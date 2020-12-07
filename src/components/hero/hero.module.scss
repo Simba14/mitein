@@ -1,0 +1,31 @@
+.wrapper {
+  position: relative;
+  width: 100%;
+
+  .hero {
+    display: flex;
+    justify-content: center;
+    height: 70vh;
+
+    &::before {
+      background-image: url('https://bloximages.chicago2.vip.townnews.com/wcfcourier.com/content/tncms/assets/v3/editorial/7/80/7803c023-b6ab-54ea-9f22-ee41b166b405/5dd6f9aab4ab4.image.jpg');
+      background-size: cover;
+      content: '';
+      display: block;
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      opacity: 0.4;
+    }
+
+    .content {
+      position: relative;
+      display: flex;
+      align-items: center;
+      font-size: 18px;
+      color: white;
+    }
+  }
+}

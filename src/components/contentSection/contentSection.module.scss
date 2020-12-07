@@ -1,0 +1,28 @@
+@import 'scss/colours.scss';
+@import 'scss/constants.scss';
+@import 'scss/breakpoints.scss';
+@import 'scss/spacings.scss';
+@import 'scss/wrapper.scss';
+
+$logo-width: 152px;
+
+.container {
+  @include wrapper;
+
+  background-color: white;
+  padding: size(5) size(2);
+
+  @include mq($from: tablet) {
+  }
+
+  .title {
+    font-family: 'Bowlby One', cursive;
+    font-family: 'Lilita One', cursive;
+    color: $blue;
+    font-size: 40px;
+    margin-bottom: size(2);
+  }
+
+  .wrapper {
+  }
+}

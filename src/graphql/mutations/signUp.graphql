@@ -1,0 +1,7 @@
+mutation SignUp($email: String!, $password: String!, $accountType: String!) {
+  signUp(email: $email, password: $password, type: $accountType) {
+    id
+    email
+    type
+  }
+}

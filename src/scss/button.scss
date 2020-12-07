@@ -1,0 +1,13 @@
+%btn {
+  cursor: pointer;
+  font-size: 12px;
+  width: 85px;
+  height: 32px;
+  line-height: 32px;
+  border-radius: 5px;
+  padding: 0px !important;
+
+  &:disabled {
+    cursor: not-allowed;
+  }
+}

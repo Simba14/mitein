@@ -1,0 +1,40 @@
+@import './mq';
+
+$breakpoints: (
+  mobile: 0px,
+  mobile-large: 375px,
+  mobile-landscape: 480px,
+  tablet: 640px,
+  tablet-wide: 768px,
+  header-large: 1000px,
+  newsletter-popup: 1024px,
+  desktop: 1024px,
+  desktop-plus: 1124px,
+  widescreen: 1260px,
+  widescreen-plus: 1360px,
+  widescreen-large: 1600px,
+  uhd: 2500px,
+  qhd: 3800px,
+);
+
+@function br($name) {
+  @return map-get($breakpoints, $name);
+}
+
+$mq-responsive: true;
+
+$mq-breakpoints: (
+  mobile: br(mobile),
+  mobileLandscape: br(mobile-landscape),
+  tablet: br(tablet),
+  tabletWide: br(tablet-wide),
+  desktop: br(desktop),
+  desktopPlus: br(desktop-plus),
+  widescreen: br(widescreen),
+  widescreenPlus: br(widescreen-plus),
+  widescreenLarge: br(widescreen-large),
+  qhd: br(qhd),
+  uhd: br(uhq),
+);
+
+$mq-static-breakpoint: desktop;

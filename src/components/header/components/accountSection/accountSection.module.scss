@@ -1,0 +1,21 @@
+@import '../../../../scss/colours.scss';
+@import '../../../../scss/spacings.scss';
+
+.accountContainer {
+  align-items: center;
+  display: flex;
+  font-size: 14px;
+
+  a {
+    color: $blue;
+    text-decoration: none;
+
+    &:first-child {
+      padding-right: size(2);
+    }
+
+    &:visited {
+      color: $blue;
+    }
+  }
+}

@@ -1,0 +1,36 @@
+@import '../../scss/spacings.scss';
+
+%formField {
+  width: 100%;
+  padding: size(1) size(0.5);
+  margin-bottom: size(2);
+  background-color: #5a8be20f;
+  border: 1px solid gainsboro;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  width: 400px;
+  height: 425px;
+  background: white;
+  padding: size(5) size(4);
+
+  .email {
+    @extend %formField;
+  }
+
+  .password {
+    @extend %formField;
+  }
+
+  .submitButton {
+    margin-bottom: size(2);
+    padding: size(1) 0px;
+    width: 120px;
+  }
+
+  label {
+    margin-bottom: size(1);
+  }
+}

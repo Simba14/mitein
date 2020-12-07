@@ -1,0 +1,14 @@
+@import '../../scss/button.scss';
+
+.topContainer {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 32px;
+
+  .logOut {
+    @extend %btn;
+
+    border: 1px black solid;
+    text-transform: uppercase;
+  }
+}

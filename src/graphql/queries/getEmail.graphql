@@ -1,0 +1,5 @@
+query GetEmail($id: String!) {
+  user(id: $id) {
+    email
+  }
+}
