@@ -1,7 +1,8 @@
-@import '../../scss/spacings.scss';
+@import './spacings.scss';
 
 $header-height: 72px;
-$menu-height: 208px;
+$menu-height-mobile: 208px;
 $menu-transition-duration: 1s;
+$organization-card-height: 558px;
 $wrapper-padding-x: size(3);
 $wrapper-padding-y: size(2);

@@ -9,8 +9,10 @@ $logo-width: 152px;
 .container {
   @include wrapper;
 
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
   background-color: white;
-  padding: size(5) size(2);
+  min-height: 100vh;
 
   @include mq($from: tablet) {
   }

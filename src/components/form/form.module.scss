@@ -2,10 +2,12 @@
 
 %formField {
   width: 100%;
+  font-size: 13px;
   padding: size(1) size(0.5);
   margin-bottom: size(2);
   background-color: #5a8be20f;
   border: 1px solid gainsboro;
+  transition: border-color 1s;
 }
 
 .form {
@@ -15,6 +17,21 @@
   height: 425px;
   background: white;
   padding: size(5) size(4);
+
+  .fieldContainer {
+    position: relative;
+
+    &.hasError {
+      input {
+        border-color: red;
+      }
+
+      .fieldError {
+        visibility: visible;
+        opacity: 1;
+      }
+    }
+  }
 
   .email {
     @extend %formField;
@@ -30,7 +47,38 @@
     width: 120px;
   }
 
+  .fieldError {
+    position: absolute;
+    top: 7px;
+    right: 0;
+    font-size: 12px;
+    text-transform: capitalize;
+    color: red;
+    visibility: hidden;
+    opacity: 0;
+    transition: visibility 1s, opacity 1s;
+  }
+
+  .error {
+    // border: red solid 1px;
+    background: #e8bcbc94;
+    min-height: 32px;
+    padding: size(1);
+    margin-top: size(3);
+    font-size: 13px;
+    color: red;
+    opacity: 0;
+    transition: opacity 1s;
+    text-transform: capitalize;
+    text-align: center;
+
+    &.visible {
+      opacity: 1;
+    }
+  }
+
   label {
-    margin-bottom: size(1);
+    display: block;
+    margin-bottom: size(0.5);
   }
 }

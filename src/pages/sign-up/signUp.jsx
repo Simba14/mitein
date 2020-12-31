@@ -1,7 +1,7 @@
 import React from 'react';
 import { navigate } from 'gatsby';
-import { Mutation } from '@apollo/react-components';
-import { compose } from 'lodash/fp';
+import { Mutation } from '@apollo/client/react/components';
+import { compose, get } from 'lodash/fp';
 
 import SIGN_UP from 'graphql/mutations/signUp.graphql';
 import Form, { SIGN_UP_TYPE } from 'components/form';
@@ -11,6 +11,12 @@ import { withLayout } from 'components/layout';
 import styles from './signUp.module.scss';
 
 const SignUp = ({ session }) => {
+  const userId = get('userId', session);
+  if (userId) {
+    navigate(ROUTE_PROFILE);
+    return null;
+  }
+
   const signUpSuccessful = (data) => {
     session.setUserLoggedIn(data.signUp.id);
     navigate(ROUTE_PROFILE);
@@ -20,10 +26,10 @@ const SignUp = ({ session }) => {
     <div className={styles.wrapper}>
       <Mutation mutation={SIGN_UP} onCompleted={signUpSuccessful}>
         {(signUp, { loading }) => {
-          const onSignUp = ({ accountType, email, password, ...rest }) => {
-            console.log({ ...rest });
+          const onSignUp = ({ accountType, email, password }) => {
             signUp({ variables: { accountType, email, password } });
           };
+
           return (
             <Form
               onSubmit={onSignUp}

@@ -26,4 +26,7 @@ export default {
       cta: 'Sign up here',
     },
   },
+  error: {
+    required: 'required*',
+  },
 };

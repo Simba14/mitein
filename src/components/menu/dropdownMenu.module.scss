@@ -158,9 +158,9 @@ a {
   @for $i from 1 through $items {
     &:nth-child(#{$i}) {
       $delay: ($i - 1) * $transition-delay;
-      transition-delay: $delay;
+      transition-delay: 0;
       &:before {
-        transition-delay: $delay;
+        transition-delay: 0;
       }
     }
   }

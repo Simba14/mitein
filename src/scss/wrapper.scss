@@ -1,4 +1,11 @@
+@import 'scss/breakpoints.scss';
+@import 'scss/spacings.scss';
+
 @mixin wrapper {
   padding: size(2) size(3);
   width: 100%;
+
+  @include mq($from: tablet) {
+    padding: size(6) size(4);
+  }
 }

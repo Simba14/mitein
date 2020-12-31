@@ -1,12 +1,13 @@
 import React from 'react';
 import { navigate } from 'gatsby';
-import { Mutation, Query } from '@apollo/react-components';
+import { Mutation, Query } from '@apollo/client/react/components';
 import { compose } from 'lodash/fp';
 import { useTranslation } from 'react-i18next';
 
 import { sessionProps, withSessionContext } from 'context/session';
 import { withLayout } from 'components/layout';
 import Calendar from 'components/calendar';
+import Slots from 'components/slots';
 import GET_PROFILE from 'graphql/queries/getProfile.graphql';
 import SIGN_OUT from 'graphql/mutations/signOut.graphql';
 import { ROUTE_BASE } from 'routes';
@@ -55,6 +56,7 @@ const Profile = ({ session }) => {
                 </Mutation>
               </div>
             </div>
+            {type === 'LEARNER'} && <Slots />
             {type === 'NATIVE' && <Calendar userId={userId} />}
           </div>
         );

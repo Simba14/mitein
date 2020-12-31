@@ -7,14 +7,24 @@
 $logo-width: 152px;
 
 .headerWrapper {
-  @include wrapper;
-
   display: flex;
+  border-bottom: 1px solid $grey;
   position: sticky;
+  padding: size(2) size(3);
   top: 0;
   background-color: white;
   height: $header-height;
   z-index: 10;
+  transition: margin-bottom $menu-transition-duration;
+  width: 100%;
+
+  &.menuIsOpen {
+    margin-bottom: $menu-height-mobile;
+
+    @include mq($from: tablet) {
+      margin-bottom: size(11);
+    }
+  }
 }
 
 .header {

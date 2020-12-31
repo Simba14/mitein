@@ -2,6 +2,9 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { MenuContextConsumer } from 'context/menu/';
 import styles from './dropdownMenu.module.scss';
+import { Link } from 'gatsby';
+
+import { ROUTE_VOLUNTEER } from 'routes';
 
 const DropdownMenu = () => {
   const { t } = useTranslation('menu');
@@ -16,18 +19,18 @@ const DropdownMenu = () => {
             onClick={() => setIsMenuOpen(!isMenuOpen)}
           />
           <nav className={`${styles.nav} ${isMenuOpen ? styles.isOpen : ''}`}>
-            <a className={styles.navItem} href="">
+            <Link className={styles.navItem} href="">
               {t('about')}
-            </a>
-            <a className={styles.navItem} href="">
+            </Link>
+            <Link className={styles.navItem} href="">
               {t('events')}
-            </a>
-            <a className={styles.navItem} href="">
+            </Link>
+            <Link className={styles.navItem} href="">
               {t('profile')}
-            </a>
-            <a className={styles.navItem} href="">
-              {t('resources')}
-            </a>
+            </Link>
+            <Link className={styles.navItem} to={ROUTE_VOLUNTEER}>
+              {t('volunteer')}
+            </Link>
           </nav>
         </>
       )}

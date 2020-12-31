@@ -13,9 +13,16 @@ const Home = () => {
     <Layout withContentPadding={false}>
       <div className={styles.wrapper}>
         <Hero />
-        <div>{t('title')}</div>
-        <ContentSection title="about" />
-        <ContentSection title="about" />
+        <ContentSection
+          className={styles.about}
+          translation="home"
+          withKey="about"
+        />
+        <ContentSection
+          className={styles.how}
+          translation="home"
+          withKey="how"
+        />
       </div>
     </Layout>
   );

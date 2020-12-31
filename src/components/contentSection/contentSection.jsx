@@ -3,21 +3,29 @@ import { string } from 'prop-types';
 import { useTranslation } from 'react-i18next';
 import styles from './contentSection.module.scss';
 
-const ContentSection = ({ title }) => {
-  const { t } = useTranslation(title);
+const ContentSection = ({ className, translation, withKey }) => {
+  const { t } = useTranslation(translation);
+  const translationKey = withKey ? `${withKey}.` : '';
   return (
-    <div className={styles.container}>
-      <h3 className={styles.title}>{t('title')}</h3>
+    <div className={`${styles.container} ${className}`}>
+      <h3 className={styles.title}>{t(`${translationKey}title`)}</h3>
       <div
         className={styles.content}
-        dangerouslySetInnerHTML={{ __html: t('content') }}
+        dangerouslySetInnerHTML={{ __html: t(`${translationKey}content`) }}
       />
     </div>
   );
 };
 
 ContentSection.propTypes = {
-  title: string.isRequired,
+  className: string,
+  translation: string.isRequired,
+  withKey: string,
+};
+
+ContentSection.defaultProps = {
+  className: null,
+  withKey: null,
 };
 
 export default ContentSection;

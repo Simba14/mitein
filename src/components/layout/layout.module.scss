@@ -15,20 +15,9 @@
     color: white;
   }
 
-  .container {
-    display: flex;
-    transition: margin-top $menu-transition-duration;
-
-    &.menuIsOpen {
-      margin-top: $menu-height;
-
-      @include mq($from: tablet) {
-        margin-top: size(11);
-      }
-    }
-  }
-
   .content {
+    background: $blue;
+    min-height: calc(100vh - #{$header-height});
     width: 100%;
 
     &.withPadding {

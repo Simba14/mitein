@@ -17,13 +17,13 @@
     "node": "13.13.0"
   },
   "devDependencies": {
-    "babel-core": "^6.26.3",
+    "@babel/core": "^7.0.0",
+    "@babel/preset-env": "^7.0.0",
+    "@babel/preset-react": "^7.0.0",
+    "babel-core": "^7.0.0-bridge.0",
     "babel-eslint": "^10.0.3",
-    "babel-jest": "^23.6.0",
-    "babel-loader": "^7.1.5",
-    "babel-preset-env": "^1.7.0",
-    "babel-preset-es2015": "^6.24.1",
-    "babel-preset-react": "^6.24.1",
+    "babel-jest": "^23.4.2",
+    "babel-loader": "^8.0.0",
     "enzyme": "^3.7.0",
     "enzyme-adapter-react-16": "^1.6.0",
     "eslint": "^5.8.0",
@@ -36,13 +36,11 @@
     "react-test-renderer": "^16.6.0"
   },
   "dependencies": {
-    "@apollo/react-components": "^3.1.5",
-    "@apollo/react-hooks": "^3.1.5",
+    "@apollo/client": "^3.3.6",
     "@fullcalendar/daygrid": "^5.1.0",
     "@fullcalendar/interaction": "^5.2.0",
     "@fullcalendar/react": "^5.1.0",
     "@fullcalendar/timegrid": "^5.1.0",
-    "apollo-boost": "^0.4.7",
     "gatsby": "^2.23.10",
     "gatsby-alias-imports": "^1.0.4",
     "gatsby-plugin-env-variables": "^1.0.2",
@@ -57,7 +55,7 @@
     "prop-types": "^15.7.2",
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
-    "react-hook-form": "^5.4.2",
+    "react-hook-form": "^6.12.2",
     "react-i18next": "^11.3.3",
     "react-router-dom": "^5.1.2"
   },

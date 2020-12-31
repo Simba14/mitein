@@ -1,10 +1,10 @@
 import React from 'react';
 // import Svg, { LOGO } from '../svg/';
-import { Link } from 'gatsby';
 import { useTranslation } from 'react-i18next';
 import { get } from 'lodash/fp';
-import { Query } from '@apollo/react-components';
+import { Query } from '@apollo/client/react/components';
 
+import Anchor from 'components/anchor';
 import { ROUTE_LOGIN, ROUTE_PROFILE, ROUTE_SIGN_UP } from 'routes';
 import { sessionProps, withSessionContext } from 'context/session';
 import GET_EMAIL from 'graphql/queries/getEmail.graphql';
@@ -17,8 +17,8 @@ const AccountSection = ({ session }) => {
 
   const NotLoggedInComponent = () => (
     <>
-      <Link to={ROUTE_SIGN_UP}>{t('signUp')}</Link>
-      <Link to={ROUTE_LOGIN}>{t('login')}</Link>
+      <Anchor to={ROUTE_SIGN_UP}>{t('signUp')}</Anchor>
+      <Anchor to={ROUTE_LOGIN}>{t('login')}</Anchor>
     </>
   );
 
@@ -31,7 +31,7 @@ const AccountSection = ({ session }) => {
             if (loading || error || !email) return <NotLoggedInComponent />;
             if (error) return <NotLoggedInComponent />;
 
-            return <Link to={ROUTE_PROFILE}>{email}</Link>;
+            return <Anchor to={ROUTE_PROFILE}>{email}</Anchor>;
           }}
         </Query>
       ) : (

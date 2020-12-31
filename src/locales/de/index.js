@@ -5,6 +5,7 @@ import header from './header';
 import home from './home';
 import menu from './menu';
 import profile from './profile';
+import volunteer from './volunteer';
 
 export default {
   about,
@@ -14,4 +15,5 @@ export default {
   home,
   menu,
   profile,
+  volunteer,
 };
