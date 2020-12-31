@@ -1,0 +1,27 @@
+@import '../../scss/button.scss';
+@import '../../scss/colours.scss';
+
+.calendar {
+  h2 {
+    color: white;
+  }
+
+  button {
+    @extend %btn;
+
+    background: white !important;
+    color: $blue !important;
+    width: 85px;
+    height: 32px;
+  }
+
+  > div > div > div > table {
+    background: white;
+    border-radius: 15px 0px 0px;
+
+    div > div > a {
+      background-color: $green;
+      border-color: $green;
+    }
+  }
+}

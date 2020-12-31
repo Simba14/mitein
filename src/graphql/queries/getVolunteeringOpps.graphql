@@ -1,0 +1,17 @@
+query getVolunteeringOpps($city: String!, $locale: String!) {
+  volunteerWith(city: $city) {
+    id
+    city
+    description(locale: $locale)
+    email
+    logo
+    name
+    socials {
+      facebook
+      instagram
+      twitter
+    }
+    tags
+    website
+  }
+}
