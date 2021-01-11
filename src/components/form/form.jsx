@@ -7,6 +7,7 @@ import { get } from 'lodash/fp';
 import styles from './form.module.scss';
 
 import Anchor from 'components/anchor';
+import Cta from 'components/cta';
 
 export const SIGN_UP_TYPE = 'signUp';
 export const LOGIN_TYPE = 'login';
@@ -115,13 +116,12 @@ const Form = ({ submitError, loadingSubmit, onSubmit, type }) => {
           </div>
         </>
       )}
-      <button
+      <Cta
         className={styles.submitButton}
         type="submit"
         disabled={loadingSubmit}
-      >
-        {t(`${type}.submitBtn`)}
-      </button>
+        text={t(`${type}.submitBtn`)}
+      />
       <div>
         {t(`${type}.changeLocation.text`)}{' '}
         <Anchor to={t(`${type}.changeLocation.route`)}>

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { Query } from '@apollo/react-components';
-import { useMutation } from '@apollo/react-hooks';
+import { Query } from '@apollo/client/react/components';
+import { useMutation } from '@apollo/client';
 import FullCalendar from '@fullcalendar/react';
 import interactionPlugin from '@fullcalendar/interaction';
 import timeGridPlugin from '@fullcalendar/timegrid';

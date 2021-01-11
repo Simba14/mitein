@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import { get, map, uniq, flatMap } from 'lodash';
+import { get, map, uniq, flatMap, intersection } from 'lodash';
 import { useQuery } from '@apollo/client';
 import { useTranslation } from 'react-i18next';
 
+import NewsletterBanner from 'components/newsletter';
 import Svg from 'components/svg';
 import { withLayout } from 'components/layout';
 import GET_VOLUNTEERING_OPPS from 'graphql/queries/getVolunteeringOpps.graphql';
@@ -14,6 +15,7 @@ const TYPENAME = '__typename';
 const Volunteer = () => {
   const [filterOptions, setFilterOptions] = useState(null);
   const [filters, setFilters] = useState([]);
+  const [results, setResults] = useState([]);
   const {
     i18n: { language },
     t,
@@ -26,10 +28,19 @@ const Volunteer = () => {
   useEffect(() => {
     if (volunteerWith) {
       const uniqueTags = uniq(flatMap(volunteerWith, (org) => org.tags || []));
-      console.log({ uniqueTags });
+
+      setResults(volunteerWith);
       setFilterOptions(uniqueTags);
     }
   }, [volunteerWith]);
+
+  useEffect(() => {
+    const newResults = filters.length
+      ? results.filter((result) => intersection(result.tags, filters).length)
+      : volunteerWith;
+
+    setResults(newResults);
+  }, [filters]);
 
   const handleFilterClick = (option) => {
     setFilters((arr) => {
@@ -40,8 +51,7 @@ const Volunteer = () => {
     });
   };
 
-  if (error || loading || !volunteerWith) return null;
-
+  if (error || loading || !results) return null;
   // <img className={styles.logo} src={organization.logo} />
   return (
     <div className={styles.container}>
@@ -49,7 +59,7 @@ const Volunteer = () => {
       <h2 className={styles.subheadline}>{t('subheadline')}</h2>
       {filterOptions && (
         <div className={styles.filters}>
-          <div className={styles.filterTitle}>Filter By:</div>
+          <div className={styles.filterTitle}>{t('filterBy')}</div>
           {filterOptions.map((filter) => (
             <button
               key={filter}
@@ -64,7 +74,7 @@ const Volunteer = () => {
         </div>
       )}
       <div className={styles.organizations}>
-        {volunteerWith.map((organization) => (
+        {results.map((organization) => (
           <div className={styles.organization} key={organization.name}>
             <div className={styles.info}>
               <div
@@ -107,6 +117,7 @@ const Volunteer = () => {
           </div>
         ))}
       </div>
+      <NewsletterBanner />
       <div className={styles.reachOut}>
         {t('haveOpps')}
         <br />

@@ -1,6 +1,7 @@
 export default {
   headline: 'Ehrenamtlich in Berlin heute',
   subheadline: 'Organisationen, die Ihre Hilfe benötigen',
+  filterBy: 'Filtern nach:',
   city: 'Stadt:',
   learnMore: 'Mehr lernen',
   haveOpps:

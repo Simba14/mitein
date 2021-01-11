@@ -1,0 +1,63 @@
+@import 'scss/spacings.scss';
+@import 'scss/colours.scss';
+
+.container {
+  background: white;
+  width: 100vw;
+  margin-left: size(-3);
+  padding: size(4);
+  text-align: center;
+
+  .heading {
+    font-family: 'Lilita One', cursive;
+    font-size: size(5);
+    color: $blue;
+    text-transform: capitalize;
+    margin-bottom: size(1);
+  }
+
+  .description {
+    color: $blue;
+    margin-bottom: size(3);
+  }
+
+  .emailInput {
+    font-size: 16px;
+    border: none;
+    border-bottom: solid 1px $dark-grey;
+    background: white;
+    padding: size(1) size(0.5);
+    width: 300px;
+    margin-bottom: size(2);
+
+    &:focus {
+      box-shadow: 0 0 3pt 3pt orange;
+      outline: none;
+    }
+  }
+
+  .formMessage {
+    padding: size(1);
+    margin-top: size(2);
+    font-size: 13px;
+    color: green;
+    opacity: 0;
+    transition: opacity 1s;
+    text-transform: capitalize;
+    text-align: center;
+
+    &.error {
+      color: red;
+      background: #e8bcbc94;
+    }
+
+    &.visible {
+      opacity: 1;
+    }
+  }
+
+  .submitBtn {
+    width: 300px;
+    margin: auto;
+  }
+}

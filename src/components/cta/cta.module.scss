@@ -1,0 +1,21 @@
+@import 'scss/colours.scss';
+@import 'scss/spacings.scss';
+
+.cta {
+  color: white;
+  cursor: pointer;
+  display: block;
+  background: $blue;
+  padding: size(1.5) size(7);
+  border: none;
+  height: 100%;
+  text-transform: capitalize;
+
+  &:hover {
+    opacity: 0.8;
+  }
+
+  &:focus {
+    outline-color: orange;
+  }
+}

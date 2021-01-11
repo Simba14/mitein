@@ -1,0 +1,3 @@
+mutation NewsletterSignUp($email: String!) {
+  newsletterSignUp(email: $email)
+}
