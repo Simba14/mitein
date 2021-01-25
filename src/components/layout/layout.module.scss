@@ -1,6 +1,6 @@
+@import 'scss/breakpoints.scss';
 @import 'scss/colours.scss';
 @import 'scss/constants.scss';
-@import 'scss/breakpoints.scss';
 
 .wrapper {
   display: flex;
@@ -17,11 +17,25 @@
 
   .content {
     background: $blue;
-    min-height: calc(100vh - #{$header-height});
+    border-top: 0px solid transparent;
+    height: calc(100vh - #{$header-height});
+    overflow-y: scroll;
     width: 100%;
+    transition: $menu-transition-duration;
 
     &.withPadding {
       padding: 32px 24px;
+    }
+
+    &.menuOpen {
+      border-top: 1px solid gray;
+      margin-top: $menu-height-mobile;
+      height: calc(100vh - #{$header-height} - #{$menu-height-mobile});
+
+      @include mq($from: tablet) {
+        margin-top: calc(#{size(8)} - 3px);
+        height: calc(100vh - #{$header-height} - #{$menu-height-desktop});
+      }
     }
   }
 }

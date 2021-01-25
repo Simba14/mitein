@@ -1,3 +1,4 @@
+@import 'scss/breakpoints.scss';
 @import 'scss/spacings.scss';
 @import 'scss/colours.scss';
 
@@ -18,7 +19,17 @@
 
   .description {
     color: $blue;
-    margin-bottom: size(3);
+    margin-bottom: size(4);
+  }
+
+  .form {
+    width: 100%;
+
+    @include mq($from: tablet) {
+      margin: auto;
+      width: 470px;
+      width: fit-content;
+    }
   }
 
   .emailInput {
@@ -26,29 +37,36 @@
     border: none;
     border-bottom: solid 1px $dark-grey;
     background: white;
-    padding: size(1) size(0.5);
-    width: 300px;
     margin-bottom: size(2);
+    padding: size(1) size(0.5);
+    width: 100%;
 
     &:focus {
       box-shadow: 0 0 3pt 3pt orange;
       outline: none;
     }
+
+    @include mq($from: tablet) {
+      margin-bottom: 0;
+      margin-right: size(2);
+      width: 300px;
+    }
   }
 
   .formMessage {
-    padding: size(1);
+    padding: size(1.5);
     margin-top: size(2);
-    font-size: 13px;
-    color: green;
+    font-size: 12px;
+    background: $green-background;
     opacity: 0;
     transition: opacity 1s;
     text-transform: capitalize;
     text-align: center;
+    height: 38px;
 
     &.error {
       color: red;
-      background: #e8bcbc94;
+      background: $red-background;
     }
 
     &.visible {
@@ -57,7 +75,15 @@
   }
 
   .submitBtn {
-    width: 300px;
-    margin: auto;
+    padding-right: size(5);
+    padding-left: size(5);
+
+    @include mq($until: tablet) {
+      width: 100%;
+    }
+
+    @include mq($from: tablet) {
+      display: inline-block;
+    }
   }
 }

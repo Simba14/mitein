@@ -1,3 +1,4 @@
+@import 'scss/breakpoints.scss';
 @import 'scss/constants.scss';
 @import 'scss/colours.scss';
 
@@ -5,10 +6,14 @@
   display: flex;
   flex-direction: column;
   background: $blue;
+  height: 100%;
   width: 100%;
-  max-height: 100vh;
   overflow-y: scroll;
   scroll-snap-type: y mandatory;
+
+  @include mq($from: tablet) {
+    max-height: 100vh;
+  }
 
   h1 {
     color: white;
@@ -17,6 +22,10 @@
   .how {
     background: $blue;
     color: white;
+
+    @include mq($until: tablet) {
+      padding-bottom: size(14);
+    }
 
     h3 {
       color: white;

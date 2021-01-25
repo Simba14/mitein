@@ -1,8 +1,10 @@
 @import './spacings.scss';
 
 $header-height: 72px;
-$menu-height-mobile: 208px;
+$menu-height-mobile: 207px;
+$menu-height-desktop: size(8);
 $menu-transition-duration: 1s;
 $organization-card-height: 558px;
-$wrapper-padding-x: size(3);
-$wrapper-padding-y: size(2);
+$wrapper-padding-x-mobile: size(2);
+$wrapper-padding-x-desktop: size(3);
+$wrapper-padding-y-desktop: size(2);

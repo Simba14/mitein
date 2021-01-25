@@ -15,7 +15,6 @@ const NewsletterBanner = () => {
       setSuccessMessage(t('newsletter:successMessage'));
     },
     onError: (error) => {
-      console.log({ error });
       setError('submit', {
         type: 'manual',
         message: get('graphQLErrors[0].message', error),

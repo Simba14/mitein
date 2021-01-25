@@ -1,14 +1,25 @@
-@import '../../../../scss/colours.scss';
-@import '../../../../scss/spacings.scss';
+@import 'scss/breakpoints.scss';
+@import 'scss/colours.scss';
+@import 'scss/spacings.scss';
 
 .accountContainer {
   align-items: center;
   display: flex;
   font-size: 14px;
 
-  a {
-    &:first-child {
-      margin-right: size(2);
+  .login {
+    display: none;
+  }
+
+  @include mq($from: tablet) {
+    a {
+      &.login {
+        display: inline-block;
+      }
+
+      &:first-child {
+        margin-right: size(2);
+      }
     }
   }
 }

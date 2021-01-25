@@ -2,7 +2,6 @@
 @import 'scss/constants.scss';
 @import 'scss/colours.scss';
 @import 'scss/spacings.scss';
-@import 'scss/wrapper.scss';
 
 $logo-width: 152px;
 
@@ -10,7 +9,7 @@ $logo-width: 152px;
   display: flex;
   border-bottom: 1px solid $grey;
   position: sticky;
-  padding: size(2) size(3);
+  padding: size(2);
   top: 0;
   background-color: white;
   height: $header-height;
@@ -18,12 +17,8 @@ $logo-width: 152px;
   transition: margin-bottom $menu-transition-duration;
   width: 100%;
 
-  &.menuIsOpen {
-    margin-bottom: $menu-height-mobile;
-
-    @include mq($from: tablet) {
-      margin-bottom: size(11);
-    }
+  @include mq($from: tablet) {
+    padding: size(2) size(3);
   }
 }
 
@@ -32,27 +27,32 @@ $logo-width: 152px;
   align-items: center;
   justify-content: space-between;
   width: 100%;
-  margin-left: calc((100% - #{$logo-width}) / 2);
+  margin-left: #{size(4)};
+
+  @include mq($from: tablet) {
+    margin-left: calc((100% - #{$logo-width}) / 2);
+  }
 
   .logoContainer {
     display: flex;
     align-items: center;
     text-decoration: none;
-    width: $logo-width;
+
+    @include mq($from: tablet) {
+      width: $logo-width;
+    }
+
+    .logo {
+      @include mq($until: tablet) {
+        display: none;
+      }
+    }
 
     .title {
       color: $blue;
       font-family: 'Cabin Sketch', cursive;
       font-size: 18px;
       margin-left: size(1);
-    }
-  }
-
-  .desktopMenu {
-    display: none;
-
-    @include mq($from: tablet) {
-      display: flex;
     }
   }
 

@@ -1,5 +1,4 @@
 import React from 'react';
-// import Svg, { LOGO } from '../svg/';
 import { useTranslation } from 'react-i18next';
 import { get } from 'lodash/fp';
 import { Query } from '@apollo/client/react/components';
@@ -17,8 +16,12 @@ const AccountSection = ({ session }) => {
 
   const NotLoggedInComponent = () => (
     <>
-      <Anchor to={ROUTE_SIGN_UP}>{t('signUp')}</Anchor>
-      <Anchor to={ROUTE_LOGIN}>{t('login')}</Anchor>
+      <Anchor className={styles.signUp} to={ROUTE_SIGN_UP}>
+        {t('signUp')}
+      </Anchor>
+      <Anchor className={styles.login} to={ROUTE_LOGIN}>
+        {t('login')}
+      </Anchor>
     </>
   );
 
@@ -31,7 +34,11 @@ const AccountSection = ({ session }) => {
             if (loading || error || !email) return <NotLoggedInComponent />;
             if (error) return <NotLoggedInComponent />;
 
-            return <Anchor to={ROUTE_PROFILE}>{email}</Anchor>;
+            return (
+              <Anchor className={styles.profile} to={ROUTE_PROFILE}>
+                {email}
+              </Anchor>
+            );
           }}
         </Query>
       ) : (

@@ -12,9 +12,10 @@ $logo-width: 152px;
   scroll-snap-align: start;
   scroll-snap-stop: always;
   background-color: white;
-  min-height: 100vh;
+  padding-bottom: size(6);
 
   @include mq($from: tablet) {
+    min-height: calc(100vh - #{$header-height});
   }
 
   .title {

@@ -1,6 +1,6 @@
 import React from 'react';
 import { bool, node } from 'prop-types';
-import { MenuContextProvider } from 'context/menu';
+import { MenuContextConsumer, MenuContextProvider } from 'context/menu';
 import Header from 'components/header';
 
 import styles from './layout.module.scss';
@@ -9,13 +9,17 @@ const Layout = ({ children, withContentPadding }) => (
   <MenuContextProvider>
     <div className={styles.wrapper}>
       <Header />
-      <div
-        className={`${styles.content} ${
-          withContentPadding ? styles.withPadding : ''
-        }`}
-      >
-        {children}
-      </div>
+      <MenuContextConsumer>
+        {({ isMenuOpen }) => (
+          <div
+            className={`${styles.content} ${
+              withContentPadding ? styles.withPadding : ''
+            } ${isMenuOpen ? styles.menuOpen : ''}`}
+          >
+            {children}
+          </div>
+        )}
+      </MenuContextConsumer>
     </div>
   </MenuContextProvider>
 );

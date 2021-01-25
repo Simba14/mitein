@@ -1,17 +1,18 @@
 import React from 'react';
 import { Link } from 'gatsby';
-import { any } from 'prop-types';
+import { any, string } from 'prop-types';
 
 import styles from './anchor.module.scss';
 
-const Anchor = ({ children, ...rest }) => (
-  <Link {...rest} className={styles.link}>
+const Anchor = ({ children, className, ...rest }) => (
+  <Link {...rest} className={`${styles.link} ${className}`}>
     {children}
   </Link>
 );
 
 Anchor.propTypes = {
   children: any.isRequired,
+  className: string,
 };
 
 export default Anchor;

@@ -26,7 +26,7 @@ module.exports = {
       options: {
         typeName: 'Mitein',
         fieldName: 'mitein',
-        url: 'http://localhost:9001',
+        url: process.env.API_URL,
       },
     },
     'gatsby-plugin-graphql-tag-loader',
