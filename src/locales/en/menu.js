@@ -4,4 +4,5 @@ export default {
   events: 'Events',
   profile: 'Profile',
   resources: 'Resources',
+  volunteer: 'Volunteer',
 };

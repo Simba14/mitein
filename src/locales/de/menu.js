@@ -1,7 +1,8 @@
 export default {
   title: 'Menu',
-  about: 'About',
+  about: 'Über uns',
   events: 'Events',
-  profile: 'Profile',
-  resources: 'Resources',
+  profile: 'Profil',
+  resources: 'Ressourcen',
+  volunteer: 'Ehrenamtlich',
 };
