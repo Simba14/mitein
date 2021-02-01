@@ -5,7 +5,7 @@ import { useTranslation } from 'react-i18next';
 
 import AccountSection from './components/accountSection';
 import LanguageSelector from './components/languageSelector';
-import DropdownMenu from 'components/menu/dropdown.jsx';
+import Menu from 'components/menu';
 import { ROUTE_BASE } from 'routes';
 
 import styles from './header.module.scss';
@@ -15,7 +15,7 @@ const Header = () => {
 
   return (
     <div className={styles.headerWrapper}>
-      <DropdownMenu />
+      <Menu />
       <div className={styles.header}>
         <Link to={ROUTE_BASE} className={styles.logoContainer}>
           <Svg className={styles.logo} name={LOGO} />

@@ -1,13 +1,13 @@
 import React from 'react';
-import { MenuContextConsumer } from 'context/menu/';
 import { useTranslation } from 'react-i18next';
-import { string } from 'prop-types';
-
+import { MenuContextConsumer } from 'context/menu/';
 import styles from './menu.module.scss';
+import { Link } from 'gatsby';
 
-const Menu = ({ className }) => {
+import { ROUTE_VOLUNTEER } from 'routes';
+
+const DropdownMenu = () => {
   const { t } = useTranslation('menu');
-
   return (
     <MenuContextConsumer>
       {({ isMenuOpen, setIsMenuOpen }) => (
@@ -17,22 +17,20 @@ const Menu = ({ className }) => {
               isMenuOpen ? styles.isOpen : ''
             }`}
             onClick={() => setIsMenuOpen(!isMenuOpen)}
-          >
-            Menu
-          </button>
+          />
           <nav className={`${styles.nav} ${isMenuOpen ? styles.isOpen : ''}`}>
-            <a className={styles.navItem} href="">
+            <Link className={styles.navItem} href="">
               {t('about')}
-            </a>
-            <a className={styles.navItem} href="">
+            </Link>
+            <Link className={styles.navItem} href="">
               {t('events')}
-            </a>
-            <a className={styles.navItem} href="">
+            </Link>
+            <Link className={styles.navItem} href="">
               {t('profile')}
-            </a>
-            <a className={styles.navItem} href="">
-              {t('resources')}
-            </a>
+            </Link>
+            <Link className={styles.navItem} to={ROUTE_VOLUNTEER}>
+              {t('volunteer')}
+            </Link>
           </nav>
         </>
       )}
@@ -40,19 +38,4 @@ const Menu = ({ className }) => {
   );
 };
 
-// <div className={`${styles.container} ${className}`}>
-//   <div className={styles.item}>{t('about')}</div>
-//   <div className={styles.item}>{t('events')}</div>
-//   <div className={styles.item}>{t('profile')}</div>
-//   <div className={styles.item}>{t('resources')}</div>
-// </div>
-
-Menu.propTypes = {
-  className: string,
-};
-
-Menu.defaultProps = {
-  className: null,
-};
-
-export default Menu;
+export default DropdownMenu;
