@@ -12,17 +12,3 @@ exports.onPostBuild = () => {
     path.join(__dirname, '/public/locales'),
   );
 };
-
-// exports.onCreateBabelConfig = ({ actions }) => {
-//   console.log('HERE', process.env.NODE_ENV);
-//   if (process.env.NODE_ENV !== 'development') {
-//     actions.setBabelPlugin({
-//       name: '@babel/plugin-transform-regenerator',
-//       options: {},
-//     });
-//     actions.setBabelPlugin({
-//       name: '@babel/plugin-transform-runtime',
-//       options: {},
-//     });
-//   }
-// };
