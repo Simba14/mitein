@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'gatsby';
+import Link from 'components/link';
 import { any, string } from 'prop-types';
 
 import styles from './anchor.module.scss';

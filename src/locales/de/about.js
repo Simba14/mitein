@@ -1,4 +1,0 @@
-export default {
-  title: 'About',
-  content: `Mitein, short for Miteinander, means togetherness.  Being lonely isn’t just a feeling. It is proven to be bad for you. Loneliness affects us all. It doesn’t discriminate, regardless of your age.  How does it work? Mitein looks to connect you to people you’d would otherwise never have the fortune of chatting to. Partnering with a number of care homes around Berlin, we will schedule a time for you  Looking to learn German?  Wanting to help others improve their German? We are always looking for new care homes to partner with or fluent German speakers who want to share their knowledge of the language and have interesting conversations in doing so.  Work for a care home, or would like to become a voluntary conversationalist? Please get in contact here, we would love to hear from you. `,
-};

@@ -1,0 +1,45 @@
+@import 'scss/breakpoints.scss';
+@import 'scss/spacings.scss';
+@import 'scss/colours.scss';
+
+@keyframes load {
+  0% {
+    left: -100%;
+  }
+
+  100% {
+    left: 100%;
+  }
+}
+
+%loading-animation-block {
+  animation-duration: 1.5s;
+  animation-iteration-count: infinite;
+  animation-name: load;
+  animation-timing-function: ease;
+  background: linear-gradient(
+    to right,
+    $grey 0%,
+    $grey 45%,
+    $light-grey 70%,
+    $grey 95%
+  );
+  content: '';
+  display: block;
+  height: 100%;
+  left: -100%;
+  position: absolute;
+  top: 0;
+  width: 100%;
+}
+
+%loading-element {
+  background: $grey;
+  overflow: hidden;
+  position: relative;
+  width: 100%;
+
+  &::before {
+    @extend %loading-animation-block;
+  }
+}

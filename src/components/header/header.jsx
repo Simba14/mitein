@@ -1,6 +1,6 @@
 import React from 'react';
 import Svg, { LOGO } from 'components/svg/';
-import { Link } from 'gatsby';
+import Link from 'components/link';
 import { useTranslation } from 'react-i18next';
 
 import AccountSection from './components/accountSection';

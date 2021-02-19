@@ -1,36 +1,32 @@
-import React, { useState } from 'react';
-import { useTranslation } from 'react-i18next';
+import React from 'react';
+import { Link } from 'gatsby';
+import { usePageContext } from 'context/page';
 
-import './languageSelector.scss';
+import styles from './languageSelector.module.scss';
 
 const ENGLISH = 'en';
 const GERMAN = 'de';
 
 const LanguageSelector = () => {
-  const [indexSelected, toggleSelection] = useState(0);
-  const { i18n } = useTranslation();
+  const { lang, originalPath } = usePageContext();
 
-  const selectLanguage = (index, language) => {
-    toggleSelection(index);
-    i18n.changeLanguage(language);
-  };
+  const Element = ({ language }) =>
+    lang === language ? (
+      <div className={styles.language}>{language}</div>
+    ) : (
+      <Link
+        aria-label={`Change language to ${language}`}
+        to={`/${language}${originalPath}`}
+        className={`${styles.language} ${styles.unselected}`}
+      >
+        {language}
+      </Link>
+    );
 
   return (
-    <div className="languageSelector">
-      <button
-        className="languageBtn"
-        disabled={indexSelected === 0}
-        onClick={() => selectLanguage(0, ENGLISH)}
-      >
-        EN
-      </button>
-      <button
-        className="languageBtn"
-        disabled={indexSelected === 1}
-        onClick={() => selectLanguage(1, GERMAN)}
-      >
-        DE
-      </button>
+    <div className={styles.languageSelector}>
+      <Element language={ENGLISH} />
+      <Element language={GERMAN} />
     </div>
   );
 };

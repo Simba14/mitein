@@ -11,6 +11,7 @@ i18n.use(initReactI18next).init({
   react: {
     transSupportBasicHtmlNodes: true,
     transKeepBasicHtmlNodesFor: ['br', 'strong', 'i'],
+    useSuspense: false,
   },
 });
 

@@ -5,6 +5,7 @@ import styles from './hero.module.scss';
 
 const Hero = () => {
   const { t } = useTranslation('home');
+
   return (
     <div className={styles.wrapper}>
       <div className={styles.hero}>

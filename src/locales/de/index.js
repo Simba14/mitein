@@ -1,4 +1,3 @@
-import about from './about';
 import calendar from './calendar';
 import form from './form';
 import header from './header';
@@ -9,7 +8,6 @@ import profile from './profile';
 import volunteer from './volunteer';
 
 export default {
-  about,
   calendar,
   form,
   header,

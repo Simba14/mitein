@@ -29,7 +29,7 @@ const Profile = ({ session }) => {
       {({ data, loading, error }) => {
         if (loading) return <div>LOADING</div>;
         if (error) return `Error! ${error.message}`;
-        // console.log({ data });
+
         const {
           user: { email, type },
         } = data;

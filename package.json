@@ -11,7 +11,8 @@
     "start": "npm run develop",
     "serve": "gatsby serve",
     "clean": "gatsby clean",
-    "test": "jest"
+    "test": "jest",
+    "preload-fonts": "gatsby-preload-fonts"
   },
   "engines": {
     "node": "13.13.0"
@@ -41,13 +42,18 @@
     "@fullcalendar/interaction": "^5.2.0",
     "@fullcalendar/react": "^5.1.0",
     "@fullcalendar/timegrid": "^5.1.0",
+    "add": "^2.0.6",
     "gatsby": "^2.23.10",
     "gatsby-alias-imports": "^1.0.4",
     "gatsby-plugin-env-variables": "^2.0.0",
     "gatsby-plugin-graphql-tag-loader": "^1.0.1",
     "gatsby-plugin-mini-css-class-name": "^3.0.1",
+    "gatsby-plugin-netlify": "^2.11.0",
+    "gatsby-plugin-preload-fonts": "^1.9.0",
+    "gatsby-plugin-react-i18next": "^1.0.2",
     "gatsby-plugin-react-svg": "^3.0.0",
     "gatsby-plugin-sass": "^3.0.0",
+    "gatsby-source-filesystem": "^2.11.0",
     "gatsby-source-graphql": "^2.5.7",
     "i18next": "^19.3.1",
     "isomorphic-fetch": "^2.2.1",
@@ -57,7 +63,8 @@
     "react-dom": "^16.12.0",
     "react-hook-form": "^6.12.2",
     "react-i18next": "^11.3.3",
-    "react-router-dom": "^5.1.2"
+    "react-router-dom": "^5.1.2",
+    "yarn": "^1.22.10"
   },
   "jest": {
     "setupTestFrameworkScriptFile": "<rootDir>src/setupTests.js"

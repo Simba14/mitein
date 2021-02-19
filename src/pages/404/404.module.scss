@@ -1,0 +1,23 @@
+@import 'scss/spacings.scss';
+
+.notFound {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding-top: size(6);
+
+  h1 {
+    color: orange;
+    margin-bottom: size(4);
+  }
+
+  .returnHome {
+    font-size: 16px;
+    color: white;
+
+    .homeAnchor {
+      color: white;
+    }
+  }
+}

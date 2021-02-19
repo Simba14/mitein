@@ -15,16 +15,19 @@
     padding: 0 size(2);
   }
 
-  .languageBtn {
+  .language {
     border: none;
-    color: #d8d7d7cf;
-    cursor: pointer;
     font-size: 14px;
+    padding: 1px 6px;
+    background: white;
+    cursor: not-allowed;
+    color: $blue;
+    text-transform: uppercase;
 
-    &:disabled {
-      cursor: not-allowed;
-      color: $blue;
-      background: white;
+    &.unselected {
+      background: #efefef;
+      color: #d8d7d7cf;
+      cursor: pointer;
     }
   }
 }
