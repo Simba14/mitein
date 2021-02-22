@@ -31,8 +31,6 @@
       .name,
       .description {
         @extend %loading-element;
-
-        color: 'black';
       }
     }
   }
@@ -40,7 +38,8 @@
   .loading {
     .logo,
     .name,
-    .description {
+    .description,
+    .tag {
       @extend %loading-element;
     }
 
@@ -51,6 +50,10 @@
 
     .description {
       height: size(7);
+    }
+
+    .tag {
+      width: size(8);
     }
   }
 
@@ -98,6 +101,7 @@
       padding: size(1) size(2);
       font-family: 'Lilita One', cursive;
       margin-right: size(1);
+      height: size(4);
     }
   }
 

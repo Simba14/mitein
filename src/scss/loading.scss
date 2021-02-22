@@ -4,11 +4,11 @@
 
 @keyframes load {
   0% {
-    left: -100%;
+    transform: tranlsateX(-100%);
   }
 
   100% {
-    left: 100%;
+    transform: translateX(100%);
   }
 }
 
@@ -22,12 +22,13 @@
     $grey 0%,
     $grey 45%,
     $light-grey 70%,
-    $grey 95%
+    $grey 95%,
+    $grey 100%
   );
   content: '';
   display: block;
   height: 100%;
-  left: -100%;
+  transform: translateX(-100%);
   position: absolute;
   top: 0;
   width: 100%;

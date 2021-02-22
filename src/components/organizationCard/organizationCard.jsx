@@ -8,8 +8,9 @@ import styles from './organizationCard.module.scss';
 const TYPENAME = '__typename';
 
 const OrganizationCard = ({ loading, organization, t }) => {
+  console.log({ organization });
   return (
-    <div className={styles.organization} key={organization.name}>
+    <div className={styles.organization}>
       <div className={`${styles.info}, ${loading ? styles.loading : ''}`}>
         <div
           className={styles.logo}
@@ -43,9 +44,11 @@ const OrganizationCard = ({ loading, organization, t }) => {
             ) : null,
           )}
       </div>
-      <a className={styles.website} href={organization.website}>
-        {t('learnMore')}
-      </a>
+      {organization.website && (
+        <a className={styles.website} href={organization.website}>
+          {t('learnMore')}
+        </a>
+      )}
     </div>
   );
 };

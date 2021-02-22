@@ -28,7 +28,7 @@
     }
 
     &.menuOpen {
-      border-top: 1px solid gray;
+      border-top: 1px solid #d4d4d4;
       margin-top: $menu-height-mobile;
       height: calc(100vh - #{$header-height} - #{$menu-height-mobile});
 

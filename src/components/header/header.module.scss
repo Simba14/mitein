@@ -30,7 +30,7 @@ $logo-width: 152px;
   margin-left: #{size(4)};
 
   @include mq($from: tablet) {
-    margin-left: calc((100% - (#{$logo-width} / 2)) / 2);
+    margin-left: calc(50% - (#{$logo-width} / 2));
   }
 
   .logoContainer {
