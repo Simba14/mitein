@@ -19,10 +19,10 @@ const Volunteer = () => {
     t,
   } = useTranslation('volunteer');
 
-  const { data, loading } = useQuery(GET_VOLUNTEERING_OPPS, {
+  const { data, loading, ...rest } = useQuery(GET_VOLUNTEERING_OPPS, {
     variables: { city: 'Berlin', locale: language },
   });
-
+  console.log({ data, loading, ...rest, query: GET_VOLUNTEERING_OPPS });
   const volunteerWith = get(data, 'volunteerWith');
 
   useEffect(() => {
