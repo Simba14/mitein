@@ -11,19 +11,23 @@ import Slots from 'components/slots';
 import GET_PROFILE from 'graphql/queries/getProfile.graphql';
 import SIGN_OUT from 'graphql/mutations/signOut.graphql';
 import { ROUTE_BASE, ROUTE_LOGIN } from 'routes';
+import { Redirect } from '@reach/router';
 
 import styles from './profile.module.scss';
 
 const Profile = ({ session }) => {
-  const { t } = useTranslation('profile');
+  const {
+    i18n: { language },
+    t,
+  } = useTranslation('profile');
   const userId = session && session.userId;
+
   if (!userId) {
-    navigate(ROUTE_LOGIN);
-    return null;
+    return <Redirect noThrow to={`${language}${ROUTE_LOGIN}`} />;
   }
 
   const signOutSuccessful = () => {
-    navigate(ROUTE_BASE);
+    navigate(`${language}${ROUTE_BASE}`);
     session.userLoggedOut();
   };
 
