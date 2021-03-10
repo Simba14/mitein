@@ -20,3 +20,11 @@
     outline-color: orange;
   }
 }
+
+a.cta {
+  margin-top: size(4);
+  max-width: 240px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

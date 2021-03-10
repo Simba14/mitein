@@ -3,6 +3,7 @@ import { get, uniq, flatMap, intersection } from 'lodash';
 import { useQuery } from '@apollo/client';
 import { useTranslation } from 'react-i18next';
 
+import ContactUs from 'components/contactUs';
 import NewsletterBanner from 'components/newsletter';
 import OrganizationCard from 'components/organizationCard';
 import { withLayout } from 'components/layout';
@@ -91,12 +92,7 @@ const Volunteer = () => {
         )}
       </div>
       <NewsletterBanner />
-      <div className={styles.reachOut}>
-        {t('haveOpps')}
-        <br />
-        {t('contactUs')}
-        <a href={`mailto: ${t('email')}`}>{t('email')}</a>
-      </div>
+      <ContactUs translation="volunteer" />
     </div>
   );
 };

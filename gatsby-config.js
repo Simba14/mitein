@@ -25,7 +25,7 @@ module.exports = {
         url: process.env.API_URL,
       },
     },
-    'gatsby-plugin-graphql-tag-loader',
+    'gatsby-plugin-graphql-loader',
     'gatsby-plugin-sass',
     'gatsby-plugin-mini-css-class-name',
     {
@@ -36,27 +36,5 @@ module.exports = {
         },
       },
     },
-    // {
-    //   resolve: `gatsby-source-filesystem`,
-    //   options: {
-    //     path: `${__dirname}/locales`,
-    //     name: `locale`,
-    //   },
-    // },
-    // {
-    //   resolve: `gatsby-plugin-react-i18next`,
-    //   options: {
-    //     localeJsonSourceName: `locale`, // name given to `gatsby-source-filesystem` plugin.
-    //     languages: [`en`, `de`],
-    //     defaultLanguage: `en`,
-    //     i18nextOptions: {
-    //       debug: 'true',
-    //       react: {
-    //         transSupportBasicHtmlNodes: true,
-    //         transKeepBasicHtmlNodesFor: ['br', 'strong', 'i'],
-    //       },
-    //     },
-    //   },
-    // },
   ],
 };

@@ -4,8 +4,10 @@ export default {
   filterBy: 'Filtern nach:',
   city: 'Stadt:',
   learnMore: 'Mehr lernen',
-  haveOpps:
-    'Sie haben Möglichkeiten zur Freiwilligenarbeit und möchten auf Mitein vorgestellt werden?',
-  contactUs: 'Melden Sie sich bei ',
-  email: 'info@mitein.de',
+  contactUs: {
+    descriptor:
+      'Sie haben Möglichkeiten zur Freiwilligenarbeit und möchten auf Mitein vorgestellt werden?',
+    text: 'Melden Sie sich bei ',
+    email: 'info@mitein.de',
+  },
 };

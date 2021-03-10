@@ -6,6 +6,6 @@
   width: 100%;
 
   @include mq($from: tablet) {
-    padding: size(6) size(4);
+    padding: size(5) size(4);
   }
 }

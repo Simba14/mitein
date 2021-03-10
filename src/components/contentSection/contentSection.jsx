@@ -1,29 +1,38 @@
 import React from 'react';
-import { string } from 'prop-types';
+import { any, string } from 'prop-types';
 import { useTranslation } from 'react-i18next';
 import styles from './contentSection.module.scss';
 
-const ContentSection = ({ className, translation, withKey }) => {
+const ContentSection = ({
+  anchorId,
+  children,
+  className,
+  translation,
+  withKey,
+}) => {
   const { t } = useTranslation(translation);
   const translationKey = withKey ? `${withKey}.` : '';
   return (
-    <div className={`${styles.container} ${className}`}>
-      <h3 className={styles.title}>{t(`${translationKey}title`)}</h3>
-      <div
-        className={styles.content}
-        dangerouslySetInnerHTML={{ __html: t(`${translationKey}content`) }}
-      />
+    <div id={anchorId} className={`${styles.wrapper} ${className}`}>
+      <div className={styles.container}>
+        <h3 className={styles.title}>{t(`${translationKey}title`)}</h3>
+        <div className={styles.content}>{t(`${translationKey}content`)}</div>
+        {children}
+      </div>
     </div>
   );
 };
 
 ContentSection.propTypes = {
+  anchorId: string,
+  children: any,
   className: string,
   translation: string.isRequired,
   withKey: string,
 };
 
 ContentSection.defaultProps = {
+  anchorId: null,
   className: null,
   withKey: null,
 };

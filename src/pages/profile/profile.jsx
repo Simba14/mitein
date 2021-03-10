@@ -10,14 +10,17 @@ import Calendar from 'components/calendar';
 import Slots from 'components/slots';
 import GET_PROFILE from 'graphql/queries/getProfile.graphql';
 import SIGN_OUT from 'graphql/mutations/signOut.graphql';
-import { ROUTE_BASE } from 'routes';
+import { ROUTE_BASE, ROUTE_LOGIN } from 'routes';
 
 import styles from './profile.module.scss';
 
 const Profile = ({ session }) => {
   const { t } = useTranslation('profile');
   const userId = session && session.userId;
-  if (!userId) return <div>Uh oh</div>;
+  if (!userId) {
+    navigate(ROUTE_LOGIN);
+    return null;
+  }
 
   const signOutSuccessful = () => {
     navigate(ROUTE_BASE);

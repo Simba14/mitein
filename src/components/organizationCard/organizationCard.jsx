@@ -8,7 +8,6 @@ import styles from './organizationCard.module.scss';
 const TYPENAME = '__typename';
 
 const OrganizationCard = ({ loading, organization, t }) => {
-  console.log({ organization });
   return (
     <div className={styles.organization}>
       <div className={`${styles.info}, ${loading ? styles.loading : ''}`}>

@@ -4,7 +4,9 @@ export default {
   filterBy: 'Filter by:',
   city: 'City:',
   learnMore: 'Learn more',
-  haveOpps: 'Need volunteers and want to be featured on Mitein?',
-  contactUs: 'Reach out to ',
-  email: 'info@mitein.de',
+  contactUs: {
+    descriptor: 'Need volunteers and want to be featured on Mitein?',
+    text: 'Reach out to ',
+    email: 'info@mitein.de',
+  },
 };

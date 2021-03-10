@@ -4,9 +4,7 @@
 @import 'scss/spacings.scss';
 @import 'scss/wrapper.scss';
 
-$logo-width: 152px;
-
-.container {
+.wrapper {
   @include wrapper;
 
   scroll-snap-align: start;
@@ -18,6 +16,13 @@ $logo-width: 152px;
     min-height: calc(100vh - #{$header-height});
   }
 
+  .container {
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+    max-width: 840px;
+  }
+
   .title {
     font-family: 'Bowlby One', cursive;
     font-family: 'Lilita One', cursive;
@@ -26,6 +31,9 @@ $logo-width: 152px;
     margin-bottom: size(2);
   }
 
-  .wrapper {
+  .content {
+    // line-height: 24px;
+    white-space: pre-line;
+    text-align: justify;
   }
 }
