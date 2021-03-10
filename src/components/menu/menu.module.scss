@@ -197,6 +197,9 @@ a {
   max-width: 20px;
 
   @include mq($until: tablet) {
+    transition: $menu-transition-duration, color $menu-transition-duration / 2,
+      transform $menu-transition-duration / 2;
+
     // Setting delays for the nav items in close transition
     @for $i from 1 through $items {
       &:nth-child(#{$i}) {
@@ -239,5 +242,6 @@ a {
     opacity: 1;
     background-color: $menu-blue;
     transform: translateY(-50%) scaleY(5);
+    transition: $menu-transition-duration;
   }
 }
