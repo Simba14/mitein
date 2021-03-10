@@ -1,7 +1,7 @@
 import React from 'react';
 import { navigate } from 'gatsby';
 import { Mutation, Query } from '@apollo/client/react/components';
-import { compose } from 'lodash/fp';
+import { compose, get } from 'lodash/fp';
 import { useTranslation } from 'react-i18next';
 
 import { sessionProps, withSessionContext } from 'context/session';
@@ -20,8 +20,8 @@ const Profile = ({ session }) => {
     i18n: { language },
     t,
   } = useTranslation('profile');
-  const userId = session && session.userId;
-  console.log(userId);
+  const userId = get('userId', session);
+
   if (!userId) {
     return <Redirect noThrow to={`${language}${ROUTE_LOGIN}`} />;
   }
