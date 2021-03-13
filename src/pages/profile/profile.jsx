@@ -21,7 +21,7 @@ const Profile = ({ session }) => {
     t,
   } = useTranslation('profile');
   const userId = get('userId', session);
-
+  console.log({ userId });
   if (!userId) {
     return <Redirect noThrow to={`${language}${ROUTE_LOGIN}`} />;
   }
