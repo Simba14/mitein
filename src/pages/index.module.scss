@@ -10,6 +10,7 @@
   width: 100%;
   overflow-y: scroll;
   scroll-snap-type: y mandatory;
+  -webkit-overflow-scrolling: touch;
 
   @include mq($from: tablet) {
     max-height: 100vh;
