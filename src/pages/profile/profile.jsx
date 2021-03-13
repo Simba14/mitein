@@ -23,6 +23,7 @@ const Profile = ({ session }) => {
   const userId = get('userId', session);
   console.log({ userId });
   if (!userId) {
+    console.log('redirecting');
     return <Redirect noThrow to={`${language}${ROUTE_LOGIN}`} />;
   }
 
