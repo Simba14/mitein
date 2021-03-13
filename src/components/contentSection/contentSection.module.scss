@@ -20,7 +20,7 @@
     display: flex;
     flex-direction: column;
     margin: auto;
-    max-width: 840px;
+    max-width: 970px;
   }
 
   .title {
@@ -32,8 +32,12 @@
   }
 
   .content {
-    // line-height: 24px;
+    line-height: 1.6;
     white-space: pre-line;
-    text-align: justify;
+
+    @include mq($from: tablet) {
+      line-height: 1.3;
+      text-align: justify;
+    }
   }
 }
