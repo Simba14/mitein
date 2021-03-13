@@ -16,9 +16,10 @@ export const SessionContextProvider = ({
   cookieUserIdIdentifier,
 }) => {
   const getUserId = () => {
-    console.log('getUserId');
+    console.log('getUserId', cookie.get(cookieUserIdIdentifier));
+    const userIdCookie = cookie.get(cookieUserIdIdentifier);
     // const [profile] = await cookie.get(cookieCustomerLoggedInIdentifier) === TRUE ? this.fetchProfile() : undefined;
-    return cookie.get(cookieUserIdIdentifier) || undefined;
+    return typeof userIdCookie === 'string' ? userIdCookie : undefined;
   };
 
   const [userId, setUserId] = useState(getUserId());
