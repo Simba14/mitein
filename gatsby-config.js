@@ -22,7 +22,7 @@ module.exports = {
       options: {
         typeName: 'Mitein',
         fieldName: 'mitein',
-        url: process.env.API_URL,
+        url: process.env.GATSBY_API_URL,
       },
     },
     'gatsby-plugin-graphql-loader',
