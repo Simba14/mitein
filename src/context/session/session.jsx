@@ -16,12 +16,13 @@ export const SessionContextProvider = ({
   cookieUserIdIdentifier,
 }) => {
   const getUserId = () => {
+    console.log('getUserId');
     // const [profile] = await cookie.get(cookieCustomerLoggedInIdentifier) === TRUE ? this.fetchProfile() : undefined;
     return cookie.get(cookieUserIdIdentifier) || undefined;
   };
 
   const [userId, setUserId] = useState(getUserId());
-
+  console.log('sessiion', { userId });
   const setUserLoggedIn = (id) => {
     if (id) {
       setUserId(id);
