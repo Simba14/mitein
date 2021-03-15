@@ -25,7 +25,7 @@
     color: white;
 
     @include mq($until: tablet) {
-      padding-bottom: size(14);
+      padding-bottom: size(16);
     }
 
     h3 {

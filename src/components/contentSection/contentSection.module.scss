@@ -10,10 +10,11 @@
   scroll-snap-align: start;
   scroll-snap-stop: always;
   background-color: white;
-  padding-bottom: size(6);
+  padding-bottom: size(14);
 
   @include mq($from: tablet) {
     min-height: calc(100vh - #{$header-height});
+    padding-bottom: size(6);
   }
 
   .container {
