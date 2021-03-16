@@ -5,6 +5,7 @@ import { compose, get } from 'lodash/fp';
 import { useTranslation } from 'react-i18next';
 
 import { sessionProps, withSessionContext } from 'context/session';
+import Cta from 'components/cta';
 import { withLayout } from 'components/layout';
 import Calendar from 'components/calendar';
 import Slots from 'components/slots';
@@ -12,6 +13,7 @@ import GET_PROFILE from 'graphql/queries/getProfile.graphql';
 import SIGN_OUT from 'graphql/mutations/signOut.graphql';
 import { ROUTE_BASE, ROUTE_LOGIN } from 'routes';
 import { Redirect } from '@reach/router';
+import { LEARNER, NATIVE } from 'constants/user';
 
 import styles from './profile.module.scss';
 
@@ -52,19 +54,18 @@ const Profile = ({ session }) => {
               <div>
                 <Mutation mutation={SIGN_OUT} onCompleted={signOutSuccessful}>
                   {(signOut, { loading: signOutLoading }) => (
-                    <button
+                    <Cta
                       className={styles.logOut}
                       onClick={signOut}
                       disabled={signOutLoading}
-                    >
-                      {t('logOut')}
-                    </button>
+                      text={t('logOut')}
+                    />
                   )}
                 </Mutation>
               </div>
             </div>
-            {type === 'LEARNER'} && <Slots />
-            {type === 'NATIVE' && <Calendar userId={userId} />}
+            {(type === LEARNER || type === NATIVE) && <Slots userId={userId} />}
+            {type === NATIVE && <Calendar userId={userId} />}
           </div>
         );
       }}
