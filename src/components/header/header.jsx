@@ -22,7 +22,7 @@ const Header = () => {
           <div className={styles.title}>{t('mitein')}</div>
         </Link>
         <div className={styles.options}>
-          {/*<AccountSection />*/}
+          {/* <AccountSection /> */}
           <LanguageSelector />
         </div>
       </div>

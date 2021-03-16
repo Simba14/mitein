@@ -3,32 +3,30 @@ export default {
   description: 'Menschen Zussamen bringen',
   about: {
     title: 'Über uns',
-    content: `Mitein, short for Miteinander, means "With one another" in German.
+    content: `Das Kernziel von Mitein (kurz für Miteinander) ist es, Menschen zusammenzubringen, auf vielfältige Weise und immer durch sichere Räume.
 
-    Mitein’s core purpose is to bring people together, in a variety of ways and always through safe spaces.
+    Wir als Gesellschaft sind nun umhüllt von dem unglaublichen Fortschritt der Technologie, und die Explosion des Internets hat uns alle auf unvorstellbare Weise verbunden. Wir sind ständig miteinander verbunden.
 
-    We as a society are now coated in the unbelievable progress of technology, and the explosion of the internet has connected us all in unimaginable ways. We are constantly connected.
+    Doch trotz dieser ständigen und unmittelbaren Verbundenheit fühlen sich große Teile der Gesellschaft mehr denn je abgekoppelt. Gefühle von Isolationismus, Einsamkeit und Mangel an sinnvollen Interaktionen sind weit verbreitet und nehmen zu. Probleme, die durch die Pandemie noch verstärkt wurden und die wir alle in irgendeiner Form durch die daraus resultierenden Abriegelungen erfahren.
 
-    Yet, despite this constant and immediate connectivity, large sections of society feel more disconnected than ever before. Feelings of isolationism, loneliness and lack of meaningful interactions are widespread and deepening. Issues that have been amplified by the pandemic, and experienced by us all in some form from the resulting lockdowns.
+    Mitein möchte dazu beitragen, diese schädlichen Trends rückgängig zu machen, indem es Wege aufzeigt und Verbindungen herstellt, die dazu beitragen, das Gemeinschaftsgefühl zu stärken und letztendlich die Menschen auf sinnvolle Weise zusammenzubringen.
 
-    Mitein wants to help undo these harmful trends, by providing avenues and establishing connections that help fortify a sense of community, ultimately bringing people together in meaningful ways.
+    Selbst in einer Zeit, in der Aktion und Interaktion zu fehlen scheinen, gibt es so viele Organisationen, die unglaubliche Arbeit in und für lokale Gemeinschaften leisten. Sich in Ihrer Gemeinde zu engagieren, sollte nicht schwierig sein.
+    Wir wollen es einfacher machen.
 
-    Even in a time when action and interaction seems missing, there are so many organisations that are doing incredible work within and for local communities. Helping out in your community shouldn’t be difficult.
-    We want to make it easier.
-
-    That’s why at Mitein, whilst also undertaking our own projects, we want to highlight and promote other organisations that you should know about. These organisations are each tackling important issues and have opportunities for you to get involved. Discover and learn how you can participate with them by clicking on the button below.`,
+    Deshalb wollen wir bei Mitein neben unseren eigenen Projekten auch andere Organisationen hervorheben und fördern, die Sie kennen sollten. Jede dieser Organisationen kümmert sich um wichtige Themen und bietet Ihnen die Möglichkeit, sich zu engagieren. Entdecken und erfahren Sie, wie Sie sich bei ihnen beteiligen können, indem Sie auf die Schaltfläche unten klicken.`,
   },
   how: {
-    title: 'How it works',
-    content: `Being lonely isn’t just a feeling. It is proven to negatively impact both your physical and mental wellbeing. Loneliness affects us all. It doesn’t discriminate, regardless of your age.
+    title: 'Wie es funktioniert',
+    content: `Einsam zu sein ist nicht nur ein Gefühl. Es wirkt sich nachweislich negativ auf Ihr körperliches und geistiges Wohlbefinden aus. Einsamkeit betrifft uns alle. Sie diskriminiert niemanden, unabhängig von Ihrem Alter.
 
-    Mitein looks to connect you to people you’d otherwise never have the fortune of chatting with. We’re in the process of launching a platform that will match those looking to sharpen their German skills with native speakers looking for someone to talk to.
+    Mitein möchte Sie mit Menschen in Kontakt bringen, mit denen Sie sonst nie das Glück hätten, sich zu unterhalten. Wir sind gerade dabei, eine Plattform zu starten, die diejenigen, die ihre Deutschkenntnisse verbessern wollen, mit Muttersprachlern zusammenbringt, die jemanden zum Reden suchen.
 
-    The plan is to improve people’s German whilst providing human connection to those who currently find themselves socially isolated.
-    We want to help bridge the intergenerational gap, and create conversations that otherwise wouldn’t take place. Conversations that are purposeful, enjoyable and build confidence.
+    Der Plan ist es, die Deutschkenntnisse der Menschen zu verbessern und gleichzeitig eine menschliche Verbindung für diejenigen zu schaffen, die sich derzeit sozial isoliert fühlen.
+    Wir wollen helfen, die Kluft zwischen den Generationen zu überbrücken und Gespräche zu schaffen, die sonst nicht stattfinden würden. Gespräche, die zielgerichtet sind, Spaß machen und Vertrauen aufbauen.
 
-    Mitein is a foundation. It will be free to use.
-    The aim is to connect, educate, increase meaningful engagement, and strengthen our communities.
+    Mitein ist eine Stiftung. Die Nutzung wird kostenlos sein.
+    Das Ziel ist es, zu verbinden, zu erziehen, sinnvolles Engagement zu erhöhen und unsere Gemeinschaften zu stärken.
     `,
   },
   contactUs: {

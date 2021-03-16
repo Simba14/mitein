@@ -25,11 +25,11 @@ const MENU_ITEMS = [
     title: 'volunteer',
     to: ROUTE_VOLUNTEER,
   },
-  {
-    'aria-label': 'Profile page',
-    title: 'profile',
-    to: ROUTE_PROFILE,
-  },
+  // {
+  //   'aria-label': 'Profile page',
+  //   title: 'profile',
+  //   to: ROUTE_PROFILE,
+  // },
 ];
 
 const Menu = () => {

@@ -17,8 +17,8 @@
 
   .content {
     background: $blue;
-    border-top: 0px solid transparent;
     height: calc(100vh - #{$header-height});
+    margin-top: 0;
     overflow-y: scroll;
     width: 100%;
     transition: $menu-transition-duration;
@@ -28,7 +28,6 @@
     }
 
     &.menuOpen {
-      border-top: 1px solid #d4d4d4;
       margin-top: $menu-height-mobile;
       height: calc(100vh - #{$header-height} - #{$menu-height-mobile});
 

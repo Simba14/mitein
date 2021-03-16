@@ -5,7 +5,7 @@
 @import 'scss/loading.scss';
 
 .organization {
-  height: $organization-card-height;
+  min-height: $organization-card-height;
   color: $blue;
   font-size: 14px;
   border-radius: 15px;
