@@ -1,7 +1,7 @@
 export default {
   title: 'Bringing people together',
   description:
-    "A foundation aiming to bring people together and improve Berliners' German skills",
+    "A foundation aiming to bring people together and improve non-natives' German skills",
   about: {
     title: 'About',
     content: `Mitein, short for Miteinander, means "With one another" in German.
@@ -32,6 +32,7 @@ export default {
     The aim is to connect, educate, increase meaningful engagement, and strengthen our communities.
     `,
   },
+  volunteerBtn: 'Volunteer now',
   contactUs: {
     descriptor: 'Have questions or want to get in touch?',
     text: 'Reach out to ',

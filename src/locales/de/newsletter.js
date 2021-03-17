@@ -1,7 +1,7 @@
 export default {
   heading: 'In Kontakt bleiben',
   description:
-    'Informieren Sie sich über die neuesten Freiwilligenangebote und Veranstaltungen in ganz Berlin, indem Sie sich für den Mitein-Newsletter anmelden.',
+    'Informiere Dich über die neuesten Freiwilligenangebote oder Veranstaltungen in ganz Berlin und abonniere den Mitein-Newsletter.',
   cta: 'Anmelden',
   placeholder: 'Ihre E-Mail hier',
   successMessage: 'Erfolgreich hinzugefügt',

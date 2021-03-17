@@ -1,12 +1,12 @@
 export default {
-  headline: 'Ehrenamtlich in Berlin heute',
-  subheadline: 'Organisationen, die Ihre Hilfe benötigen',
+  headline: 'Volunteer in Berlin heute',
+  subheadline: 'Organisationen, die deine Hilfe brauchen',
   filterBy: 'Filtern nach:',
   city: 'Stadt:',
-  learnMore: 'Mehr lernen',
+  learnMore: 'Mehr erfahren',
   contactUs: {
     descriptor:
-      'Sie haben Möglichkeiten zur Freiwilligenarbeit und möchten auf Mitein vorgestellt werden?',
+      'Auf der Suche nach Freiwilligen und interessiert an einer Veröffentlichung auf Mitein?',
     text: 'Melden Sie sich bei ',
     email: 'info@mitein.de',
   },

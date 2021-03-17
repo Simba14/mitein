@@ -4,10 +4,10 @@ import { useTranslation } from 'react-i18next';
 
 import styles from './contactUs.module.scss';
 
-const ContactUs = ({ translation }) => {
+const ContactUs = ({ className, translation }) => {
   const { t } = useTranslation(translation);
   return (
-    <div className={styles.contactUs}>
+    <div className={`${styles.contactUs} ${className}`}>
       {t('contactUs.descriptor')}
       <br />
       {t('contactUs.text')}
@@ -17,6 +17,7 @@ const ContactUs = ({ translation }) => {
 };
 
 ContactUs.propTypes = {
+  className: string.isRequired,
   translation: string.isRequired,
 };
 

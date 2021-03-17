@@ -1,4 +1,5 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 
 import Cta from 'components/cta';
 import ContactUs from 'components/contactUs';
@@ -11,6 +12,7 @@ import { ROUTE_VOLUNTEER } from 'routes';
 import styles from './index.module.scss';
 
 const Home = () => {
+  const { t } = useTranslation('home');
   return (
     <Layout withContentPadding={false}>
       <div className={`${styles.wrapper}`}>
@@ -21,7 +23,7 @@ const Home = () => {
           translation="home"
           withKey="about"
         >
-          <Cta text="Volunteer Now" to={ROUTE_VOLUNTEER} />
+          <Cta text={t('volunteerBtn')} to={ROUTE_VOLUNTEER} />
         </ContentSection>
         <ContentSection
           anchorId="how"
@@ -29,7 +31,7 @@ const Home = () => {
           translation="home"
           withKey="how"
         >
-          <ContactUs translation="home" />
+          <ContactUs className={styles.contact} translation="home" />
         </ContentSection>
       </div>
     </Layout>

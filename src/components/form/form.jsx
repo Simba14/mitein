@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
-import { bool, func, oneOf } from 'prop-types';
+import { bool, func, oneOf, string } from 'prop-types';
 import { get } from 'lodash/fp';
 
 import styles from './form.module.scss';
@@ -36,7 +36,6 @@ const Form = ({ submitError, loadingSubmit, onSubmit, type }) => {
     }
   }, [submitError]);
 
-  console.log({ errors });
   return (
     <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
       <div
@@ -137,8 +136,8 @@ const Form = ({ submitError, loadingSubmit, onSubmit, type }) => {
 
 Form.propTypes = {
   loadingSubmit: bool,
-  // onError: func.isRequired,
   onSubmit: func.isRequired,
+  submitError: string,
   type: oneOf([SIGN_UP_TYPE, LOGIN_TYPE]).isRequired,
 };
 

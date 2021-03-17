@@ -5,5 +5,5 @@ export default {
   how: 'Wie',
   profile: 'Profil',
   resources: 'Ressourcen',
-  volunteer: 'Ehrenamtlich',
+  volunteer: 'Volunteer',
 };

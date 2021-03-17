@@ -12,7 +12,7 @@
   scroll-snap-type: y proximity;
   -webkit-overflow-scrolling: touch;
 
-  @include mq($from: tablet) {
+  @include mq($from: desktop) {
     scroll-snap-type: y mandatory;
     max-height: 100vh;
   }
@@ -27,6 +27,12 @@
 
     @include mq($until: tablet) {
       padding-bottom: size(16);
+    }
+
+    @include mq($from: tablet, $until: desktop) {
+      .contact {
+        padding: size(4) 0;
+      }
     }
 
     h3 {
