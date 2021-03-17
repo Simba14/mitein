@@ -5,12 +5,8 @@
 @import 'scss/wrapper.scss';
 
 .wrapper {
-  @include wrapper;
-
-  scroll-snap-align: start;
-  scroll-snap-stop: always;
   background-color: white;
-  padding-bottom: size(14);
+  padding: 1px;
 
   @include mq($from: tabletWide) {
     min-height: calc(100vh - #{$header-height});
@@ -18,10 +14,19 @@
   }
 
   .container {
+    @include wrapper;
+
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
     display: flex;
     flex-direction: column;
     margin: auto;
     max-width: 970px;
+    padding-bottom: size(14);
+
+    @include mq($from: tabletWide) {
+      padding-bottom: size(6);
+    }
   }
 
   .title {

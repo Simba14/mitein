@@ -116,7 +116,6 @@ a {
 
     // Restoring nav items from 'lines' in the menu icon
     .navItem {
-      font-family: 'Cabin Sketch', cursive;
       color: $menu-blue;
       letter-spacing: 0;
       height: size(2);
@@ -156,7 +155,7 @@ a {
       // Hide the lines
       &:before {
         opacity: 0;
-        transition: $menu-transition-duration;
+        transition: 3/4 * $menu-transition-duration;
       }
 
       &::after {
@@ -182,6 +181,7 @@ a {
 
 // Showing nav items as lines, making up the hamburger menu icon
 .navItem {
+  font-family: 'Cabin Sketch', cursive;
   position: relative;
   display: inline-block;
   float: left;
