@@ -1,6 +1,7 @@
 <h1 align="center">
   Mitein
 </h1>
+
 Access the site [here](https://mitein.de/)
 
 This is the frontend repository written in React, which utilises the Gatsby framework.
