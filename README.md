@@ -1,6 +1,7 @@
 <h1 align="center">
-  [Mitein](https://mitein.de/)
+  Mitein
 </h1>
+Access the site [here](https://mitein.de/)
 
 This is the frontend repository written in React, which utilises the Gatsby framework.
 Gatsby is a static site generator (it creates a single HTML file with the required assets at build time).
@@ -63,15 +64,15 @@ Note: OS Env Variables that are needed to be accessed in browser Javascript, nee
 
 ## Commands
 
-| Command      | Description                                                                                      |
-| ------------ | ------------------------------------------------------------------------------------------------ |
-| `yarn`       | Install the dependencies                                                                         |
-| `yarn dev`   | Starts development server                                                                        |
-| `yarn build` | Compiles application                                                                             |
-| `yarn serve` | serve the production build of the site for testing                                               |
-| `yarn clean` | clears the cache (.cache folder) and public directories                                          |
-| `yarn test`  | Runs the tests files                                                                             |
-| `preload-fonts` | Generates `font-preload-cache.json`, which contains font asset map in order for pre-loading fonts. Needs to be run after adding routes or new font assets or stylesheets that link to font assets.  |
+| Command          | Description                                                                                      |
+| ---------------- | ------------------------------------------------------------------------------------------------ |
+| `yarn`           | Install the dependencies                                                                         |
+| `yarn dev`       | Starts development server                                                                        |
+| `yarn build`     | Compiles application                                                                             |
+| `yarn serve`     | serve the production build of the site for testing                                               |
+| `yarn clean`     | clears the cache (.cache folder) and public directories                                          |
+| `yarn test`      | Runs the tests files                                                                             |
+| `preload-fonts`  | Generates `font-preload-cache.json`, which contains font asset map in order for pre-loading fonts. Needs to be run after adding routes or new font assets or stylesheets that link to font assets.  |
 
 
 ## 💫 Deploy
