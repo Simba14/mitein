@@ -26,6 +26,14 @@ security features. You can learn more about Gatsby through their [documentation]
 
 
 ## 🧐 What's inside?
+In Gatsby, pages are automatically created when a component is added to `src/pages/` folder.
+For example, the component `src/pages/about.jsx` will add the route `mitein.de/about` where the component will be served.
+
+Gatsby also exposes an api `createPages`, accessible in `gatsby-node.js` to create pages manually.
+This has been used in order to create localized routes e.g. `/en/about` / `/de/about` automatically, without having to create separate components for each language specific route.
+
+This function maps over the pre-defined pages and creates new locale specific pages.
+The locale is also added to the context of the page.
 
 A quick look at the some of the important Gatsby specific top-level files and directories.
 
