@@ -1,0 +1,34 @@
+{
+  "email": "Email",
+  "password": "Password",
+  "confirmPassword": "Confirm Password",
+  "displayName": {
+    "label": "Display Name",
+    "placeholder": "Your display name"
+  },
+  "accountType": {
+    "label": "I Am...",
+    "learner": "Learning German",
+    "native": "a Native Speaker",
+    "representative": "Representative"
+  },
+  "signUp": {
+    "submitBtn": "Sign Up",
+    "changeLocation": {
+      "text": "Already a member?",
+      "route": "/login/",
+      "cta": "Login here"
+    }
+  },
+  "login": {
+    "submitBtn": "Login",
+    "changeLocation": {
+      "text": "New to Mitein?",
+      "route": "/sign-up/",
+      "cta": "Sign up here"
+    }
+  },
+  "error": {
+    "required": "required*"
+  }
+}

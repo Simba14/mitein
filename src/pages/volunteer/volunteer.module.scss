@@ -1,5 +1,5 @@
 @import 'scss/breakpoints.scss';
-@import 'scss/colours.scss';
+@import 'scss/colors.scss';
 @import 'scss/spacings.scss';
 
 .container {
@@ -12,7 +12,7 @@
   }
 
   .subheadline {
-    color: orange;
+    color: $orange;
     font-size: 24px;
     font-family: 'Lilita One', cursive;
     text-align: center;
@@ -35,7 +35,7 @@
     }
 
     .filterBtn {
-      color: orange;
+      color: $orange;
       cursor: pointer;
       border-radius: 15px;
       border: 1px solid $blue;
@@ -47,7 +47,7 @@
       opacity: 0.5;
 
       &:hover {
-        box-shadow: 0 0 3pt 2pt orange;
+        box-shadow: 0 0 3pt 2pt$orange;
       }
 
       &:focus {
@@ -59,7 +59,7 @@
         opacity: 1;
 
         &:focus {
-          box-shadow: 0 0 3pt 2pt orange;
+          box-shadow: 0 0 3pt 2pt$orange;
           outline: none;
         }
       }

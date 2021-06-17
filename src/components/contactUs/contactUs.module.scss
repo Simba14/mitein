@@ -1,10 +1,11 @@
+@import 'scss/colors.scss';
 @import 'scss/spacings.scss';
 
 .contactUs {
   font-family: 'Lilita One', cursive;
   font-size: size(5);
   padding: size(8) 0;
-  color: orange;
+  color: $orange;
   text-align: center;
   width: 100%;
 

@@ -1,18 +1,26 @@
 import React from 'react';
-import { useTranslation } from 'react-i18next';
+import { useTranslation } from 'next-i18next';
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 
 import Cta from 'components/cta';
 import ContactUs from 'components/contactUs';
 import ContentSection from 'components/contentSection';
 import Hero from 'components/hero';
 import Layout from 'components/layout';
-import NewsletterBanner from 'components/newsletter';
+// import NewsletterBanner from 'components/newsletter';
 import { ROUTE_VOLUNTEER } from 'routes';
 
 import styles from './index.module.scss';
 
+export const getStaticProps = async ({ locale }) => ({
+  props: {
+    ...(await serverSideTranslations(locale, ['home', 'header', 'menu'])),
+  },
+});
+
 const Home = () => {
   const { t } = useTranslation('home');
+
   return (
     <Layout withContentPadding={false}>
       <div className={`${styles.wrapper}`}>
@@ -37,7 +45,5 @@ const Home = () => {
     </Layout>
   );
 };
-
-// <Newsletter  Banner />
 
 export default Home;

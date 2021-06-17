@@ -1,26 +1,19 @@
 import React from 'react';
-import { Link as GatsbyLink } from 'gatsby';
-import { get } from 'lodash/fp';
-import { any, func, string } from 'prop-types';
-import { usePageContext } from 'context/page';
+import NextLink from 'next/link';
+import { oneOfType, func, node, string } from 'prop-types';
+import { useRouter } from 'next/router';
 
-const handleScroll = ({ event, elementId, lang }) => {
-  if (get('location.pathname', window) === `/${lang}/`) {
+const handleScroll = ({ event, elementId, pathname }) => {
+  if (pathname === '/') {
     event.preventDefault();
     const element = document.getElementById(elementId);
     element.scrollIntoView({ behavior: 'smooth', block: 'start' });
     // update hash after scroll
+
     setTimeout(() => {
       window.location.hash = elementId;
     }, 500);
   }
-};
-
-const isActive = ({ activeClassName, className, href, location }) => {
-  const active =
-    activeClassName && href === `${location.pathname}${location.hash}`;
-
-  return active ? { className: `${className} ${activeClassName}` } : {};
 };
 
 const Link = ({
@@ -28,39 +21,42 @@ const Link = ({
   children,
   className,
   hashId,
+  locale,
   onClick,
   to,
   ...rest
 }) => {
-  const { lang } = usePageContext();
+  const { asPath, pathname, locale: existingLocale } = useRouter();
   const handleOnClick = hashId
-    ? (event) => handleScroll({ event, elementId: hashId, lang })
+    ? (event) => handleScroll({ event, elementId: hashId, pathname })
     : onClick;
 
-  const getIsActive = (props) =>
-    isActive({ ...props, className, activeClassName });
+  const classNames =
+    activeClassName && to === asPath
+      ? `${className} ${activeClassName}`
+      : className;
 
   return (
-    <GatsbyLink
-      activeClassName={activeClassName}
-      className={className}
-      {...rest}
-      getProps={getIsActive}
-      to={`/${lang}${to}`}
-      onClick={handleOnClick}
-    >
-      {children}
-    </GatsbyLink>
+    <NextLink href={to} locale={locale || existingLocale}>
+      <a {...rest} className={classNames} onClick={handleOnClick}>
+        {children}
+      </a>
+    </NextLink>
   );
 };
 
 Link.propTypes = {
   activeClassName: string,
-  children: any,
+  children: oneOfType([node, string]).isRequired,
   className: string,
   hashId: string,
+  locale: string,
   onClick: func,
   to: string.isRequired,
+};
+
+Link.defaultProps = {
+  locale: null,
 };
 
 export default Link;

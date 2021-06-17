@@ -1,16 +1,22 @@
+@import 'scss/colors.scss';
 @import 'scss/spacings.scss';
 
 .topContainer {
   display: flex;
+  align-items: flex-end;
   justify-content: space-between;
   margin-bottom: 32px;
 
   .logOut {
-    border: 1px black solid;
-    border-radius: 5px;
+    border: 1px white solid;
     background: white;
-    color: black;
-    text-transform: uppercase;
-    padding: 0 size(1.5);
+    color: $blue;
+    text-transform: capitalize;
+    width: 100px;
   }
+}
+
+.accordion {
+  color: white;
+  margin-bottom: size(4);
 }

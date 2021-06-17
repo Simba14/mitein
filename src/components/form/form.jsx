@@ -1,13 +1,16 @@
-import React, { useEffect } from 'react';
+import React, { useCallback, useEffect } from 'react';
+import classnames from 'classnames/bind';
 import { useForm } from 'react-hook-form';
-import { useTranslation } from 'react-i18next';
+import { useTranslation } from 'next-i18next';
 import { bool, func, oneOf, string } from 'prop-types';
 import { get } from 'lodash/fp';
-
-import styles from './form.module.scss';
+import { throttle } from 'lodash';
 
 import Anchor from 'components/anchor';
 import Cta from 'components/cta';
+
+import styles from './form.module.scss';
+const cx = classnames.bind(styles);
 
 export const SIGN_UP_TYPE = 'signUp';
 export const LOGIN_TYPE = 'login';
@@ -21,86 +24,107 @@ const userType = {
   representative: REPRESENTATIVE_TYPE,
 };
 
-const Form = ({ submitError, loadingSubmit, onSubmit, type }) => {
+const Form = ({ submitError, loadingSubmit, onChange, onSubmit, type }) => {
   const { t } = useTranslation('form');
   const { clearErrors, register, handleSubmit, errors, setError } = useForm();
   const isSignUp = type === SIGN_UP_TYPE;
 
   useEffect(() => {
     if (submitError) {
-      const message = get('graphQLErrors[0].message', submitError);
       setError('submit', {
         type: 'manual',
-        message,
+        message: submitError,
       });
     }
   }, [submitError]);
 
+  const handleOnChange = useCallback(
+    throttle(
+      () => {
+        clearErrors('submit');
+        onChange();
+      },
+      1000,
+      { trailing: false },
+    ),
+    [],
+  );
+
   return (
-    <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
-      <div
-        className={`${styles.fieldContainer} ${
-          errors.email ? styles.hasError : ''
-        }`}
-      >
+    <form className={cx('form')} onSubmit={handleSubmit(onSubmit)}>
+      <div className={cx('fieldContainer', { hasError: errors.email })}>
         <label htmlFor="email">{t('email')}</label>
         <input
           ref={register({ required: t('error.required'), validate: true })}
-          className={styles.email}
+          className={cx('email')}
           id="email"
           name="email"
-          placeholder="Email"
+          placeholder={t('email')}
           type="email"
+          onChange={handleOnChange}
         />
 
-        <div
-          className={`${styles.fieldError} ${errors.email ? styles.show : ''}`}
-        >
-          {errors?.email?.message}
+        <div className={cx('fieldError', { show: errors.email })}>
+          {get('email.message', errors)}
         </div>
       </div>
-      <div
-        className={`${styles.fieldContainer} ${
-          errors.password ? styles.hasError : ''
-        }`}
-      >
+      <div className={cx('fieldContainer', { hasError: errors.password })}>
         <label htmlFor="password">{t('password')}</label>
         <input
           ref={register({ required: t('error.required') })}
-          className={styles.password}
+          className={cx('password')}
           id="password"
           name="password"
-          placeholder="Password"
+          placeholder={t('password')}
           type="password"
-          onChange={() => clearErrors('submit')}
+          onChange={handleOnChange}
         />
-        <div className={styles.fieldError}>{errors?.password?.message}</div>
+        <div className={cx('fieldError')}>
+          {get('password.message', errors)}
+        </div>
       </div>
       {isSignUp && (
         <>
           <div
-            className={`${styles.fieldContainer} ${
-              errors.confirmPassword ? styles.hasError : ''
-            }`}
+            className={cx('fieldContainer', {
+              hasError: errors.confirmPassword,
+            })}
           >
             <label htmlFor="confirmPassword">{t('confirmPassword')}</label>
             <input
               ref={register({ required: t('error.required') })}
-              className={styles.password}
+              className={cx('password')}
               id="confirmPassword"
               name="confirmPassword"
-              placeholder="Password"
+              placeholder={t('password')}
               type="password"
+              onChange={handleOnChange}
             />
-            <div className={styles.fieldError}>
-              {errors?.confirmPassword?.message}
+            <div className={cx('fieldError')}>
+              {get('confirmPassword.message', errors)}
             </div>
           </div>
-          <div className={styles.fieldContainer}>
+          <div
+            className={cx('fieldContainer', { hasError: errors.displayName })}
+          >
+            <label htmlFor="displayName">{t('displayName.label')}</label>
+            <input
+              ref={register({ required: t('error.required') })}
+              className={cx('email')}
+              id="displayName"
+              name="displayName"
+              placeholder={t('displayName.placeholder')}
+              type="text"
+            />
+            <div className={cx('fieldError')}>
+              {get('displayName.message', errors)}
+            </div>
+          </div>
+          <div className={cx('fieldContainer')}>
             <label htmlFor="accountType">{t('accountType.label')}</label>
             <select
               ref={register({ required: t('error.required') })}
-              className={styles.password}
+              className={cx('password')}
               id="accountType"
               name="accountType"
             >
@@ -116,7 +140,7 @@ const Form = ({ submitError, loadingSubmit, onSubmit, type }) => {
         </>
       )}
       <Cta
-        className={styles.submitButton}
+        className={cx('submitButton')}
         type="submit"
         disabled={loadingSubmit}
         text={t(`${type}.submitBtn`)}
@@ -127,8 +151,8 @@ const Form = ({ submitError, loadingSubmit, onSubmit, type }) => {
           {t(`${type}.changeLocation.cta`)}
         </Anchor>
       </div>
-      <div className={`${styles.error} ${errors.submit ? styles.visible : ''}`}>
-        {errors.submit?.message}
+      <div className={cx('error', { visible: errors.submit })}>
+        {get('submit.message', errors)}
       </div>
     </form>
   );
@@ -136,6 +160,7 @@ const Form = ({ submitError, loadingSubmit, onSubmit, type }) => {
 
 Form.propTypes = {
   loadingSubmit: bool,
+  onChange: func.isRequired,
   onSubmit: func.isRequired,
   submitError: string,
   type: oneOf([SIGN_UP_TYPE, LOGIN_TYPE]).isRequired,

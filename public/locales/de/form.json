@@ -1,0 +1,31 @@
+{
+  "email": "Email",
+  "password": "Passwort",
+  "confirmPassword": "Passwort Bestätigen",
+  "displayName": {
+    "label": "Display Name",
+    "placeholder": "Your display name"
+  },
+  "accountType": {
+    "label": "Ich...",
+    "learner": "lerne Deutsch",
+    "native": "bin Muttersprachler",
+    "representative": "bin ein Vertreter"
+  },
+  "signUp": {
+    "submitBtn": "Anmelden",
+    "changeLocation": {
+      "text": "Sie sind bereits Mitglied?",
+      "route": "/sign-up/",
+      "cta": "Hier einloggen"
+    }
+  },
+  "login": {
+    "submitBtn": "Einloggen",
+    "changeLocation": {
+      "text": "Neu bei?",
+      "route": "/login/",
+      "cta": "Hier anmelden"
+    }
+  }
+}

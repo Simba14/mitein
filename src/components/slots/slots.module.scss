@@ -1,7 +1,42 @@
-@import 'scss/colours.scss';
+@import 'scss/colors.scss';
+@import 'scss/spacings.scss';
 
-.bookButton {
-  border: 1px solid black;
-  background: white;
-  color: black;
+.container {
+  .instruction {
+    font-family: 'Lilita One', cursive;
+    color: $orange;
+    font-size: size(6);
+    margin-bottom: size(2);
+  }
+
+  .note {
+    color: #9e2a2a;
+    margin-bottom: size(4);
+  }
+
+  .dateContainer {
+    margin-bottom: size(4);
+
+    .date {
+      border-bottom: 3px solid white;
+      padding-bottom: size(1);
+      margin-bottom: size(2);
+      font-family: 'Lilita One', cursive;
+      color: white;
+    }
+
+    .slots {
+      display: flex;
+
+      .slot {
+        border: 1px solid black;
+        border-radius: size(3);
+        padding-left: size(3);
+        padding-right: size(3);
+        margin-right: size(3);
+        background: white;
+        color: black;
+      }
+    }
+  }
 }

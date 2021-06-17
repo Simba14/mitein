@@ -1,0 +1,25 @@
+@import 'scss/breakpoints.scss';
+@import 'scss/spacings.scss';
+
+.accordionContent {
+  box-sizing: border-box;
+  border-bottom: 0px solid currentColor;
+  height: 0;
+  visibility: hidden;
+  text-transform: none;
+  opacity: 0;
+  transition: 0.3s linear, opacity 0.2s linear;
+  padding: 0;
+
+  &.isOpen {
+    opacity: 1;
+    height: auto;
+    visibility: visible;
+    padding: size(2) 0;
+    transition: 0.3s linear;
+
+    @include mq($from: tablet) {
+      padding: size(3) 0;
+    }
+  }
+}

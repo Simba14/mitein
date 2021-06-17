@@ -1,8 +1,9 @@
 @import '../../scss/button.scss';
-@import '../../scss/colours.scss';
+@import '../../scss/colors.scss';
 
 .calendar {
   h2 {
+    font-family: 'Lilita One', cursive;
     color: white;
   }
 
@@ -18,10 +19,5 @@
   > div > div > div > table {
     background: white;
     border-radius: 15px 0px 0px;
-
-    div > div > a {
-      background-color: $green;
-      border-color: $green;
-    }
   }
 }

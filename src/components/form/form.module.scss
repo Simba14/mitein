@@ -1,4 +1,8 @@
+@import '../../scss/colors.scss';
 @import '../../scss/spacings.scss';
+
+$form-width: 400px;
+$form-height: 530px;
 
 %formField {
   width: 100%;
@@ -13,8 +17,8 @@
 .form {
   display: flex;
   flex-direction: column;
-  width: 400px;
-  height: 458px;
+  width: $form-width;
+  height: $form-height;
   background: white;
   padding: size(5) size(4);
 
@@ -23,7 +27,7 @@
 
     &.hasError {
       input {
-        border-color: red;
+        border-color: $red;
       }
 
       .fieldError {
@@ -51,20 +55,22 @@
     right: 0;
     font-size: 12px;
     text-transform: capitalize;
-    color: red;
+    color: $red;
     visibility: hidden;
     opacity: 0;
     transition: visibility 1s, opacity 1s;
   }
 
   .error {
-    // border: red solid 1px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     background: #e8bcbc94;
     min-height: 32px;
     padding: size(1);
     margin-top: size(3);
     font-size: 13px;
-    color: red;
+    color: $red;
     opacity: 0;
     transition: opacity 1s;
     text-transform: capitalize;

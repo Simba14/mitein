@@ -1,6 +1,6 @@
 import React from 'react';
 import { string } from 'prop-types';
-import { useTranslation } from 'react-i18next';
+import { useTranslation } from 'next-i18next';
 
 import styles from './contactUs.module.scss';
 
@@ -17,7 +17,7 @@ const ContactUs = ({ className, translation }) => {
 };
 
 ContactUs.propTypes = {
-  className: string.isRequired,
+  className: string,
   translation: string.isRequired,
 };
 

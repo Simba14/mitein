@@ -1,0 +1,18 @@
+query GetSessions(
+  $participant1Id: ID
+  $participant2Id: ID
+  $status: EventStatus
+  $notOneOf: [EventStatus]
+) {
+  sessions(
+    participant1Id: $participant1Id
+    participant2Id: $participant2Id
+    status: $status
+    notOneOf: $notOneOf
+  ) {
+    id
+    status
+    start
+    end
+  }
+}

@@ -1,5 +1,13 @@
 query Profile($id: ID!) {
   user(id: $id) {
+    sessions {
+      id
+      status
+      start
+      end
+    }
+    id
+    displayName
     email
     type
   }

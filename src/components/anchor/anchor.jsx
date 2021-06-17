@@ -1,6 +1,6 @@
 import React from 'react';
 import Link from 'components/link';
-import { any, string } from 'prop-types';
+import { oneOfType, node, string } from 'prop-types';
 
 import styles from './anchor.module.scss';
 
@@ -11,7 +11,7 @@ const Anchor = ({ children, className, ...rest }) => (
 );
 
 Anchor.propTypes = {
-  children: any.isRequired,
+  children: oneOfType([node, string]).isRequired,
   className: string,
 };
 

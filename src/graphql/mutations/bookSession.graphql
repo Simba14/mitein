@@ -1,3 +1,0 @@
-mutation BookSession($userId: ID!, $date: String!, $sessionId: ID!) {
-  bookSession(userId: $userId, date: $date, sessionId: $sessionId)
-}

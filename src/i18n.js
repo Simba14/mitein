@@ -1,11 +1,12 @@
 import i18n from 'i18next';
-import { initReactI18next } from 'react-i18next';
+import { initReactI18next } from 'next-i18next';
 
 import locales from 'locales';
+import { ENGLISH } from 'constants/defaultOptions';
 
-i18n.use(initReactI18next).init({
-  lng: 'en',
-  fallbackLng: 'en',
+export const i18nOptions = {
+  lng: ENGLISH,
+  fallbackLng: ENGLISH,
   debug: 'true',
   resources: locales,
   react: {
@@ -13,6 +14,8 @@ i18n.use(initReactI18next).init({
     transKeepBasicHtmlNodesFor: ['br', 'strong', 'i'],
     useSuspense: false,
   },
-});
+};
+
+i18n.use(initReactI18next).init(i18nOptions);
 
 export default i18n;

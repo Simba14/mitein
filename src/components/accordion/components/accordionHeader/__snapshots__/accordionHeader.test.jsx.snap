@@ -1,0 +1,33 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`AccordionHeader when is not selected should render correctly 1`] = `
+<h3>
+  <button
+    aria-controls="panel-01"
+    aria-expanded={false}
+    className="accordionHeader"
+    id="button-01"
+    onClick={[Function]}
+  >
+    <div>
+      this is the header
+    </div>
+  </button>
+</h3>
+`;
+
+exports[`AccordionHeader when is selected should render correctly 1`] = `
+<h3>
+  <button
+    aria-controls="panel-01"
+    aria-expanded={true}
+    className="accordionHeader isOpen"
+    id="button-01"
+    onClick={[Function]}
+  >
+    <div>
+      this is the header
+    </div>
+  </button>
+</h3>
+`;

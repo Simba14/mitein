@@ -1,0 +1,3 @@
+mutation deleteSessions($ids: [ID!]!) {
+  deleteSessions(ids: $ids)
+}

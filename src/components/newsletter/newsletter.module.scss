@@ -1,6 +1,6 @@
 @import 'scss/breakpoints.scss';
 @import 'scss/spacings.scss';
-@import 'scss/colours.scss';
+@import 'scss/colors.scss';
 
 .container {
   background: white;
@@ -18,7 +18,7 @@
   }
 
   .description {
-    color: $blue;
+    color: black;
     margin-bottom: size(4);
   }
 
@@ -42,7 +42,7 @@
     width: 100%;
 
     &:focus {
-      box-shadow: 0 0 3pt 3pt orange;
+      box-shadow: 0 0 3pt 3pt$orange;
       outline: none;
     }
 
@@ -54,6 +54,7 @@
   }
 
   .formMessage {
+    color: black;
     padding: size(1.5);
     margin-top: size(2);
     font-size: 12px;
@@ -65,7 +66,6 @@
     height: 38px;
 
     &.error {
-      color: red;
       background: $red-background;
     }
 

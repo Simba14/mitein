@@ -1,7 +1,0 @@
-query GetAvailability($userId: ID!) {
-  userAvailability(user_id: $userId) {
-    id
-    start
-    end
-  }
-}

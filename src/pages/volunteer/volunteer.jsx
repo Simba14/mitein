@@ -1,45 +1,36 @@
 import React, { useEffect, useState } from 'react';
+import { arrayOf, any, shape, string } from 'prop-types';
 import { get, uniq, flatMap, intersection } from 'lodash';
-import { useQuery } from '@apollo/client';
-import { useTranslation } from 'react-i18next';
+import { useTranslation } from 'next-i18next';
 
 import ContactUs from 'components/contactUs';
 import NewsletterBanner from 'components/newsletter';
 import OrganizationCard from 'components/organizationCard';
 import { withLayout } from 'components/layout';
-import GET_VOLUNTEERING_OPPS from 'graphql/queries/getVolunteeringOpps.graphql';
 
 import styles from './volunteer.module.scss';
 
-const Volunteer = () => {
+const Volunteer = ({ organizations }) => {
   const [filterOptions, setFilterOptions] = useState(null);
   const [filters, setFilters] = useState([]);
   const [results, setResults] = useState([...Array(3)]);
-  const {
-    i18n: { language },
-    t,
-  } = useTranslation('volunteer');
 
-  const { data, loading } = useQuery(GET_VOLUNTEERING_OPPS, {
-    variables: { city: 'Berlin', locale: language },
-  });
-
-  const volunteerWith = get(data, 'volunteerWith');
+  const { t } = useTranslation('volunteer');
 
   useEffect(() => {
-    if (volunteerWith) {
-      const uniqueTags = uniq(flatMap(volunteerWith, (org) => org.tags || []));
+    if (organizations) {
+      const uniqueTags = uniq(flatMap(organizations, (org) => org.tags || []));
 
-      setResults(volunteerWith);
+      setResults(organizations);
       setFilterOptions(uniqueTags);
     }
-  }, [volunteerWith]);
+  }, [organizations]);
 
   useEffect(() => {
-    if (!loading) {
+    if (organizations) {
       const newResults = filters.length
         ? results.filter((result) => intersection(result.tags, filters).length)
-        : volunteerWith;
+        : organizations;
 
       setResults(newResults);
     }
@@ -76,11 +67,11 @@ const Volunteer = () => {
           ))}
       </div>
       <div className={styles.organizations}>
-        {loading || firstResult ? (
+        {firstResult ? (
           results.map((organization, index) => (
             <OrganizationCard
               key={`organization${index}${firstResult}`}
-              loading={loading}
+              loading={false}
               organization={organization}
               t={t}
             />
@@ -95,6 +86,19 @@ const Volunteer = () => {
       <ContactUs translation="volunteer" />
     </div>
   );
+};
+
+Volunteer.propTypes = {
+  organizations: arrayOf(
+    shape({
+      name: string,
+      city: string,
+      logo: string,
+      socials: any,
+      tags: arrayOf(string),
+      website: string,
+    }),
+  ),
 };
 
 export default withLayout(Volunteer);

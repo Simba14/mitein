@@ -1,12 +1,12 @@
 import React from 'react';
-import { useTranslation } from 'react-i18next';
+import { useTranslation } from 'next-i18next';
 import { get } from 'lodash/fp';
 import { Query } from '@apollo/client/react/components';
 
 import Anchor from 'components/anchor';
 import { ROUTE_LOGIN, ROUTE_PROFILE, ROUTE_SIGN_UP } from 'routes';
 import { sessionProps, withSessionContext } from 'context/session';
-import GET_EMAIL from 'graphql/queries/getEmail.graphql';
+import GET_EMAIL from '@graphql/queries/getEmail.graphql';
 import AccountIcon from 'assets/account.svg';
 
 import styles from './accountSection.module.scss';

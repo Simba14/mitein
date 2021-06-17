@@ -1,9 +1,13 @@
 import React from 'react';
 import { bool, node } from 'prop-types';
+import { convert } from 'lodash/fp';
 import { MenuContextConsumer, MenuContextProvider } from 'context/menu';
 import Header from 'components/header';
 
 import styles from './layout.module.scss';
+
+// Remove cap on iteratee arguments
+convert({ cap: false });
 
 const Layout = ({ children, withContentPadding }) => (
   <MenuContextProvider>

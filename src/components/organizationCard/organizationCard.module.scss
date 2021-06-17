@@ -1,5 +1,5 @@
 @import 'scss/breakpoints.scss';
-@import 'scss/colours.scss';
+@import 'scss/colors.scss';
 @import 'scss/constants.scss';
 @import 'scss/spacings.scss';
 @import 'scss/loading.scss';
@@ -106,6 +106,7 @@
     .tag {
       border-radius: 15px;
       background: $grey;
+      color: $dark-blue;
       padding: size(1) size(2);
       font-family: 'Lilita One', cursive;
       margin-right: size(1);

@@ -1,5 +1,15 @@
-mutation SignUp($email: String!, $password: String!, $accountType: String!) {
-  signUp(email: $email, password: $password, type: $accountType) {
+mutation SignUp(
+  $email: String!
+  $password: String!
+  $accountType: String!
+  $displayName: String!
+) {
+  signUp(
+    email: $email
+    password: $password
+    type: $accountType
+    displayName: $displayName
+  ) {
     id
     email
     type

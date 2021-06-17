@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
-import { useTranslation } from 'react-i18next';
+import { useTranslation } from 'next-i18next';
 import { useForm } from 'react-hook-form';
 import { useMutation } from '@apollo/client';
 import { get } from 'lodash/fp';
 
-import NEWSLETTER_SIGN_UP from 'graphql/mutations/newsletterSignUp.graphql';
+import NEWSLETTER_SIGN_UP from '@graphql/mutations/newsletterSignUp.graphql';
 import Cta from 'components/cta';
 import styles from './newsletter.module.scss';
 
@@ -17,13 +17,13 @@ const NewsletterBanner = () => {
     onError: (error) => {
       setError('submit', {
         type: 'manual',
-        message: get('graphQLErrors[0].message', error),
+        message: get('graphqlErrors[0].message', error),
       });
     },
   });
   const { t } = useTranslation(['form', 'newsletter']);
   const { clearErrors, register, handleSubmit, errors, setError } = useForm();
-  const formMessage = errors.submit?.message || successMessage;
+  const formMessage = get('submit.message', errors) || successMessage;
 
   const onSubmit = ({ email }) => {
     newsletterSignUp({ variables: { email } });

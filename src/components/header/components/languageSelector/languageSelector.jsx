@@ -1,27 +1,29 @@
 import React from 'react';
-import { Link } from 'gatsby';
-import { usePageContext } from 'context/page';
+import { string } from 'prop-types';
+import { useRouter } from 'next/router';
 
+import Link from 'components/link';
+import { ENGLISH, GERMAN } from 'constants/defaultOptions';
 import styles from './languageSelector.module.scss';
 
-const ENGLISH = 'en';
-const GERMAN = 'de';
-
 const LanguageSelector = () => {
-  const { lang, originalPath } = usePageContext();
+  const { locale, pathname } = useRouter();
 
   const Element = ({ language }) =>
-    lang === language ? (
+    locale === language ? (
       <div className={styles.language}>{language}</div>
     ) : (
       <Link
         aria-label={`Change language to ${language}`}
-        to={`/${language}${originalPath}`}
+        to={pathname}
+        locale={language}
         className={`${styles.language} ${styles.unselected}`}
       >
         {language}
       </Link>
     );
+
+  Element.propTypes = { language: string };
 
   return (
     <div className={styles.languageSelector}>
