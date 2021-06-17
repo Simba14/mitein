@@ -1,11 +1,9 @@
 import React, { useEffect } from 'react';
 import { useRouter } from 'next/router';
-import { useQuery, useMutation } from 'urql';
-// import { useQuery } from '@apollo/client';
-// import { Mutation } from '@apollo/client/react/components';
+import { useQuery } from '@apollo/client';
+import { Mutation } from '@apollo/client/react/components';
 import { compose, get, groupBy, take } from 'lodash/fp';
 import { useTranslation } from 'next-i18next';
-import { withUrqlClient } from 'next-urql';
 
 import Accordion from 'components/accordion';
 import Calendar from 'components/calendar';
@@ -29,29 +27,28 @@ const Profile = ({ session }) => {
   } = useTranslation('profile');
   const router = useRouter();
   const userId = get('userId', session);
-  const [result, refetch] = useQuery({
-    query: GET_PROFILE,
+  const { data, loading, error, refetch } = useQuery(GET_PROFILE, {
     variables: { id: userId },
   });
 
-  const [signOutResult, signOut] = useMutation(SIGN_OUT);
-
-  const { data, fetching, error } = result;
-
   useEffect(() => {
-    if (!(userId || fetching)) {
+    if (!(userId || loading)) {
       router.push(ROUTE_LOGIN);
     }
-  }, [userId, fetching]);
+  }, [userId, loading]);
 
-  if (fetching) return <div>LOADING</div>;
+  if (loading) return <div>LOADING</div>;
   if (error) return `Error! ${error.message}`;
 
   const {
     user: { sessions, displayName, email, type },
   } = data;
 
-  const { fetching: signOutLoading } = signOutResult;
+  const signOutSuccessful = () => {
+    router.push(`${language}${ROUTE_BASE}`);
+    session.userLoggedOut();
+  };
+
   const sessionsByStatus = groupBy('status', sessions);
   const requestedSessions = sessionsByStatus[REQUESTED];
   const latestSessionIsRejected = get('[0].status', sessions) === REJECTED;
@@ -60,13 +57,6 @@ const Profile = ({ session }) => {
   const bookedSessions = sessionsByStatus[BOOKED];
   const isLearner = type === LEARNER;
   const isNative = type === NATIVE;
-
-  const onSignOut = () => {
-    signOut().then(() => {
-      router.push(`${language}${ROUTE_BASE}`);
-      session.userLoggedOut();
-    });
-  };
 
   return (
     <div>
@@ -79,12 +69,16 @@ const Profile = ({ session }) => {
         </div>
 
         <div>
-          <Cta
-            className={styles.logOut}
-            onClick={onSignOut}
-            disabled={signOutLoading}
-            text={t('logOut')}
-          />
+          <Mutation mutation={SIGN_OUT} onCompleted={signOutSuccessful}>
+            {(signOut, { loading: signOutLoading }) => (
+              <Cta
+                className={styles.logOut}
+                onClick={signOut}
+                disabled={signOutLoading}
+                text={t('logOut')}
+              />
+            )}
+          </Mutation>
         </div>
       </div>
       {bookedSessions && (
@@ -99,6 +93,7 @@ const Profile = ({ session }) => {
               status={BOOKED}
               ctaCallback={refetch}
               userType={type}
+              userId={userId}
             />
           ))}
           open={true}
@@ -116,6 +111,7 @@ const Profile = ({ session }) => {
               session={session}
               status={requestedSessions ? REQUESTED : REJECTED}
               userType={type}
+              userId={userId}
             />
           ))}
           open={true}

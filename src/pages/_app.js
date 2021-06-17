@@ -1,7 +1,6 @@
 import React from 'react';
 import { appWithTranslation } from 'next-i18next';
-// import { ApolloProvider } from '@apollo/client';
-import { Provider } from 'urql';
+import { ApolloProvider } from '@apollo/client';
 
 import { client } from 'apollo/client';
 import { SessionContextProvider } from 'context/session';
@@ -24,11 +23,11 @@ const SESSION = {
 };
 
 const Mitein = ({ Component, pageProps }) => (
-  <Provider client={client}>
+  <ApolloProvider client={client}>
     <SessionContextProvider {...SESSION}>
       <Component {...pageProps} />
     </SessionContextProvider>
-  </Provider>
+  </ApolloProvider>
 );
 
 export default appWithTranslation(Mitein);

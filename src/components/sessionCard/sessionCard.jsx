@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useMutation } from 'urql';
+import { useMutation } from '@apollo/client';
 import { noop } from 'lodash/fp';
 import classnames from 'classnames/bind';
 import { func, oneOf, shape, string } from 'prop-types';
@@ -9,6 +9,7 @@ import Cta from 'components/cta';
 import Modal from 'components/modal';
 import UPDATE_SESSION from '@graphql/mutations/updateSession.graphql';
 import GET_AVAILABILITY from '@graphql/queries/getSessions.graphql';
+import GET_PROFILE from '@graphql/queries/getProfile.graphql';
 import { formatSessionDate, formatSessionTime } from 'helpers/index';
 import {
   AVAILABLE,
@@ -23,7 +24,7 @@ import {
 import styles from './sessionCard.module.scss';
 const cx = classnames.bind(styles);
 
-const SessionCard = ({ session, ctaCallback, status, userType }) => {
+const SessionCard = ({ session, ctaCallback, status, userType, userId }) => {
   const {
     i18n: { language },
     t,
@@ -34,11 +35,25 @@ const SessionCard = ({ session, ctaCallback, status, userType }) => {
 
   const [amendSession] = useMutation(UPDATE_SESSION);
 
+  const refetchQueries = [
+    isLearner
+      ? null
+      : {
+          query: GET_AVAILABILITY,
+          variables: { participant1Id: userId, notOneOf: [REJECTED] },
+        },
+    {
+      query: GET_PROFILE,
+      variables: { id: userId },
+    },
+  ];
+
   const handleConfirmClick = () => {
     amendSession({
       variables: { sessionId: session.id, status: BOOKED },
+      refetchQueries,
     }).then(() => {
-      ctaCallback();
+      // ctaCallback();
     });
   };
 
@@ -50,8 +65,9 @@ const SessionCard = ({ session, ctaCallback, status, userType }) => {
           status: CANCELLED,
           cancelledBy: userType,
         },
+        refetchQueries,
       }).then(() => {
-        ctaCallback();
+        // ctaCallback();
       });
     } else {
       amendSession({
@@ -64,8 +80,9 @@ const SessionCard = ({ session, ctaCallback, status, userType }) => {
               }
             : { status: REJECTED }),
         },
+        refetchQueries,
       }).then(() => {
-        ctaCallback();
+        // ctaCallback();
       });
     }
   };
@@ -129,6 +146,7 @@ SessionCard.defaultProps = {
     start: null,
     end: null,
   },
+  userId: null,
 };
 
 SessionCard.propTypes = {
@@ -140,6 +158,7 @@ SessionCard.propTypes = {
   }),
   status: oneOf([BOOKED, CANCELLED, REJECTED, REQUESTED]).isRequired,
   userType: oneOf([LEARNER, NATIVE]).isRequired,
+  userId: string,
 };
 
 export default SessionCard;

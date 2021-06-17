@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef } from 'react';
-import { useMutation, useQuery } from 'urql';
+import { useMutation, useQuery } from '@apollo/client';
 import FullCalendar from '@fullcalendar/react';
 import interactionPlugin from '@fullcalendar/interaction';
 import timeGridPlugin from '@fullcalendar/timegrid';
@@ -50,13 +50,11 @@ const Calendar = ({ userId, triggerRefetch }) => {
 
   const isFirstRender = useRef(true);
   const [selectedEvents, setSelectedEvents] = useState([]);
-  const [, deleteAvailabilities] = useMutation(DELETE_SESSIONS);
-  const [, updateAvailability] = useMutation(UPDATE_SESSION);
-  const [result, refetch] = useQuery({
-    query: GET_AVAILABILITY,
+  const [deleteAvailabilities] = useMutation(DELETE_SESSIONS);
+  const [updateAvailability] = useMutation(UPDATE_SESSION);
+  const { data, loading, error, refetch } = useQuery(GET_AVAILABILITY, {
     variables: { participant1Id: userId, notOneOf: [REJECTED] },
   });
-  const { data, fetching, error } = result;
 
   const availability = get('sessions', data);
   const events = availability ? formatEvents(availability, selectedEvents) : [];
@@ -103,7 +101,7 @@ const Calendar = ({ userId, triggerRefetch }) => {
       ? `${DELETE_SELECTED} today prev,next`
       : 'today prev,next';
 
-  if (fetching || error) return null;
+  if (loading || error) return null;
 
   return (
     <div className={styles.calendar}>
