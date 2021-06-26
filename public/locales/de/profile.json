@@ -4,5 +4,7 @@
   "accordionHeader": {
     "requested": "Angefordert",
     "upcoming": "kommende"
-  }
+  },
+  "suspendedUntil": "ACCOUNT RESTRICTED: Due to exceeding the cancellation limit.\nYou will not be able to book any new sessions until {{date}}.",
+  "suspendedNote": "Note: Any sessions you have booked already will still take place."
 }

@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useState } from 'react';
 import { useMutation, useQuery } from '@apollo/client';
 import FullCalendar from '@fullcalendar/react';
 import interactionPlugin from '@fullcalendar/interaction';
@@ -8,7 +8,7 @@ import { any, string } from 'prop-types';
 import { get } from 'lodash/fp';
 
 import GET_AVAILABILITY from '@graphql/queries/getSessions.graphql';
-import UPDATE_SESSION from '@graphql/mutations/updateSession.graphql';
+import CREATE_SESSIONS from '@graphql/mutations/createSessions.graphql';
 import DELETE_SESSIONS from '@graphql/mutations/deleteSessions.graphql';
 import { blue, green, grey, red } from 'constants/colors';
 import { AVAILABLE, BOOKED, REQUESTED, REJECTED } from 'constants/user';
@@ -42,31 +42,21 @@ const formatEvents = (events, selectedEvents) =>
     return { ...event, backgroundColor: eventColor, borderColor: eventColor };
   });
 
-const Calendar = ({ userId, triggerRefetch }) => {
+const Calendar = ({ userId }) => {
   const {
     i18n: { language },
     t,
   } = useTranslation('calendar');
 
-  const isFirstRender = useRef(true);
   const [selectedEvents, setSelectedEvents] = useState([]);
   const [deleteAvailabilities] = useMutation(DELETE_SESSIONS);
-  const [updateAvailability] = useMutation(UPDATE_SESSION);
+  const [updateAvailability] = useMutation(CREATE_SESSIONS);
   const { data, loading, error, refetch } = useQuery(GET_AVAILABILITY, {
     variables: { participant1Id: userId, notOneOf: [REJECTED] },
   });
 
   const availability = get('sessions', data);
   const events = availability ? formatEvents(availability, selectedEvents) : [];
-  //
-  // useEffect(() => {
-  //   if (isFirstRender.current) {
-  //     isFirstRender.current = false;
-  //     return;
-  //   }
-  //
-  //   refetch();
-  // }, [triggerRefetch]);
 
   const handleSelectEvent = ({ event }) => {
     const eventId = get('_def.publicId', event);

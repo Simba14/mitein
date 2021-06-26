@@ -1,12 +1,16 @@
+import admin from 'firebase-admin';
+import { v4 as uuidv4 } from 'uuid';
+import { isEmpty } from 'lodash/fp';
 import { Firestore } from './admin.js';
 import Sessions from './sessions.js';
 import { getDocData } from './helpers.js';
 import {
   COLLECTION_USERS,
-  COLLECTION_SESSIONS,
   USER_TYPE_LEARNER,
   FIELD_PARTICIPANT_ONE,
   FIELD_PARTICIPANT_TWO,
+  MAX_NUMBER_OF_CANCELLATIONS,
+  SUSPENSION_DURATION,
 } from './constants.js';
 
 const User = {};
@@ -15,20 +19,17 @@ User.create = async ({ id, user }) =>
   Firestore.collection(COLLECTION_USERS)
     .doc(id)
     .set(user)
-    .catch(error => console.log({ error }));
+    .catch((error) => console.log({ error }));
 
-User.byId = async id =>
-  Firestore.collection(COLLECTION_USERS)
-    .doc(id)
-    .get()
-    .then(getDocData);
+User.byId = async (id) =>
+  Firestore.collection(COLLECTION_USERS).doc(id).get().then(getDocData);
 
-User.byIdWithAvailability = async id => {
+User.byIdWithAvailability = async (id) => {
   const user = await Firestore.collection(COLLECTION_USERS)
     .doc(id)
     .get()
     .then(getDocData)
-    .catch(error => {
+    .catch((error) => {
       console.log('Error getting document:', error);
     });
 
@@ -48,9 +49,43 @@ User.byIdWithAvailability = async id => {
   };
 };
 
-User.deleteById = async id =>
+User.updateById = ({ id, fields }) =>
   Firestore.collection(COLLECTION_USERS)
     .doc(id)
-    .delete();
+    .set(fields, { merge: true })
+    .then(getDocData);
+
+User.updateCancellations = async ({ sessionId, userId }) => {
+  const { cancellations } = await User.byId(userId);
+  const dateConstraint = new Date(Date.now() - SUSPENSION_DURATION);
+
+  const recentCancellations =
+    !isEmpty(cancellations) &&
+    cancellations.filter((item) => item.date > dateConstraint.toISOString());
+  const suspendedUntil =
+    !isEmpty(recentCancellations) &&
+    recentCancellations.length >= MAX_NUMBER_OF_CANCELLATIONS
+      ? new Date(Date.now() + SUSPENSION_DURATION).toISOString()
+      : null;
+
+  const newCancellation = {
+    id: uuidv4(),
+    sessionId,
+    date: new Date().toISOString(),
+  };
+
+  await User.updateById({
+    id: userId,
+    fields: {
+      cancellations: admin.firestore.FieldValue.arrayUnion(newCancellation),
+      suspendedUntil,
+    },
+  });
+
+  return suspendedUntil;
+};
+
+User.deleteById = async (id) =>
+  Firestore.collection(COLLECTION_USERS).doc(id).delete();
 
 export default User;

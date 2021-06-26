@@ -1,10 +1,10 @@
-export const getDocData = doc => {
+export const getDocData = (doc) => {
   if (doc.exists) {
     return doc.data();
   } else {
-    console.log('No such document!');
+    console.log('No such document!', { doc });
   }
 };
 
-export const getQuerySnapshotData = querySnapshot =>
-  querySnapshot.docs.map(doc => doc.data());
+export const getQuerySnapshotData = (querySnapshot) =>
+  querySnapshot.docs.map((doc) => doc.data());

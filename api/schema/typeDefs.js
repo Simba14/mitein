@@ -10,6 +10,8 @@ const typeDefs = gql`
   enum EventStatus {
     AVAILABLE
     BOOKED
+    CANCELLED
+    REJECTED
     REQUESTED
   }
 
@@ -17,9 +19,16 @@ const typeDefs = gql`
     id: ID!
     start: String!
     end: String!
-    participant1Id: String
-    participant2Id: String
-    status: String!
+    participant1Id: ID
+    participant2Id: ID
+    status: EventStatus!
+    cancellationReason: ID
+  }
+
+  type Cancellation {
+    id: ID!
+    sessionId: ID!
+    date: String!
   }
 
   type User {
@@ -29,6 +38,8 @@ const typeDefs = gql`
     id: ID!
     name: String
     phoneNumber: String
+    suspendedUntil: String
+    cancellations: [Cancellation]
     type: UserType
   }
 
@@ -53,19 +64,33 @@ const typeDefs = gql`
   type Query {
     availableSlots: [Session]
     user(id: ID!): User
-    sessions(participant1Id: ID, participant2Id: ID, status: String): [Session]
+    sessions(
+      participant1Id: ID
+      participant2Id: ID
+      status: EventStatus
+      notOneOf: [EventStatus]
+    ): [Session]
     volunteerWith(city: String!): [Organization]
   }
 
   type Mutation {
+    createSessions(
+      participant1Id: ID
+      participant2Id: ID
+      status: EventStatus!
+      start: String
+      end: String
+    ): [Session]
     deleteSessions(ids: [ID!]!): Boolean
     updateSession(
       sessionId: ID
       participant1Id: ID
       participant2Id: ID
-      status: String!
+      status: EventStatus!
       start: String
       end: String
+      cancelledBy: ID
+      cancellationReason: UserType
     ): Session
     newsletterSignUp(email: String!): String
     signIn(email: String!, password: String!): User

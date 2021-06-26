@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import classnames from 'classnames/bind';
 import { useRouter } from 'next/router';
 import { useQuery } from '@apollo/client';
 import { Mutation } from '@apollo/client/react/components';
@@ -16,9 +17,11 @@ import { sessionProps, withSessionContext } from 'context/session';
 import GET_PROFILE from '@graphql/queries/getProfile.graphql';
 import SIGN_OUT from '@graphql/mutations/signOut.graphql';
 import { ROUTE_BASE, ROUTE_LOGIN } from 'routes';
+import { formatSessionDate } from 'helpers/index';
 import { LEARNER, NATIVE, BOOKED, REJECTED, REQUESTED } from 'constants/user';
 
 import styles from './profile.module.scss';
+const cx = classnames.bind(styles);
 
 const Profile = ({ session }) => {
   const {
@@ -41,7 +44,7 @@ const Profile = ({ session }) => {
   if (error) return `Error! ${error.message}`;
 
   const {
-    user: { sessions, displayName, email, type },
+    user: { sessions, displayName, email, suspendedUntil, type },
   } = data;
 
   const signOutSuccessful = () => {
@@ -60,7 +63,7 @@ const Profile = ({ session }) => {
 
   return (
     <div>
-      <div className={styles.topContainer}>
+      <div className={cx('topContainer')}>
         <div>
           <div>{t('title')}</div>
           <div>Email: {email}</div>
@@ -72,7 +75,7 @@ const Profile = ({ session }) => {
           <Mutation mutation={SIGN_OUT} onCompleted={signOutSuccessful}>
             {(signOut, { loading: signOutLoading }) => (
               <Cta
-                className={styles.logOut}
+                className={cx('logOut')}
                 onClick={signOut}
                 disabled={signOutLoading}
                 text={t('logOut')}
@@ -81,9 +84,17 @@ const Profile = ({ session }) => {
           </Mutation>
         </div>
       </div>
+      {suspendedUntil && (
+        <div className={cx('suspended')}>
+          {t('suspendedUntil', {
+            date: formatSessionDate(suspendedUntil, language),
+          })}
+          <div className={cx('suspendedNote')}>{t('suspendedNote')}</div>
+        </div>
+      )}
       {bookedSessions && (
         <Accordion
-          className={styles.accordion}
+          className={cx('accordion')}
           ariaId="booked sessions accordion"
           headerText={t('accordionHeader.upcoming')}
           content={bookedSessions.map((session) => (
@@ -91,7 +102,6 @@ const Profile = ({ session }) => {
               key={session.id}
               session={session}
               status={BOOKED}
-              ctaCallback={refetch}
               userType={type}
               userId={userId}
             />
@@ -101,13 +111,12 @@ const Profile = ({ session }) => {
       )}
       {requestedAccordionData && (
         <Accordion
-          className={styles.accordion}
+          className={cx('accordion')}
           ariaId="requested sessions accordion"
           headerText={t('accordionHeader.requested')}
           content={requestedAccordionData.map((session) => (
             <SessionCard
               key={session.id}
-              ctaCallback={refetch}
               session={session}
               status={requestedSessions ? REQUESTED : REJECTED}
               userType={type}
@@ -118,9 +127,9 @@ const Profile = ({ session }) => {
         />
       )}
       {isLearner && !requestedSessions && (
-        <Slots language={language} userId={userId} onSelect={refetch} />
+        <Slots userId={userId} onSelect={refetch} />
       )}
-      {isNative && <Calendar userId={userId} />}
+      {isNative && Boolean(!suspendedUntil) && <Calendar userId={userId} />}
     </div>
   );
 };

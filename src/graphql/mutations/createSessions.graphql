@@ -1,22 +1,16 @@
-mutation updateSession(
-  $sessionId: ID
+mutation createSessions(
   $participant1Id: ID
   $participant2Id: ID
   $status: EventStatus!
   $start: String
   $end: String
-  $cancelledBy: ID
-  $cancellationReason: UserType
 ) {
-  updateSession(
-    sessionId: $sessionId
+  createSessions(
     participant1Id: $participant1Id
     participant2Id: $participant2Id
     status: $status
     start: $start
     end: $end
-    cancelledBy: $cancelledBy
-    cancellationReason: $cancellationReason
   ) {
     id
     status

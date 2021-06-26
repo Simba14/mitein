@@ -9,6 +9,7 @@ query Profile($id: ID!) {
     id
     displayName
     email
+    suspendedUntil
     type
   }
 }

@@ -2,33 +2,40 @@ import React, { useState } from 'react';
 import { get, isEmpty, map } from 'lodash/fp';
 import { func, string } from 'prop-types';
 import { useMutation, useQuery } from '@apollo/client';
+import { useTranslation } from 'next-i18next';
 
 import Cta from 'components/cta';
+import ConfirmPopUp from 'components/confirmPopUp';
 import REQUEST_SESSION from '@graphql/mutations/updateSession.graphql';
 import GET_SLOTS from '@graphql/queries/getAvailableSlots.graphql';
 import { formatSessionDate, formatSessionTime } from 'helpers/index';
-import { REQUESTED } from 'constants/user';
+import { LEARNER, REQUESTED } from 'constants/user';
 
 import styles from './slots.module.scss';
 
 const mapWithKey = map.convert({ cap: false });
 
-const Slots = ({ language, userId, onSelect }) => {
+const Slots = ({ userId, onSelect }) => {
+  const {
+    i18n: { language },
+    t,
+  } = useTranslation('session');
+  const [selectedSession, selectSession] = useState(null);
   const [sessionRequested, setSessionRequested] = useState(false);
   const { data, loading, error } = useQuery(GET_SLOTS);
   const [requestSession] = useMutation(REQUEST_SESSION);
   const availableSlots = get('availableSlots', data);
 
-  const handleOnClick = (sessionId) => {
+  const handleConfirmClick = () => {
     requestSession({
       variables: {
         participant2Id: userId,
-        sessionId,
+        sessionId: selectedSession,
         status: REQUESTED,
       },
     }).then(() => {
-      console.log('session requested');
       onSelect();
+      selectSession(null);
       setSessionRequested(true);
     });
   };
@@ -36,12 +43,7 @@ const Slots = ({ language, userId, onSelect }) => {
   if (loading) return null;
 
   if (error || isEmpty(availableSlots))
-    return (
-      <div className={styles.container}>
-        No Available Slots. Check back here in the next few days. We are working
-        hard to partner with more Retirement homes and native speakers.
-      </div>
-    );
+    return <div className={styles.container}>{t('slots.noneAvailable')}</div>;
   else {
     let slots = {};
     availableSlots.forEach((slot) => {
@@ -52,14 +54,8 @@ const Slots = ({ language, userId, onSelect }) => {
 
     return (
       <div className={styles.container}>
-        <h2 className={styles.instruction}>
-          Request a session below by clicking on a time slot
-        </h2>
-        <div className={styles.note}>
-          Note: only one session can be requested at a time. Please choose a
-          time slot that you can definitely commit to. You will receive an
-          answer to your request in good time.
-        </div>
+        <h2 className={styles.instruction}>{t('slots.instruction')}</h2>
+        <div className={styles.note}>{t('slots.note')}</div>
         {mapWithKey((dateSlots, key) => {
           const date = formatSessionDate(key, language);
 
@@ -71,7 +67,7 @@ const Slots = ({ language, userId, onSelect }) => {
                   <Cta
                     className={styles.slot}
                     key={slot.id}
-                    onClick={() => handleOnClick(slot.id)}
+                    onClick={() => selectSession(slot.id)}
                     type="button"
                     disabled={sessionRequested}
                     text={formatSessionTime(slot)}
@@ -81,13 +77,19 @@ const Slots = ({ language, userId, onSelect }) => {
             </div>
           );
         }, slots)}
+        <ConfirmPopUp
+          handleConfirmClick={handleConfirmClick}
+          modalOpen={selectedSession}
+          namespace={LEARNER}
+          setModalOpen={selectSession}
+          t={t}
+        />
       </div>
     );
   }
 };
 
 Slots.propTypes = {
-  language: string.isRequired,
   onSelect: func.isRequired,
   userId: string.isRequired,
 };

@@ -1,7 +1,7 @@
 import React, { useEffect, useMemo, useRef } from 'react';
 import classnames from 'classnames/bind';
 import { createPortal } from 'react-dom';
-import { bool, func, node, string } from 'prop-types';
+import { bool, func, node, oneOfType, string } from 'prop-types';
 
 import styles from './modal.module.scss';
 const cx = classnames.bind(styles);
@@ -75,7 +75,7 @@ Modal.propTypes = {
   children: node.isRequired,
   className: string,
   locked: bool,
-  open: bool.isRequired,
+  open: oneOfType([bool, string]).isRequired,
   onClose: func.isRequired,
   parent: node,
 };

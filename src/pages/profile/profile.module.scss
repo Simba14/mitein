@@ -16,6 +16,19 @@
   }
 }
 
+.suspended {
+  background: $red-background;
+  color: $red;
+  padding: size(3);
+  margin-bottom: size(3);
+  white-space: break-spaces;
+
+  .suspendedNote {
+    color: $green;
+    margin-top: size(1);
+  }
+}
+
 .accordion {
   color: white;
   margin-bottom: size(4);

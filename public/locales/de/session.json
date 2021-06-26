@@ -1,4 +1,9 @@
 {
+  "slots": {
+    "instruction": "Request a session below by clicking on a time slot",
+    "note": "Note: only one session can be requested at a time. Please choose a\n    time slot that you can definitely commit to. You will receive an\n    answer to your request in good time.",
+    "noneAvailable": "No Available Slots. Check back here in the next few days. We are working\n    hard to partner with more Retirement homes and native speakers."
+  },
   "LEARNER": {
     "BOOKED": {
       "title": "Session booked for:",
