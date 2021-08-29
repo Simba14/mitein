@@ -1,4 +1,4 @@
-import { get } from 'lodash/fp.js';
+import { get } from 'lodash/fp';
 
 export default {
   Organization: {

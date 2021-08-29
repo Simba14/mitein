@@ -75,7 +75,7 @@
   }
 
   .name {
-    font-family: 'Lilita One', cursive;
+    font-family: 'Lilita One', sans-serif;
     font-size: size(3);
     margin-bottom: size(2);
   }
@@ -108,14 +108,14 @@
       background: $grey;
       color: $dark-blue;
       padding: size(1) size(2);
-      font-family: 'Lilita One', cursive;
+      font-family: 'Lilita One', sans-serif;
       margin-right: size(1);
       height: size(4);
     }
   }
 
   .website {
-    font-family: 'Cabin Sketch', cursive;
+    font-family: 'Cabin Sketch', sans-serif;
     font-size: size(2);
     background: $blue;
     border: 1px solid grey;

@@ -1,16 +1,81 @@
+@import 'scss/button.scss';
+@import 'scss/breakpoints.scss';
 @import 'scss/colors.scss';
 @import 'scss/spacings.scss';
 
 .container {
-  .instruction {
-    font-family: 'Lilita One', cursive;
-    color: $orange;
-    font-size: size(6);
+  .title {
+    font-family: 'Lilita One', sans-serif;
+    color: $teal;
     margin-bottom: size(2);
   }
 
+  .selectionContainer {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: size(3);
+    width: 100%;
+
+    .step {
+      margin-bottom: size(2);
+    }
+
+    .calendar {
+      width: 100%;
+
+      @include mq($from: tablet) {
+        margin-right: size(3);
+      }
+
+      h2 {
+        font-family: revert;
+        color: $blue;
+        display: inline;
+        font-size: 24px;
+      }
+
+      button {
+        @extend %btn;
+
+        background: $blue !important;
+        border-color: $blue !important;
+        color: white !important;
+        width: 85px;
+        height: 32px;
+      }
+
+      .dayAvailable {
+        background: $green-background;
+        cursor: pointer;
+      }
+      .dayUnavailable {
+        background: $light-grey;
+        cursor: not-allowed;
+      }
+    }
+
+    .requestSlot {
+      .slots {
+        display: flex;
+        flex-wrap: wrap;
+
+        .slot {
+          border: 1px solid black;
+          border-radius: size(3);
+          padding-left: size(3);
+          padding-right: size(3);
+          margin-right: size(3);
+          margin-bottom: size(2);
+          background: white;
+          color: black;
+          white-space: nowrap;
+        }
+      }
+    }
+  }
+
   .note {
-    color: #9e2a2a;
+    color: red;
     margin-bottom: size(4);
   }
 
@@ -21,12 +86,13 @@
       border-bottom: 3px solid white;
       padding-bottom: size(1);
       margin-bottom: size(2);
-      font-family: 'Lilita One', cursive;
-      color: white;
+      font-family: 'Lilita One', sans-serif;
+      color: black;
     }
 
     .slots {
       display: flex;
+      overflow-x: scroll;
 
       .slot {
         border: 1px solid black;
@@ -36,6 +102,7 @@
         margin-right: size(3);
         background: white;
         color: black;
+        white-space: nowrap;
       }
     }
   }

@@ -19,6 +19,7 @@ const typeDefs = gql`
     id: ID!
     start: String!
     end: String!
+    link: String
     participant1Id: ID
     participant2Id: ID
     status: EventStatus!
@@ -35,6 +36,7 @@ const typeDefs = gql`
     sessions: [Session]
     displayName: String
     email: String
+    isEmailVerified: Boolean
     id: ID!
     name: String
     phoneNumber: String
@@ -83,7 +85,7 @@ const typeDefs = gql`
     ): [Session]
     deleteSessions(ids: [ID!]!): Boolean
     updateSession(
-      sessionId: ID
+      id: ID
       participant1Id: ID
       participant2Id: ID
       status: EventStatus!
@@ -101,6 +103,7 @@ const typeDefs = gql`
       displayName: String!
       type: String!
     ): User
+    verifyEmail(token: String!): Boolean!
   }
 `;
 

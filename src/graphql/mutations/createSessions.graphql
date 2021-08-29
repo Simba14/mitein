@@ -1,4 +1,4 @@
-mutation createSessions(
+mutation CreateSessions(
   $participant1Id: ID
   $participant2Id: ID
   $status: EventStatus!

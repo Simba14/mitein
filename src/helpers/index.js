@@ -1,7 +1,7 @@
 import breakpoints from 'constants/breakpoints';
 import { GERMAN } from 'constants/defaultOptions';
 
-export const getIsMobile = (width) => width <= breakpoints.mobile;
+export const getIsMobile = width => width <= breakpoints.mobile;
 
 const DE_LOCALE = 'de-DE';
 const EN_LOCALE = 'en-GB';
@@ -18,14 +18,14 @@ export const formatSessionDate = (date, locale) =>
     DATE_OPTIONS,
   );
 
-export const formatSessionTime = (session) => {
-  const start = new Date(session.start);
-  const end = new Date(session.end);
+export const formatSessionTime = ({ start, end }) => {
+  const dateStart = new Date(start);
+  const dateEnd = new Date(end);
 
-  return `${start.toLocaleTimeString([], {
+  return `${dateStart.toLocaleTimeString([], {
     hour: '2-digit',
     minute: '2-digit',
-  })} - ${end.toLocaleTimeString([], {
+  })} - ${dateEnd.toLocaleTimeString([], {
     hour: '2-digit',
     minute: '2-digit',
     timeZoneName: 'short',

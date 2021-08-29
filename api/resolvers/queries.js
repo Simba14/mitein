@@ -1,7 +1,7 @@
 import { sortBy } from 'lodash/fp';
-import Sessions from '../firebase/sessions.js';
-import User from '../firebase/user.js';
-import { Firestore } from '../firebase/index.js';
+import Sessions from '@api/firebase/sessions';
+import User from '@api/firebase/user';
+import { Firestore } from '@api/firebase';
 
 const Query = {
   user: async (obj, { id }, context, info) => {
@@ -27,7 +27,7 @@ const Query = {
   },
   volunteerWith: async (obj, args, context, info) => {
     const collection = await Firestore.collection('organizations').get();
-    const coll = collection.docs.map((doc) => doc.data());
+    const coll = collection.docs.map(doc => doc.data());
 
     return coll;
   },

@@ -1,13 +1,18 @@
 {
+  "sessionLink": "Open Zoom chat",
   "slots": {
-    "instruction": "Request a session below by clicking on a time slot",
+    "title": "Request a session",
+    "step1": "1. Select an available date",
+    "step2": "2. Request a time slot{{date}}",
+    "noAvailability": "No availabile sessions for this date. Please select a different date in the calendar.",
     "note": "Note: only one session can be requested at a time. Please choose a\n    time slot that you can definitely commit to. You will receive an\n    answer to your request in good time.",
     "noneAvailable": "No Available Slots. Check back here in the next few days. We are working\n    hard to partner with more Retirement homes and native speakers."
   },
   "LEARNER": {
     "BOOKED": {
       "title": "Session booked for:",
-      "cancelCta": "Cancel session"
+      "cancelCta": "Cancel session",
+      "moreInfo": "Will take place online via the zoom link below:"
     },
     "REQUESTED": {
       "title": "Session Requested for:",
@@ -27,7 +32,8 @@
   "NATIVE": {
     "BOOKED": {
       "title": "Session booked for:",
-      "cancelCta": "Cancel session"
+      "cancelCta": "Cancel session",
+      "moreInfo": "Chat will be held online via Zoom."
     },
     "REQUESTED": {
       "title": "Session Requested for:",

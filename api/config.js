@@ -1,21 +1,27 @@
+const TRUE = 'true';
+
 export default {
   port: process.env.PORT,
   isProduction: process.env.NODE_ENV === 'production',
   isDevelopment: process.env.NODE_ENV === 'development',
   environment: process.env.NODE_ENV,
-  // auth: {
-  //   reset_pasword: {
-  //     jwt_secret: process.env.RESET_PASSWORD_JWT_SECRET,
-  //     jwt_exp_seconds: parseInt(process.env.RESET_PASSWORD_JWT_EXP_SECONDS, 10),
-  //   },
-  //   verify_email: {
-  //     jwt_secret: process.env.VERIFY_EMAIL_JWT_SECRET,
-  //     jwt_exp_seconds: parseInt(process.env.VERIFY_EMAIL_JWT_EXP_SECONDS, 10),
-  //   },
-  //   privileged_key: process.env.PRIVILEGED_KEY,
-  // },
+  apollo: {
+    enablePlayground: process.env.APOLLO_PLAYGROUND === TRUE,
+    introspection: process.env.APOLLO_INTROSPECTION === TRUE,
+  },
+  auth: {
+    verifyEmail: {
+      jwtSecret: process.env.VERIFY_EMAIL_JWT_SECRET,
+      jwtExpSeconds: parseInt(process.env.VERIFY_EMAIL_JWT_EXP_SECONDS, 10),
+    },
+  },
   firebase: {
     apiKey: process.env.FIREBASE_API_KEY,
+    emulator: {
+      authHost: process.env.FIREBASE_EMULATOR_AUTH_HOST,
+      firestoreHost: process.env.FIREBASE_EMULATOR_FIRESTORE_HOST,
+      projectId: process.env.FIREBASE_PROJECT_ID,
+    },
     clientKeys: {
       appId: process.env.FIREBASE_APP_ID,
       authDomain: process.env.FIREBASE_AUTH_DOMAIN,
@@ -26,6 +32,7 @@ export default {
       storageBucket: process.env.FIREBASE_STORAGE_BUCKET,
     },
     serviceAccountKeys: {
+      // Has to be remain in snake case
       type: process.env.FIREBASE_ADMIN_TYPE,
       project_id: process.env.FIREBASE_PROJECT_ID,
       private_key_id: process.env.FIREBASE_PRIVATE_KEY_ID,
@@ -39,14 +46,41 @@ export default {
       client_x509_cert_url: process.env.FIREBASE_CLIENT_X509_CERT_URL,
     },
   },
-  octopus: {
-    apiKey: process.env.OCTOPUS_API_KEY,
-    listId: process.env.OCTOPUS_LIST_ID,
+  gcp: {
+    email: process.env.GCP_EMAIL,
+    privateKey: process.env.GCP_PRIVATE_KEY.replace(/\\n/g, '\n'),
+    projectId: process.env.GCP_PROJECT_ID,
+    restartSubscriptionIntervalInMinutes:
+      process.env.GCP_RESTART_SUBSCRIPTION_INTERVAL_IN_MINUTES || 15,
+    topics: {
+      users: process.env.GCP_PUBSUB_TOPIC_USERS,
+      sessions: process.env.GCP_PUBSUB_TOPIC_SESSIONS,
+    },
+  },
+  sendinblue: {
+    apiKey: process.env.SENDINBLUE_API_KEY,
+    baseUrl: process.env.SENDINBLUE_API_URL,
+    listId: Number(process.env.SENDINBLUE_LIST_ID),
+    emailVerificationUrl: `${process.env.UI_HOST}/verify-email`,
+    template: {
+      sessionConfirmation: Number(
+        process.env.SENDINBLUE_TEMPLATE_SESSION_CONFIRMATION,
+      ),
+      userVerification: Number(
+        process.env.SENDINBLUE_TEMPLATE_USER_VERIFICATION,
+      ),
+    },
   },
   engine: {
     apiKey: process.env.APOLLO_ENGINE_API_KEY,
   },
   winston: {
-    winston_level: process.env.WINSTON_LEVEL,
+    winstonLevel: process.env.WINSTON_LEVEL,
+  },
+  zoom: {
+    apiKey: process.env.ZOOM_API_KEY,
+    apiSecret: process.env.ZOOM_API_SECRET,
+    baseUrl: process.env.ZOOM_BASE_API_URL,
+    hostEmail: process.env.ZOOM_HOST_EMAIL,
   },
 };

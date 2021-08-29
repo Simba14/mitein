@@ -3,8 +3,10 @@ import classnames from 'classnames/bind';
 import { useRouter } from 'next/router';
 import { useQuery } from '@apollo/client';
 import { Mutation } from '@apollo/client/react/components';
-import { compose, get, groupBy, take } from 'lodash/fp';
+import { compose, get, groupBy, isEmpty, take } from 'lodash/fp';
 import { useTranslation } from 'next-i18next';
+// import { COLLECTION_SESSIONS } from '@api/firebase/constants';
+// import { db } from '@api/firebase';
 
 import Accordion from 'components/accordion';
 import Calendar from 'components/calendar';
@@ -32,16 +34,33 @@ const Profile = ({ session }) => {
   const userId = get('userId', session);
   const { data, loading, error, refetch } = useQuery(GET_PROFILE, {
     variables: { id: userId },
+    skip: !userId,
   });
 
+  // useEffect(() => {
+  //   const unsubscribe = Firestore.db
+  //     .collection(COLLECTION_SESSIONS)
+  //     .onSnapshot((snapshot) => {
+  //       if (snapshot.size) {
+  //         console.log({ snapshot });
+  //       } else {
+  //         // it's empty
+  //       }
+  //     });
+  //   return () => {
+  //     unsubscribe();
+  //   };
+  // }, []);
+
   useEffect(() => {
-    if (!(userId || loading)) {
+    if (!(userId || loading || data) || error) {
+      session.userLoggedOut();
       router.push(ROUTE_LOGIN);
     }
   }, [userId, loading]);
 
   if (loading) return <div>LOADING</div>;
-  if (error) return `Error! ${error.message}`;
+  if (error || !data) return null;
 
   const {
     user: { sessions, displayName, email, suspendedUntil, type },
@@ -57,15 +76,20 @@ const Profile = ({ session }) => {
   const latestSessionIsRejected = get('[0].status', sessions) === REJECTED;
   const requestedAccordionData =
     requestedSessions || (latestSessionIsRejected && take(1, sessions));
-  const bookedSessions = sessionsByStatus[BOOKED];
+  const bookedSessions =
+    sessionsByStatus[BOOKED] &&
+    sessionsByStatus[BOOKED].filter(
+      session => session.end > new Date().toISOString(),
+    );
   const isLearner = type === LEARNER;
   const isNative = type === NATIVE;
+  const isSuspended = suspendedUntil > new Date().toISOString();
 
   return (
     <div>
       <div className={cx('topContainer')}>
         <div>
-          <div>{t('title')}</div>
+          <h1 className={cx('title')}>{t('title')}</h1>
           <div>Email: {email}</div>
           <div>Display Name: {displayName}</div>
           <div>Account type: {type}</div>
@@ -77,6 +101,7 @@ const Profile = ({ session }) => {
               <Cta
                 className={cx('logOut')}
                 onClick={signOut}
+                outline
                 disabled={signOutLoading}
                 text={t('logOut')}
               />
@@ -84,7 +109,7 @@ const Profile = ({ session }) => {
           </Mutation>
         </div>
       </div>
-      {suspendedUntil && (
+      {isSuspended && (
         <div className={cx('suspended')}>
           {t('suspendedUntil', {
             date: formatSessionDate(suspendedUntil, language),
@@ -92,12 +117,13 @@ const Profile = ({ session }) => {
           <div className={cx('suspendedNote')}>{t('suspendedNote')}</div>
         </div>
       )}
-      {bookedSessions && (
+      {!isEmpty(bookedSessions) && (
         <Accordion
           className={cx('accordion')}
+          contentClassName={cx('sessionsContainer')}
           ariaId="booked sessions accordion"
           headerText={t('accordionHeader.upcoming')}
-          content={bookedSessions.map((session) => (
+          content={bookedSessions.map(session => (
             <SessionCard
               key={session.id}
               session={session}
@@ -112,9 +138,10 @@ const Profile = ({ session }) => {
       {requestedAccordionData && (
         <Accordion
           className={cx('accordion')}
+          contentClassName={cx('sessionsContainer')}
           ariaId="requested sessions accordion"
           headerText={t('accordionHeader.requested')}
-          content={requestedAccordionData.map((session) => (
+          content={requestedAccordionData.map(session => (
             <SessionCard
               key={session.id}
               session={session}

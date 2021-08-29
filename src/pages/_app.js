@@ -8,7 +8,6 @@ import 'scss/main.scss';
 import '@fullcalendar/common/main.css';
 import '@fullcalendar/daygrid/main.css';
 import '@fullcalendar/timegrid/main.css';
-// import { ENGLISH } from 'constants/defaultOptions';
 
 const cookieUserIdExpireDays = parseInt(
   process.env.NEXT_PUBLIC_COOKIE_USER_ID_EXPIRE_DAYS,

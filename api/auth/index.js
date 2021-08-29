@@ -1,23 +1,27 @@
-import User from '../firebase/user.js';
-import { ValidationError } from './errors.js';
-import * as _firebase from '../firebase/index.js';
+import User from '@api/firebase/user';
+import * as firebaseAuth from '@api/firebase/auth';
+import publishUserCreatedMessage from '@api/pubsub/publishers/publishUserCreatedMessage';
+import { FirebaseEmailAlreadyExistsError } from '@api/firebase/errors';
 
-export const Auth = ({ firebase = _firebase } = {}) => {
+export const Auth = ({ firebase = firebaseAuth } = {}) => {
   const auth = {};
 
   auth.firebase = firebase;
 
   auth.signUp = async ({ displayName, email, password, type }) => {
-    const firebaseUser = await firebase.getAccountByEmail(email);
+    let user;
 
-    if (firebaseUser) throw new ValidationError('user already exists');
-
-    const user = await firebase.createAccount({
+    user = await firebase.createAccount({
       displayName,
       email,
+      isEmailVerified: false,
       password,
       type,
     });
+
+    if (!user) throw new FirebaseEmailAlreadyExistsError();
+
+    publishUserCreatedMessage(user);
 
     return {
       ...user,

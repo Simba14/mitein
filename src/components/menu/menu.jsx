@@ -49,7 +49,7 @@ const Menu = () => {
               onClick={handleOnClick}
             />
             <nav className={`${styles.nav} ${isMenuOpen ? styles.isOpen : ''}`}>
-              {MENU_ITEMS.map((item) => (
+              {MENU_ITEMS.map(item => (
                 <Link
                   key={item.title}
                   className={styles.navItem}

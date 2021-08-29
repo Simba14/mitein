@@ -6,7 +6,16 @@ import Link from 'components/link';
 import styles from './cta.module.scss';
 const cx = classnames.bind(styles);
 
-const Cta = ({ disabled, fullWidth, text, onClick, className, to, type }) => {
+const Cta = ({
+  disabled,
+  fullWidth,
+  text,
+  onClick,
+  outline,
+  className,
+  to,
+  type,
+}) => {
   if (to)
     return (
       <Link
@@ -20,7 +29,7 @@ const Cta = ({ disabled, fullWidth, text, onClick, className, to, type }) => {
 
   return (
     <button
-      className={cx('cta', className, { fullWidth })}
+      className={cx('cta', className, { fullWidth, outline })}
       type={type}
       disabled={disabled}
       onClick={onClick}
@@ -35,6 +44,7 @@ Cta.propTypes = {
   disabled: bool,
   fullWidth: bool,
   onClick: func,
+  outline: bool,
   text: string.isRequired,
   to: string,
   type: string,
@@ -45,6 +55,7 @@ Cta.defaultProps = {
   disabled: false,
   fullWidth: false,
   onClick: null,
+  outline: false,
   to: null,
   type: 'submit',
 };

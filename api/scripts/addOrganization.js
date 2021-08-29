@@ -1,6 +1,8 @@
-import { Firestore } from '../src/firebase/index.js';
-import { COLLECTION_ORGANIZATIONS } from '../src/firebase/constants.js';
+import { Firestore } from '@api/firebase';
+import { COLLECTION_ORGANIZATIONS } from '@api/firebase/constants';
 import { v4 as uuidv4 } from 'uuid';
+
+// TODO: initialize firebase
 
 const docRef = Firestore.collection(COLLECTION_ORGANIZATIONS).doc('FILL ME IN');
 

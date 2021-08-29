@@ -7,14 +7,14 @@
 
   .headline {
     font-size: size(6);
-    font-family: 'Lilita One', cursive;
+    font-family: 'Lilita One', sans-serif;
     text-align: center;
   }
 
   .subheadline {
     color: $orange;
     font-size: 24px;
-    font-family: 'Lilita One', cursive;
+    font-family: 'Lilita One', sans-serif;
     text-align: center;
     margin-bottom: size(6);
   }
@@ -29,7 +29,7 @@
 
     .filterTitle {
       font-size: 24px;
-      font-family: 'Lilita One', cursive;
+      font-family: 'Lilita One', sans-serif;
       line-height: size(4);
       margin-right: size(2);
     }
@@ -41,7 +41,7 @@
       border: 1px solid $blue;
       background: white;
       padding: 0 size(2);
-      font-family: 'Lilita One', cursive;
+      font-family: 'Lilita One', sans-serif;
       height: size(4);
       margin-right: size(1);
       opacity: 0.5;
@@ -67,7 +67,7 @@
   }
 
   .noResults {
-    font-family: 'Cabin Sketch', cursive;
+    font-family: 'Cabin Sketch', sans-serif;
     font-size: 16px;
     text-align: center;
     padding: size(8) 0;

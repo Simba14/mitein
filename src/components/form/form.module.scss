@@ -2,7 +2,6 @@
 @import '../../scss/spacings.scss';
 
 $form-width: 400px;
-$form-height: 530px;
 
 %formField {
   width: 100%;
@@ -18,7 +17,6 @@ $form-height: 530px;
   display: flex;
   flex-direction: column;
   width: $form-width;
-  height: $form-height;
   background: white;
   padding: size(5) size(4);
 

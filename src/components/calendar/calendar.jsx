@@ -21,7 +21,7 @@ const MIN_TIME = '09:00:00';
 const MAX_TIME = '21:00:00';
 const GET_SESSIONS_QUERY = 'GetSessions';
 
-const getEventColor = (status) => {
+const getEventColor = status => {
   switch (status) {
     case AVAILABLE:
       return green;
@@ -36,7 +36,7 @@ const getEventColor = (status) => {
 };
 
 const formatEvents = (events, selectedEvents) =>
-  events.map((event) => {
+  events.map(event => {
     const isSelected = selectedEvents.includes(event.id);
     const eventColor = getEventColor(isSelected ? SELECTED : event.status);
     return { ...event, backgroundColor: eventColor, borderColor: eventColor };
@@ -64,7 +64,7 @@ const Calendar = ({ userId }) => {
 
     if (selectedEvents.includes(eventId)) {
       event.setProp('backgroundColor', green);
-      setSelectedEvents((prevEvents) => {
+      setSelectedEvents(prevEvents => {
         const index = prevEvents.indexOf(eventId);
         if (index > -1) {
           prevEvents.splice(index, 1);
@@ -73,7 +73,7 @@ const Calendar = ({ userId }) => {
       });
     } else {
       event.setProp('backgroundColor', red);
-      setSelectedEvents((prevEvents) => [...prevEvents, eventId]);
+      setSelectedEvents(prevEvents => [...prevEvents, eventId]);
     }
   };
 
@@ -94,7 +94,8 @@ const Calendar = ({ userId }) => {
   if (loading || error) return null;
 
   return (
-    <div className={styles.calendar}>
+    <section className={styles.calendar}>
+      <div className={styles.instructions}>{t('instructions')}</div>
       <FullCalendar
         allDaySlot={true}
         customButtons={{
@@ -130,10 +131,11 @@ const Calendar = ({ userId }) => {
             refetchQueries: [GET_SESSIONS_QUERY],
           });
         }}
+        fixedWeekCount={false}
         slotMaxTime={MAX_TIME}
         slotMinTime={MIN_TIME}
         duration={{ days: 7 }}
-        validRange={(currentDate) => {
+        validRange={currentDate => {
           const start = new Date(currentDate.valueOf());
           let end = new Date(currentDate.valueOf());
           end.setDate(end.getDate() + 6); // 6 days into the future
@@ -141,7 +143,7 @@ const Calendar = ({ userId }) => {
           return { start, end };
         }}
       />
-    </div>
+    </section>
   );
 };
 

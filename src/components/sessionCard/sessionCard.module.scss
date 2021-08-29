@@ -4,15 +4,12 @@
 @import 'scss/spacings.scss';
 @import 'scss/loading.scss';
 
-$card-border-radius: 15px;
-
 .session {
   color: black;
   font-size: 14px;
   border-radius: $card-border-radius;
+  border: 1px solid $blue;
   background: white;
-  display: flex;
-  flex-direction: column;
   width: 100%;
   padding: size(3);
   justify-content: space-between;
@@ -44,7 +41,7 @@ $card-border-radius: 15px;
 
   .title {
     color: $blue;
-    font-family: 'Lilita One', cursive;
+    font-family: 'Lilita One', sans-serif;
     font-size: size(3);
     margin-bottom: size(1);
   }
@@ -69,6 +66,11 @@ $card-border-radius: 15px;
 
   .moreInfo {
   }
+
+  .link {
+    color: $blue;
+    display: inline-block;
+  }
 }
 
 .modal {
@@ -81,7 +83,7 @@ $card-border-radius: 15px;
   padding: size(4);
 
   .heading {
-    font-family: 'Lilita One', cursive;
+    font-family: 'Lilita One', sans-serif;
     color: $orange;
     margin-bottom: size(3);
   }

@@ -1,5 +1,5 @@
-mutation updateSession(
-  $sessionId: ID
+mutation UpdateSession(
+  $id: ID
   $participant1Id: ID
   $participant2Id: ID
   $status: EventStatus!
@@ -9,7 +9,7 @@ mutation updateSession(
   $cancellationReason: UserType
 ) {
   updateSession(
-    sessionId: $sessionId
+    id: $id
     participant1Id: $participant1Id
     participant2Id: $participant2Id
     status: $status
@@ -19,6 +19,9 @@ mutation updateSession(
     cancellationReason: $cancellationReason
   ) {
     id
+    participant1Id
+    participant2Id
+    link
     status
     start
     end

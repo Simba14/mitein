@@ -5,7 +5,9 @@ export class NewsletterEmailAlreadySubscribedError extends Error {
   constructor(message, code, errors) {
     super();
     this.message = message || MEMBER_EXISTS_MESSAGE;
-    this.code = code || MEMBER_EXISTS_CODE;
-    this.errors = errors;
+    this.extensions = {
+      code: code || MEMBER_EXISTS_CODE,
+      errors,
+    };
   }
 }

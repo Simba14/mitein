@@ -4,6 +4,7 @@ import classnames from 'classnames/bind';
 import { oneOf, shape, string } from 'prop-types';
 import { useTranslation } from 'next-i18next';
 
+import Anchor from 'components/anchor';
 import Cta from 'components/cta';
 import ConfirmPopUp from 'components/confirmPopUp';
 import UPDATE_SESSION from '@graphql/mutations/updateSession.graphql';
@@ -30,8 +31,10 @@ const SessionCard = ({ session, status, userType, userId }) => {
   } = useTranslation('session');
   const [modalOpen, setModalOpen] = useState(false);
   const isLearner = userType === LEARNER;
+  const isBooked = status === BOOKED;
   const isRejected = status === REJECTED;
   const isRequested = status === REQUESTED;
+  const { id, ...sessionFields } = session;
 
   const [amendSession] = useMutation(UPDATE_SESSION);
 
@@ -52,16 +55,21 @@ const SessionCard = ({ session, status, userType, userId }) => {
 
   const handleConfirmClick = () => {
     amendSession({
-      variables: { sessionId: session.id, status: BOOKED },
+      variables: {
+        id,
+        ...sessionFields,
+        status: BOOKED,
+      },
       refetchQueries,
     }).then(() => setModalOpen(false));
   };
 
   const handleCancelClick = () => {
-    if (status === BOOKED) {
+    if (isBooked) {
       amendSession({
         variables: {
-          sessionId: session.id,
+          id,
+          ...sessionFields,
           status: CANCELLED,
           cancellationReason: userType,
           cancelledBy: userId,
@@ -71,7 +79,8 @@ const SessionCard = ({ session, status, userType, userId }) => {
     } else {
       amendSession({
         variables: {
-          sessionId: session.id,
+          id,
+          ...sessionFields,
           ...(isLearner
             ? {
                 status: AVAILABLE,
@@ -90,7 +99,10 @@ const SessionCard = ({ session, status, userType, userId }) => {
       <div className={cx('date')}>
         {formatSessionDate(session.start, language)}
       </div>
-      <div className={cx('time')}>{formatSessionTime(session)}</div>
+      <div className={cx('time')}>
+        {formatSessionTime({ start: session.start, end: session.end })}
+      </div>
+
       {!isLearner && isRequested ? (
         <Cta
           className={cx('confirmCta')}
@@ -102,6 +114,17 @@ const SessionCard = ({ session, status, userType, userId }) => {
         />
       ) : (
         <i className={cx('moreInfo')}>{t(`${userType}.${status}.moreInfo`)}</i>
+      )}
+      {isBooked && (
+        <Anchor
+          href={session.link}
+          className={cx('link')}
+          target="_blank"
+          rel="noreferrer"
+          underlined
+        >
+          {t('sessionLink')}
+        </Anchor>
       )}
       {!isRejected && (
         <Cta
@@ -126,20 +149,16 @@ const SessionCard = ({ session, status, userType, userId }) => {
 
 SessionCard.defaultProps = {
   hideCta: false,
-  session: {
-    description: null,
-    start: null,
-    end: null,
-  },
   userId: null,
 };
 
 SessionCard.propTypes = {
   session: shape({
-    description: string,
+    id: string.isRequired,
+    link: string,
     start: string,
     end: string,
-  }),
+  }).isRequired,
   status: oneOf([BOOKED, CANCELLED, REJECTED, REQUESTED]).isRequired,
   userType: oneOf([LEARNER, NATIVE]).isRequired,
   userId: string,

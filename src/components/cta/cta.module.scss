@@ -18,6 +18,16 @@
     width: 100%;
   }
 
+  &.outline {
+    color: $blue;
+    background: white;
+    border: 1px solid currentColor;
+
+    &:hover {
+      background: $grey;
+    }
+  }
+
   &:hover {
     opacity: 0.8;
   }

@@ -11,8 +11,11 @@ query GetSessions(
     notOneOf: $notOneOf
   ) {
     id
+    participant1Id
+    participant2Id
     status
     start
     end
+    link
   }
 }

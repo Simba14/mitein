@@ -52,7 +52,9 @@ typings/
 *.tgz
 
 # dotenv environment variable files
-.env*
+.env
+.env.local
+
 
 # next.js
 .next

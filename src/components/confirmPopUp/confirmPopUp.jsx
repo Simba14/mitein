@@ -10,6 +10,7 @@ import styles from './confirmPopUp.module.scss';
 const cx = classnames.bind(styles);
 
 const ConfirmPopUp = ({
+  error,
   handleConfirmClick,
   modalOpen,
   namespace,
@@ -31,13 +32,16 @@ const ConfirmPopUp = ({
           onClick={handleConfirmClick}
           type="button"
           text={t(`${namespace}.modal.cta`)}
+          disabled={error}
         />
+        {error && <div className={cx('error')}>{error}</div>}
       </div>
     </Modal>
   );
 };
 
 ConfirmPopUp.propTypes = {
+  error: string,
   handleConfirmClick: func.isRequired,
   modalOpen: oneOfType([bool, string]).isRequired,
   namespace: string.isRequired,

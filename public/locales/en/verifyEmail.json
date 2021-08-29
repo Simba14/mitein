@@ -1,0 +1,10 @@
+{
+  "emailVerified": "Your email address has been verified.",
+  "featuresEnabled": "You will now be able to use all of Mitein's features",
+  "redirect": "Book chats here",
+  "invalidToken": {
+    "title": "Token Invalid",
+    "description": "Your email address has not been verified.",
+    "cta": "Resend Verification Email"
+  }
+}

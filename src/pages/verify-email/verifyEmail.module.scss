@@ -1,0 +1,23 @@
+@import 'scss/colors.scss';
+@import 'scss/spacings.scss';
+
+.wrapper {
+  display: flex;
+  color: white;
+  align-items: center;
+  flex-direction: column;
+
+  .heading {
+    text-transform: capitalize;
+    margin-bottom: size(4);
+  }
+
+  .description {
+    margin-bottom: size(2);
+  }
+
+  .cta {
+    background: white;
+    color: $blue;
+  }
+}

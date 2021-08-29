@@ -12,20 +12,19 @@
   width: 100%;
 
   h1 {
-    color: white;
+    color: $blue;
   }
 
-  .content {
-    background: $blue;
-    height: calc(100vh - #{$header-height});
+  .container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
     margin-top: 0;
+    background: white;
     overflow-y: scroll;
+    height: calc(100vh - #{$header-height});
     width: 100%;
     transition: $menu-transition-duration;
-
-    &.withPadding {
-      padding: 32px 24px;
-    }
 
     &.menuOpen {
       margin-top: $menu-height-mobile;
@@ -34,6 +33,14 @@
       @include mq($from: tablet) {
         margin-top: calc(#{size(8)} - 3px);
         height: calc(100vh - #{$header-height} - #{$menu-height-desktop});
+      }
+    }
+
+    .content {
+      width: 100%;
+
+      &.withPadding {
+        padding: 32px 24px;
       }
     }
   }

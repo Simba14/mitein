@@ -1,11 +1,14 @@
-import { Firestore } from './admin.js';
-import { getDocData, getQuerySnapshotData } from './helpers.js';
+import { Firestore } from '@api/firebase';
+import { getDocData, getQuerySnapshotData } from '@api/firebase/helpers';
+import { generateZoomLink } from '@api/zoom';
+import User from '@api/firebase/user';
+import publishSessionBookedMessage from '@api/pubsub/publishers/publishSessionBookedMessage';
 import {
   COLLECTION_SESSIONS,
   FIELD_PARTICIPANT_ONE,
   FIELD_PARTICIPANT_TWO,
   SESSION_STATUS_AVAILABLE,
-} from './constants.js';
+} from '@api/firebase/constants';
 
 const Sessions = {};
 
@@ -14,26 +17,26 @@ Sessions.create = async ({ id, session }) =>
     .doc(id)
     .set(session)
     .then(() => session)
-    .catch((error) => console.log({ error, session }));
+    .catch(error => console.log({ error, session }));
 
-Sessions.byId = async (id) =>
+Sessions.byId = async id =>
   Firestore.collection(COLLECTION_SESSIONS).doc(id).get().then(getDocData);
 
-Sessions.byStatus = async (status) =>
+Sessions.byStatus = async status =>
   Firestore.collection(COLLECTION_SESSIONS)
     .where('status', '==', status)
     .orderBy('start', 'desc')
     .get()
     .then(getDocData)
-    .catch((error) => console.log({ error }));
+    .catch(error => console.log({ error }));
 
 Sessions.byParticipantId = async ({ field, id }) =>
   Firestore.collection(COLLECTION_SESSIONS)
     .where(field, '==', id)
-    .orderBy('start', 'desc')
+    .orderBy('start')
     .get()
     .then(getQuerySnapshotData)
-    .catch((error) => console.log({ error, field, id }));
+    .catch(error => console.log({ error, field, id }));
 
 Sessions.byParticipantIdWithStatusCondition = async ({
   field,
@@ -46,7 +49,7 @@ Sessions.byParticipantIdWithStatusCondition = async ({
     .where('status', condition, status)
     .get()
     .then(getQuerySnapshotData)
-    .catch((error) => console.log({ error }));
+    .catch(error => console.log({ error }));
 
 Sessions.byFilters = async ({
   participant1Id,
@@ -85,24 +88,52 @@ Sessions.byFilters = async ({
 Sessions.getOnlyAvailable = async () => {
   let dateConstraint = new Date();
   dateConstraint.setDate(dateConstraint.getDate() + 1);
+  dateConstraint.setHours(0, 0, 0); // set to tomorrow
 
   return await Firestore.collection(COLLECTION_SESSIONS)
     .where('status', '==', SESSION_STATUS_AVAILABLE)
     .where('start', '>', dateConstraint.toISOString())
     .get()
-    .then((querySnapshot) => {
-      return querySnapshot.docs.map((doc) => doc.data());
+    .then(querySnapshot => {
+      return querySnapshot.docs.map(doc => doc.data());
     })
-    .catch((error) => console.log({ error }));
+    .catch(error => console.log({ error }));
 };
 
 Sessions.updateById = async ({ id, fields }) =>
   Firestore.collection(COLLECTION_SESSIONS)
     .doc(id)
-    .set(fields, { merge: true })
-    .then((doc) => console.log({ doc }));
+    .update(fields)
+    .then(() => ({ id, ...fields }));
 
-Sessions.deleteById = (id) =>
+Sessions.handleConfirmation = async session => {
+  const { participant1Id, participant2Id } = session;
+
+  const participants = await Promise.all([
+    User.byId(participant1Id),
+    User.byId(participant2Id),
+  ]);
+  console.log({ participants });
+
+  participants.forEach(participant =>
+    publishSessionBookedMessage({ participant, session }).catch(error =>
+      console.log(error),
+    ),
+  );
+};
+
+Sessions.book = async ({ id, fields }) => {
+  const link = await generateZoomLink(fields.start);
+  const session = await Sessions.updateById({
+    id,
+    fields: { link, ...fields },
+  });
+
+  Sessions.handleConfirmation(session);
+  return session;
+};
+
+Sessions.deleteById = id =>
   Firestore.collection(COLLECTION_SESSIONS).doc(id).delete();
 
 export default Sessions;

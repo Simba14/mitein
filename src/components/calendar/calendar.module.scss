@@ -1,17 +1,23 @@
-@import '../../scss/button.scss';
-@import '../../scss/colors.scss';
+@import 'scss/button.scss';
+@import 'scss/colors.scss';
+@import 'scss/spacings.scss';
 
 .calendar {
+  .instructions {
+    margin-bottom: size(4);
+  }
+
   h2 {
-    font-family: 'Lilita One', cursive;
-    color: white;
+    font-family: 'Lilita One', sans-serif;
+    color: $blue;
   }
 
   button {
     @extend %btn;
 
-    background: white !important;
-    color: $blue !important;
+    background: $blue !important;
+    border-color: $blue !important;
+    color: white !important;
     width: 85px;
     height: 32px;
   }

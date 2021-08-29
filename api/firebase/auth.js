@@ -1,30 +1,85 @@
-import * as firebase from 'firebase/app';
-import 'firebase/auth';
-import config from '../config.js';
+import { FireAuth } from '@api/firebase';
+import User from '@api/firebase/user';
 import {
+  EMAIL_EXISTS_CODE,
   EMAIL_NOT_FOUND_ERROR_MESSAGE,
   INVALID_PASSWORD_ERROR_MESSAGE,
   INVALID_PASSWORD_ERROR_CODE,
   TOO_MANY_ATTEMPTS_TRY_LATER_ERROR_MESSAGE,
   USER_NOT_FOUND_ERROR_CODE,
+  // UNABLE_TO_PARSE_ERROR_CODE,
+  // FirebaseAccountNotFoundError,
+  FirebaseEmailAlreadyExistsError,
   FirebaseEmailTooManyAttemptsError,
   FirebaseWrongCredentialsError,
-} from './errors.js';
+} from '@api/firebase/errors';
 
-const {
-  firebase: { apiKey, clientKeys },
-} = config;
+export const deleteAccount = () => {
+  const user = FireAuth.currentUser;
+  user.delete();
+};
 
-if (!firebase.apps.length) {
-  firebase.initializeApp({ apiKey, ...clientKeys });
-}
+export const createAccount = ({ displayName, email, password, type }) => {
+  return FireAuth.createUserWithEmailAndPassword(email, password)
+    .then(async userCredential => {
+      const {
+        user: { uid, emailVerified },
+      } = userCredential;
+      const user = {
+        id: uid,
+        displayName,
+        email,
+        isEmailVerified: emailVerified,
+        type,
+      };
+
+      try {
+        await User.create({ id: uid, user });
+      } catch (error) {
+        deleteAccount();
+        console.log('error creating user', { error });
+      }
+
+      return user;
+    })
+    .catch(error => {
+      if (error.code === EMAIL_EXISTS_CODE) {
+        throw new FirebaseEmailAlreadyExistsError();
+      }
+      console.log({ error });
+    });
+};
+
+//
+// export const setPasswordByEmail = async ({ email, password }) => {
+//   try {
+//     const user = await FireAuth.getUserByEmail(email);
+//     return FireAuth.updateUser(user.uid, { password });
+//   } catch (error) {
+//     if (error.code === USER_NOT_FOUND_ERROR_CODE)
+//       throw new FirebaseAccountNotFoundError();
+//     throw error;
+//   }
+// };
+
+// export const updatePasswordByEmail = async ({
+//   email,
+//   newPassword,
+//   oldPassword
+// }) => {
+//   validate.password(newPassword);
+//   const account = await rest.findAccountByCreds({
+//     email,
+//     password: oldPassword
+//   });
+//   if (!account) throw new FirebaseWrongCredentialsError();
+//   await setPasswordByEmail({ email, password: newPassword });
+// };
 
 export const signIn = ({ email, password }) =>
-  firebase
-    .auth()
-    .signInWithEmailAndPassword(email, password)
+  FireAuth.signInWithEmailAndPassword(email, password)
     .then(({ user }) => user.uid)
-    .catch((error) => {
+    .catch(error => {
       console.log('Firebase Sign In', { error });
       if (
         error.message === EMAIL_NOT_FOUND_ERROR_MESSAGE ||
@@ -40,4 +95,4 @@ export const signIn = ({ email, password }) =>
       return Promise.reject(error);
     });
 
-export const signOut = () => firebase.auth().signOut();
+export const signOut = () => FireAuth.signOut();

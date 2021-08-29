@@ -28,7 +28,7 @@ const Link = ({
 }) => {
   const { asPath, pathname, locale: existingLocale } = useRouter();
   const handleOnClick = hashId
-    ? (event) => handleScroll({ event, elementId: hashId, pathname })
+    ? event => handleScroll({ event, elementId: hashId, pathname })
     : onClick;
 
   const classNames =

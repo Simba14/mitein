@@ -1,6 +1,6 @@
-import Organization from './organization.js';
-import Query from './queries.js';
-import Mutation from './mutations.js';
+import Organization from '@api/resolvers/organization';
+import Query from '@api/resolvers/queries';
+import Mutation from '@api/resolvers/mutations';
 
 const resolvers = {
   ...Organization,

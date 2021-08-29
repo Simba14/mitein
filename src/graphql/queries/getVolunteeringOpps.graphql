@@ -1,4 +1,4 @@
-query getVolunteeringOpps($city: String!, $locale: String!) {
+query GetVolunteeringOpps($city: String!, $locale: String!) {
   volunteerWith(city: $city) {
     id
     city
