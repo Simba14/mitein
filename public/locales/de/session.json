@@ -1,0 +1,51 @@
+{
+  "sessionLink": "Click here to open Zoom chat",
+  "slots": {
+    "title": "Request a session",
+    "step1": "1. Select an available date",
+    "step2": "2. Request a time{{date}}",
+    "noAvailability": "No availabile sessions for this date. Please select a different date in the calendar.",
+    "note": "Note: only one session can be requested at a time. Please choose a\n    time slot that you can definitely commit to. You will receive an\n    answer to your request in good time.",
+    "noneAvailable": "No Available Slots. Check back here in the next few days. We are working\n    hard to partner with more Retirement homes and native speakers."
+  },
+  "LEARNER": {
+    "BOOKED": {
+      "title": "Session booked for:",
+      "cancelCta": "Cancel session"
+    },
+    "REQUESTED": {
+      "title": "Session Requested for:",
+      "cancelCta": "Cancel session",
+      "moreInfo": "You will be notified via email as soon as your request has a response"
+    },
+    "REJECTED": {
+      "title": "Session Unavailable:",
+      "moreInfo": "This session is no longer available. Please request another one."
+    },
+    "modal": {
+      "title": "Are you sure?",
+      "disclaimer": "Request the session only if you defininitely can attend.\nMitein is a charity and free service. Cancellations make our life tough.\nTherefore, we only allow one cancellation per user once a session is booked.",
+      "cta": "Request session"
+    }
+  },
+  "NATIVE": {
+    "BOOKED": {
+      "title": "Session booked for:",
+      "cancelCta": "Cancel session"
+    },
+    "REQUESTED": {
+      "title": "Session Requested for:",
+      "confirmCta": "Confirm session",
+      "cancelCta": "Cancel request"
+    },
+    "REJECTED": {
+      "title": "Session Declined:",
+      "moreInfo": "You declined this session. It is now no longer scheduled or available"
+    },
+    "modal": {
+      "title": "Are you sure?",
+      "disclaimer": "Click confirm only if you defininitely can attend.\nMitein is a charity and free service. Cancellations make our life tough.\nTherefore, we only allow one cancellation per user.",
+      "cta": "Confirm session"
+    }
+  }
+}

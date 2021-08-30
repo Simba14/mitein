@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Bowlby+One&family=Cabin+Sketch:wght@400;700&family=Lilita+One&display=swap');
+// @import url('https://fonts.googleapis.com/css2?family=Bowlby+One&family=Cabin+Sketch:wght@400;700&family=Lilita+One&display=swap');
 
 html {
   height: 100%;
@@ -12,15 +12,27 @@ body {
   font-family: sans-serif;
 }
 
+a {
+  text-decoration: none;
+}
+
 h1,
 h2,
 h3 {
+  font-family: 'Lilita One', sans-serif;
   margin: 0;
 }
 
 h1 {
-  font-family: 'Lilita One', cursive;
   font-size: 64px;
+}
+
+h2 {
+  font-size: 48px;
+}
+
+h3 {
+  font-size: 32px;
 }
 
 * {

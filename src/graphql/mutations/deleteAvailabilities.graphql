@@ -1,3 +1,0 @@
-mutation deleteAvailabilities($ids: [ID!]!) {
-  deleteAvailabilities(ids: $ids)
-}

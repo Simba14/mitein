@@ -1,4 +1,4 @@
-@import 'scss/colours.scss';
+@import 'scss/colors.scss';
 
 .link {
   position: relative;
@@ -21,6 +21,18 @@
   &:hover::before {
     visibility: visible;
     transform: scaleX(1);
+  }
+
+  &.underlined {
+    &::before {
+      visibility: visible;
+      transform: scaleX(1);
+    }
+
+    &:hover::before {
+      visibility: hidden;
+      transform: scaleX(0);
+    }
   }
 
   &:visited {

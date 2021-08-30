@@ -1,16 +1,43 @@
+@import 'scss/colors.scss';
 @import 'scss/spacings.scss';
 
 .topContainer {
+  border-bottom: $blue solid 1px;
+  padding-bottom: size(4);
   display: flex;
+  align-items: flex-end;
   justify-content: space-between;
   margin-bottom: 32px;
 
   .logOut {
-    border: 1px black solid;
-    border-radius: 5px;
-    background: white;
-    color: black;
-    text-transform: uppercase;
-    padding: 0 size(1.5);
+    text-transform: capitalize;
+    width: size(12);
+  }
+
+  .title {
+    font-size: 48px;
+  }
+}
+
+.suspended {
+  background: $red-background;
+  color: $red;
+  padding: size(3);
+  margin-bottom: size(3);
+  white-space: break-spaces;
+
+  .suspendedNote {
+    color: $green;
+    margin-top: size(1);
+  }
+}
+
+.accordion {
+  color: $blue;
+  margin-bottom: size(4);
+
+  .sessionsContainer {
+    display: flex;
+    flex-wrap: wrap;
   }
 }

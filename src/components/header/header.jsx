@@ -1,30 +1,28 @@
 import React from 'react';
-import Svg, { LOGO } from 'components/svg/';
-import Link from 'components/link';
-import { useTranslation } from 'react-i18next';
+import { useTranslation } from 'next-i18next';
+import classnames from 'classnames/bind';
 
-import AccountSection from './components/accountSection';
+import Link from 'components/link';
+// import AccountSection from './components/accountSection';
 import LanguageSelector from './components/languageSelector';
 import Menu from 'components/menu';
 import { ROUTE_BASE } from 'routes';
 
 import styles from './header.module.scss';
+const cx = classnames.bind(styles);
 
 const Header = () => {
   const { t } = useTranslation('header');
 
   return (
-    <div className={styles.headerWrapper}>
+    <div className={cx('headerWrapper')}>
       <Menu />
-      <div className={styles.header}>
-        <Link to={ROUTE_BASE} className={styles.logoContainer}>
-          <Svg className={styles.logo} name={LOGO} />
-          <div className={styles.title}>{t('mitein')}</div>
-        </Link>
-        <div className={styles.options}>
-          {/* <AccountSection /> */}
-          <LanguageSelector />
-        </div>
+      <Link to={ROUTE_BASE} className={cx('title')}>
+        {t('mitein')}
+      </Link>
+      <div className={cx('options')}>
+        {/* <AccountSection /> */}
+        <LanguageSelector />
       </div>
     </div>
   );

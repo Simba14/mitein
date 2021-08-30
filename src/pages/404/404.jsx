@@ -1,17 +1,19 @@
 import React from 'react';
+import { useTranslation } from 'next-i18next';
 
 import Anchor from 'components/anchor';
 import { withLayout } from 'components/layout';
 import styles from './404.module.scss';
 
 const NotFound = () => {
+  const { t } = useTranslation('notFound');
   return (
     <div className={styles.notFound}>
-      <h1>Page not found</h1>
+      <h1>{t('title')}</h1>
       <div className={styles.returnHome}>
-        Return back to the{' '}
+        {t('returnTo')}
         <Anchor to={'/'} className={styles.homeAnchor}>
-          home page
+          {t('link')}
         </Anchor>
       </div>
     </div>

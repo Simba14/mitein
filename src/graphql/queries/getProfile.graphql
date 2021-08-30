@@ -1,6 +1,18 @@
 query Profile($id: ID!) {
   user(id: $id) {
+    sessions {
+      id
+      participant1Id
+      participant2Id
+      link
+      status
+      start
+      end
+    }
+    id
+    displayName
     email
+    suspendedUntil
     type
   }
 }

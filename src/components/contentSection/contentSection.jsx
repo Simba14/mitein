@@ -1,6 +1,6 @@
 import React from 'react';
-import { any, string } from 'prop-types';
-import { useTranslation } from 'react-i18next';
+import { node, string } from 'prop-types';
+import { useTranslation } from 'next-i18next';
 import styles from './contentSection.module.scss';
 
 const ContentSection = ({
@@ -25,7 +25,7 @@ const ContentSection = ({
 
 ContentSection.propTypes = {
   anchorId: string,
-  children: any,
+  children: node,
   className: string,
   translation: string.isRequired,
   withKey: string,

@@ -1,16 +1,21 @@
 @import 'scss/breakpoints.scss';
 @import 'scss/spacings.scss';
-@import 'scss/colours.scss';
+@import 'scss/colors.scss';
+@import 'scss/constants.scss';
 
 .container {
   background: white;
   width: 100vw;
-  margin-left: size(-3);
+  margin-left: -1 * $wrapper-padding-x-mobile;
   padding: size(4);
   text-align: center;
 
+  @include mq($from: tablet) {
+    margin-left: -1 * $wrapper-padding-x-desktop;
+  }
+
   .heading {
-    font-family: 'Lilita One', cursive;
+    font-family: 'Lilita One', sans-serif;
     font-size: size(5);
     color: $blue;
     text-transform: capitalize;
@@ -18,7 +23,7 @@
   }
 
   .description {
-    color: $blue;
+    color: black;
     margin-bottom: size(4);
   }
 
@@ -42,7 +47,7 @@
     width: 100%;
 
     &:focus {
-      box-shadow: 0 0 3pt 3pt orange;
+      box-shadow: 0 0 3pt 3pt$orange;
       outline: none;
     }
 
@@ -54,6 +59,7 @@
   }
 
   .formMessage {
+    color: black;
     padding: size(1.5);
     margin-top: size(2);
     font-size: 12px;
@@ -65,7 +71,6 @@
     height: 38px;
 
     &.error {
-      color: red;
       background: $red-background;
     }
 

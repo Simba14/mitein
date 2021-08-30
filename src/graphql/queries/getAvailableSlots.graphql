@@ -2,6 +2,7 @@ query GetAvailableSlots {
   availableSlots {
     id
     start
+    status
     end
   }
 }

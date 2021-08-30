@@ -1,23 +1,44 @@
-@import 'scss/colours.scss';
+@import 'scss/colors.scss';
 @import 'scss/spacings.scss';
 
 .cta {
   color: white;
   cursor: pointer;
-  display: block;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   background: $blue;
-  padding: size(1.5) size(7);
+  padding: size(1.5);
   border: none;
   height: 100%;
   max-height: size(5);
   text-transform: capitalize;
+
+  &.fullWidth {
+    width: 100%;
+  }
+
+  &.outline {
+    color: $blue;
+    background: white;
+    border: 1px solid currentColor;
+
+    &:hover {
+      background: $grey;
+    }
+  }
 
   &:hover {
     opacity: 0.8;
   }
 
   &:focus {
-    outline-color: orange;
+    outline-color: $orange;
+  }
+
+  &:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
   }
 }
 
@@ -27,4 +48,8 @@ a.cta {
   display: flex;
   align-items: center;
   justify-content: center;
+
+  &.fullWidth {
+    max-width: 100%;
+  }
 }

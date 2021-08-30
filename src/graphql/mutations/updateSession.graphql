@@ -1,0 +1,29 @@
+mutation UpdateSession(
+  $id: ID
+  $participant1Id: ID
+  $participant2Id: ID
+  $status: EventStatus!
+  $start: String
+  $end: String
+  $cancelledBy: ID
+  $cancellationReason: UserType
+) {
+  updateSession(
+    id: $id
+    participant1Id: $participant1Id
+    participant2Id: $participant2Id
+    status: $status
+    start: $start
+    end: $end
+    cancelledBy: $cancelledBy
+    cancellationReason: $cancellationReason
+  ) {
+    id
+    participant1Id
+    participant2Id
+    link
+    status
+    start
+    end
+  }
+}

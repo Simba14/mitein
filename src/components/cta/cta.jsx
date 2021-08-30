@@ -1,20 +1,35 @@
 import React from 'react';
 import { bool, string, func } from 'prop-types';
+import classnames from 'classnames/bind';
 
 import Link from 'components/link';
 import styles from './cta.module.scss';
+const cx = classnames.bind(styles);
 
-const Cta = ({ disabled, text, onClick, className, to, type }) => {
+const Cta = ({
+  disabled,
+  fullWidth,
+  text,
+  onClick,
+  outline,
+  className,
+  to,
+  type,
+}) => {
   if (to)
     return (
-      <Link className={`${styles.cta} ${className}`} to={to} onClick={onClick}>
+      <Link
+        className={cx('cta', className, { fullWidth })}
+        to={to}
+        onClick={onClick}
+      >
         {text}
       </Link>
     );
 
   return (
     <button
-      className={`${styles.cta} ${className}`}
+      className={cx('cta', className, { fullWidth, outline })}
       type={type}
       disabled={disabled}
       onClick={onClick}
@@ -27,7 +42,9 @@ const Cta = ({ disabled, text, onClick, className, to, type }) => {
 Cta.propTypes = {
   className: string,
   disabled: bool,
+  fullWidth: bool,
   onClick: func,
+  outline: bool,
   text: string.isRequired,
   to: string,
   type: string,
@@ -35,8 +52,10 @@ Cta.propTypes = {
 
 Cta.defaultProps = {
   className: null,
-  onClick: null,
   disabled: false,
+  fullWidth: false,
+  onClick: null,
+  outline: false,
   to: null,
   type: 'submit',
 };

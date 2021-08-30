@@ -1,0 +1,40 @@
+@import 'scss/breakpoints.scss';
+@import 'scss/spacings.scss';
+
+.accordionHeader {
+  cursor: pointer;
+  color: currentColor;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: size(1);
+  background: none;
+  border: none;
+  border-bottom: 1px solid currentColor;
+  width: 100%;
+
+  @include mq($from: tablet) {
+    padding: size(1) 0;
+
+    .arrow {
+      width: size(2);
+      height: size(2);
+    }
+  }
+
+  &.isOpen {
+    .arrow {
+      transform: rotate(-180deg);
+    }
+  }
+
+  &:focus {
+    outline: none;
+  }
+
+  .arrow {
+    width: size(3);
+    height: size(3);
+    transition: transform 0.5s ease;
+  }
+}
