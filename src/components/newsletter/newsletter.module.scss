@@ -1,13 +1,18 @@
 @import 'scss/breakpoints.scss';
 @import 'scss/spacings.scss';
 @import 'scss/colors.scss';
+@import 'scss/constants.scss';
 
 .container {
   background: white;
   width: 100vw;
-  margin-left: size(-3);
+  margin-left: -1 * $wrapper-padding-x-mobile;
   padding: size(4);
   text-align: center;
+
+  @include mq($from: tablet) {
+    margin-left: -1 * $wrapper-padding-x-desktop;
+  }
 
   .heading {
     font-family: 'Lilita One', sans-serif;

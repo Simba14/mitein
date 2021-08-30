@@ -19,7 +19,7 @@ const Volunteer = ({ organizations }) => {
 
   useEffect(() => {
     if (organizations) {
-      const uniqueTags = uniq(flatMap(organizations, (org) => org.tags || []));
+      const uniqueTags = uniq(flatMap(organizations, org => org.tags || []));
 
       setResults(organizations);
       setFilterOptions(uniqueTags);
@@ -29,18 +29,18 @@ const Volunteer = ({ organizations }) => {
   useEffect(() => {
     if (organizations) {
       const newResults = filters.length
-        ? results.filter((result) => intersection(result.tags, filters).length)
+        ? results.filter(result => intersection(result.tags, filters).length)
         : organizations;
 
       setResults(newResults);
     }
   }, [filters]);
 
-  const handleFilterClick = (option) => {
-    setFilters((arr) => {
+  const handleFilterClick = option => {
+    setFilters(arr => {
       const alreadySelected = filters.includes(option);
       return alreadySelected
-        ? arr.filter((value) => value !== option)
+        ? arr.filter(value => value !== option)
         : [...arr, option];
     });
   };
@@ -54,7 +54,7 @@ const Volunteer = ({ organizations }) => {
       <div className={styles.filters}>
         <div className={styles.filterTitle}>{t('filterBy')}</div>
         {filterOptions &&
-          filterOptions.map((filter) => (
+          filterOptions.map(filter => (
             <button
               key={filter}
               className={`${styles.filterBtn} ${

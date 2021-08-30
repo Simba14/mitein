@@ -1,244 +1,88 @@
-@import '../../scss/breakpoints.scss';
-@import '../../scss/constants.scss';
-@import '../../scss/colors.scss';
-@import '../../scss/spacings.scss';
+@import 'scss/breakpoints.scss';
+@import 'scss/constants.scss';
+@import 'scss/colors.scss';
+@import 'scss/spacings.scss';
 
 $items: 4;
-$transition-delay: 0.05s;
+$transition-duration: $menu-transition-duration / 2;
+$icon-size: 20px;
 
-/* Toggle Button */
+.menu {
+  display: flex;
+  flex: 1;
 
-.buttonToggle {
-  position: absolute;
-  display: inline-block;
-  width: size(2);
-  height: size(2);
-  margin: 10px size(3) 12px 0px;
-  background-color: transparent;
-  border-color: transparent;
-  border: none;
-  outline: none;
-  cursor: pointer;
-  transition: $menu-transition-duration + 0.1s;
+  .buttonToggle {
+    background-color: transparent;
+    border-color: transparent;
+    border: none;
+    margin-right: auto;
+    height: calc(#{$icon-size} + #{size(1)});
+    width: calc(#{$icon-size} + #{size(1)});
+    padding: size(0.5);
+    outline: none;
+    cursor: pointer;
+    transition: $menu-transition-duration;
 
-  @include mq($from: tablet) {
-    margin: 12px size(3) size(3) 0px;
-  }
+    .icon {
+      height: $icon-size;
+      width: $icon-size;
 
-  // Shadow on Hover
-  &:hover {
-    box-shadow: 0 2px 0 size(1) rgba(0, 0, 0, 0.1),
-      inset 0 0 0 size(1) rgba(0, 0, 0, 0.1);
-  }
-
-  &.isOpen {
-    @include mq($until: tablet) {
-      margin-top: 12px;
-    }
-
-    &:before {
-      transform: translateY(-50%) rotate(45deg) scale(1);
-    }
-
-    &:after {
-      transform: translateY(-50%) rotate(-45deg) scale(1);
+      path {
+        stroke: $blue;
+      }
     }
 
     &:hover {
-      box-shadow: 0 0px 0 size(1) rgba(0, 0, 0, 0.1),
-        inset 0 0 0 size(1) rgba(0, 0, 0, 0.1);
+      background: $grey;
     }
   }
 
-  // Making the 'X' icon using `:before` and `:after` pseudo-elements
-  // Initially hidden beause of `scale(0)` transformation
-
-  &:before,
-  &:after {
+  .nav {
     position: absolute;
-    content: '';
-    top: 50%;
-    left: 0;
-    width: 100%;
-    height: 2px;
-    background-color: $dark-blue;
-    border-radius: 5px;
-    transition: $menu-transition-duration;
-  }
+    transition: 0s;
+    opacity: 0;
+    padding: 0;
+    visibility: hidden;
+    font-family: 'Cabin Sketch', sans-serif;
+    height: $menu-height-desktop;
 
-  &:before {
-    transform: translateY(-50%) rotate(45deg) scale(0);
-  }
-
-  &:after {
-    transform: translateY(50%) rotate(-45deg) scale(0);
-  }
-}
-
-/* Menu */
-
-.nav {
-  position: absolute;
-  display: inline-block;
-  padding: 10px size(3) 12px 0px;
-  pointer-events: none;
-  transition: $menu-transition-duration, background-color 0s;
-
-  @include mq($from: tablet) {
-    box-sizing: content-box;
-    padding: 12px size(3) 12px 0px;
-  }
-
-  &.isOpen {
-    background-color: $grey;
-    padding: size(3) size(2);
-    pointer-events: auto;
-    transform: translate(
-      size(-2),
-      calc(#{$header-height} - #{$wrapper-padding-y-desktop})
-    ); //-1 for header border-width
-    transition: $menu-transition-duration,
-      background-color 0s $menu-transition-duration;
-    width: 100vw;
-
-    @include mq($from: tablet) {
+    @include mq($until: tablet) {
       display: flex;
-      padding: size(3) size(3);
-      transform: translate(
-        size(-3),
-        calc(#{$header-height} - #{$wrapper-padding-y-desktop})
-      ); //-1 for header border-width
+      flex-direction: column;
+      align-items: center;
+      width: calc(100% - #{$wrapper-padding-x-mobile} * 2);
     }
 
-    // Restoring nav items from 'lines' in the menu icon
+    &.isOpen {
+      opacity: 1;
+      visibility: visible;
+      transition: $transition-duration opacity $transition-duration, 0s padding;
+      top: size(9);
+      padding: size(3) 0;
+    }
+
     .navItem {
       color: $dark-blue;
-      letter-spacing: 0;
-      height: size(2);
-      line-height: size(2);
-      margin-top: size(1.5);
-      margin-bottom: size(1.5);
+      font-size: 14px;
+      line-height: 16px;
+      text-transform: uppercase;
       opacity: 1;
-      transform: scaleY(1);
-      transition: $menu-transition-duration, opacity 0.1s;
-      width: auto;
-      max-width: none;
 
-      @include mq($from: tablet) {
-        height: 14px;
-        line-height: size(2);
-        margin: 0 size(3) 0 0;
+      @include mq($until: tablet) {
+        &:not(:last-child) {
+          margin-bottom: size(3);
+        }
       }
 
-      // Setting delays for the nav items in open transition
-      @for $i from 1 through $items {
-        &:nth-child(#{$i}) {
-          $delay: ($items - $i) * $transition-delay;
-          transition-delay: $delay;
-          &:before {
-            transition-delay: $delay;
-          }
+      @include mq($from: tablet) {
+        &:not(:last-child) {
+          margin-right: size(3);
         }
       }
 
       &.active {
-        &::after {
-          visibility: visible;
-          transform: scaleX(1);
-        }
-      }
-
-      // Hide the lines
-      &:before {
-        opacity: 0;
-        transition: 3/4 * $menu-transition-duration;
-      }
-
-      &::after {
-        content: '';
-        position: absolute;
-        width: 100%;
-        height: 1px;
-        bottom: -2px;
-        left: 0;
-        background-color: $dark-blue;
-        visibility: hidden;
-        transform: scaleX(0);
-        transition: all 0.3s ease-in-out 0s;
-      }
-
-      &:hover::after {
-        visibility: visible;
-        transform: scaleX(1);
+        color: $dark-grey;
       }
     }
-  }
-}
-
-// Showing nav items as lines, making up the hamburger menu icon
-.navItem {
-  font-family: 'Cabin Sketch', sans-serif;
-  position: relative;
-  display: inline-block;
-  float: left;
-  clear: both;
-  color: transparent;
-  font-size: 14px;
-  letter-spacing: -6.2px;
-  height: 7px;
-  line-height: 7px;
-  text-transform: uppercase;
-  text-decoration: none;
-  white-space: nowrap;
-  transform: scaleY(0.2);
-  max-width: 20px;
-
-  @include mq($until: tablet) {
-    transition: $menu-transition-duration, color $menu-transition-duration / 2,
-      transform $menu-transition-duration / 2;
-
-    // Setting delays for the nav items in close transition
-    @for $i from 1 through $items {
-      &:nth-child(#{$i}) {
-        $delay: ($i - 1) * 0.06s;
-        transition-delay: $delay;
-        &:before {
-          transition-delay: $delay;
-        }
-      }
-    }
-  }
-
-  // Adjusting width for first line
-  &:nth-child(1) {
-    width: 12px;
-    letter-spacing: -8px;
-  }
-
-  // Adjusting width for second line
-  &:nth-child(2) {
-    width: 16px;
-    letter-spacing: -7px;
-  }
-
-  // Adjusting the fourth element onwards
-  &:nth-child(n + 4) {
-    letter-spacing: -8px;
-    margin-top: -7px;
-    opacity: 0;
-  }
-
-  //getting lines for the hamburger menu icon
-  &:before {
-    position: absolute;
-    content: '';
-    top: 50%;
-    left: 0;
-    width: 100%;
-    height: 2px;
-    opacity: 1;
-    background-color: $dark-blue;
-    transform: translateY(-50%) scaleY(5);
-    transition: $menu-transition-duration;
   }
 }

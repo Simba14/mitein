@@ -1,11 +1,19 @@
 @import 'scss/breakpoints.scss';
 @import 'scss/colors.scss';
+@import 'scss/constants.scss';
 @import 'scss/spacings.scss';
 
 .container {
+  background: $blue;
   color: white;
+  padding: $wrapper-padding-y-mobile $wrapper-padding-x-mobile;
+
+  @include mq($from: tablet) {
+    padding: $wrapper-padding-y-desktop $wrapper-padding-x-desktop;
+  }
 
   .headline {
+    color: white;
     font-size: size(6);
     font-family: 'Lilita One', sans-serif;
     text-align: center;

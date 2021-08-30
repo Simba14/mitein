@@ -13,6 +13,7 @@ export const getStaticProps = async ({ locale }) => {
 
   return {
     props: {
+      withContentPadding: false,
       organizations,
       ...(await serverSideTranslations(locale, [
         'volunteer',
