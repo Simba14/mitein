@@ -27,5 +27,8 @@
       "route": "/login/",
       "cta": "Hier anmelden"
     }
+  },
+  "errorMsg": {
+    "required": "erforderlich*"
   }
 }

@@ -28,7 +28,7 @@
       "cta": "Sign up here"
     }
   },
-  "error": {
+  "errorMsg": {
     "required": "required*"
   }
 }

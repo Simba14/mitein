@@ -55,7 +55,7 @@ const Form = ({ submitError, loadingSubmit, onChange, onSubmit, type }) => {
       <div className={cx('fieldContainer', { hasError: errors.email })}>
         <label htmlFor="email">{t('email')}</label>
         <input
-          ref={register({ required: t('error.required'), validate: true })}
+          ref={register({ required: t('errorMsg.required'), validate: true })}
           className={cx('email')}
           id="email"
           name="email"
@@ -71,7 +71,7 @@ const Form = ({ submitError, loadingSubmit, onChange, onSubmit, type }) => {
       <div className={cx('fieldContainer', { hasError: errors.password })}>
         <label htmlFor="password">{t('password')}</label>
         <input
-          ref={register({ required: t('error.required') })}
+          ref={register({ required: t('errorMsg.required') })}
           className={cx('password')}
           id="password"
           name="password"
@@ -92,7 +92,7 @@ const Form = ({ submitError, loadingSubmit, onChange, onSubmit, type }) => {
           >
             <label htmlFor="confirmPassword">{t('confirmPassword')}</label>
             <input
-              ref={register({ required: t('error.required') })}
+              ref={register({ required: t('errorMsg.required') })}
               className={cx('password')}
               id="confirmPassword"
               name="confirmPassword"
@@ -109,7 +109,7 @@ const Form = ({ submitError, loadingSubmit, onChange, onSubmit, type }) => {
           >
             <label htmlFor="displayName">{t('displayName.label')}</label>
             <input
-              ref={register({ required: t('error.required') })}
+              ref={register({ required: t('errorMsg.required') })}
               className={cx('email')}
               id="displayName"
               name="displayName"
@@ -123,7 +123,7 @@ const Form = ({ submitError, loadingSubmit, onChange, onSubmit, type }) => {
           <div className={cx('fieldContainer')}>
             <label htmlFor="accountType">{t('accountType.label')}</label>
             <select
-              ref={register({ required: t('error.required') })}
+              ref={register({ required: t('errorMsg.required') })}
               className={cx('password')}
               id="accountType"
               name="accountType"
