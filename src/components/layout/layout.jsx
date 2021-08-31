@@ -5,7 +5,7 @@ import { MenuContextConsumer, MenuContextProvider } from 'context/menu';
 import classnames from 'classnames/bind';
 
 import Header from 'components/header';
-import Footer from 'components/footer';
+// import Footer from 'components/footer';
 
 import styles from './layout.module.scss';
 const cx = classnames.bind(styles);
@@ -31,7 +31,7 @@ const Layout = ({ children, withContentPadding }) => (
             >
               {children}
             </div>
-            <Footer />
+            {/* <Footer /> */}
           </div>
         )}
       </MenuContextConsumer>
