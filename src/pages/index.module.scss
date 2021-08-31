@@ -21,10 +21,21 @@
     color: white;
   }
 
-  .how {
+  .about {
     background: $blue;
     color: white;
 
+    h3 {
+      color: white;
+    }
+
+    .volunteerBtn {
+      background: white;
+      color: $blue;
+    }
+  }
+
+  .how {
     @include mq($until: tablet) {
       padding-bottom: size(16);
     }
@@ -32,11 +43,21 @@
     @include mq($from: tablet, $until: desktop) {
       .contact {
         padding: size(4) 0;
+
+        a {
+        }
       }
     }
 
+    .contact {
+      a {
+        color: $blue;
+      }
+    }
+
+    h1,
     h3 {
-      color: white;
+      color: $blue;
     }
   }
 }

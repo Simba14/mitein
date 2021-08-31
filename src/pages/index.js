@@ -26,20 +26,24 @@ const Home = () => {
       <div className={`${styles.wrapper}`}>
         <Hero />
         <ContentSection
-          anchorId="about"
-          className={styles.about}
-          translation="home"
-          withKey="about"
-        >
-          <Cta text={t('volunteerBtn')} to={ROUTE_VOLUNTEER} />
-        </ContentSection>
-        <ContentSection
           anchorId="how"
           className={styles.how}
           translation="home"
           withKey="how"
         >
           <ContactUs className={styles.contact} translation="home" />
+        </ContentSection>
+        <ContentSection
+          anchorId="about"
+          className={styles.about}
+          translation="home"
+          withKey="about"
+        >
+          <Cta
+            className={styles.volunteerBtn}
+            text={t('volunteerBtn')}
+            to={ROUTE_VOLUNTEER}
+          />
         </ContentSection>
       </div>
     </Layout>

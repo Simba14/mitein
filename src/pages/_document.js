@@ -41,6 +41,15 @@ class MyDocument extends Document {
           <meta property="og:type" content="website" />
           <meta property="og:url" content="https://www.mitein.de/" />
           <meta property="og:image" content="/ogImage.png" />
+          <meta name="twitter:card" content="summary_large_image" />
+          <meta property="twitter:domain" content="mitein.de" />
+          <meta property="twitter:url" content="https://www.mitein.de/" />
+          <meta name="twitter:title" content="Mitein" />
+          <meta
+            name="twitter:description"
+            content="A non-profit aiming to enrich communities through connection, language and learning."
+          />
+          <meta name="twitter:image" content="https://mitein.de/ogImage.png" />
         </Head>
         <body>
           <Main />
