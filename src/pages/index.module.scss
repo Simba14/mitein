@@ -32,6 +32,12 @@
     .volunteerBtn {
       background: white;
       color: $blue;
+
+      @include mq($until: tablet) {
+        align-self: center;
+        width: 100%;
+        max-width: 100%;
+      }
     }
   }
 
@@ -40,12 +46,9 @@
   }
 
   .how {
-    @include mq($until: tablet) {
-      padding-bottom: size(16);
-    }
-
-    @include mq($from: tablet, $until: desktop) {
+    @include mq($from: tablet) {
       min-height: unset;
+
       .contact {
         padding: size(4) 0;
       }
