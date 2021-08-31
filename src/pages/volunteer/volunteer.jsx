@@ -82,7 +82,7 @@ const Volunteer = ({ organizations }) => {
           </div>
         )}
       </div>
-      <NewsletterBanner />
+      <NewsletterBanner className={styles.newsletterBanner} />
       <ContactUs translation="volunteer" />
     </div>
   );

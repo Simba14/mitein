@@ -7,14 +7,19 @@ import ContactUs from 'components/contactUs';
 import ContentSection from 'components/contentSection';
 import Hero from 'components/hero';
 import Layout from 'components/layout';
-// import NewsletterBanner from 'components/newsletter';
+import NewsletterBanner from 'components/newsletter';
 import { ROUTE_VOLUNTEER } from 'routes';
 
 import styles from './index.module.scss';
 
 export const getStaticProps = async ({ locale }) => ({
   props: {
-    ...(await serverSideTranslations(locale, ['home', 'header', 'menu'])),
+    ...(await serverSideTranslations(locale, [
+      'home',
+      'header',
+      'menu',
+      'newsletter',
+    ])),
   },
 });
 
@@ -30,9 +35,12 @@ const Home = () => {
           className={styles.how}
           translation="home"
           withKey="how"
-        >
-          <ContactUs className={styles.contact} translation="home" />
-        </ContentSection>
+        ></ContentSection>
+        <NewsletterBanner
+          className={styles.newsletter}
+          heading={t('newsletter.heading')}
+          description={t('newsletter.description')}
+        />
         <ContentSection
           anchorId="about"
           className={styles.about}
@@ -44,6 +52,7 @@ const Home = () => {
             text={t('volunteerBtn')}
             to={ROUTE_VOLUNTEER}
           />
+          <ContactUs className={styles.contact} translation="home" />
         </ContentSection>
       </div>
     </Layout>

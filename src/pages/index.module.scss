@@ -35,23 +35,19 @@
     }
   }
 
+  .newsletter {
+    background: $egg-shell;
+  }
+
   .how {
     @include mq($until: tablet) {
       padding-bottom: size(16);
     }
 
     @include mq($from: tablet, $until: desktop) {
+      min-height: unset;
       .contact {
         padding: size(4) 0;
-
-        a {
-        }
-      }
-    }
-
-    .contact {
-      a {
-        color: $blue;
       }
     }
 

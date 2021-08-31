@@ -5,14 +5,9 @@
 
 .container {
   background: white;
-  width: 100vw;
-  margin-left: -1 * $wrapper-padding-x-mobile;
-  padding: size(4);
+  width: 100%;
   text-align: center;
-
-  @include mq($from: tablet) {
-    margin-left: -1 * $wrapper-padding-x-desktop;
-  }
+  padding: size(4);
 
   .heading {
     font-family: 'Lilita One', sans-serif;
