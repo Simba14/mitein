@@ -1,15 +1,15 @@
-import { get } from 'lodash';
+import { get } from 'lodash/fp';
 import { client } from 'apollo/client';
 import GET_VOLUNTEERING_OPPS from '@graphql/queries/getVolunteeringOpps.graphql';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 
 export const getStaticProps = async ({ locale }) => {
-  const { data } = await client.query({
+  const organizationsQuery = await client.query({
     query: GET_VOLUNTEERING_OPPS,
     variables: { city: 'Berlin', locale },
   });
 
-  const organizations = get(data, 'volunteerWith');
+  const organizations = get('data.volunteerWith', organizationsQuery);
 
   return {
     props: {

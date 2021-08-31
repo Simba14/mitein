@@ -11,12 +11,14 @@ export const initializeFirebase = fbConfig => {
   if (!firebase.apps.length) {
     firebase.initializeApp(fbConfig);
 
-    if (!config.isProduction) {
-      const {
-        firebase: {
-          emulator: { firestoreHost, authHost },
-        },
-      } = config;
+    const {
+      isProduction,
+      firebase: {
+        emulator: { firestoreHost, authHost },
+      },
+    } = config;
+
+    if (!isProduction && firestoreHost) {
       const storeElements = firestoreHost.split(':');
       const storeHost = storeElements[0];
       const storePort = Number(storeElements[1]);
