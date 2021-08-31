@@ -33,6 +33,14 @@ class MyDocument extends Document {
             href="https://fonts.googleapis.com/css2?family=Bowlby+One&family=Cabin+Sketch:wght@400;700&family=Lilita+One&display=swap"
             rel="stylesheet"
           />
+          <meta property="og:title" content="Mitein" />
+          <meta
+            property="og:description"
+            content="A non-profit aiming to enrich communities through connection, language and learning."
+          />
+          <meta property="og:type" content="website" />
+          <meta property="og:url" content="https://www.mitein.de/" />
+          <meta property="og:image" content="/ogImage.png" />
         </Head>
         <body>
           <Main />
