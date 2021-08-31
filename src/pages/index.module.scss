@@ -22,6 +22,7 @@
   }
 
   .about {
+    font-size: 20px;
     background: $blue;
     color: white;
 
@@ -46,7 +47,10 @@
   }
 
   .how {
+    font-size: 20px;
+
     @include mq($from: tablet) {
+      padding-bottom: 0px;
       min-height: unset;
 
       .contact {

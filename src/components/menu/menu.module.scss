@@ -58,23 +58,29 @@ $icon-size: 20px;
       visibility: visible;
       transition: $transition-duration opacity $transition-duration, 0s padding;
       top: size(9);
-      padding: size(3) 0;
+      padding: size(4) 0;
+
+      @include mq($from: tablet) {
+        padding: size(3) 0;
+      }
     }
 
     .navItem {
       color: $dark-blue;
-      font-size: 14px;
+      font-size: 18px;
       line-height: 16px;
       text-transform: uppercase;
       opacity: 1;
 
       @include mq($until: tablet) {
         &:not(:last-child) {
-          margin-bottom: size(3);
+          margin-bottom: size(4);
         }
       }
 
       @include mq($from: tablet) {
+        font-size: 14px;
+
         &:not(:last-child) {
           margin-right: size(3);
         }
