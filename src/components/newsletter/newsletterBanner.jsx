@@ -40,7 +40,10 @@ const NewsletterBanner = ({ className, heading, description }) => {
       </div>
       <form className={cx('form')} onSubmit={handleSubmit(onSubmit)}>
         <input
-          ref={register({ required: t('form:error.required'), validate: true })}
+          ref={register({
+            required: t('form:errorMsg.required'),
+            validate: true,
+          })}
           className={cx('emailInput')}
           id="email"
           name="email"

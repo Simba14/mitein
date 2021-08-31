@@ -1,4 +1,5 @@
 @import 'scss/breakpoints.scss';
+@import 'scss/colors.scss';
 @import 'scss/spacings.scss';
 
 .wrapper {
@@ -39,6 +40,18 @@
       @include mq($from: tablet) {
         font-size: 48px;
         line-height: 1.4;
+      }
+    }
+
+    .comingSoon {
+      color: $egg-shell;
+      position: absolute;
+      bottom: 32px;
+      left: 32px;
+
+      .logo {
+        width: 190px;
+        margin-bottom: size(0.5);
       }
     }
   }
