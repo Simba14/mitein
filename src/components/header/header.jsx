@@ -1,5 +1,4 @@
 import React from 'react';
-import { useTranslation } from 'next-i18next';
 import classnames from 'classnames/bind';
 
 import Link from 'components/link';
@@ -7,18 +6,17 @@ import Link from 'components/link';
 import LanguageSelector from './components/languageSelector';
 import Menu from 'components/menu';
 import { ROUTE_BASE } from 'routes';
+import Logo from 'assets/logo.svg';
 
 import styles from './header.module.scss';
 const cx = classnames.bind(styles);
 
 const Header = () => {
-  const { t } = useTranslation('header');
-
   return (
     <div className={cx('headerWrapper')}>
       <Menu />
       <Link to={ROUTE_BASE} className={cx('title')}>
-        {t('mitein')}
+        <Logo className={cx('logo')} />
       </Link>
       <div className={cx('options')}>
         {/* <AccountSection /> */}
