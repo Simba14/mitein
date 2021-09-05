@@ -1,13 +1,15 @@
 const TRUE = 'true';
+const PRODUCTION = 'production';
+const DEVELOPMENT = 'development';
 
 export default {
   port: process.env.PORT,
-  isProduction: process.env.NODE_ENV === 'production',
-  isDevelopment: process.env.NODE_ENV === 'development',
+  isProduction: process.env.NODE_ENV === PRODUCTION,
+  isDevelopment: process.env.NODE_ENV === DEVELOPMENT,
   environment: process.env.NODE_ENV,
   apollo: {
     enablePlayground: process.env.APOLLO_PLAYGROUND === TRUE,
-    introspection: process.env.APOLLO_INTROSPECTION === TRUE,
+    introspection: process.env.NODE_ENV !== PRODUCTION,
   },
   auth: {
     verifyEmail: {

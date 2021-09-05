@@ -1,4 +1,4 @@
-import admin from 'firebase-admin';
+import firebase from 'firebase/app';
 import { v4 as uuidv4 } from 'uuid';
 import { isEmpty } from 'lodash/fp';
 import { Firestore } from '@api/firebase';
@@ -74,7 +74,7 @@ User.updateCancellations = async ({ sessionId, userId }) => {
   await User.updateById({
     id: userId,
     fields: {
-      cancellations: admin.firestore.FieldValue.arrayUnion(newCancellation),
+      cancellations: firebase.firestore.FieldValue.arrayUnion(newCancellation),
       suspendedUntil,
     },
   });
