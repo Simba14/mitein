@@ -1,4 +1,4 @@
-// @import url('https://fonts.googleapis.com/css2?family=Bowlby+One&family=Cabin+Sketch:wght@400;700&family=Lilita+One&display=swap');
+@import 'scss/fonts.scss';
 
 html {
   height: 100%;
@@ -9,7 +9,7 @@ html {
 body {
   padding: 0;
   margin: 0;
-  font-family: sans-serif;
+  font-family: 'Poppins', sans-serif;
 }
 
 a {
@@ -20,10 +20,7 @@ h1,
 h2,
 h3,
 h4 {
-  margin: 0;
-}
-
-h4 {
+  font-family: 'LilGrotesk', 'Poppins', sans-serif;
   margin: 0;
 }
 

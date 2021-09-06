@@ -30,7 +30,7 @@ class MyDocument extends Document {
           />
           <link rel="manifest" href="/favicons/site.webmanifest" />
           <link
-            href="https://fonts.googleapis.com/css2?family=Bowlby+One&family=Cabin+Sketch:wght@400;700&family=Lilita+One&display=swap"
+            href="https://fonts.googleapis.com/css2?family=Bowlby+One&family=Cabin+Sketch:wght@400;700&family=Poppins&display=swap"
             rel="stylesheet"
           />
           <meta property="og:title" content="Mitein" />

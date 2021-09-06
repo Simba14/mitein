@@ -35,7 +35,6 @@
       line-height: 1.6;
       color: white;
       max-width: 800px;
-      font-family: 'Lilita One', sans-serif;
 
       @include mq($from: tablet) {
         font-size: 48px;
