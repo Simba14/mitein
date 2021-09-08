@@ -10,10 +10,10 @@ const Hero = () => {
   return (
     <div className={styles.wrapper}>
       <div className={styles.hero}>
-        <div className={styles.content}>{t('description')}</div>
+        <h2 className={styles.content}>{t('description')}</h2>
         <div className={styles.comingSoon}>
           <Logo className={styles.logo} />
-          <h4>{t('comingSoon')}</h4>
+          <h5 className={styles.text}>{t('comingSoon')}</h5>
         </div>
       </div>
     </div>

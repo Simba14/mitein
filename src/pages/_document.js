@@ -29,9 +29,47 @@ class MyDocument extends Document {
             href="/favicons/favicon-16x16.png"
           />
           <link rel="manifest" href="/favicons/site.webmanifest" />
+          <link rel="preconnect" href="https://fonts.googleapis.com" />
+          <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin />
           <link
-            href="https://fonts.googleapis.com/css2?family=Bowlby+One&family=Cabin+Sketch:wght@400;700&family=Poppins&display=swap"
+            href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;700&display=swap"
             rel="stylesheet"
+          />
+          <link
+            rel="preload"
+            href="/fonts/LilGrotesk/LilGrotesk-Regular.ttf"
+            as="font"
+            crossOrigin=""
+          />
+          <link
+            rel="preload"
+            href="/fonts/LilGrotesk/LilGrotesk-Regular.woff"
+            as="font"
+            crossOrigin=""
+          />
+          <link
+            rel="preload"
+            href="/fonts/LilGrotesk/LilGrotesk-Regular.woff2"
+            as="font"
+            crossOrigin=""
+          />
+          <link
+            rel="preload"
+            href="/fonts/LilGrotesk/LilGrotesk-Bold.ttf"
+            as="font"
+            crossOrigin=""
+          />
+          <link
+            rel="preload"
+            href="/fonts/LilGrotesk/LilGrotesk-Bold.woff"
+            as="font"
+            crossOrigin=""
+          />
+          <link
+            rel="preload"
+            href="/fonts/LilGrotesk/LilGrotesk-Bold.woff2"
+            as="font"
+            crossOrigin=""
           />
           <meta property="og:title" content="Mitein" />
           <meta

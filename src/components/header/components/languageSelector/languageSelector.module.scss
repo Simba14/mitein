@@ -16,17 +16,20 @@
   }
 
   .language {
+    font-family: 'LilGrotesk';
+    font-weight: bold;
     border: none;
-    font-size: 14px;
-    padding: 1px 6px;
+    font-size: 16px;
+    line-height: 16px;
+    padding: 4px 6px;
     background: white;
     cursor: not-allowed;
     color: $blue;
     text-transform: uppercase;
 
     &.unselected {
-      background: #efefef;
-      color: #d8d7d7cf;
+      background: $light-grey;
+      color: #c6c7ca;
       cursor: pointer;
     }
   }

@@ -3,7 +3,7 @@
 @import 'scss/colors.scss';
 @import 'scss/spacings.scss';
 
-$logo-width: 72px;
+$logo-width: size(12);
 
 .headerWrapper {
   display: flex;
@@ -22,6 +22,7 @@ $logo-width: 72px;
   }
 
   .title {
+    display: flex;
     text-decoration: none;
 
     .logo {
@@ -32,10 +33,5 @@ $logo-width: 72px;
   .options {
     display: flex;
     flex: 1;
-  }
-
-  svg {
-    height: 40px;
-    width: 40px;
   }
 }
