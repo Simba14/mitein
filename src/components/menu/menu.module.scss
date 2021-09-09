@@ -16,8 +16,8 @@ $icon-size: size(3);
     border-color: transparent;
     border: none;
     margin-right: auto;
-    height: calc(#{$icon-size} + #{size(0.5)});
-    width: calc(#{$icon-size} + #{size(0.5)});
+    height: calc(#{$icon-size} + #{size(1)}); // for hover state
+    width: calc(#{$icon-size} + #{size(1)});
     padding: size(0.5);
     outline: none;
     cursor: pointer;
