@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useMutation } from '@apollo/client';
 import { useRouter } from 'next/router';
+import classnames from 'classnames/bind';
 
 import { compose, get } from 'lodash/fp';
 
@@ -9,13 +10,15 @@ import Form, { SIGN_UP_TYPE } from 'components/form';
 import { sessionProps, withSessionContext } from 'context/session';
 import { ROUTE_PROFILE } from 'routes';
 import { withLayout } from 'components/layout';
+
 import styles from './signUp.module.scss';
+const cx = classnames.bind(styles);
 
 const SignUp = ({ session }) => {
   const [error, setError] = useState(null);
   const router = useRouter();
 
-  const signUpSuccessful = (data) => {
+  const signUpSuccessful = data => {
     session.setUserLoggedIn(data.signUp.id);
     router.push(ROUTE_PROFILE);
   };
@@ -33,7 +36,7 @@ const SignUp = ({ session }) => {
   const onSignUp = ({ accountType, displayName, email, password }) => {
     signUp({
       variables: { accountType, displayName, email, password },
-    }).catch((e) => {
+    }).catch(e => {
       setError(get('graphqlErrors[0].message', e) || e.message);
     });
   };
@@ -41,7 +44,7 @@ const SignUp = ({ session }) => {
   const resetError = () => setError(null);
 
   return (
-    <div className={styles.wrapper}>
+    <div className={cx('wrapper')}>
       <Form
         loadingSubmit={loading}
         onChange={resetError}

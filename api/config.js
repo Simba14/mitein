@@ -7,6 +7,7 @@ export default {
   isProduction: process.env.NODE_ENV === PRODUCTION,
   isDevelopment: process.env.NODE_ENV === DEVELOPMENT,
   environment: process.env.NODE_ENV,
+  uiHost: process.env.UI_HOST,
   apollo: {
     enablePlayground: process.env.APOLLO_PLAYGROUND === TRUE,
     introspection: process.env.NODE_ENV !== PRODUCTION,
@@ -49,14 +50,23 @@ export default {
     apiKey: process.env.SENDINBLUE_API_KEY,
     baseUrl: process.env.SENDINBLUE_API_URL,
     listId: Number(process.env.SENDINBLUE_LIST_ID),
-    emailVerificationUrl: `${process.env.UI_HOST}/verify-email`,
     template: {
-      sessionConfirmation: Number(
-        process.env.SENDINBLUE_TEMPLATE_SESSION_CONFIRMATION,
-      ),
-      userVerification: Number(
-        process.env.SENDINBLUE_TEMPLATE_USER_VERIFICATION,
-      ),
+      de: {
+        sessionConfirmation: Number(
+          process.env.SENDINBLUE_TEMPLATE_SESSION_CONFIRMATION_DE,
+        ),
+        userVerification: Number(
+          process.env.SENDINBLUE_TEMPLATE_USER_VERIFICATION_DE,
+        ),
+      },
+      en: {
+        sessionConfirmation: Number(
+          process.env.SENDINBLUE_TEMPLATE_SESSION_CONFIRMATION_EN,
+        ),
+        userVerification: Number(
+          process.env.SENDINBLUE_TEMPLATE_USER_VERIFICATION_EN,
+        ),
+      },
     },
   },
   engine: {

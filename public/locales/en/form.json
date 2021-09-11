@@ -16,7 +16,6 @@
     "submitBtn": "Sign Up",
     "changeLocation": {
       "text": "Already a member?",
-      "route": "/login/",
       "cta": "Login here"
     }
   },
@@ -24,7 +23,6 @@
     "submitBtn": "Login",
     "changeLocation": {
       "text": "New to Mitein?",
-      "route": "/sign-up/",
       "cta": "Sign up here"
     }
   },

@@ -25,7 +25,13 @@ const NewsletterBanner = ({ className, heading, description }) => {
     },
   });
   const { t } = useTranslation(['form', 'newsletter']);
-  const { clearErrors, register, handleSubmit, errors, setError } = useForm();
+  const {
+    clearErrors,
+    register,
+    handleSubmit,
+    formState: { errors },
+    setError,
+  } = useForm();
   const formMessage = get('submit.message', errors) || successMessage;
 
   const onSubmit = ({ email }) => {
@@ -40,13 +46,12 @@ const NewsletterBanner = ({ className, heading, description }) => {
       </div>
       <form className={cx('form')} onSubmit={handleSubmit(onSubmit)}>
         <input
-          ref={register({
+          {...register('email', {
             required: t('form:errorMsg.required'),
             validate: true,
           })}
           className={cx('emailInput')}
           id="email"
-          name="email"
           placeholder={t('newsletter:placeholder')}
           type="email"
           onChange={() => {

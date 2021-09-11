@@ -3,9 +3,11 @@
 @import 'scss/colors.scss';
 @import 'scss/spacings.scss';
 
+$slot-width: 180px;
+
 .container {
   .title {
-    color: $teal;
+    color: $blue;
     margin-bottom: size(2);
   }
 
@@ -15,7 +17,17 @@
     column-gap: size(3);
     width: 100%;
 
+    .step2Container {
+      display: flex;
+      margin-bottom: size(2);
+
+      :first-child {
+        margin-right: size(1);
+      }
+    }
+
     .step {
+      color: $teal;
       margin-bottom: size(2);
     }
 
@@ -28,7 +40,7 @@
 
       h2 {
         font-family: revert;
-        color: $blue;
+        color: $teal;
         display: inline;
         font-size: 24px;
       }
@@ -36,17 +48,21 @@
       button {
         @extend %btn;
 
-        background: $blue !important;
-        border-color: $blue !important;
+        background: $teal !important;
+        border-color: $teal !important;
         color: white !important;
         width: 85px;
-        height: 32px;
+      }
+
+      .daySelected {
+        outline: $blue 2px auto;
       }
 
       .dayAvailable {
         background: $green-background;
         cursor: pointer;
       }
+
       .dayUnavailable {
         background: $light-grey;
         cursor: not-allowed;
@@ -68,40 +84,25 @@
           background: white;
           color: black;
           white-space: nowrap;
+          width: $slot-width;
+
+          &:hover {
+            background: $light-grey;
+          }
+
+          &:focus,
+          &:focus-visible {
+            outline: none;
+            box-shadow: 0 0 3pt 2pt $teal;
+            border-color: $teal;
+          }
         }
       }
     }
   }
 
   .note {
-    color: red;
+    color: $red;
     margin-bottom: size(4);
-  }
-
-  .dateContainer {
-    margin-bottom: size(4);
-
-    .date {
-      border-bottom: 3px solid white;
-      padding-bottom: size(1);
-      margin-bottom: size(2);
-      color: black;
-    }
-
-    .slots {
-      display: flex;
-      overflow-x: scroll;
-
-      .slot {
-        border: 1px solid black;
-        border-radius: size(3);
-        padding-left: size(3);
-        padding-right: size(3);
-        margin-right: size(3);
-        background: white;
-        color: black;
-        white-space: nowrap;
-      }
-    }
   }
 }

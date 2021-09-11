@@ -20,6 +20,13 @@ const cx = classnames.bind(styles);
 
 const mapWithKey = map.convert({ cap: false });
 
+const dayHasAvailability = ({ date, slots }) => {
+  const offset = date.getTimezoneOffset();
+  const dateOffsetForTimezone = new Date(date.getTime() - offset * 60 * 1000);
+  const day = dateOffsetForTimezone.toISOString().split('T')[0];
+  return !isEmpty(slots[day]);
+};
+
 const Slots = ({ userId, onSelect }) => {
   const {
     i18n: { language },
@@ -29,6 +36,7 @@ const Slots = ({ userId, onSelect }) => {
   const [selectedSession, selectSession] = useState(null);
   const [sessionRequested, setSessionRequested] = useState(false);
   const [requestSessionError, setRequestSessionError] = useState(null);
+
   const { data, loading, error: getSlotsError } = useQuery(GET_SLOTS);
   const [requestSession] = useMutation(REQUEST_SESSION);
   const availableSlots = get('availableSlots', data);
@@ -45,6 +53,7 @@ const Slots = ({ userId, onSelect }) => {
         onSelect();
         selectSession(null);
         setSessionRequested(true);
+        setSelectedDate(null);
       })
       .catch(e => {
         onSelect();
@@ -64,8 +73,6 @@ const Slots = ({ userId, onSelect }) => {
       slots[date] = slots[date] ? [...slots[date], slot] : [slot];
     });
 
-    console.log({ slots, selectedDate });
-
     return (
       <div className={cx('container')}>
         <h2 className={cx('title')}>{t('slots.title')}</h2>
@@ -74,8 +81,16 @@ const Slots = ({ userId, onSelect }) => {
           <div className={cx('calendar')}>
             <h3 className={cx('step')}>{t('slots.step1')}</h3>
             <FullCalendar
-              dateClick={({ dateStr }) => {
-                setSelectedDate(dateStr);
+              dateClick={({ date, dateStr, dayEl }) => {
+                if (dayHasAvailability({ date, slots })) {
+                  if (selectedDate)
+                    document
+                      .querySelector(`.${cx('daySelected')}`)
+                      .classList.remove(cx('daySelected'));
+
+                  setSelectedDate(dateStr);
+                  dayEl.classList.add(cx('daySelected'));
+                }
               }}
               height="auto"
               locale={language}
@@ -90,14 +105,7 @@ const Slots = ({ userId, onSelect }) => {
               initialView="dayGridMonth"
               plugins={[dayGridPlugin, interactionPlugin]}
               dayCellClassNames={({ date }) => {
-                const offset = date.getTimezoneOffset();
-                const dateOffsetForTimezone = new Date(
-                  date.getTime() - offset * 60 * 1000,
-                );
-                const day = dateOffsetForTimezone.toISOString().split('T')[0];
-                const dayHasAvailability = !isEmpty(slots[day]);
-
-                return dayHasAvailability
+                return dayHasAvailability({ date, slots })
                   ? [cx('dayAvailable')]
                   : [cx('dayUnavailable')];
               }}
@@ -117,13 +125,16 @@ const Slots = ({ userId, onSelect }) => {
             />
           </div>
           <div className={cx('requestSlot')}>
-            <h3 className={cx('step')}>
-              {t('slots.step2', {
-                date:
-                  selectedDate &&
-                  ` for ${formatSessionDate(selectedDate, language)}`,
-              })}
-            </h3>
+            <div className={cx('step2Container')}>
+              <h3 className={cx('step')}>{t('slots.step2Number')}</h3>
+              <h3 className={cx('step')}>
+                {t('slots.step2', {
+                  date:
+                    selectedDate &&
+                    ` for ${formatSessionDate(selectedDate, language)}`,
+                })}
+              </h3>
+            </div>
             {selectedDate ? (
               <div className={cx('slots')}>
                 {slots[selectedDate].map(slot => (

@@ -3,9 +3,9 @@
 
 .wrapper {
   display: flex;
-  color: white;
   align-items: center;
   flex-direction: column;
+  padding-top: size(2);
 
   .heading {
     text-transform: capitalize;
@@ -17,7 +17,5 @@
   }
 
   .cta {
-    background: white;
-    color: $blue;
   }
 }

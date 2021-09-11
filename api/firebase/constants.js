@@ -5,6 +5,9 @@ export const COLLECTION_USERS = 'users';
 export const USER_TYPE_LEARNER = 'LEARNER';
 export const USER_TYPE_NATIVE = 'NATIVE';
 
+export const ENGLISH = 'en';
+export const GERMAN = 'de';
+
 export const FIELD_PARTICIPANT_ONE = 'participant1Id';
 export const FIELD_PARTICIPANT_TWO = 'participant2Id';
 

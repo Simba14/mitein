@@ -1,5 +1,6 @@
 import { FireAuth } from '@api/firebase';
 import User from '@api/firebase/user';
+import { GERMAN, ENGLISH, USER_TYPE_LEARNER } from '@api/firebase/constants';
 import {
   EMAIL_EXISTS_CODE,
   EMAIL_NOT_FOUND_ERROR_MESSAGE,
@@ -28,6 +29,7 @@ export const createAccount = ({ displayName, email, password, type }) => {
       const user = {
         id: uid,
         displayName,
+        displayLanguage: type === USER_TYPE_LEARNER ? ENGLISH : GERMAN,
         email,
         isEmailVerified: emailVerified,
         type,

@@ -65,7 +65,7 @@
     "prop-types": "^15.7.2",
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
-    "react-hook-form": "^6.12.2",
+    "react-hook-form": "^7.15.2",
     "react-router-dom": "^5.1.2",
     "sib-api-v3-sdk": "^8.2.1",
     "uuid": "^8.3.2",

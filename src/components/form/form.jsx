@@ -8,6 +8,7 @@ import { throttle } from 'lodash';
 
 import Anchor from 'components/anchor';
 import Cta from 'components/cta';
+import { ROUTE_LOGIN, ROUTE_SIGN_UP } from 'routes';
 
 import styles from './form.module.scss';
 const cx = classnames.bind(styles);
@@ -26,8 +27,19 @@ const userType = {
 
 const Form = ({ submitError, loadingSubmit, onChange, onSubmit, type }) => {
   const { t } = useTranslation('form');
-  const { clearErrors, register, handleSubmit, errors, setError } = useForm();
+  const {
+    clearErrors,
+    register,
+    handleSubmit,
+    formState: { errors },
+    setError,
+    setFocus,
+  } = useForm();
   const isSignUp = type === SIGN_UP_TYPE;
+
+  useEffect(() => {
+    setFocus('email');
+  }, [setFocus]);
 
   useEffect(() => {
     if (submitError) {
@@ -55,10 +67,12 @@ const Form = ({ submitError, loadingSubmit, onChange, onSubmit, type }) => {
       <div className={cx('fieldContainer', { hasError: errors.email })}>
         <label htmlFor="email">{t('email')}</label>
         <input
-          ref={register({ required: t('errorMsg.required'), validate: true })}
+          {...register('email', {
+            required: t('errorMsg.required'),
+            validate: true,
+          })}
           className={cx('email')}
           id="email"
-          name="email"
           placeholder={t('email')}
           type="email"
           onChange={handleOnChange}
@@ -71,10 +85,9 @@ const Form = ({ submitError, loadingSubmit, onChange, onSubmit, type }) => {
       <div className={cx('fieldContainer', { hasError: errors.password })}>
         <label htmlFor="password">{t('password')}</label>
         <input
-          ref={register({ required: t('errorMsg.required') })}
+          {...register('password', { required: t('errorMsg.required') })}
           className={cx('password')}
           id="password"
-          name="password"
           placeholder={t('password')}
           type="password"
           onChange={handleOnChange}
@@ -92,10 +105,11 @@ const Form = ({ submitError, loadingSubmit, onChange, onSubmit, type }) => {
           >
             <label htmlFor="confirmPassword">{t('confirmPassword')}</label>
             <input
-              ref={register({ required: t('errorMsg.required') })}
+              {...register('confirmPassword', {
+                required: t('errorMsg.required'),
+              })}
               className={cx('password')}
               id="confirmPassword"
-              name="confirmPassword"
               placeholder={t('password')}
               type="password"
               onChange={handleOnChange}
@@ -109,10 +123,9 @@ const Form = ({ submitError, loadingSubmit, onChange, onSubmit, type }) => {
           >
             <label htmlFor="displayName">{t('displayName.label')}</label>
             <input
-              ref={register({ required: t('errorMsg.required') })}
+              {...register('displayName', { required: t('errorMsg.required') })}
               className={cx('email')}
               id="displayName"
-              name="displayName"
               placeholder={t('displayName.placeholder')}
               type="text"
             />
@@ -123,10 +136,9 @@ const Form = ({ submitError, loadingSubmit, onChange, onSubmit, type }) => {
           <div className={cx('fieldContainer')}>
             <label htmlFor="accountType">{t('accountType.label')}</label>
             <select
-              ref={register({ required: t('errorMsg.required') })}
-              className={cx('password')}
+              {...register('accountType', { required: t('errorMsg.required') })}
+              className={cx('dropdown')}
               id="accountType"
-              name="accountType"
             >
               <option value={userType.learner}>
                 {t('accountType.learner')}
@@ -147,7 +159,7 @@ const Form = ({ submitError, loadingSubmit, onChange, onSubmit, type }) => {
       />
       <div>
         {t(`${type}.changeLocation.text`)}{' '}
-        <Anchor to={t(`${type}.changeLocation.route`)}>
+        <Anchor to={isSignUp ? ROUTE_LOGIN : ROUTE_SIGN_UP}>
           {t(`${type}.changeLocation.cta`)}
         </Anchor>
       </div>

@@ -15,6 +15,11 @@ const typeDefs = gql`
     REQUESTED
   }
 
+  enum Language {
+    de
+    en
+  }
+
   type Session {
     id: ID!
     start: String!
@@ -35,6 +40,7 @@ const typeDefs = gql`
   type User {
     sessions: [Session]
     displayName: String
+    displayLanguage: Language
     email: String
     isEmailVerified: Boolean
     id: ID!

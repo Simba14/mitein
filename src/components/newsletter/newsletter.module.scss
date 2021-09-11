@@ -5,6 +5,7 @@
 
 .container {
   background: white;
+  font-size: 16px;
   width: 100%;
   text-align: center;
   padding: size(4);
@@ -32,13 +33,14 @@
   }
 
   .emailInput {
+    font-family: 'Poppins', sans-serif;
     font-size: 16px;
     border: none;
     border-bottom: solid 1px $dark-grey;
     background: white;
     margin-bottom: size(2);
-    padding: size(1) size(0.5);
-    height: size(5);
+    padding: size(2) size(1);
+    height: size(6);
     width: 100%;
 
     &:focus {
@@ -57,7 +59,6 @@
     color: black;
     padding: size(1.5);
     margin-top: size(2);
-    font-size: 12px;
     background: $green-background;
     opacity: 0;
     transition: opacity 1s;

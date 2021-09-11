@@ -17,13 +17,12 @@ export const SessionContextProvider = ({
 }) => {
   const getUserId = () => {
     const userIdCookie = cookie.get(cookieUserIdIdentifier);
-    // const [profile] = await cookie.get(cookieCustomerLoggedInIdentifier) === TRUE ? this.fetchProfile() : undefined;
     return typeof userIdCookie === 'string' ? userIdCookie : undefined;
   };
 
   const [userId, setUserId] = useState(getUserId());
 
-  const setUserLoggedIn = (id) => {
+  const setUserLoggedIn = id => {
     if (id) {
       setUserId(id);
       cookie.set(cookieUserIdIdentifier, id, {
@@ -56,9 +55,9 @@ SessionContextProvider.propTypes = {
 
 const SessionContextConsumer = SessionContext.Consumer;
 
-export const withSessionContext = (WrappedComponent) => (props) => (
+export const withSessionContext = WrappedComponent => props => (
   <SessionContextConsumer>
-    {(sessionContextConsumerProps) => (
+    {sessionContextConsumerProps => (
       <WrappedComponent {...props} {...sessionContextConsumerProps} />
     )}
   </SessionContextConsumer>

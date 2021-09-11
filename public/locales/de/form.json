@@ -16,7 +16,6 @@
     "submitBtn": "Anmelden",
     "changeLocation": {
       "text": "Sie sind bereits Mitglied?",
-      "route": "/sign-up/",
       "cta": "Hier einloggen"
     }
   },
@@ -24,7 +23,6 @@
     "submitBtn": "Einloggen",
     "changeLocation": {
       "text": "Neu bei?",
-      "route": "/login/",
       "cta": "Hier anmelden"
     }
   },

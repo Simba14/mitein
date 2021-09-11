@@ -46,7 +46,7 @@ const VerifyEmail = ({ tokenValue }) => {
   const [tokenValid, setTokenValid] = useState(false);
 
   const [confirmEmail] = useMutation(VERIFY_EMAIL);
-  console.log({ tokenValue });
+
   // const {
   //   user: { sessions, displayName, email, suspendedUntil, type },
   // } = data;
@@ -73,12 +73,7 @@ const VerifyEmail = ({ tokenValue }) => {
     <div className={cx('wrapper')}>
       <h3 className={cx('heading')}>{t('emailVerified')}</h3>
       <div className={cx('description')}>{t('featuresEnabled')}</div>
-      <Cta
-        to={ROUTE_PROFILE}
-        className={cx('cta')}
-        onClick={null}
-        text={t('invalidToken.cta')}
-      />
+      <Cta to={ROUTE_PROFILE} className={cx('cta')} text={t('redirect')} />
     </div>
   ) : (
     <div className={cx('wrapper')}>

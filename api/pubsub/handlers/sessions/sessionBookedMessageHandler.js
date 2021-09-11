@@ -6,13 +6,19 @@ const SessionBookedMessageHandler = ({
   message,
 }) => {
   const {
-    participant: { email },
+    participant: { displayLanguage, email },
     session: { start, end, link },
   } = message;
 
   const date = formatSessionDate(start);
   const time = formatSessionTime({ start, end });
-  return sendConfirmationEmail({ email, date, time, zoomLink: link });
+  return sendConfirmationEmail({
+    displayLanguage,
+    email,
+    date,
+    time,
+    zoomLink: link,
+  });
 };
 
 export default SessionBookedMessageHandler;

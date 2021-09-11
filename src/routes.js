@@ -7,3 +7,4 @@ export const ROUTE_LOGIN = '/login/';
 export const ROUTE_PROFILE = '/profile/';
 export const ROUTE_SIGN_UP = '/sign-up/';
 export const ROUTE_VOLUNTEER = '/volunteer/';
+export const ROUTE_VERIFY_EMAIL = '/verify-email/';

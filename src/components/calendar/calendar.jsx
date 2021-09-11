@@ -10,7 +10,7 @@ import { get } from 'lodash/fp';
 import GET_AVAILABILITY from '@graphql/queries/getSessions.graphql';
 import CREATE_SESSIONS from '@graphql/mutations/createSessions.graphql';
 import DELETE_SESSIONS from '@graphql/mutations/deleteSessions.graphql';
-import { blue, green, grey, red } from 'constants/colors';
+import { BLUE, GREEN, GREY, RED } from 'constants/colors';
 import { AVAILABLE, BOOKED, REQUESTED, REJECTED } from 'constants/user';
 
 import styles from './calendar.module.scss';
@@ -24,14 +24,14 @@ const GET_SESSIONS_QUERY = 'GetSessions';
 const getEventColor = status => {
   switch (status) {
     case AVAILABLE:
-      return green;
+      return GREEN;
     case BOOKED:
-      return blue;
+      return BLUE;
     case SELECTED:
-      return red;
+      return RED;
     case REQUESTED:
     default:
-      return grey;
+      return GREY;
   }
 };
 
@@ -63,7 +63,7 @@ const Calendar = ({ userId }) => {
     if (!eventId) return;
 
     if (selectedEvents.includes(eventId)) {
-      event.setProp('backgroundColor', green);
+      event.setProp('backgroundColor', GREEN);
       setSelectedEvents(prevEvents => {
         const index = prevEvents.indexOf(eventId);
         if (index > -1) {
@@ -72,7 +72,7 @@ const Calendar = ({ userId }) => {
         }
       });
     } else {
-      event.setProp('backgroundColor', red);
+      event.setProp('backgroundColor', RED);
       setSelectedEvents(prevEvents => [...prevEvents, eventId]);
     }
   };
@@ -97,7 +97,7 @@ const Calendar = ({ userId }) => {
     <section className={styles.calendar}>
       <div className={styles.instructions}>{t('instructions')}</div>
       <FullCalendar
-        allDaySlot={true}
+        allDaySlot={false}
         customButtons={{
           deleteSelected: {
             text: t('deleteSelected'),
@@ -107,7 +107,7 @@ const Calendar = ({ userId }) => {
         locale={language}
         editable={true}
         events={events}
-        eventColor={green}
+        eventColor={GREEN}
         eventClick={handleSelectEvent}
         eventOverlap={false}
         headerToolbar={{
