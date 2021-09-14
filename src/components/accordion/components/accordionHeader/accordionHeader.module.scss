@@ -10,8 +10,8 @@
   padding: size(1);
   background: none;
   border: none;
-  border-bottom: 1px solid currentColor;
   width: 100%;
+  text-transform: capitalize;
 
   @include mq($from: tablet) {
     padding: size(1) 0;

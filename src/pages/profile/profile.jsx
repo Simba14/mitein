@@ -5,8 +5,8 @@ import { useQuery } from '@apollo/client';
 import { Mutation } from '@apollo/client/react/components';
 import { compose, get, groupBy, isEmpty, take } from 'lodash/fp';
 import { useTranslation } from 'next-i18next';
-import { COLLECTION_SESSIONS } from '@api/firebase/constants';
-import { Firestore } from '@api/firebase';
+// import { COLLECTION_SESSIONS } from '@api/firebase/constants';
+// import { Firestore } from '@api/firebase';
 
 import Accordion from 'components/accordion';
 import Calendar from 'components/calendar';
@@ -37,20 +37,20 @@ const Profile = ({ session }) => {
     skip: !userId,
   });
 
-  useEffect(() => {
-    const unsubscribe = Firestore.db
-      .collection(COLLECTION_SESSIONS)
-      .onSnapshot(snapshot => {
-        if (snapshot.size) {
-          console.log({ snapshot });
-        } else {
-          // it's empty
-        }
-      });
-    return () => {
-      unsubscribe();
-    };
-  }, []);
+  // useEffect(() => {
+  //   const unsubscribe = Firestore.db
+  //     .collection(COLLECTION_SESSIONS)
+  //     .onSnapshot(snapshot => {
+  //       if (snapshot.size) {
+  //         console.log({ snapshot });
+  //       } else {
+  //         // it's empty
+  //       }
+  //     });
+  //   return () => {
+  //     unsubscribe();
+  //   };
+  // }, []);
 
   useEffect(() => {
     if (!(userId || loading || data) || error) {
@@ -153,7 +153,7 @@ const Profile = ({ session }) => {
           open={true}
         />
       )}
-      {isLearner && !requestedSessions && (
+      {isLearner && !requestedSessions && Boolean(!suspendedUntil) && (
         <Slots userId={userId} onSelect={refetch} />
       )}
       {isNative && Boolean(!suspendedUntil) && <Calendar userId={userId} />}

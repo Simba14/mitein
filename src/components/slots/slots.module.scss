@@ -104,5 +104,6 @@ $slot-width: 180px;
   .note {
     color: $red;
     margin-bottom: size(4);
+    white-space: pre-wrap;
   }
 }
