@@ -1,9 +1,10 @@
 import React from 'react';
-import { bool, node } from 'prop-types';
+import { bool, node, string } from 'prop-types';
 import { convert } from 'lodash/fp';
 import { MenuContextConsumer, MenuContextProvider } from 'context/menu';
 import classnames from 'classnames/bind';
 
+import ConsentLayer from 'components/consentLayer/consentLayer';
 import Header from 'components/header';
 // import Footer from 'components/footer';
 
@@ -13,38 +14,43 @@ const cx = classnames.bind(styles);
 // Remove cap on iteratee arguments
 convert({ cap: false });
 
-const Layout = ({ children, withContentPadding }) => (
-  <MenuContextProvider>
-    <div className={cx('wrapper')}>
-      <Header />
-      <MenuContextConsumer>
-        {({ isMenuOpen }) => (
-          <div
-            className={cx('container', {
-              menuOpen: isMenuOpen,
-            })}
-          >
+const Layout = ({ children, className, withContentPadding }) => {
+  return (
+    <MenuContextProvider>
+      <div className={cx('wrapper')}>
+        <Header />
+        <MenuContextConsumer>
+          {({ isMenuOpen }) => (
             <div
-              className={cx('content', {
-                withPadding: withContentPadding,
+              className={cx('container', className, {
+                menuOpen: isMenuOpen,
               })}
             >
-              {children}
+              <div
+                className={cx('content', {
+                  withPadding: withContentPadding,
+                })}
+              >
+                {children}
+              </div>
+              {/* <Footer /> */}
             </div>
-            {/* <Footer /> */}
-          </div>
-        )}
-      </MenuContextConsumer>
-    </div>
-  </MenuContextProvider>
-);
+          )}
+        </MenuContextConsumer>
+      </div>
+      <ConsentLayer />
+    </MenuContextProvider>
+  );
+};
 
 Layout.propTypes = {
   children: node.isRequired,
+  className: string,
   withContentPadding: bool,
 };
 
 Layout.defaultProps = {
+  className: null,
   withContentPadding: true,
 };
 

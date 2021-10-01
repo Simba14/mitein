@@ -52,9 +52,10 @@ const Form = ({ submitError, loadingSubmit, onChange, onSubmit, type }) => {
 
   const handleOnChange = useCallback(
     throttle(
-      () => {
+      event => {
         clearErrors('submit');
         onChange();
+        event.persist();
       },
       1000,
       { trailing: false },
@@ -62,20 +63,29 @@ const Form = ({ submitError, loadingSubmit, onChange, onSubmit, type }) => {
     [],
   );
 
+  const registerInput = name => {
+    const { onChange, ...rest } = register(name, {
+      required: t('errorMsg.required'),
+    });
+    return {
+      ...rest,
+      onChange: e => {
+        onChange(e);
+        handleOnChange(e);
+      },
+    };
+  };
+
   return (
     <form className={cx('form')} onSubmit={handleSubmit(onSubmit)}>
       <div className={cx('fieldContainer', { hasError: errors.email })}>
         <label htmlFor="email">{t('email')}</label>
         <input
-          {...register('email', {
-            required: t('errorMsg.required'),
-            validate: true,
-          })}
-          className={cx('email')}
+          {...registerInput('email')}
+          className={cx('textInput')}
           id="email"
           placeholder={t('email')}
           type="email"
-          onChange={handleOnChange}
         />
 
         <div className={cx('fieldError', { show: errors.email })}>
@@ -85,12 +95,11 @@ const Form = ({ submitError, loadingSubmit, onChange, onSubmit, type }) => {
       <div className={cx('fieldContainer', { hasError: errors.password })}>
         <label htmlFor="password">{t('password')}</label>
         <input
-          {...register('password', { required: t('errorMsg.required') })}
+          {...registerInput('password')}
           className={cx('password')}
           id="password"
           placeholder={t('password')}
           type="password"
-          onChange={handleOnChange}
         />
         <div className={cx('fieldError')}>
           {get('password.message', errors)}
@@ -105,14 +114,11 @@ const Form = ({ submitError, loadingSubmit, onChange, onSubmit, type }) => {
           >
             <label htmlFor="confirmPassword">{t('confirmPassword')}</label>
             <input
-              {...register('confirmPassword', {
-                required: t('errorMsg.required'),
-              })}
+              {...registerInput('customPassword')}
               className={cx('password')}
               id="confirmPassword"
               placeholder={t('password')}
               type="password"
-              onChange={handleOnChange}
             />
             <div className={cx('fieldError')}>
               {get('confirmPassword.message', errors)}
@@ -123,8 +129,8 @@ const Form = ({ submitError, loadingSubmit, onChange, onSubmit, type }) => {
           >
             <label htmlFor="displayName">{t('displayName.label')}</label>
             <input
-              {...register('displayName', { required: t('errorMsg.required') })}
-              className={cx('email')}
+              {...registerInput('displayName')}
+              className={cx('textInput')}
               id="displayName"
               placeholder={t('displayName.placeholder')}
               type="text"
@@ -136,7 +142,7 @@ const Form = ({ submitError, loadingSubmit, onChange, onSubmit, type }) => {
           <div className={cx('fieldContainer')}>
             <label htmlFor="accountType">{t('accountType.label')}</label>
             <select
-              {...register('accountType', { required: t('errorMsg.required') })}
+              {...register('accountType')}
               className={cx('dropdown')}
               id="accountType"
             >

@@ -1,4 +1,5 @@
 @import 'scss/colors.scss';
+@import 'scss/constants.scss';
 @import 'scss/spacings.scss';
 
 .cta {
@@ -46,8 +47,7 @@
 }
 
 a.cta {
-  margin-top: size(4);
-  max-width: 240px;
+  max-width: $cta-max-width;
   display: flex;
   align-items: center;
   justify-content: center;

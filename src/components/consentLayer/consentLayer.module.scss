@@ -1,0 +1,37 @@
+@import 'scss/breakpoints.scss';
+@import 'scss/colors.scss';
+@import 'scss/constants.scss';
+@import 'scss/spacings.scss';
+
+.consentLayer {
+  align-items: flex-end;
+  justify-content: flex-end;
+  backdrop-filter: blur(3px);
+
+  .container {
+    background: $egg-shell;
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    column-gap: size(4);
+    margin-bottom: size(3);
+    margin-right: size(3);
+    padding: size(4);
+    max-width: $content-max-width;
+
+    .text {
+      .heading {
+        margin-bottom: size(2);
+      }
+    }
+
+    .actions {
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+
+      .confirmCta {
+        margin-bottom: size(2);
+      }
+    }
+  }
+}

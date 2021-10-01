@@ -9,7 +9,12 @@ $icon-size: size(3);
 
 .menu {
   display: flex;
-  flex: 1;
+  margin-right: size(2);
+
+  @include mq($from: tablet) {
+    flex: 1;
+    margin-right: 0;
+  }
 
   .buttonToggle {
     background-color: transparent;

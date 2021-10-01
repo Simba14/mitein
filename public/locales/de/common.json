@@ -1,0 +1,12 @@
+{
+  "login": "Einloggen",
+  "menu": "Menu",
+  "mitein": "Mitein(ander)",
+  "signUp": "Anmelden",
+  "consentLayer": {
+    "heading": "We don't have any tracking",
+    "description": "but we do use cookies to make the site work as expected. Please provide your consent and confirmation that you are 16+ years old. You can find more details in our Terms of Service.",
+    "confirmBtn": "Accept all",
+    "reject": "Reject all"
+  }
+}

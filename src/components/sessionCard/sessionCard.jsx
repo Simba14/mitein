@@ -108,7 +108,6 @@ const SessionCard = ({ session, status, userType, userId }) => {
           className={cx('confirmCta')}
           fullWidth
           onClick={() => setModalOpen(true)}
-          type="button"
           disabled={false}
           text={t(`${userType}.${status}.confirmCta`)}
         />
@@ -131,7 +130,6 @@ const SessionCard = ({ session, status, userType, userId }) => {
           className={cx('cancelCta')}
           fullWidth
           onClick={handleCancelClick}
-          type="button"
           disabled={false}
           text={t(`${userType}.${status}.cancelCta`)}
         />

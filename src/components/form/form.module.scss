@@ -48,7 +48,7 @@ $form-width: 500px;
     }
   }
 
-  .email,
+  .textInput,
   .password,
   .dropdown {
     @extend %formField;

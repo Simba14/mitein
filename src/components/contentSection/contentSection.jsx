@@ -1,22 +1,27 @@
 import React from 'react';
 import { node, string } from 'prop-types';
-import { useTranslation } from 'next-i18next';
+import classnames from 'classnames/bind';
+
 import styles from './contentSection.module.scss';
+const cx = classnames.bind(styles);
 
 const ContentSection = ({
   anchorId,
   children,
   className,
-  translation,
-  withKey,
+  containerClassName,
+  content,
+  title,
 }) => {
-  const { t } = useTranslation(translation);
-  const translationKey = withKey ? `${withKey}.` : '';
   return (
-    <div id={anchorId} className={`${styles.wrapper} ${className}`}>
-      <div className={styles.container}>
-        <h3 className={styles.title}>{t(`${translationKey}title`)}</h3>
-        <div className={styles.content}>{t(`${translationKey}content`)}</div>
+    <div id={anchorId} className={cx('wrapper', className)}>
+      <div className={cx('container', containerClassName)}>
+        {(title || content) && (
+          <div className={cx('fixedContent')}>
+            {title && <h3 className={cx('title')}>{title}</h3>}
+            {content && <div className={cx('content')}>{content}</div>}
+          </div>
+        )}
         {children}
       </div>
     </div>
@@ -27,14 +32,17 @@ ContentSection.propTypes = {
   anchorId: string,
   children: node,
   className: string,
-  translation: string.isRequired,
-  withKey: string,
+  containerClassName: string,
+  content: string,
+  title: string,
 };
 
 ContentSection.defaultProps = {
   anchorId: null,
   className: null,
-  withKey: null,
+  containerClassName: null,
+  content: null,
+  title: null,
 };
 
 export default ContentSection;

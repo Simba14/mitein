@@ -7,6 +7,7 @@ import { useTranslation } from 'next-i18next';
 import { any, string } from 'prop-types';
 import { get } from 'lodash/fp';
 
+import Loading from 'components/loading';
 import GET_AVAILABILITY from '@graphql/queries/getSessions.graphql';
 import CREATE_SESSIONS from '@graphql/mutations/createSessions.graphql';
 import DELETE_SESSIONS from '@graphql/mutations/deleteSessions.graphql';
@@ -91,7 +92,8 @@ const Calendar = ({ userId }) => {
       ? `${DELETE_SELECTED} today prev,next`
       : 'today prev,next';
 
-  if (loading || error) return null;
+  if (loading) return <Loading />;
+  if (error) return null;
 
   return (
     <section className={styles.calendar}>
@@ -114,6 +116,7 @@ const Calendar = ({ userId }) => {
           start: 'title',
           end: getHeaderBtns(),
         }}
+        height="auto"
         plugins={[interactionPlugin, timeGridPlugin]}
         initialView="timeGrid"
         selectable={true}

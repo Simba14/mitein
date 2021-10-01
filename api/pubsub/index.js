@@ -9,6 +9,7 @@ export const USER_PASSWORD_RESET_REQUEST_MESSAGE_TYPE =
   'UserPasswordResetRequest';
 export const USER_VERIFY_EMAIL_REQUEST_MESSAGE_TYPE = 'UserVerifyEmailRequest';
 export const SESSION_BOOKED_MESSAGE_TYPE = 'SessionBooked';
+export const SESSION_REQUESTED_MESSAGE_TYPE = 'SessionRequested';
 
 const SESSIONS = 'sessions';
 const USERS = 'users';

@@ -9,6 +9,9 @@ import '@fullcalendar/common/main.css';
 import '@fullcalendar/daygrid/main.css';
 import '@fullcalendar/timegrid/main.css';
 
+const cookieConsentRecordedIdentifier =
+  process.env.NEXT_PUBLIC_COOKIE_CONSENT_RECORDED_IDENTIFIER;
+
 const cookieUserIdExpireDays = parseInt(
   process.env.NEXT_PUBLIC_COOKIE_USER_ID_EXPIRE_DAYS,
   10,
@@ -17,6 +20,7 @@ const cookieUserIdIdentifier =
   process.env.NEXT_PUBLIC_COOKIE_USER_ID_IDENTIFIER;
 
 const SESSION = {
+  cookieConsentRecordedIdentifier,
   cookieUserIdExpireDays,
   cookieUserIdIdentifier,
 };

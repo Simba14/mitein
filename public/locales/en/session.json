@@ -7,7 +7,8 @@
     "step2Number": "2.",
     "noAvailability": "No availabile sessions for this date. Please select a different date in the calendar.",
     "note": "Note: only one session can be requested at a time.\nPlease choose a time slot that you can definitely commit to. You will receive an answer to your request in good time.",
-    "noneAvailable": "No Available Slots. Check back here in the next few days. We are working\n    hard to partner with more Retirement homes and native speakers."
+    "noneAvailable": "No Available Slots",
+    "checkBack": "Check back here in the next few days.\nWe are working hard to partner with more Retirement homes and native speakers."
   },
   "LEARNER": {
     "BOOKED": {

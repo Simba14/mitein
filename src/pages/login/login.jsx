@@ -15,7 +15,7 @@ const SignIn = ({ session }) => {
   const [error, setError] = useState(null);
   const router = useRouter();
 
-  const signInSuccessful = (data) => {
+  const signInSuccessful = data => {
     session.setUserLoggedIn(data.signIn.id);
     router.push(ROUTE_PROFILE);
   };
@@ -31,7 +31,7 @@ const SignIn = ({ session }) => {
   }
 
   const onLogin = ({ email, password }) =>
-    signIn({ variables: { email, password } }).catch((e) => {
+    signIn({ variables: { email, password } }).catch(e => {
       setError(get('graphqlErrors[0].message', e) || e.message);
     });
 

@@ -55,6 +55,9 @@ export default {
         sessionConfirmation: Number(
           process.env.SENDINBLUE_TEMPLATE_SESSION_CONFIRMATION_DE,
         ),
+        sessionRequest: Number(
+          process.env.SENDINBLUE_TEMPLATE_SESSION_REQUEST_DE,
+        ),
         userVerification: Number(
           process.env.SENDINBLUE_TEMPLATE_USER_VERIFICATION_DE,
         ),
@@ -62,6 +65,9 @@ export default {
       en: {
         sessionConfirmation: Number(
           process.env.SENDINBLUE_TEMPLATE_SESSION_CONFIRMATION_EN,
+        ),
+        sessionRequest: Number(
+          process.env.SENDINBLUE_TEMPLATE_SESSION_REQUEST_EN,
         ),
         userVerification: Number(
           process.env.SENDINBLUE_TEMPLATE_USER_VERIFICATION_EN,

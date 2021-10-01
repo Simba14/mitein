@@ -1,6 +1,8 @@
 @import './spacings.scss';
 
 $card-border-radius: 15px;
+$content-max-width: 970px;
+$cta-max-width: 240px;
 $header-height: 72px;
 $menu-height-mobile: size(22);
 $menu-height-desktop: size(8);
@@ -9,4 +11,5 @@ $organization-card-height: 558px;
 $wrapper-padding-x-mobile: size(2);
 $wrapper-padding-x-desktop: size(3);
 $wrapper-padding-y-mobile: size(3);
-$wrapper-padding-y-desktop: size(4);
+$wrapper-padding-y-desktop-small: size(4);
+$wrapper-padding-y-desktop-large: size(16);

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { arrayOf, any, shape, string } from 'prop-types';
 import { get, uniq, flatMap, intersection } from 'lodash';
 import { useTranslation } from 'next-i18next';
+import classnames from 'classnames/bind';
 
 import ContactUs from 'components/contactUs';
 import NewsletterBanner from 'components/newsletter';
@@ -9,6 +10,7 @@ import OrganizationCard from 'components/organizationCard';
 import { withLayout } from 'components/layout';
 
 import styles from './volunteer.module.scss';
+const cx = classnames.bind(styles);
 
 const Volunteer = ({ organizations }) => {
   const [filterOptions, setFilterOptions] = useState(null);
@@ -48,25 +50,25 @@ const Volunteer = ({ organizations }) => {
   const firstResult = get(results[0], 'name');
 
   return (
-    <div className={styles.container}>
-      <h1 className={styles.headline}>{t('headline')}</h1>
-      <h2 className={styles.subheadline}>{t('subheadline')}</h2>
-      <div className={styles.filters}>
-        <div className={styles.filterTitle}>{t('filterBy')}</div>
+    <div className={cx('container')}>
+      <h1 className={cx('headline')}>{t('headline')}</h1>
+      <h2 className={cx('subheadline')}>{t('subheadline')}</h2>
+      <div className={cx('filters')}>
+        <div className={cx('filterTitle')}>{t('filterBy')}</div>
         {filterOptions &&
           filterOptions.map(filter => (
             <button
               key={filter}
-              className={`${styles.filterBtn} ${
-                filters.includes(filter) ? styles.selected : ''
-              }`}
+              className={cx('filterBtn', {
+                selected: filters.includes(filter),
+              })}
               onClick={() => handleFilterClick(filter)}
             >
               {filter}
             </button>
           ))}
       </div>
-      <div className={styles.organizations}>
+      <div className={cx('organizations')}>
         {firstResult ? (
           results.map((organization, index) => (
             <OrganizationCard
@@ -77,12 +79,12 @@ const Volunteer = ({ organizations }) => {
             />
           ))
         ) : (
-          <div className={styles.noResults}>
+          <div className={cx('noResults')}>
             No Opportunities at the moment. Check back here soon!
           </div>
         )}
       </div>
-      <NewsletterBanner className={styles.newsletterBanner} />
+      <NewsletterBanner className={cx('newsletterBanner')} />
       <ContactUs translation="volunteer" />
     </div>
   );

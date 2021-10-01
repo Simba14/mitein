@@ -60,7 +60,7 @@ const Mutation = {
           id,
           fields,
         });
-        console.log({ bookedSession });
+
         return bookedSession;
       }
 
@@ -70,6 +70,12 @@ const Mutation = {
 
         if (existingParticipant2 && existingParticipant2 !== participant2Id)
           throw new Error('Session no longer available. Please try again.');
+
+        const requestedSession = await Sessions.request({
+          id,
+          fields,
+        });
+        return requestedSession;
       }
 
       const session = await Sessions.updateById({

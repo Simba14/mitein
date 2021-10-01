@@ -6,11 +6,6 @@
 $slot-width: 180px;
 
 .container {
-  .title {
-    color: $blue;
-    margin-bottom: size(2);
-  }
-
   .selectionContainer {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -105,5 +100,15 @@ $slot-width: 180px;
     color: $red;
     margin-bottom: size(4);
     white-space: pre-wrap;
+  }
+}
+
+.noneAvailable {
+  padding: size(6) 0;
+  text-align: center;
+  white-space: pre-wrap;
+
+  .noneAvailableTitle {
+    margin-bottom: size(3);
   }
 }

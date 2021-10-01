@@ -2,6 +2,10 @@ import { get } from 'lodash/fp';
 import { client } from 'apollo/client';
 import GET_VOLUNTEERING_OPPS from '@graphql/queries/getVolunteeringOpps.graphql';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
+import classnames from 'classnames/bind';
+
+import styles from './volunteer.module.scss';
+const cx = classnames.bind(styles);
 
 // export const getStaticProps = async ({ locale }) => {
 //   const organizationsQuery = await client.query({
@@ -16,11 +20,11 @@ import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 //       withContentPadding: false,
 //       organizations,
 //       ...(await serverSideTranslations(locale, [
-//         'volunteer',
-//         'header',
+//         'common',
+//         'form',
 //         'menu',
 //         'newsletter',
-//         'form',
+//         'volunteer',
 //       ])),
 //     },
 //   };
@@ -36,14 +40,14 @@ export const getServerSideProps = async ({ locale }) => {
 
   return {
     props: {
-      withContentPadding: false,
+      className: cx('volunteerLayout'),
       organizations,
       ...(await serverSideTranslations(locale, [
-        'volunteer',
-        'header',
+        'common',
+        'form',
         'menu',
         'newsletter',
-        'form',
+        'volunteer',
       ])),
     },
   };

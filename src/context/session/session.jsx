@@ -1,8 +1,10 @@
 import React, { createContext, useState } from 'react';
-import { func, node, number, shape, string } from 'prop-types';
+import { bool, func, node, number, shape, string } from 'prop-types';
 import cookie from 'js-cookie';
 
 export const sessionProps = shape({
+  consentRecorded: bool,
+  onConsentSelection: func,
   userId: string,
   userLoggedOut: func,
   setUserLoggedOut: func,
@@ -12,6 +14,7 @@ const SessionContext = createContext();
 
 export const SessionContextProvider = ({
   children,
+  cookieConsentRecordedIdentifier,
   cookieUserIdExpireDays,
   cookieUserIdIdentifier,
 }) => {
@@ -20,7 +23,14 @@ export const SessionContextProvider = ({
     return typeof userIdCookie === 'string' ? userIdCookie : undefined;
   };
 
+  const getConsentRecorded = () => {
+    const consentRecordedCookie = cookie.get(cookieConsentRecordedIdentifier);
+    return Boolean(consentRecordedCookie);
+  };
+
   const [userId, setUserId] = useState(getUserId());
+  const [consent, setConsent] = useState(getConsentRecorded());
+  const [consentRecorded, setConsentRecorded] = useState(getConsentRecorded);
 
   const setUserLoggedIn = id => {
     if (id) {
@@ -38,9 +48,23 @@ export const SessionContextProvider = ({
     setUserId(undefined);
   };
 
+  const onConsentSelection = value => {
+    setConsent(value);
+    setConsentRecorded(true);
+    cookie.set(cookieConsentRecordedIdentifier, true);
+  };
+
   return (
     <SessionContext.Provider
-      value={{ session: { userId, setUserLoggedIn, userLoggedOut } }}
+      value={{
+        session: {
+          consentRecorded,
+          userId,
+          setUserLoggedIn,
+          userLoggedOut,
+          onConsentSelection,
+        },
+      }}
     >
       {children}
     </SessionContext.Provider>
@@ -49,6 +73,7 @@ export const SessionContextProvider = ({
 
 SessionContextProvider.propTypes = {
   children: node.isRequired,
+  cookieConsentRecordedIdentifier: string.isRequired,
   cookieUserIdExpireDays: number.isRequired,
   cookieUserIdIdentifier: string.isRequired,
 };

@@ -8,7 +8,7 @@ import { compose, get } from 'lodash/fp';
 import SIGN_UP from '@graphql/mutations/signUp.graphql';
 import Form, { SIGN_UP_TYPE } from 'components/form';
 import { sessionProps, withSessionContext } from 'context/session';
-import { ROUTE_PROFILE } from 'routes';
+import { ROUTE_ONBOARDING, ROUTE_PROFILE } from 'routes';
 import { withLayout } from 'components/layout';
 
 import styles from './signUp.module.scss';
@@ -20,7 +20,7 @@ const SignUp = ({ session }) => {
 
   const signUpSuccessful = data => {
     session.setUserLoggedIn(data.signUp.id);
-    router.push(ROUTE_PROFILE);
+    router.push(ROUTE_ONBOARDING);
   };
 
   const [signUp, { loading }] = useMutation(SIGN_UP, {

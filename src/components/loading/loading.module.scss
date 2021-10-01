@@ -1,0 +1,30 @@
+@import 'scss/colors.scss';
+@import 'scss/spacings.scss';
+
+@keyframes move {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+
+  to {
+    transform: translate3d(33.33333%, 0, 0);
+  }
+}
+
+.wrapper {
+  display: flex;
+  height: 100%;
+  width: 100px;
+  align-items: flex-start;
+  justify-content: flex-end;
+  overflow: hidden;
+  margin: size(16) auto;
+
+  .logo {
+    animation: move infinite 1.5s;
+    flex-shrink: 0;
+    width: 150px;
+    fill: $blue;
+    position: relative;
+  }
+}

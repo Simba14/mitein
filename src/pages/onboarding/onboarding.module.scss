@@ -1,0 +1,70 @@
+@import 'scss/breakpoints.scss';
+@import 'scss/constants.scss';
+@import 'scss/colors.scss';
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+  overflow-y: scroll;
+  scroll-snap-type: y proximity;
+  -webkit-overflow-scrolling: touch;
+  padding: $wrapper-padding-y-mobile $wrapper-padding-x-mobile;
+
+  @include mq($from: tablet) {
+    padding: $wrapper-padding-y-desktop-small $wrapper-padding-x-desktop
+      $wrapper-padding-y-desktop-large;
+  }
+
+  @include mq($from: desktop) {
+    scroll-snap-type: y mandatory;
+    max-height: 100vh;
+  }
+
+  .intro {
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
+    padding: size(4);
+    margin: auto;
+    max-width: $content-max-width;
+    margin-bottom: size(5);
+    text-align: center;
+
+    .title {
+      margin-bottom: size(2);
+    }
+  }
+
+  .section {
+    margin-bottom: size(5);
+
+    .step {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+
+      .sectionImage {
+        margin-left: 64px;
+      }
+
+      &.row-reverse {
+        flex-direction: row-reverse;
+
+        .sectionImage {
+          margin-right: 64px;
+          margin-left: 0px;
+        }
+      }
+    }
+
+    .sectionImage {
+      height: size(25);
+      width: size(25);
+    }
+
+    .continue {
+      width: $cta-max-width;
+    }
+  }
+}

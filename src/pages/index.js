@@ -1,6 +1,7 @@
 import React from 'react';
 import { useTranslation } from 'next-i18next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
+import classnames from 'classnames/bind';
 
 import Cta from 'components/cta';
 import ContactUs from 'components/contactUs';
@@ -11,13 +12,14 @@ import NewsletterBanner from 'components/newsletter';
 import { ROUTE_VOLUNTEER } from 'routes';
 
 import styles from './index.module.scss';
+const cx = classnames.bind(styles);
 
 export const getStaticProps = async ({ locale }) => ({
   props: {
     ...(await serverSideTranslations(locale, [
-      'home',
+      'common',
       'form',
-      'header',
+      'home',
       'menu',
       'newsletter',
     ])),
@@ -29,31 +31,31 @@ const Home = () => {
 
   return (
     <Layout withContentPadding={false}>
-      <div className={`${styles.wrapper}`}>
+      <div className={cx('wrapper')}>
         <Hero />
         <ContentSection
           anchorId="how"
-          className={styles.how}
-          translation="home"
-          withKey="how"
-        ></ContentSection>
+          className={cx('how')}
+          title={t('how.title')}
+          content={t('how.content')}
+        />
         <NewsletterBanner
-          className={styles.newsletter}
+          className={cx('newsletter')}
           heading={t('newsletter.heading')}
           description={t('newsletter.description')}
         />
         <ContentSection
           anchorId="about"
-          className={styles.about}
-          translation="home"
-          withKey="about"
+          className={cx('about')}
+          title={t('about.title')}
+          content={t('about.content')}
         >
           <Cta
-            className={styles.volunteerBtn}
+            className={cx('volunteerBtn')}
             text={t('volunteerBtn')}
             to={ROUTE_VOLUNTEER}
           />
-          <ContactUs className={styles.contact} translation="home" />
+          <ContactUs className={cx('contact')} translation="home" />
         </ContentSection>
       </div>
     </Layout>

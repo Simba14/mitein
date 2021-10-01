@@ -16,7 +16,7 @@ $account-icon-size: 21px;
   align-items: center;
   color: $blue;
   display: flex;
-  font-size: 14px;
+  margin-right: size(2);
 
   .login,
   .signUpText,
@@ -24,8 +24,11 @@ $account-icon-size: 21px;
     @extend %desktopOnly;
   }
 
+  .accountLink {
+    display: flex;
+  }
+
   .accountIcon {
-    display: inline-block;
     width: $account-icon-size;
     height: $account-icon-size;
 
@@ -35,14 +38,10 @@ $account-icon-size: 21px;
   }
 
   @include mq($from: tablet) {
-    height: $account-icon-size;
-  }
+    margin-right: size(3);
 
-  @include mq($from: tablet) {
-    a {
-      &:first-child {
-        margin-right: size(2);
-      }
+    .signUp {
+      margin-right: size(2);
     }
   }
 }

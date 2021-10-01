@@ -95,7 +95,7 @@ $transition-delay: 0.05s;
     pointer-events: auto;
     transform: translate(
       size(-2),
-      calc(#{$header-height} - #{$wrapper-padding-y-desktop})
+      calc(#{$header-height} - #{$wrapper-padding-y-mobile})
     ); //-1 for header border-width
     transition: $menu-transition-duration,
       background-color 0s $menu-transition-duration;
@@ -106,7 +106,7 @@ $transition-delay: 0.05s;
       padding: size(3) size(3);
       transform: translate(
         size(-3),
-        calc(#{$header-height} - #{$wrapper-padding-y-desktop})
+        calc(#{$header-height} - #{$wrapper-padding-y-desktop-small})
       ); //-1 for header border-width
     }
 

@@ -8,6 +8,7 @@ import { compose, get } from 'lodash/fp';
 import { useTranslation } from 'next-i18next';
 
 import Cta from 'components/cta';
+import Loading from 'components/loading';
 import { withLayout } from 'components/layout';
 import VERIFY_EMAIL from '@graphql/mutations/verifyEmail.graphql';
 // import { sessionProps, withSessionContext } from 'context/session';
@@ -29,9 +30,9 @@ export const getServerSideProps = async ({ locale, params }) => {
   return {
     props: {
       ...(await serverSideTranslations(locale, [
-        'verifyEmail',
-        'header',
+        'common',
         'menu',
+        'verifyEmail',
       ])),
       tokenValue,
     },
@@ -67,7 +68,7 @@ const VerifyEmail = ({ tokenValue }) => {
       });
   }, []);
 
-  if (loading) return 'Loading';
+  if (loading) return <Loading />;
 
   return tokenValid ? (
     <div className={cx('wrapper')}>

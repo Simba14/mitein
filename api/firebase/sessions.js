@@ -3,6 +3,7 @@ import { getDocData, getQuerySnapshotData } from '@api/firebase/helpers';
 import { generateZoomLink } from '@api/zoom';
 import User from '@api/firebase/user';
 import publishSessionBookedMessage from '@api/pubsub/publishers/publishSessionBookedMessage';
+import publishSessionRequestedMessage from '@api/pubsub/publishers/publishSessionRequestedMessage';
 import {
   COLLECTION_SESSIONS,
   FIELD_PARTICIPANT_ONE,
@@ -106,14 +107,13 @@ Sessions.updateById = async ({ id, fields }) =>
     .update(fields)
     .then(() => ({ id, ...fields }));
 
-Sessions.handleConfirmation = async session => {
+Sessions.onConfirmation = async session => {
   const { participant1Id, participant2Id } = session;
 
   const participants = await Promise.all([
     User.byId(participant1Id),
     User.byId(participant2Id),
   ]);
-  console.log({ participants });
 
   participants.forEach(participant =>
     publishSessionBookedMessage({ participant, session }).catch(error =>
@@ -129,7 +129,27 @@ Sessions.book = async ({ id, fields }) => {
     fields: { link, ...fields },
   });
 
-  Sessions.handleConfirmation(session);
+  Sessions.onConfirmation(session);
+  return session;
+};
+
+Sessions.onRequested = async session => {
+  const { participant1Id } = session;
+  const participant1 = await User.byId(participant1Id);
+
+  publishSessionRequestedMessage({
+    participant: participant1,
+    session,
+  }).catch(error => console.log(error));
+};
+
+Sessions.request = async ({ id, fields }) => {
+  const session = await Sessions.updateById({
+    id,
+    fields,
+  });
+
+  Sessions.onRequested(fields);
   return session;
 };
 

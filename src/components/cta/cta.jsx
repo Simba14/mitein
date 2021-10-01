@@ -57,7 +57,7 @@ Cta.defaultProps = {
   onClick: null,
   outline: false,
   to: null,
-  type: 'submit',
+  type: 'button',
 };
 
 export default Cta;

@@ -33,5 +33,6 @@ $logo-width: size(12);
   .options {
     display: flex;
     flex: 1;
+    justify-content: flex-end;
   }
 }

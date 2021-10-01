@@ -30,7 +30,6 @@ const ConfirmPopUp = ({
           className={cx('cta')}
           fullWidth
           onClick={handleConfirmClick}
-          type="button"
           text={t(`${namespace}.modal.cta`)}
           disabled={error}
         />

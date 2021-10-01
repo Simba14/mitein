@@ -8,7 +8,7 @@ const cx = classnames.bind(styles);
 
 const Footer = ({ className }) => {
   return (
-    <div className={cx('footer', className)}>
+    <footer className={cx('footer', className)}>
       <div>
         <div>Mitein 2021</div>
         <Anchor href="info@mitein.de">info@mitein.de</Anchor>
@@ -24,7 +24,7 @@ const Footer = ({ className }) => {
         </a>
       </div>
       <div className={cx('socials')}>Social Icons</div>
-    </div>
+    </footer>
   );
 };
 

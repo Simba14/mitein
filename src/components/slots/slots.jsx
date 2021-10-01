@@ -31,7 +31,7 @@ const Slots = ({ userId, onSelect }) => {
   const {
     i18n: { language },
     t,
-  } = useTranslation('session');
+  } = useTranslation('session', { keyPrefix: 'slots' });
   const [selectedDate, setSelectedDate] = useState(null);
   const [selectedSession, selectSession] = useState(null);
   const [sessionRequested, setSessionRequested] = useState(false);
@@ -64,7 +64,12 @@ const Slots = ({ userId, onSelect }) => {
   if (loading) return null;
 
   if (getSlotsError || isEmpty(availableSlots))
-    return <div className={styles.container}>{t('slots.noneAvailable')}</div>;
+    return (
+      <div className={cx('noneAvailable')}>
+        <h3 className={cx('noneAvailableTitle')}>{t('noneAvailable')}</h3>
+        <div>{t('checkBack')}</div>
+      </div>
+    );
   else {
     let slots = {};
     availableSlots.forEach(slot => {
@@ -75,11 +80,10 @@ const Slots = ({ userId, onSelect }) => {
 
     return (
       <div className={cx('container')}>
-        <h2 className={cx('title')}>{t('slots.title')}</h2>
-        <div className={cx('note')}>{t('slots.note')}</div>
+        <div className={cx('note')}>{t('note')}</div>
         <section className={cx('selectionContainer')}>
           <div className={cx('calendar')}>
-            <h3 className={cx('step')}>{t('slots.step1')}</h3>
+            <h3 className={cx('step')}>{t('step1')}</h3>
             <FullCalendar
               dateClick={({ date, dateStr, dayEl }) => {
                 if (dayHasAvailability({ date, slots })) {
@@ -126,9 +130,9 @@ const Slots = ({ userId, onSelect }) => {
           </div>
           <div className={cx('requestSlot')}>
             <div className={cx('step2Container')}>
-              <h3 className={cx('step')}>{t('slots.step2Number')}</h3>
+              <h3 className={cx('step')}>{t('step2Number')}</h3>
               <h3 className={cx('step')}>
-                {t('slots.step2', {
+                {t('step2', {
                   date:
                     selectedDate &&
                     ` for ${formatSessionDate(selectedDate, language)}`,
@@ -142,7 +146,6 @@ const Slots = ({ userId, onSelect }) => {
                     className={cx('slot')}
                     key={slot.id}
                     onClick={() => selectSession(slot)}
-                    type="button"
                     disabled={Boolean(sessionRequested)}
                     text={formatSessionTime({
                       start: slot.start,
@@ -152,7 +155,7 @@ const Slots = ({ userId, onSelect }) => {
                 ))}
               </div>
             ) : (
-              <div>{t('slots.noAvailability')}</div>
+              <div>{t('noAvailability')}</div>
             )}
           </div>
         </section>

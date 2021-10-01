@@ -21,6 +21,14 @@
     color: white;
   }
 
+  .about,
+  .how {
+    @include mq($from: tabletWide) {
+      min-height: calc(100vh - #{$header-height});
+      padding-bottom: size(6);
+    }
+  }
+
   .about {
     font-size: 20px;
     background: $blue;
@@ -33,6 +41,7 @@
     .volunteerBtn {
       background: white;
       color: $blue;
+      margin-top: size(4);
 
       @include mq($until: tablet) {
         align-self: center;

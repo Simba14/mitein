@@ -11,6 +11,7 @@ import { useTranslation } from 'next-i18next';
 import Accordion from 'components/accordion';
 import Calendar from 'components/calendar';
 import Cta from 'components/cta';
+import Loading from 'components/loading';
 import SessionCard from 'components/sessionCard';
 import Slots from 'components/slots';
 import { withLayout } from 'components/layout';
@@ -18,7 +19,7 @@ import { withLayout } from 'components/layout';
 import { sessionProps, withSessionContext } from 'context/session';
 import GET_PROFILE from '@graphql/queries/getProfile.graphql';
 import SIGN_OUT from '@graphql/mutations/signOut.graphql';
-import { ROUTE_LOGIN } from 'routes';
+import { ROUTE_LOGIN, ROUTE_SESSIONS_BOOK } from 'routes';
 import { formatSessionDate } from 'helpers/index';
 import { LEARNER, NATIVE, BOOKED, REJECTED, REQUESTED } from 'constants/user';
 
@@ -59,7 +60,7 @@ const Profile = ({ session }) => {
     }
   }, [userId, loading]);
 
-  if (loading) return <div>LOADING</div>;
+  if (loading) return <Loading />;
   if (error || !data) return null;
 
   const {
@@ -154,7 +155,11 @@ const Profile = ({ session }) => {
         />
       )}
       {isLearner && !requestedSessions && Boolean(!suspendedUntil) && (
-        <Slots userId={userId} onSelect={refetch} />
+        <Cta
+          to={ROUTE_SESSIONS_BOOK}
+          className={cx('')}
+          text={'Request a Session'}
+        ></Cta>
       )}
       {isNative && Boolean(!suspendedUntil) && <Calendar userId={userId} />}
     </div>

@@ -8,11 +8,6 @@
   background-color: white;
   padding: 1px;
 
-  @include mq($from: tabletWide) {
-    min-height: calc(100vh - #{$header-height});
-    padding-bottom: size(6);
-  }
-
   .container {
     @include wrapper;
 
@@ -21,7 +16,7 @@
     display: flex;
     flex-direction: column;
     margin: auto;
-    max-width: 970px;
+    max-width: $content-max-width;
     padding-bottom: size(14);
 
     @include mq($from: tabletWide) {

@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useRef } from 'react';
+import React, { useEffect, useMemo, useRef, useState } from 'react';
 import classnames from 'classnames/bind';
 import { createPortal } from 'react-dom';
 import { bool, func, node, oneOfType, string } from 'prop-types';
@@ -9,7 +9,7 @@ const cx = classnames.bind(styles);
 const NEXT_ROOT_ID = '#__next';
 
 const Modal = ({ children, open, onClose, locked, parent, className }) => {
-  const [active, setActive] = React.useState(false);
+  const [active, setActive] = useState(false);
 
   const backdrop = useRef(null);
   const el = useMemo(() => document.createElement('div'), []);
@@ -29,10 +29,9 @@ const Modal = ({ children, open, onClose, locked, parent, className }) => {
 
     const transitionEnd = () => setActive(open);
 
-    const keyHandler = (e) =>
-      !locked && [27].indexOf(e.which) >= 0 && onClose();
+    const keyHandler = e => !locked && [27].indexOf(e.which) >= 0 && onClose();
 
-    const clickHandler = (e) => !locked && e.target === current && onClose();
+    const clickHandler = e => !locked && e.target === current && onClose();
 
     if (current) {
       current.addEventListener('transitionend', transitionEnd);
