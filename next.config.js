@@ -5,6 +5,7 @@ const withTM = require('next-transpile-modules')([
   '@fullcalendar/react',
   '@fullcalendar/timegrid',
   '@fullcalendar/common',
+  'seamless-scroll-polyfill',
 ]);
 
 module.exports = withTM({

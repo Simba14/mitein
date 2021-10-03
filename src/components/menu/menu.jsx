@@ -10,7 +10,7 @@ import MenuIcon from 'assets/menu.svg';
 import styles from './menu.module.scss';
 const cx = classnames.bind(styles);
 
-import { ROUTE_ABOUT, ROUTE_HOW, ROUTE_PROFILE, ROUTE_VOLUNTEER } from 'routes';
+import { ROUTE_ABOUT, ROUTE_HOW, ROUTE_VOLUNTEER } from 'routes';
 
 const MENU_ITEMS = [
   {

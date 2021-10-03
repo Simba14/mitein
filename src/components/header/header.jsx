@@ -2,7 +2,7 @@ import React from 'react';
 import classnames from 'classnames/bind';
 
 import Link from 'components/link';
-import AccountSection from './components/accountSection';
+// import AccountSection from './components/accountSection';
 import LanguageSelector from './components/languageSelector';
 import Menu from 'components/menu';
 import { ROUTE_BASE } from 'routes';
@@ -19,7 +19,7 @@ const Header = () => {
         <Logo className={cx('logo')} />
       </Link>
       <div className={cx('options')}>
-        <AccountSection />
+        {/* <AccountSection /> */}
         <LanguageSelector />
       </div>
     </div>

@@ -24,6 +24,7 @@ $logo-width: size(12);
   .title {
     display: flex;
     text-decoration: none;
+    height: 100%;
 
     .logo {
       width: $logo-width;

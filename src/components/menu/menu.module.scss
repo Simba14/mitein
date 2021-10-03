@@ -55,6 +55,7 @@ $icon-size: size(3);
       display: flex;
       flex-direction: column;
       align-items: center;
+      height: $menu-height-mobile;
       width: calc(100% - #{$wrapper-padding-x-mobile} * 2);
     }
 
@@ -73,7 +74,7 @@ $icon-size: size(3);
     .navItem {
       color: $dark-blue;
       font-size: 18px;
-      line-height: 16px;
+      line-height: 18px;
       text-transform: uppercase;
       opacity: 1;
 
@@ -93,6 +94,16 @@ $icon-size: size(3);
 
       &.active {
         color: $dark-grey;
+
+        &::before {
+          visibility: visible;
+          transform: scaleX(1);
+        }
+
+        &:hover::before {
+          visibility: hidden;
+          transform: scaleX(0);
+        }
       }
     }
   }

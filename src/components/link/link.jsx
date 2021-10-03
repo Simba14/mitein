@@ -2,12 +2,13 @@ import React from 'react';
 import NextLink from 'next/link';
 import { oneOfType, func, node, string } from 'prop-types';
 import { useRouter } from 'next/router';
+import { elementScrollIntoView } from 'seamless-scroll-polyfill';
 
 const handleScroll = ({ event, elementId, pathname }) => {
   if (pathname === '/') {
     event.preventDefault();
     const element = document.getElementById(elementId);
-    element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    elementScrollIntoView(element, { behavior: 'smooth', block: 'start' });
     // update hash after scroll
 
     setTimeout(() => {
