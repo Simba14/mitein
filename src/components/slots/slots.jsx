@@ -18,7 +18,7 @@ import { LEARNER, REQUESTED } from 'constants/user';
 import styles from './slots.module.scss';
 const cx = classnames.bind(styles);
 
-const mapWithKey = map.convert({ cap: false });
+map.convert({ cap: false });
 
 const dayHasAvailability = ({ date, slots }) => {
   const offset = date.getTimezoneOffset();
