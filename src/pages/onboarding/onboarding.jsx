@@ -11,7 +11,7 @@ import Loading from 'components/loading';
 import { ROUTE_PROFILE } from 'routes';
 import { sessionProps, withSessionContext } from 'context/session';
 import GET_USER_TYPE from '@graphql/queries/getUserType.graphql';
-import getUserSteps from './getUserSteps';
+import getUserSteps from 'helpers/getUserSteps';
 
 import styles from './onboarding.module.scss';
 const cx = classnames.bind(styles);
@@ -38,18 +38,21 @@ const Onboarding = ({ session }) => {
             <h1 className={cx('title')}>{t(`${userType}.intro.title`)}</h1>
             <div>{t(`${userType}.intro.description`)}</div>
           </div>
-          {userSteps.map(({ name, content, className, svg, title }) => (
-            <ContentSection
-              key={name}
-              anchorId={name}
-              className={cx('section')}
-              containerClassName={cx('step', className)}
-              content={t(content)}
-              title={t(title)}
-            >
-              {svg}
-            </ContentSection>
-          ))}
+          {userSteps.map(({ name, content, className, svg, title }) => {
+            const Icon = svg;
+            return (
+              <ContentSection
+                key={name}
+                anchorId={name}
+                className={cx('section')}
+                containerClassName={cx('step', className)}
+                content={t(content)}
+                title={t(title)}
+              >
+                <Icon className={cx('sectionImage')} />
+              </ContentSection>
+            );
+          })}
           <ContentSection
             className={cx('section')}
             containerClassName={cx('step')}
