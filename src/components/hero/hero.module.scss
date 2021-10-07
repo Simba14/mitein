@@ -2,6 +2,9 @@
 @import 'scss/colors.scss';
 @import 'scss/spacings.scss';
 
+$logo-width-mobile: 170px;
+$logo-width-desktop: 190px;
+
 .wrapper {
   position: relative;
   width: 100%;
@@ -10,9 +13,15 @@
 
   .hero {
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    justify-content: space-around;
     text-align: center;
     height: 70vh;
+
+    @include mq($from: tablet) {
+      align-items: center;
+      justify-content: center;
+    }
 
     &::before {
       background-image: url('https://bloximages.chicago2.vip.townnews.com/wcfcourier.com/content/tncms/assets/v3/editorial/7/80/7803c023-b6ab-54ea-9f22-ee41b166b405/5dd6f9aab4ab4.image.jpg');
@@ -36,6 +45,11 @@
       color: white;
       max-width: 800px;
 
+      &.german {
+        font-size: 25px;
+        line-height: 1.5;
+      }
+
       @include mq($from: tablet) {
         font-weight: normal;
         font-size: 48px;
@@ -45,16 +59,23 @@
 
     .comingSoon {
       color: $egg-shell;
-      position: absolute;
-      bottom: 32px;
-      left: 32px;
 
       .logo {
-        width: 190px;
+        width: $logo-width-mobile;
       }
 
       .text {
         font-family: 'Poppins', sans-serif;
+      }
+
+      @include mq($from: tablet) {
+        position: absolute;
+        bottom: size(4);
+        left: size(4);
+
+        .logo {
+          width: $logo-width-desktop;
+        }
       }
     }
   }
