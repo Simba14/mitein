@@ -2,7 +2,7 @@
   "compilerOptions": {
     "baseUrl": "./",
     "paths": {
-      "@api/*": ["api/*"],
+      "@api/*": ["apiServer/*"],
       "apollo/*": ["src/apollo/*"],
       "assets/*": ["src/assets/*"],
       "components/*": ["src/components/*"],
