@@ -4,7 +4,7 @@ import { convert } from 'lodash/fp';
 import { MenuContextConsumer, MenuContextProvider } from 'context/menu';
 import classnames from 'classnames/bind';
 
-import ConsentLayer from 'components/consentLayer/consentLayer';
+// import ConsentLayer from 'components/consentLayer/consentLayer';
 import Header from 'components/header';
 // import Footer from 'components/footer';
 
@@ -38,7 +38,7 @@ const Layout = ({ children, className, withContentPadding }) => {
           )}
         </MenuContextConsumer>
       </div>
-      <ConsentLayer />
+      {/* <ConsentLayer /> */}
     </MenuContextProvider>
   );
 };

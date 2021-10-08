@@ -2,17 +2,17 @@ import React from 'react';
 import NextLink from 'next/link';
 import { oneOfType, func, node, string } from 'prop-types';
 import { useRouter } from 'next/router';
-import { elementScrollIntoView } from 'seamless-scroll-polyfill';
+import { polyfill } from 'seamless-scroll-polyfill';
 
-const handleScroll = ({ event, elementId, pathname }) => {
+const handleScroll = ({ event, elementId, pathname, push }) => {
   if (pathname === '/') {
     event.preventDefault();
+    polyfill();
     const element = document.getElementById(elementId);
-    elementScrollIntoView(element, { behavior: 'smooth', block: 'start' });
+    element.scrollIntoView({ behavior: 'smooth', block: 'start' });
     // update hash after scroll
-
     setTimeout(() => {
-      window.location.hash = elementId;
+      push(`/#${elementId}`, undefined, { shallow: true });
     }, 500);
   }
 };
@@ -27,9 +27,9 @@ const Link = ({
   to,
   ...rest
 }) => {
-  const { asPath, pathname, locale: existingLocale } = useRouter();
+  const { asPath, pathname, locale: existingLocale, push } = useRouter();
   const handleOnClick = hashId
-    ? event => handleScroll({ event, elementId: hashId, pathname })
+    ? event => handleScroll({ event, elementId: hashId, pathname, push })
     : onClick;
 
   const classNames =
