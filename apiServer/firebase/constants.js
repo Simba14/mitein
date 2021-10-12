@@ -1,3 +1,4 @@
+export const COLLECTION_AVAILABILITY = 'availability';
 export const COLLECTION_ORGANIZATIONS = 'organizations';
 export const COLLECTION_SESSIONS = 'sessions';
 export const COLLECTION_USERS = 'users';

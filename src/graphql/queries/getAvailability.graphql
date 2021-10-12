@@ -1,0 +1,8 @@
+query GetAvailability($userId: ID!) {
+  availability(userId: $userId) {
+    id
+    start
+    end
+    userId
+  }
+}

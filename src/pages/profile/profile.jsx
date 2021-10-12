@@ -9,11 +9,11 @@ import { useTranslation } from 'next-i18next';
 // import { Firestore } from '@api/firebase';
 
 import Accordion from 'components/accordion';
+import Availability from 'components/availability';
 import Calendar from 'components/calendar';
 import Cta from 'components/cta';
 import Loading from 'components/loading';
 import SessionCard from 'components/sessionCard';
-import Slots from 'components/slots';
 import { withLayout } from 'components/layout';
 
 import { sessionProps, withSessionContext } from 'context/session';
@@ -33,7 +33,7 @@ const Profile = ({ session }) => {
   } = useTranslation('profile');
   const router = useRouter();
   const userId = get('userId', session);
-  const { data, loading, error, refetch } = useQuery(GET_PROFILE, {
+  const { data, loading, error } = useQuery(GET_PROFILE, {
     variables: { id: userId },
     skip: !userId,
   });
@@ -162,6 +162,9 @@ const Profile = ({ session }) => {
         ></Cta>
       )}
       {isNative && Boolean(!suspendedUntil) && <Calendar userId={userId} />}
+      {isLearner && Boolean(!suspendedUntil) && (
+        <Availability userId={userId} />
+      )}
     </div>
   );
 };

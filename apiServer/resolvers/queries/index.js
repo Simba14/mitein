@@ -1,4 +1,5 @@
 import { sortBy } from 'lodash/fp';
+import Availability from '@api/firebase/availability';
 import Sessions from '@api/firebase/sessions';
 import User from '@api/firebase/user';
 import { Firestore } from '@api/firebase';
@@ -21,6 +22,9 @@ const Query = {
       status,
       notOneOf,
     });
+  },
+  availability: async (obj, { userId }, context, info) => {
+    return await Availability.byUserId(userId);
   },
   availableSlots: async (obj, args, context, info) => {
     return sortBy('start')(await Sessions.getOnlyAvailable());

@@ -8,13 +8,13 @@ import { any, string } from 'prop-types';
 import { get } from 'lodash/fp';
 
 import Loading from 'components/loading';
-import GET_AVAILABILITY from '@graphql/queries/getSessions.graphql';
-import CREATE_SESSION from '@graphql/mutations/createSession.graphql';
-import DELETE_SESSIONS from '@graphql/mutations/deleteSessions.graphql';
+import GET_AVAILABILITY from '@graphql/queries/getAvailability.graphql';
+import CREATE_AVAILABILITY from '@graphql/mutations/createAvailability.graphql';
+import DELETE_AVAILABILITY from '@graphql/mutations/deleteAvailability.graphql';
 import { BLUE, GREEN, GREY, RED } from 'constants/colors';
 import { AVAILABLE, BOOKED, REQUESTED, REJECTED } from 'constants/user';
 
-import styles from './calendar.module.scss';
+import styles from './availability.module.scss';
 
 const SELECTED = 'SELECTED';
 const DELETE_SELECTED = 'deleteSelected';
@@ -22,24 +22,10 @@ const MIN_TIME = '09:00:00';
 const MAX_TIME = '21:00:00';
 const GET_SESSIONS_QUERY = 'GetSessions';
 
-const getEventColor = status => {
-  switch (status) {
-    case AVAILABLE:
-      return GREEN;
-    case BOOKED:
-      return BLUE;
-    case SELECTED:
-      return RED;
-    case REQUESTED:
-    default:
-      return GREY;
-  }
-};
-
 const formatEvents = (events, selectedEvents) =>
   events.map(event => {
     const isSelected = selectedEvents.includes(event.id);
-    const eventColor = getEventColor(isSelected ? SELECTED : event.status);
+    const eventColor = isSelected ? RED : GREEN;
     return { ...event, backgroundColor: eventColor, borderColor: eventColor };
   });
 
@@ -50,10 +36,10 @@ const Calendar = ({ userId }) => {
   } = useTranslation('calendar');
 
   const [selectedEvents, setSelectedEvents] = useState([]);
-  const [deleteAvailabilities] = useMutation(DELETE_SESSIONS);
-  const [updateAvailability] = useMutation(CREATE_SESSION);
+  const [deleteAvailabilities] = useMutation(DELETE_AVAILABILITY);
+  const [updateAvailability] = useMutation(CREATE_AVAILABILITY);
   const { data, loading, error } = useQuery(GET_AVAILABILITY, {
-    variables: { participant1Id: userId, notOneOf: [REJECTED] },
+    variables: { userId },
   });
 
   const availability = get('sessions', data);
@@ -88,9 +74,7 @@ const Calendar = ({ userId }) => {
   };
 
   const getHeaderBtns = () =>
-    selectedEvents.length
-      ? `${DELETE_SELECTED} today prev,next`
-      : 'today prev,next';
+    selectedEvents.length ? { end: `${DELETE_SELECTED}` } : false;
 
   if (loading) return <Loading />;
   if (error) return null;
@@ -107,17 +91,16 @@ const Calendar = ({ userId }) => {
           },
         }}
         locale={language}
+        dayHeaderFormat={{ weekday: 'long' }}
         editable={true}
         events={events}
         eventColor={GREEN}
         eventClick={handleSelectEvent}
         eventOverlap={false}
-        headerToolbar={{
-          start: 'title',
-          end: getHeaderBtns(),
-        }}
+        headerToolbar={getHeaderBtns()}
         height="auto"
         plugins={[interactionPlugin, timeGridPlugin]}
+        initialDate="Mon Oct 04 2021"
         initialView="timeGrid"
         selectable={true}
         selectMirror={true}
@@ -134,14 +117,13 @@ const Calendar = ({ userId }) => {
             refetchQueries: [GET_SESSIONS_QUERY],
           });
         }}
-        fixedWeekCount={false}
         slotMaxTime={MAX_TIME}
         slotMinTime={MIN_TIME}
         duration={{ days: 7 }}
-        validRange={currentDate => {
-          const start = new Date(currentDate.valueOf());
-          let end = new Date(currentDate.valueOf());
-          end.setDate(end.getDate() + 6); // 6 days into the future
+        validRange={() => {
+          const start = new Date('Mon Oct 04 2021');
+          let end = new Date('Mon Oct 04 2021');
+          end.setDate(end.getDate() + 7); // 6 days into the future
 
           return { start, end };
         }}

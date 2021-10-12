@@ -1,0 +1,46 @@
+@import 'scss/breakpoints.scss';
+@import 'scss/colors.scss';
+@import 'scss/constants.scss';
+@import 'scss/spacings.scss';
+
+.careers {
+  max-width: $content-max-width;
+  margin: auto;
+
+  .heading {
+    background: $egg-shell;
+    text-align: center;
+    margin-bottom: size(5);
+    padding: size(3) 0;
+  }
+
+  .jobTitle {
+    margin-bottom: size(4);
+  }
+
+  .subheading {
+    color: $blue;
+  }
+
+  .apply {
+    font-size: 18px;
+    font-weight: bold;
+  }
+
+  .paragraph {
+    margin-bottom: size(2);
+  }
+
+  .list {
+    margin-bottom: size(4);
+
+    .listItem {
+    }
+  }
+
+  .paragraph,
+  .list,
+  .apply {
+    line-height: 2;
+  }
+}

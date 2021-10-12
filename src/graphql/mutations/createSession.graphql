@@ -1,11 +1,11 @@
-mutation CreateSessions(
+mutation CreateSession(
   $participant1Id: ID
   $participant2Id: ID
   $status: EventStatus!
   $start: String
   $end: String
 ) {
-  createSessions(
+  createSession(
     participant1Id: $participant1Id
     participant2Id: $participant2Id
     status: $status

@@ -20,6 +20,13 @@ const typeDefs = gql`
     en
   }
 
+  type Availability {
+    id: ID!
+    start: String!
+    end: String!
+    userId: ID!
+  }
+
   type Session {
     id: ID!
     start: String!
@@ -70,6 +77,7 @@ const typeDefs = gql`
   }
 
   type Query {
+    availability(userId: ID!): [Availability]
     availableSlots: [Session]
     user(id: ID!): User
     sessions(
@@ -82,7 +90,9 @@ const typeDefs = gql`
   }
 
   type Mutation {
-    createSessions(
+    addAvailability(start: String!, end: String!, userId: ID!): [Availability]
+    deleteAvailability(ids: [ID!]!): Boolean
+    createSession(
       participant1Id: ID
       participant2Id: ID
       status: EventStatus!
