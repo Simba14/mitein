@@ -9,7 +9,7 @@ import { get } from 'lodash/fp';
 
 import Loading from 'components/loading';
 import GET_AVAILABILITY from '@graphql/queries/getAvailability.graphql';
-import CREATE_AVAILABILITY from '@graphql/mutations/createAvailability.graphql';
+import CREATE_AVAILABILITY from '@graphql/mutations/addAvailability.graphql';
 import DELETE_AVAILABILITY from '@graphql/mutations/deleteAvailability.graphql';
 import { BLUE, GREEN, GREY, RED } from 'constants/colors';
 import { AVAILABLE, BOOKED, REQUESTED, REJECTED } from 'constants/user';
