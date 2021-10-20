@@ -21,11 +21,10 @@
     color: white;
   }
 
-  .about,
-  .how {
+  .how,
+  .contact {
     @include mq($from: tabletWide) {
       min-height: calc(100vh - #{$header-height});
-      padding-bottom: size(6);
     }
   }
 
@@ -38,15 +37,20 @@
       color: white;
     }
 
-    .volunteerBtn {
-      background: white;
-      color: $blue;
-      margin-top: size(4);
+    .btnWrapper {
+      padding-bottom: size(5);
+      scroll-snap-align: end;
 
-      @include mq($until: tablet) {
-        align-self: center;
-        width: 100%;
-        max-width: 100%;
+      .volunteerBtn {
+        background: white;
+        color: $blue;
+        margin-top: size(4);
+
+        @include mq($until: tablet) {
+          align-self: center;
+          width: 100%;
+          max-width: 100%;
+        }
       }
     }
   }
@@ -61,15 +65,24 @@
     @include mq($from: tablet) {
       padding-bottom: 0px;
       min-height: unset;
-
-      .contact {
-        padding: size(4) 0;
-      }
     }
 
     h1,
     h3 {
       color: $blue;
+    }
+  }
+
+  .contact {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    scroll-snap-align: start;
+    padding: 0 size(6) size(14);
+
+    @include mq($from: tabletWide) {
+      padding: 0;
     }
   }
 }

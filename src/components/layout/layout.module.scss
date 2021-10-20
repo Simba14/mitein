@@ -43,16 +43,12 @@
     }
   }
 
-  .content {
-    width: 100%;
+  &.withPadding {
+    padding: $wrapper-padding-y-mobile $wrapper-padding-x-mobile;
 
-    &.withPadding {
-      padding: $wrapper-padding-y-mobile $wrapper-padding-x-mobile;
-
-      @include mq($from: tablet) {
-        padding: $wrapper-padding-y-desktop-small $wrapper-padding-x-desktop
-          $wrapper-padding-y-desktop-large;
-      }
+    @include mq($from: tablet) {
+      padding: $wrapper-padding-y-desktop-small $wrapper-padding-x-desktop
+        $wrapper-padding-y-desktop-large;
     }
   }
 }

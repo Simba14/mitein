@@ -51,13 +51,15 @@ const Home = () => {
           title={t('about.title')}
           content={t('about.content')}
         >
-          <Cta
-            className={cx('volunteerBtn')}
-            text={t('volunteerBtn')}
-            to={ROUTE_VOLUNTEER}
-          />
-          <ContactUs className={cx('contact')} translation="home" />
+          <div className={cx('btnWrapper')}>
+            <Cta
+              className={cx('volunteerBtn')}
+              text={t('volunteerBtn')}
+              to={ROUTE_VOLUNTEER}
+            />
+          </div>
         </ContentSection>
+        <ContactUs className={cx('contact')} translation="home" />
       </div>
     </Layout>
   );

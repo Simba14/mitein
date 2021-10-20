@@ -24,15 +24,10 @@ const Layout = ({ children, className, withContentPadding }) => {
             <div
               className={cx('container', className, {
                 menuOpen: isMenuOpen,
+                withPadding: withContentPadding,
               })}
             >
-              <div
-                className={cx('content', {
-                  withPadding: withContentPadding,
-                })}
-              >
-                {children}
-              </div>
+              {children}
               {/* <Footer /> */}
             </div>
           )}
