@@ -78,11 +78,12 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    scroll-snap-align: start;
+    scroll-snap-align: end;
     padding: 0 size(6) size(14);
 
     @include mq($from: tabletWide) {
       padding: 0;
+      scroll-snap-align: start;
     }
   }
 }

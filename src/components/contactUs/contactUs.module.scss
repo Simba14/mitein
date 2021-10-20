@@ -1,8 +1,9 @@
+@import 'scss/breakpoints.scss';
 @import 'scss/colors.scss';
 @import 'scss/spacings.scss';
 
 .contactUs {
-  font-size: size(5);
+  font-size: size(4);
   padding: size(8) 0;
   color: $orange;
   text-align: center;
@@ -11,5 +12,9 @@
   a {
     color: white;
     border-bottom: 4px solid currentColor;
+  }
+
+  @include mq($from: tablet) {
+    font-size: size(5);
   }
 }
