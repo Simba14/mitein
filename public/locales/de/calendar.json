@@ -1,4 +1,6 @@
 {
   "deleteSelected": "löschen",
-  "instructions": "Wählen Sie Ihre Verfügbarkeit für Chats im untenstehenden Kalender aus. Auf diese Weise können andere Nutzer Ihre Verfügbarkeit anonym einsehen und Anfragen für Sitzungen mit Ihnen stellen. Alle Anfragen werden sofort oben angezeigt und müssen dann von Ihnen bestätigt werden."
+  "instructions": "Wählen Sie Ihre Verfügbarkeit für Chats im untenstehenden Kalender aus. Auf diese Weise können andere Nutzer Ihre Verfügbarkeit anonym einsehen und Anfragen für Sitzungen mit Ihnen stellen. Alle Anfragen werden sofort oben angezeigt und müssen dann von Ihnen bestätigt werden.",
+  "availabilityTitle": "Add your availability",
+  "availabilityNote": "Select your availability for chats in the calendar below. You will then be notified when a chat at one of those times becomes available."
 }

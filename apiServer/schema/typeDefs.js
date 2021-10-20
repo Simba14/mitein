@@ -90,7 +90,7 @@ const typeDefs = gql`
   }
 
   type Mutation {
-    addAvailability(start: String!, end: String!, userId: ID!): [Availability]
+    addAvailability(start: String!, end: String!, userId: ID!): Availability
     deleteAvailability(ids: [ID!]!): Boolean
     createSession(
       participant1Id: ID

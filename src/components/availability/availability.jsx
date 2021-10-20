@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import classnames from 'classnames/bind';
 import { useMutation, useQuery } from '@apollo/client';
 import FullCalendar from '@fullcalendar/react';
 import interactionPlugin from '@fullcalendar/interaction';
@@ -7,20 +8,19 @@ import { useTranslation } from 'next-i18next';
 import { any, string } from 'prop-types';
 import { get } from 'lodash/fp';
 
+import Cta from 'components/cta';
 import Loading from 'components/loading';
 import GET_AVAILABILITY from '@graphql/queries/getAvailability.graphql';
 import CREATE_AVAILABILITY from '@graphql/mutations/addAvailability.graphql';
 import DELETE_AVAILABILITY from '@graphql/mutations/deleteAvailability.graphql';
-import { BLUE, GREEN, GREY, RED } from 'constants/colors';
-import { AVAILABLE, BOOKED, REQUESTED, REJECTED } from 'constants/user';
+import { GREEN, RED } from 'constants/colors';
 
 import styles from './availability.module.scss';
+const cx = classnames.bind(styles);
 
-const SELECTED = 'SELECTED';
-const DELETE_SELECTED = 'deleteSelected';
 const MIN_TIME = '09:00:00';
 const MAX_TIME = '21:00:00';
-const GET_SESSIONS_QUERY = 'GetSessions';
+const GET_AVAILABILITY_QUERY = 'GetAvailability';
 
 const formatEvents = (events, selectedEvents) =>
   events.map(event => {
@@ -42,7 +42,7 @@ const Calendar = ({ userId }) => {
     variables: { userId },
   });
 
-  const availability = get('sessions', data);
+  const availability = get('availability', data);
   const events = availability ? formatEvents(availability, selectedEvents) : [];
 
   const handleSelectEvent = ({ event }) => {
@@ -69,27 +69,29 @@ const Calendar = ({ userId }) => {
       variables: {
         ids: selectedEvents,
       },
-      refetchQueries: [GET_SESSIONS_QUERY],
+      refetchQueries: [GET_AVAILABILITY_QUERY],
     }).then(() => setSelectedEvents([]));
   };
-
-  const getHeaderBtns = () =>
-    selectedEvents.length ? { end: `${DELETE_SELECTED}` } : false;
 
   if (loading) return <Loading />;
   if (error) return null;
 
   return (
-    <section className={styles.calendar}>
-      <div className={styles.instructions}>{t('instructions')}</div>
+    <section className={cx('calendar')}>
+      <div className={cx('toolbar')}>
+        <div>
+          <h3 className={cx('title')}>{t('availabilityTitle')}</h3>
+          <div className={cx('instructions')}>{t('availabilityNote')}</div>
+        </div>
+        <Cta
+          className={cx('delete')}
+          onClick={onDeleteSelected}
+          disabled={!selectedEvents.length}
+          text={t('deleteSelected')}
+        />
+      </div>
       <FullCalendar
         allDaySlot={false}
-        customButtons={{
-          deleteSelected: {
-            text: t('deleteSelected'),
-            click: onDeleteSelected,
-          },
-        }}
         locale={language}
         dayHeaderFormat={{ weekday: 'long' }}
         editable={true}
@@ -97,7 +99,7 @@ const Calendar = ({ userId }) => {
         eventColor={GREEN}
         eventClick={handleSelectEvent}
         eventOverlap={false}
-        headerToolbar={getHeaderBtns()}
+        headerToolbar={false}
         height="auto"
         plugins={[interactionPlugin, timeGridPlugin]}
         initialDate="Mon Oct 04 2021"
@@ -109,12 +111,11 @@ const Calendar = ({ userId }) => {
           setSelectedEvents([]);
           updateAvailability({
             variables: {
-              participant1Id: userId,
-              status: AVAILABLE,
+              userId,
               start: startStr,
               end: endStr,
             },
-            refetchQueries: [GET_SESSIONS_QUERY],
+            refetchQueries: [GET_AVAILABILITY_QUERY],
           });
         }}
         slotMaxTime={MAX_TIME}

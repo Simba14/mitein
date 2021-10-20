@@ -1,5 +1,5 @@
 import { Firestore } from '@api/firebase';
-import { getDocData } from '@api/firebase/helpers';
+import { getDocData, getQuerySnapshotData } from '@api/firebase/helpers';
 
 import { COLLECTION_AVAILABILITY } from '@api/firebase/constants';
 
@@ -16,7 +16,11 @@ Availability.byId = async id =>
   Firestore.collection(COLLECTION_AVAILABILITY).doc(id).get().then(getDocData);
 
 Availability.byUserId = async id =>
-  Firestore.collection(COLLECTION_AVAILABILITY).doc(id).get().then(getDocData);
+  Firestore.collection(COLLECTION_AVAILABILITY)
+    .where('userId', '==', id)
+    .get()
+    .then(getQuerySnapshotData)
+    .catch(error => console.log({ error }));
 
 Availability.deleteById = id =>
   Firestore.collection(COLLECTION_AVAILABILITY).doc(id).delete();

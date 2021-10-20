@@ -157,9 +157,9 @@ const Profile = ({ session }) => {
       {isLearner && !requestedSessions && Boolean(!suspendedUntil) && (
         <Cta
           to={ROUTE_SESSIONS_BOOK}
-          className={cx('')}
+          className={cx('requestCta')}
           text={'Request a Session'}
-        ></Cta>
+        />
       )}
       {isNative && Boolean(!suspendedUntil) && <Calendar userId={userId} />}
       {isLearner && Boolean(!suspendedUntil) && (

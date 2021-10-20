@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import classnames from 'classnames/bind';
 import { useMutation, useQuery } from '@apollo/client';
 import FullCalendar from '@fullcalendar/react';
 import interactionPlugin from '@fullcalendar/interaction';
@@ -9,12 +10,13 @@ import { get } from 'lodash/fp';
 
 import Loading from 'components/loading';
 import GET_AVAILABILITY from '@graphql/queries/getSessions.graphql';
-import CREATE_SESSION from '@graphql/mutations/createSession.graphql';
+import CREATE_SESSIONS from '@graphql/mutations/createSession.graphql';
 import DELETE_SESSIONS from '@graphql/mutations/deleteSessions.graphql';
 import { BLUE, GREEN, GREY, RED } from 'constants/colors';
 import { AVAILABLE, BOOKED, REQUESTED, REJECTED } from 'constants/user';
 
 import styles from './calendar.module.scss';
+const cx = classnames.bind(styles);
 
 const SELECTED = 'SELECTED';
 const DELETE_SELECTED = 'deleteSelected';
@@ -51,7 +53,7 @@ const Calendar = ({ userId }) => {
 
   const [selectedEvents, setSelectedEvents] = useState([]);
   const [deleteAvailabilities] = useMutation(DELETE_SESSIONS);
-  const [updateAvailability] = useMutation(CREATE_SESSION);
+  const [updateAvailability] = useMutation(CREATE_SESSIONS);
   const { data, loading, error } = useQuery(GET_AVAILABILITY, {
     variables: { participant1Id: userId, notOneOf: [REJECTED] },
   });
@@ -96,8 +98,8 @@ const Calendar = ({ userId }) => {
   if (error) return null;
 
   return (
-    <section className={styles.calendar}>
-      <div className={styles.instructions}>{t('instructions')}</div>
+    <section className={cx('calendar')}>
+      <div className={cx('instructions')}>{t('instructions')}</div>
       <FullCalendar
         allDaySlot={false}
         customButtons={{

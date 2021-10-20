@@ -3,23 +3,31 @@
 @import 'scss/spacings.scss';
 
 .calendar {
-  .instructions {
+  .toolbar {
+    display: flex;
+    justify-content: space-between;
     margin-bottom: size(4);
+    width: 100%;
+
+    .title {
+      margin-bottom: size(2);
+    }
+
+    .delete {
+      align-self: flex-end;
+      border-radius: 0.25em;
+      width: 85px;
+      height: size(5);
+    }
+
+    .instructions {
+      width: 80%;
+    }
   }
 
   h2 {
     font-family: 'LilGrotesk', sans-serif;
     color: $blue;
-  }
-
-  button {
-    @extend %btn;
-
-    background: $blue !important;
-    border-color: $blue !important;
-    color: white !important;
-    width: 85px;
-    height: 32px;
   }
 
   td {
