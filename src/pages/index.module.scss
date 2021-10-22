@@ -83,7 +83,13 @@
 
     @include mq($from: tabletWide) {
       padding: 0;
+      max-width: $content-max-width;
+      margin: auto;
       scroll-snap-align: start;
     }
+  }
+
+  .footer {
+    scroll-snap-align: start;
   }
 }

@@ -1,8 +1,7 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useTranslation } from 'next-i18next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import classnames from 'classnames/bind';
-import { useRouter } from 'next/router';
 
 import Cta from 'components/cta';
 import ContactUs from 'components/contactUs';
@@ -61,7 +60,7 @@ const Home = () => {
           </div>
         </ContentSection>
         <ContactUs className={cx('contact')} translation="home" />
-        <Footer />
+        <Footer className={cx('footer')} />
       </div>
     </Layout>
   );

@@ -9,12 +9,20 @@
   text-align: center;
   width: 100%;
 
+  @include mq($from: tablet) {
+    font-size: size(5);
+    padding: size(15) 0;
+  }
+
   a {
     color: white;
     border-bottom: 4px solid currentColor;
   }
 
-  @include mq($from: tablet) {
-    font-size: size(5);
+  .email {
+    @include mq($until: desktop) {
+      display: block;
+      margin-top: size(4);
+    }
   }
 }

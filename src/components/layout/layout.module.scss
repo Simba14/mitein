@@ -50,6 +50,10 @@
       padding: $wrapper-padding-y-desktop-small $wrapper-padding-x-desktop
         $wrapper-padding-y-desktop-large;
     }
+
+    &.withFooter {
+      padding-bottom: 0;
+    }
   }
 
   .footer {

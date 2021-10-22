@@ -3,6 +3,8 @@
 @import 'scss/colors.scss';
 @import 'scss/spacings.scss';
 
+$icon-size: 20px;
+
 .footer {
   background: white;
   color: $blue;
@@ -10,7 +12,7 @@
   width: 100%;
 
   .content {
-    padding: size(8) size(3) size(3);
+    padding: size(8) size(3) size(4);
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     column-gap: size(3);
@@ -22,14 +24,15 @@
       display: flex;
       align-items: flex-end;
       justify-content: flex-end;
+      padding-bottom: size(0.5);
 
       .socialLink {
-        height: size(4);
-        width: size(4);
+        height: $icon-size;
+        width: $icon-size;
         fill: $blue;
 
         &:not(:last-child) {
-          margin-right: size(2);
+          margin-right: size(1.5);
         }
       }
     }
