@@ -12,13 +12,18 @@ $icon-size: 20px;
   width: 100%;
 
   .content {
-    padding: size(8) size(3) size(4);
+    padding: size(8) size(3);
+    padding-bottom: size(13);
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     column-gap: size(3);
     width: 100%;
     max-width: $content-max-width;
     margin: 0 auto;
+
+    @include mq($from: tablet) {
+      padding-bottom: size(4);
+    }
 
     .socials {
       display: flex;

@@ -10,11 +10,11 @@ import styles from './footer.module.scss';
 const cx = classnames.bind(styles);
 
 const SOCIALS = [
-  { key: 'fb', Icon: FacebookIcon, url: 'https://facebook.com/mitien.berlin' },
+  { key: 'fb', Icon: FacebookIcon, url: 'https://facebook.com/mitein.berlin' },
   {
     key: 'insta',
     Icon: InstagramIcon,
-    url: 'https://instagram.com/mitien.berlin',
+    url: 'https://instagram.com/mitein.berlin',
   },
 ];
 
