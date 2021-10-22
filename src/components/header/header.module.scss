@@ -2,6 +2,7 @@
 @import 'scss/constants.scss';
 @import 'scss/colors.scss';
 @import 'scss/spacings.scss';
+@import 'scss/wrapper.scss';
 
 $logo-width: size(12);
 
@@ -9,7 +10,7 @@ $logo-width: size(12);
   display: flex;
   align-items: center;
   border-bottom: 1px solid $grey;
-  padding: size(2);
+  padding: $wrapper-padding-x-mobile;
   position: relative;
   background-color: white;
   height: $header-height;
@@ -17,7 +18,7 @@ $logo-width: size(12);
   width: 100%;
 
   @include mq($from: tablet) {
-    padding: size(2) size(3);
+    @include gutter;
   }
 
   .title {

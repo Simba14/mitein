@@ -47,6 +47,11 @@
     padding: $wrapper-padding-y-mobile $wrapper-padding-x-mobile;
 
     @include mq($from: tablet) {
+      padding: $wrapper-padding-y-desktop-small $wrapper-padding-x-tablet
+        $wrapper-padding-y-desktop-large;
+    }
+
+    @include mq($from: desktop) {
       padding: $wrapper-padding-y-desktop-small $wrapper-padding-x-desktop
         $wrapper-padding-y-desktop-large;
     }
@@ -62,6 +67,10 @@
       margin-left: -$wrapper-padding-x-mobile;
 
       @include mq($from: tablet) {
+        margin-left: -$wrapper-padding-x-tablet;
+      }
+
+      @include mq($from: desktop) {
         margin-left: -$wrapper-padding-x-desktop;
       }
     }

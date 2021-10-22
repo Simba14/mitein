@@ -5,6 +5,10 @@ import User from '@api/firebase/user';
 import publishSessionBookedMessage from '@api/pubsub/publishers/publishSessionBookedMessage';
 import publishSessionRequestedMessage from '@api/pubsub/publishers/publishSessionRequestedMessage';
 import {
+  FirebaseCreateDocError,
+  FirebaseGetDocError,
+} from '@api/firebase/errors';
+import {
   COLLECTION_SESSIONS,
   FIELD_PARTICIPANT_ONE,
   FIELD_PARTICIPANT_TWO,
@@ -18,7 +22,9 @@ Sessions.create = async ({ id, session }) =>
     .doc(id)
     .set(session)
     .then(() => session)
-    .catch(error => console.log({ error, session }));
+    .catch(() => {
+      throw new FirebaseCreateDocError('Creation of Session doc failed');
+    });
 
 Sessions.byId = async id =>
   Firestore.collection(COLLECTION_SESSIONS).doc(id).get().then(getDocData);
@@ -29,7 +35,9 @@ Sessions.byStatus = async status =>
     .orderBy('start', 'desc')
     .get()
     .then(getDocData)
-    .catch(error => console.log({ error }));
+    .catch(() => {
+      throw new FirebaseGetDocError('Could not return session by status');
+    });
 
 Sessions.byParticipantId = async ({ field, id }) =>
   Firestore.collection(COLLECTION_SESSIONS)
@@ -37,7 +45,9 @@ Sessions.byParticipantId = async ({ field, id }) =>
     .orderBy('start')
     .get()
     .then(getQuerySnapshotData)
-    .catch(error => console.log({ error, field, id }));
+    .catch(() => {
+      throw new FirebaseGetDocError('Could not return session by user');
+    });
 
 Sessions.byParticipantIdWithStatusCondition = async ({
   field,
@@ -50,7 +60,9 @@ Sessions.byParticipantIdWithStatusCondition = async ({
     .where('status', condition, status)
     .get()
     .then(getQuerySnapshotData)
-    .catch(error => console.log({ error }));
+    .catch(() => {
+      throw new FirebaseGetDocError('Could not return session by user/status');
+    });
 
 Sessions.byFilters = async ({
   participant1Id,
@@ -97,8 +109,7 @@ Sessions.getOnlyAvailable = async () => {
     .get()
     .then(querySnapshot => {
       return querySnapshot.docs.map(doc => doc.data());
-    })
-    .catch(error => console.log({ error }));
+    });
 };
 
 Sessions.updateById = async ({ id, fields }) =>

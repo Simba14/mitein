@@ -89,6 +89,10 @@
     width: 100vw;
 
     @include mq($from: tablet) {
+      margin-left: -1 * $wrapper-padding-x-tablet;
+    }
+
+    @include mq($from: desktop) {
       margin-left: -1 * $wrapper-padding-x-desktop;
     }
   }

@@ -2,6 +2,7 @@
 @import 'scss/constants.scss';
 @import 'scss/colors.scss';
 @import 'scss/spacings.scss';
+@import 'scss/wrapper.scss';
 
 $icon-size: 20px;
 
@@ -12,14 +13,14 @@ $icon-size: 20px;
   width: 100%;
 
   .content {
-    padding: size(8) size(3);
+    @include gutter;
+
+    padding-top: size(8);
     padding-bottom: size(13);
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     column-gap: size(3);
     width: 100%;
-    max-width: $content-max-width;
-    margin: 0 auto;
 
     @include mq($from: tablet) {
       padding-bottom: size(4);

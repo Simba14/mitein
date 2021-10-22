@@ -10,3 +10,18 @@
     padding: size(5) size(4);
   }
 }
+
+@mixin gutter {
+  padding-left: $wrapper-padding-x-mobile;
+  padding-right: $wrapper-padding-x-mobile;
+
+  @include mq($from: tablet) {
+    padding-left: $wrapper-padding-x-tablet;
+    padding-right: $wrapper-padding-x-tablet;
+  }
+
+  @include mq($from: desktop) {
+    padding-left: $wrapper-padding-x-desktop;
+    padding-right: $wrapper-padding-x-desktop;
+  }
+}

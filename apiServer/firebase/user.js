@@ -12,6 +12,10 @@ import {
   MAX_NUMBER_OF_CANCELLATIONS,
   SUSPENSION_DURATION,
 } from '@api/firebase/constants';
+import {
+  FirebaseCreateDocError,
+  FirebaseGetDocError,
+} from '@api/firebase/errors';
 
 const User = {};
 
@@ -19,7 +23,9 @@ User.create = async ({ id, user }) =>
   Firestore.collection(COLLECTION_USERS)
     .doc(id)
     .set(user)
-    .catch(error => console.log('User.create', { error }));
+    .catch(() => {
+      throw new FirebaseCreateDocError('Creation of User doc failed');
+    });
 
 User.byId = async id =>
   Firestore.collection(COLLECTION_USERS).doc(id).get().then(getDocData);
@@ -29,8 +35,8 @@ User.byIdWithAvailability = async id => {
     .doc(id)
     .get()
     .then(getDocData)
-    .catch(error => {
-      console.log('Error getting document:', error);
+    .catch(() => {
+      throw new FirebaseGetDocError('Could not return user');
     });
 
   const participantField =

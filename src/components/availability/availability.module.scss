@@ -34,6 +34,20 @@
     background-color: none !important;
   }
 
+  a > div {
+    display: flex;
+    align-items: center;
+    padding: 0 6px !important;
+  }
+
+  a div {
+    font-size: 15px !important;
+
+    &::after {
+      display: none;
+    }
+  }
+
   > div > div > div > table {
     background: white;
     border-radius: 15px 0px 0px;

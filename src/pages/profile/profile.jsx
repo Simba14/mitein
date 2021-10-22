@@ -87,7 +87,7 @@ const Profile = ({ session }) => {
   const isSuspended = suspendedUntil > new Date().toISOString();
 
   return (
-    <div>
+    <div className={cx('wrapper')}>
       <div className={cx('topContainer')}>
         <div>
           <h1 className={cx('title')}>{t('title')}</h1>

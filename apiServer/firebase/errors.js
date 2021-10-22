@@ -13,10 +13,41 @@ export const INVALID_PASSWORD_ERROR_CODE = 'auth/wrong-password';
 export const EMAIL_EXISTS_CODE = 'auth/email-already-in-use';
 export const UNABLE_TO_PARSE_ERROR_CODE = 'app/unable-to-parse-response'; // error when using emulator
 
+export class FirebaseCreateDocError extends Error {
+  constructor(message, code, errors) {
+    super();
+    this.message = message || 'Document creation failed';
+    this.extensions = {
+      code: code,
+      errors,
+    };
+  }
+}
+export class FirebaseUpdateDocError extends Error {
+  constructor(message, code, errors) {
+    super();
+    this.message = message || 'Document update failed';
+    this.extensions = {
+      code: code,
+      errors,
+    };
+  }
+}
+
+export class FirebaseGetDocError extends Error {
+  constructor(message, code, errors) {
+    super();
+    this.message = message || 'Document could not be retrieved';
+    this.extensions = {
+      code: code,
+      errors,
+    };
+  }
+}
 export class FirebaseAccountNotFoundError extends Error {
   constructor(message, code, errors) {
     super();
-    this.message = message || 'account not found';
+    this.message = message || 'Account not found';
     this.extensions = {
       code: code || ACCOUNT_NOT_FOUND,
       errors,
@@ -49,7 +80,7 @@ export class FirebaseEmailAlreadyExistsError extends Error {
 export class FirebaseEmailNotVerifiedError extends Error {
   constructor(message, code, errors) {
     super();
-    this.message = message || 'the email is not verified';
+    this.message = message || 'The email is not verified';
     this.extensions = {
       code: code || EMAIL_NOT_VERIFIED,
       errors,
