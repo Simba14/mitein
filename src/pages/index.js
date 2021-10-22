@@ -7,6 +7,7 @@ import { useRouter } from 'next/router';
 import Cta from 'components/cta';
 import ContactUs from 'components/contactUs';
 import ContentSection from 'components/contentSection';
+import Footer from 'components/footer';
 import Hero from 'components/hero';
 import Layout from 'components/layout';
 import NewsletterBanner from 'components/newsletter';
@@ -31,7 +32,7 @@ const Home = () => {
   const { t } = useTranslation('home');
 
   return (
-    <Layout withContentPadding={false}>
+    <Layout withContentPadding={false} withFooter={false}>
       <div className={cx('wrapper')}>
         <Hero />
         <ContentSection
@@ -60,6 +61,7 @@ const Home = () => {
           </div>
         </ContentSection>
         <ContactUs className={cx('contact')} translation="home" />
+        <Footer />
       </div>
     </Layout>
   );

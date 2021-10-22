@@ -3,27 +3,38 @@ import { string } from 'prop-types';
 import classnames from 'classnames/bind';
 
 import Anchor from 'components/anchor';
+import FacebookIcon from 'assets/facebook.svg';
+import InstagramIcon from 'assets/instagram.svg';
+
 import styles from './footer.module.scss';
 const cx = classnames.bind(styles);
+
+const SOCIALS = [
+  { key: 'fb', Icon: FacebookIcon, url: 'https://facebook.com/mitien.berlin' },
+  {
+    key: 'insta',
+    Icon: InstagramIcon,
+    url: 'https://instagram.com/mitien.berlin',
+  },
+];
 
 const Footer = ({ className }) => {
   return (
     <footer className={cx('footer', className)}>
-      <div>
-        <div>Mitein 2021</div>
-        <Anchor href="info@mitein.de">info@mitein.de</Anchor>
+      <div className={cx('content')}>
+        <div>
+          <div>Mitein 2021</div>
+          <Anchor href="info@mitein.de">info@mitein.de</Anchor>
+        </div>
+        <div></div>
+        <div className={cx('socials')}>
+          {SOCIALS.map(({ Icon, url, key }) => (
+            <a className={cx('socialLink')} href={url} key={key}>
+              <Icon className={cx('socialLink')} />
+            </a>
+          ))}
+        </div>
       </div>
-      <div>
-        Icons made by{' '}
-        <a href="https://www.flaticon.com/authors/freepik" title="Freepik">
-          Freepik
-        </a>{' '}
-        from{' '}
-        <a href="https://www.flaticon.com/" title="Flaticon">
-          www.flaticon.com
-        </a>
-      </div>
-      <div className={cx('socials')}>Social Icons</div>
     </footer>
   );
 };

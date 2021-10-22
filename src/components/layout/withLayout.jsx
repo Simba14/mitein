@@ -7,6 +7,7 @@ const withLayout = Component => {
     <Layout
       className={get('className', props, null)}
       withContentPadding={get('withContentPadding', props, true)}
+      withFooter={get('withFooter', props, true)}
     >
       <Component {...props} />
     </Layout>

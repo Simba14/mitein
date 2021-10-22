@@ -6,7 +6,7 @@ import classnames from 'classnames/bind';
 
 // import ConsentLayer from 'components/consentLayer/consentLayer';
 import Header from 'components/header';
-// import Footer from 'components/footer';
+import Footer from 'components/footer';
 
 import styles from './layout.module.scss';
 const cx = classnames.bind(styles);
@@ -14,22 +14,26 @@ const cx = classnames.bind(styles);
 // Remove cap on iteratee arguments
 convert({ cap: false });
 
-const Layout = ({ children, className, withContentPadding }) => {
+const Layout = ({ children, className, withContentPadding, withFooter }) => {
   return (
     <MenuContextProvider>
       <div className={cx('wrapper')}>
         <Header />
         <MenuContextConsumer>
           {({ isMenuOpen }) => (
-            <div
-              className={cx('container', className, {
-                menuOpen: isMenuOpen,
-                withPadding: withContentPadding,
-              })}
-            >
-              {children}
-              {/* <Footer /> */}
-            </div>
+            <>
+              <div
+                className={cx('container', className, {
+                  menuOpen: isMenuOpen,
+                  withPadding: withContentPadding,
+                })}
+              >
+                {children}
+                {withFooter && (
+                  <Footer className={cx('footer', { withContentPadding })} />
+                )}
+              </div>
+            </>
           )}
         </MenuContextConsumer>
       </div>
@@ -42,11 +46,13 @@ Layout.propTypes = {
   children: node.isRequired,
   className: string,
   withContentPadding: bool,
+  withFooter: bool,
 };
 
 Layout.defaultProps = {
   className: null,
   withContentPadding: true,
+  withFooter: true,
 };
 
 export default Layout;

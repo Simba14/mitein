@@ -51,4 +51,15 @@
         $wrapper-padding-y-desktop-large;
     }
   }
+
+  .footer {
+    &.withContentPadding {
+      width: 100vw;
+      margin-left: -$wrapper-padding-x-mobile;
+
+      @include mq($from: tablet) {
+        margin-left: -$wrapper-padding-x-desktop;
+      }
+    }
+  }
 }

@@ -17,7 +17,6 @@ const cx = classnames.bind(styles);
 //
 //   return {
 //     props: {
-//       withContentPadding: false,
 //       organizations,
 //       ...(await serverSideTranslations(locale, [
 //         'common',

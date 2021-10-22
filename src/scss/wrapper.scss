@@ -1,8 +1,9 @@
+@import 'scss/constants.scss';
 @import 'scss/breakpoints.scss';
 @import 'scss/spacings.scss';
 
 @mixin wrapper {
-  padding: size(3) size(2);
+  padding: $wrapper-padding-y-mobile $wrapper-padding-x-mobile;
   width: 100%;
 
   @include mq($from: tablet) {

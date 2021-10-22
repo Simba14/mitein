@@ -29,7 +29,7 @@ const Onboarding = ({ session }) => {
   const userSteps = getUserSteps(userType);
 
   return (
-    <Layout withContentPadding={false}>
+    <Layout>
       {loading || !data ? (
         <Loading />
       ) : (

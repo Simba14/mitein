@@ -1,19 +1,37 @@
 @import 'scss/breakpoints.scss';
+@import 'scss/constants.scss';
 @import 'scss/colors.scss';
 @import 'scss/spacings.scss';
 
 .footer {
   background: white;
   color: $blue;
-  padding: size(8) size(3) size(3);
   border-top: 1px solid $dark-grey;
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  column-gap: size(3);
   width: 100%;
 
-  .socials {
-    display: flex;
-    justify-content: flex-end;
+  .content {
+    padding: size(8) size(3) size(3);
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    column-gap: size(3);
+    width: 100%;
+    max-width: $content-max-width;
+    margin: 0 auto;
+
+    .socials {
+      display: flex;
+      align-items: flex-end;
+      justify-content: flex-end;
+
+      .socialLink {
+        height: size(4);
+        width: size(4);
+        fill: $blue;
+
+        &:not(:last-child) {
+          margin-right: size(2);
+        }
+      }
+    }
   }
 }
