@@ -79,9 +79,18 @@
   }
 
   .organizations {
-    display: flex;
-    flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: 1fr;
+    column-gap: size(3);
     margin-bottom: size(6);
+
+    @include mq($from: tablet, $until: tabletWide) {
+      grid-template-columns: 1fr 1fr;
+    }
+
+    @include mq($from: tabletWide) {
+      grid-template-columns: 1fr 1fr 1fr;
+    }
   }
 
   .newsletterBanner {
