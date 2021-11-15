@@ -4,10 +4,13 @@ import Availability from '@api/firebase/availability';
 const SessionsMutation = {
   addAvailability: async (parent, { start, end, userId }, context, info) => {
     const id = uuidv4();
+    const dayIndex = new Date(start).getDay();
+
     const availability = await Availability.create({
       id,
       fields: {
         id,
+        dayIndex,
         start,
         end,
         userId,

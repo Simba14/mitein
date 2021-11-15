@@ -1,7 +1,12 @@
+@import 'scss/constants.scss';
 @import 'scss/spacings';
 
-.title {
-  margin-bottom: size(4);
-  text-transform: capitalize;
-  text-align: center;
+.wrapper {
+  margin-bottom: $wrapper-padding-y-desktop-large;
+
+  .title {
+    margin-bottom: size(4);
+    text-transform: capitalize;
+    text-align: center;
+  }
 }

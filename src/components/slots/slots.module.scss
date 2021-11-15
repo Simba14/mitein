@@ -48,20 +48,6 @@ $slot-width: 180px;
         color: white !important;
         width: 85px;
       }
-
-      .daySelected {
-        outline: $blue 2px auto;
-      }
-
-      .dayAvailable {
-        background: $green-background;
-        cursor: pointer;
-      }
-
-      .dayUnavailable {
-        background: $light-grey;
-        cursor: not-allowed;
-      }
     }
 
     .requestSlot {

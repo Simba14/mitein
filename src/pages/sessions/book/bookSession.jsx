@@ -59,7 +59,7 @@ const BookSession = ({ session }) => {
   const isSuspended = suspendedUntil > new Date().toISOString();
 
   return (
-    <div>
+    <div className={cx('wrapper')}>
       <h1 className={cx('title')}>{t('slots.title')}</h1>
       {isSuspended && (
         <div className={cx('suspended')}>

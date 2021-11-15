@@ -1,4 +1,4 @@
-@import 'scss/button.scss';
+@import 'scss/breakpoints.scss';
 @import 'scss/colors.scss';
 @import 'scss/spacings.scss';
 
@@ -14,10 +14,15 @@
     }
 
     .delete {
+      display: none;
       align-self: flex-end;
       border-radius: 0.25em;
       width: 85px;
       height: size(5);
+
+      @include mq($from: tablet) {
+        display: block;
+      }
     }
 
     .instructions {
@@ -28,28 +33,5 @@
   h2 {
     font-family: 'LilGrotesk', sans-serif;
     color: $blue;
-  }
-
-  td {
-    background-color: none !important;
-  }
-
-  a > div {
-    display: flex;
-    align-items: center;
-    padding: 0 6px !important;
-  }
-
-  a div {
-    font-size: 15px !important;
-
-    &::after {
-      display: none;
-    }
-  }
-
-  > div > div > div > table {
-    background: white;
-    border-radius: 15px 0px 0px;
   }
 }

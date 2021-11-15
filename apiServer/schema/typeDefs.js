@@ -22,6 +22,7 @@ const typeDefs = gql`
 
   type Availability {
     id: ID!
+    dayIndex: Int
     start: String!
     end: String!
     userId: ID!

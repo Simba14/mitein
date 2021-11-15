@@ -1,37 +1,32 @@
 import React, { useState } from 'react';
 import { get, isEmpty, map } from 'lodash/fp';
 import { func, string } from 'prop-types';
+import { useRouter } from 'next/router';
 import { useMutation, useQuery } from '@apollo/client';
 import { useTranslation } from 'next-i18next';
-import FullCalendar from '@fullcalendar/react';
-import dayGridPlugin from '@fullcalendar/daygrid';
 import classnames from 'classnames/bind';
-import interactionPlugin from '@fullcalendar/interaction';
 
 import Cta from 'components/cta';
 import ConfirmPopUp from 'components/confirmPopUp';
+import DayViewCalendar from 'components/calendar/dayView';
 import REQUEST_SESSION from '@graphql/mutations/updateSession.graphql';
 import GET_SLOTS from '@graphql/queries/getAvailableSlots.graphql';
 import { formatSessionDate, formatSessionTime } from 'helpers/index';
 import { LEARNER, REQUESTED } from 'constants/user';
+import { ROUTE_PROFILE } from 'routes';
 
 import styles from './slots.module.scss';
 const cx = classnames.bind(styles);
 
 map.convert({ cap: false });
 
-const dayHasAvailability = ({ date, slots }) => {
-  const offset = date.getTimezoneOffset();
-  const dateOffsetForTimezone = new Date(date.getTime() - offset * 60 * 1000);
-  const day = dateOffsetForTimezone.toISOString().split('T')[0];
-  return !isEmpty(slots[day]);
-};
-
 const Slots = ({ userId, onSelect }) => {
   const {
     i18n: { language },
     t,
   } = useTranslation('session', { keyPrefix: 'slots' });
+
+  const router = useRouter();
   const [selectedDate, setSelectedDate] = useState(null);
   const [selectedSession, selectSession] = useState(null);
   const [sessionRequested, setSessionRequested] = useState(false);
@@ -50,6 +45,7 @@ const Slots = ({ userId, onSelect }) => {
       },
     })
       .then(() => {
+        router.push(ROUTE_PROFILE);
         onSelect();
         selectSession(null);
         setSessionRequested(true);
@@ -84,48 +80,11 @@ const Slots = ({ userId, onSelect }) => {
         <section className={cx('selectionContainer')}>
           <div className={cx('calendar')}>
             <h3 className={cx('step')}>{t('step1')}</h3>
-            <FullCalendar
-              dateClick={({ date, dateStr, dayEl }) => {
-                if (dayHasAvailability({ date, slots })) {
-                  if (selectedDate)
-                    document
-                      .querySelector(`.${cx('daySelected')}`)
-                      .classList.remove(cx('daySelected'));
-
-                  setSelectedDate(dateStr);
-                  dayEl.classList.add(cx('daySelected'));
-                }
-              }}
-              height="auto"
+            <DayViewCalendar
               locale={language}
-              eventClick={null}
-              eventOverlap={false}
-              fixedWeekCount={false}
-              showNonCurrentDates={true}
-              headerToolbar={{
-                start: 'title',
-                end: 'prev,next',
-              }}
-              initialView="dayGridMonth"
-              plugins={[dayGridPlugin, interactionPlugin]}
-              dayCellClassNames={({ date }) => {
-                return dayHasAvailability({ date, slots })
-                  ? [cx('dayAvailable')]
-                  : [cx('dayUnavailable')];
-              }}
-              validRange={currentDate => {
-                const start = new Date(
-                  currentDate.getFullYear(),
-                  currentDate.getMonth(),
-                  1,
-                );
-                const end = new Date(
-                  start.getFullYear(),
-                  start.getMonth() + 2,
-                  0,
-                );
-                return { start, end };
-              }}
+              onClick={setSelectedDate}
+              selectedDate={selectedDate}
+              slots={slots}
             />
           </div>
           <div className={cx('requestSlot')}>

@@ -1,12 +1,13 @@
+@import 'scss/breakpoints.scss';
 @import 'scss/button.scss';
 @import 'scss/colors.scss';
 @import 'scss/spacings.scss';
 
-.calendar {
-  .instructions {
-    margin-bottom: size(4);
-  }
+$btn-height: 32px;
+$btn-width-small: 34px;
+$btn-width-large: 85px;
 
+.calendar {
   h2 {
     font-family: 'LilGrotesk', sans-serif;
     color: $blue;
@@ -18,8 +19,16 @@
     background: $blue !important;
     border-color: $blue !important;
     color: white !important;
-    width: 85px;
-    height: 32px;
+
+    height: $btn-height;
+    width: $btn-width-large;
+
+    &.fc-next-button,
+    &.fc-prev-button {
+      @include mq($until: mobile) {
+        width: $btn-width-small;
+      }
+    }
   }
 
   a > div {
@@ -30,6 +39,7 @@
 
   a div {
     font-size: 15px !important;
+    white-space: pre-wrap !important;
 
     &::after {
       display: none;

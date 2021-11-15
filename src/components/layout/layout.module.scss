@@ -23,6 +23,7 @@
   margin-top: 0;
   background: white;
   overflow-y: scroll;
+  overflow-x: hidden;
   height: calc(100vh - #{$header-height});
   width: 100%;
   transition: $menu-transition-duration;

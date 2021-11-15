@@ -9,8 +9,8 @@ import { useTranslation } from 'next-i18next';
 // import { Firestore } from '@api/firebase';
 
 import Accordion from 'components/accordion';
-import Availability from 'components/availability';
-import Calendar from 'components/calendar';
+import LearnerCalendar from 'components/calendar/timeView/learner';
+import NativeCalendar from 'components/calendar/timeView/native';
 import Cta from 'components/cta';
 import Loading from 'components/loading';
 import SessionCard from 'components/sessionCard';
@@ -161,9 +161,11 @@ const Profile = ({ session }) => {
           text={'Request a Session'}
         />
       )}
-      {isNative && Boolean(!suspendedUntil) && <Calendar userId={userId} />}
+      {isNative && Boolean(!suspendedUntil) && (
+        <NativeCalendar userId={userId} />
+      )}
       {isLearner && Boolean(!suspendedUntil) && (
-        <Availability userId={userId} />
+        <LearnerCalendar userId={userId} />
       )}
     </div>
   );
