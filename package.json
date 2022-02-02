@@ -13,12 +13,14 @@
     "start": "next start",
     "start-emulator": "CLOUD_RUNTIME_CONFIG=$(pwd)/functions/.runtimeconfig.json firebase emulators:start --import=./firebase-emulator-data --export-on-exit",
     "test": "jest",
+    "lint": "eslint src apiServer",
     "lint-functions": "eslint ./functions",
     "serve-functions": "firebase emulators:start --only functions",
     "functions-shell": "firebase functions:shell",
     "start-functions": "yarn shell",
     "deploy-functions": "firebase deploy --only functions",
-    "logs-functions": "firebase functions:log"
+    "logs-functions": "firebase functions:log",
+    "prepare": "husky install"
   },
   "engines": {
     "node": "^14"
@@ -42,6 +44,7 @@
     "eslint-plugin-prettier": "^3.0.0",
     "eslint-plugin-react": "^7.25.2",
     "firebase-functions-test": "^0.2.0",
+    "husky": "^7.0.0",
     "jest": "^27.4.7",
     "jest-transform-graphql": "^2.1.0",
     "prettier": "2.4.1",
@@ -86,7 +89,9 @@
     "yarn": "^1.22.10"
   },
   "jest": {
-    "setupFilesAfterEnv": ["<rootDir>unitTests/setupTests.js"],
+    "setupFilesAfterEnv": [
+      "<rootDir>unitTests/setupTests.js"
+    ],
     "moduleDirectories": [
       "node_modules",
       "unitTests",
