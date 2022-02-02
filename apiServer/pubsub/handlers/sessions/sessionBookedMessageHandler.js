@@ -24,7 +24,7 @@ const SessionBookedMessageHandler = ({
   const date = formatSessionDate(start);
   const time = formatSessionTime({ start, end });
   return sendConfirmationEmail({
-    email,
+    emails: [{ email }],
     params: {
       date,
       link,

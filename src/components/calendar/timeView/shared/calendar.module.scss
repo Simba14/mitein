@@ -1,11 +1,10 @@
 @import 'scss/breakpoints.scss';
 @import 'scss/button.scss';
 @import 'scss/colors.scss';
+@import 'scss/focus.scss';
 @import 'scss/spacings.scss';
 
-$btn-height: 32px;
 $btn-width-small: 34px;
-$btn-width-large: 85px;
 
 .calendar {
   h2 {
@@ -20,15 +19,20 @@ $btn-width-large: 85px;
     border-color: $blue !important;
     color: white !important;
 
-    height: $btn-height;
-    width: $btn-width-large;
-
     &.fc-next-button,
     &.fc-prev-button {
       @include mq($until: mobile) {
         width: $btn-width-small;
       }
     }
+
+    &:focus {
+      @include focus($orange, 2pt, 1.5pt, true);
+    }
+  }
+
+  div > div > div > div:last-of-type > button:not(:first-child) {
+    margin-left: 2px !important;
   }
 
   a > div {

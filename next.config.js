@@ -13,17 +13,27 @@ module.exports = withTM({
   trailingSlash: true,
   webpack(config) {
     config.module.rules.push({
-      test: /\.svg$/,
-      issuer: {
-        test: /\.(js|ts)x?$/,
-      },
+      test: /\.svg$/i,
+      issuer: { and: [/\.(js|ts|md)x?$/] },
       use: [
         {
           loader: '@svgr/webpack',
           options: {
+            svgo: true,
             svgoConfig: {
-              plugins: [{ removeViewBox: false }],
+              plugins: [
+                'prefixIds',
+                {
+                  name: 'preset-default',
+                  params: {
+                    overrides: {
+                      removeViewBox: false,
+                    },
+                  },
+                },
+              ],
             },
+            titleProp: true,
           },
         },
       ],

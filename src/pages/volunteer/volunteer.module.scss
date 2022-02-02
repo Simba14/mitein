@@ -1,6 +1,7 @@
 @import 'scss/breakpoints.scss';
 @import 'scss/colors.scss';
 @import 'scss/constants.scss';
+@import 'scss/focus.scss';
 @import 'scss/spacings.scss';
 
 .volunteerLayout {
@@ -51,20 +52,18 @@
       opacity: 0.5;
 
       &:hover {
-        box-shadow: 0 0 3pt 2pt$orange;
+        @include focus($orange);
       }
 
       &:focus {
-        box-shadow: 0 0 3pt 2pt $grey;
-        outline: none;
+        @include focus($grey);
       }
 
       &.selected {
         opacity: 1;
 
         &:focus {
-          box-shadow: 0 0 3pt 2pt$orange;
-          outline: none;
+          @include focus($orange);
         }
       }
     }

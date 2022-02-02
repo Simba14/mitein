@@ -21,7 +21,7 @@ import GET_PROFILE from '@graphql/queries/getProfile.graphql';
 import SIGN_OUT from '@graphql/mutations/signOut.graphql';
 import { ROUTE_LOGIN, ROUTE_SESSIONS_BOOK } from 'routes';
 import { formatSessionDate } from 'helpers/index';
-import { LEARNER, NATIVE, BOOKED, REJECTED, REQUESTED } from 'constants/user';
+import { LEARNER, NATIVE, BOOKED, REJECTED, REQUESTED } from '@constants/user';
 
 import styles from './profile.module.scss';
 const cx = classnames.bind(styles);
@@ -162,10 +162,10 @@ const Profile = ({ session }) => {
         />
       )}
       {isNative && Boolean(!suspendedUntil) && (
-        <NativeCalendar userId={userId} />
+        <NativeCalendar userId={userId} userType={type} />
       )}
       {isLearner && Boolean(!suspendedUntil) && (
-        <LearnerCalendar userId={userId} />
+        <LearnerCalendar userId={userId} userType={type} />
       )}
     </div>
   );

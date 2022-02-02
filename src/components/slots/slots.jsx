@@ -12,7 +12,7 @@ import DayViewCalendar from 'components/calendar/dayView';
 import REQUEST_SESSION from '@graphql/mutations/updateSession.graphql';
 import GET_SLOTS from '@graphql/queries/getAvailableSlots.graphql';
 import { formatSessionDate, formatSessionTime } from 'helpers/index';
-import { LEARNER, REQUESTED } from 'constants/user';
+import { LEARNER, REQUESTED } from '@constants/user';
 import { ROUTE_PROFILE } from 'routes';
 
 import styles from './slots.module.scss';

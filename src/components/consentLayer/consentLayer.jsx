@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import classnames from 'classnames/bind';
 import { useTranslation } from 'next-i18next';
 
@@ -14,16 +14,36 @@ const ConsentLayer = ({ session }) => {
   const [mounted, setMounted] = useState(false);
   const { consentRecorded, onConsentSelection } = session;
 
+  const onConfirm = useCallback(() => {
+    window.OneTrust.AllowAll();
+    onConsentSelection(true);
+  });
+
+  // const onReject = useCallback(() => {
+  //   window.OneTrust.RejectAll();
+  //   onConsentSelection(false);
+  // });
+
+  const onClose = useCallback(() => {
+    window.OneTrust.Close();
+    onConsentSelection(true);
+  });
+
+  const openSettings = useCallback(() => {
+    window.OneTrust.ToggleInfoDisplay();
+  });
+
   useEffect(() => {
-    if (!consentRecorded) setMounted(true);
+    if (!consentRecorded && window) setMounted(true);
   }, [consentRecorded]);
 
   if (!mounted || consentRecorded) return null;
+
   return (
     <Modal
       className={cx('consentLayer')}
       open={!consentRecorded}
-      onClose={() => null}
+      onClose={onClose}
     >
       <div className={cx('container')}>
         <div className={cx('text')}>
@@ -36,16 +56,23 @@ const ConsentLayer = ({ session }) => {
             fullWidth
             outline
             text={t('confirmBtn')}
-            onClick={() => onConsentSelection(true)}
+            onClick={onConfirm}
             disabled={false}
           />
           <Cta
             className={cx('rejectCta')}
             fullWidth
-            onClick={() => onConsentSelection(false)}
-            text={t('reject')}
+            onClick={openSettings}
+            text={t('cookieSettings')}
             disabled={false}
           />
+          {/* <Cta
+            className={cx('rejectCta')}
+            fullWidth
+            onClick={onReject}
+            text={t('reject')}
+            disabled={false}
+          /> */}
         </div>
       </div>
     </Modal>

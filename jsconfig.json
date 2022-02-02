@@ -6,7 +6,7 @@
       "apollo/*": ["src/apollo/*"],
       "assets/*": ["src/assets/*"],
       "components/*": ["src/components/*"],
-      "constants/*": ["src/constants/*"],
+      "@constants/*": ["src/constants/*"],
       "context/*": ["src/context/*"],
       "@graphql/*": ["src/graphql/*"],
       "helpers/*": ["src/helpers/*"],
@@ -14,7 +14,8 @@
       "locales/*": ["src/locales/*"],
       "pages/*": ["src/pages/*"],
       "scss/*": ["src/scss/*"],
-      "routes": ["src/routes.js"]
+      "routes": ["src/routes.js"],
+      "unitTests/*": ["unitTests/*"]
     }
   }
 }

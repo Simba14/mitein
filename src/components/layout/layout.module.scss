@@ -63,6 +63,11 @@
   }
 
   .footer {
+    &:only-child {
+      position: absolute;
+      bottom: 0;
+    }
+
     &.withContentPadding {
       width: 100vw;
       margin-left: -$wrapper-padding-x-mobile;

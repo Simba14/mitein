@@ -2,18 +2,19 @@ mutation CreateSession(
   $participant1Id: ID
   $participant2Id: ID
   $status: EventStatus!
-  $start: String
-  $end: String
+  $start: String!
+  $end: String!
+  $userType: UserType!
 ) {
-  createSession(
+  createSessionsFromAvailability(
     participant1Id: $participant1Id
     participant2Id: $participant2Id
     status: $status
     start: $start
     end: $end
+    userType: $userType
   ) {
     id
-    status
     start
     end
   }

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import { useMutation } from '@apollo/client';
 import { useRouter } from 'next/router';
 import { compose, get } from 'lodash/fp';
@@ -24,18 +24,21 @@ const SignIn = ({ session }) => {
     onCompleted: signInSuccessful,
   });
 
+  const onLogin = useCallback(
+    ({ email, password }) =>
+      signIn({ variables: { email, password } }).catch(e => {
+        setError(get('graphqlErrors[0].message', e) || e.message);
+      }),
+    [signIn, setError],
+  );
+
+  const resetError = useCallback(() => setError(null), [setError]);
+
   const userId = get('userId', session);
   if (userId) {
     router.push(ROUTE_PROFILE);
     return null;
   }
-
-  const onLogin = ({ email, password }) =>
-    signIn({ variables: { email, password } }).catch(e => {
-      setError(get('graphqlErrors[0].message', e) || e.message);
-    });
-
-  const resetError = () => setError(null);
 
   return (
     <div className={styles.wrapper}>

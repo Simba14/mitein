@@ -9,12 +9,19 @@ import InstagramIcon from 'assets/instagram.svg';
 import styles from './footer.module.scss';
 const cx = classnames.bind(styles);
 
+export const INFO_EMAIL = 'info@mitein.de';
+export const FB_URL = 'https://facebook.com/mitein.berlin';
+export const IG_URL = 'https://instagram.com/mitein.berlin';
 const SOCIALS = [
-  { key: 'fb', Icon: FacebookIcon, url: 'https://facebook.com/mitein.berlin' },
   {
-    key: 'insta',
+    key: 'facebook',
+    Icon: FacebookIcon,
+    url: FB_URL,
+  },
+  {
+    key: 'instagram',
     Icon: InstagramIcon,
-    url: 'https://instagram.com/mitein.berlin',
+    url: IG_URL,
   },
 ];
 
@@ -24,13 +31,21 @@ const Footer = ({ className }) => {
       <div className={cx('content')}>
         <div>
           <div>Mitein 2021</div>
-          <Anchor href="info@mitein.de">info@mitein.de</Anchor>
+          <Anchor href={`mailto: ${INFO_EMAIL}`}>{INFO_EMAIL}</Anchor>
         </div>
-        <div></div>
+        <div className={cx('legal')}>
+          <button
+            id="ot-sdk-btn"
+            className={`ot-sdk-show-settings ${cx('cookies')}`}
+          >
+            Cookie Settings
+          </button>
+        </div>
         <div className={cx('socials')}>
           {SOCIALS.map(({ Icon, url, key }) => (
             <a className={cx('socialLink')} href={url} key={key}>
-              <Icon className={cx('socialLink')} />
+              <Icon className={cx('socialLink')} aria-hidden="true" />
+              <span className={cx('socialLabel')}>{key}</span>
             </a>
           ))}
         </div>

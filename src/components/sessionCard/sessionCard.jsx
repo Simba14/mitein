@@ -19,7 +19,7 @@ import {
   REJECTED,
   LEARNER,
   NATIVE,
-} from 'constants/user';
+} from '@constants/user';
 
 import styles from './sessionCard.module.scss';
 const cx = classnames.bind(styles);

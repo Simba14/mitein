@@ -1,44 +1,55 @@
 import React from 'react';
-import renderer from 'react-test-renderer';
-import { shallow } from 'enzyme';
 import { noop } from 'lodash';
+import { render, screen, userEvent } from 'testUtils';
 import AccordionHeader from './accordionHeader';
+import { MOCK_TEXT } from 'unitTests/sharedMocks';
 
-describe('AccordionHeader', () => {
-  describe('when is selected', () => {
-    it('should render correctly', () => {
-      const rendered = renderer.create(
-        <AccordionHeader isOpen onClick={noop} ariaId="button-01" ariaControls="panel-01">
-          <div>this is the header</div>
-        </AccordionHeader>,
-      );
-      expect(rendered.toJSON()).toMatchSnapshot();
-    });
-  });
+test('AccordionHeader renders correctly when isOpen', () => {
+  render(
+    <AccordionHeader
+      isOpen
+      onClick={noop}
+      ariaId="button-01"
+      ariaControls="panel-01"
+      text={MOCK_TEXT}
+    />,
+  );
 
-  describe('when is not selected', () => {
-    it('should render correctly', () => {
-      const rendered = renderer.create(
-        <AccordionHeader isOpen={false} onClick={noop} ariaId="button-01" ariaControls="panel-01">
-          <div>this is the header</div>
-        </AccordionHeader>,
-      );
-      expect(rendered.toJSON()).toMatchSnapshot();
-    });
-  });
+  const btn = screen.getByRole('button');
+  expect(btn.textContent).toEqual(MOCK_TEXT);
+  expect(btn.classList.contains('isOpen')).toBe(true);
+  expect(screen.getByTestId('svg')).toBeTruthy();
+});
 
-  describe('when clicking', () => {
-    it('should call "onClick"', () => {
-      const onClick = jest.fn();
+test('AccordionHeader renders correctly when isOpen is false', () => {
+  render(
+    <AccordionHeader
+      isOpen={false}
+      onClick={noop}
+      ariaId="button-01"
+      ariaControls="panel-01"
+      text={MOCK_TEXT}
+    />,
+  );
 
-      const wrapper = shallow(
-        <AccordionHeader isOpen onClick={onClick} ariaId="button-01" ariaControls="panel-01">
-          <div>this is the header</div>
-        </AccordionHeader>,
-      );
+  const btn = screen.getByRole('button');
+  expect(btn.textContent).toEqual(MOCK_TEXT);
+  expect(btn.classList.contains('isOpen')).toBe(false);
+  expect(screen.getByTestId('svg')).toBeTruthy();
+});
 
-      wrapper.find('.accordionHeader').simulate('click');
-      expect(onClick).toHaveBeenCalled();
-    });
-  });
+test('button click should call onClick', () => {
+  const onClick = jest.fn();
+  render(
+    <AccordionHeader
+      isOpen={false}
+      onClick={onClick}
+      ariaId="button-01"
+      ariaControls="panel-01"
+      text={MOCK_TEXT}
+    />,
+  );
+
+  userEvent.click(screen.getByRole('button'));
+  expect(onClick).toHaveBeenCalled();
 });

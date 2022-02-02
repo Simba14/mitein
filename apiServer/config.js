@@ -63,6 +63,9 @@ export default {
         ),
       },
       en: {
+        sessionAvailable: Number(
+          process.env.SENDINBLUE_TEMPLATE_SESSION_AVAILABLE_EN,
+        ),
         sessionConfirmation: Number(
           process.env.SENDINBLUE_TEMPLATE_SESSION_CONFIRMATION_EN,
         ),

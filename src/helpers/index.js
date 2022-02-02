@@ -1,5 +1,5 @@
-import breakpoints from 'constants/breakpoints';
-import { GERMAN } from 'constants/defaultOptions';
+import breakpoints from '@constants/breakpoints';
+import { GERMAN } from '@constants/defaultOptions';
 
 export const getIsMobile = width => width <= breakpoints.mobile;
 

@@ -1,8 +1,11 @@
+$btn-height: 32px;
+$btn-width: 85px;
+
 %btn {
   cursor: pointer;
-  font-size: 12px;
-  width: 85px;
-  height: 32px;
+  font-size: 16px;
+  width: $btn-width;
+  height: $btn-height;
   border-radius: 5px;
   padding: 0px !important;
 

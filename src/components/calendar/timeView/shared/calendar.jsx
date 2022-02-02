@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect } from 'react';
 import classnames from 'classnames/bind';
 import FullCalendar from '@fullcalendar/react';
 import interactionPlugin from '@fullcalendar/interaction';
@@ -7,8 +7,8 @@ import { useTranslation } from 'next-i18next';
 import { any, arrayOf, func, number, string } from 'prop-types';
 import { get } from 'lodash/fp';
 
-import { BLUE, GREEN, GREY, RED } from 'constants/colors';
-import { AVAILABLE, BOOKED, REQUESTED } from 'constants/user';
+import { BLUE, GREEN, GREY, RED } from '@constants/colors';
+import { AVAILABLE, BOOKED, REQUESTED } from '@constants/user';
 
 import styles from './calendar.module.scss';
 const cx = classnames.bind(styles);
@@ -57,6 +57,10 @@ const Calendar = ({
     t,
   } = useTranslation('calendar');
 
+  useEffect(() => {
+    if (selectedEvents.length) setSelectedEvents([]);
+  }, [events]);
+
   const formattedEvents = events ? formatEvents(events, selectedEvents) : [];
 
   const handleSelectEvent = ({ event }) => {
@@ -89,7 +93,7 @@ const Calendar = ({
         ids: selectedEvents,
       },
       refetchQueries,
-    }).then(() => setSelectedEvents([]));
+    });
   };
 
   const getValidRange = currentDate => {

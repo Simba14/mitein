@@ -13,7 +13,7 @@ import { sessionProps, withSessionContext } from 'context/session';
 import GET_PROFILE from '@graphql/queries/getProfile.graphql';
 import { ROUTE_LOGIN, ROUTE_PROFILE } from 'routes';
 import { formatSessionDate } from 'helpers/index';
-import { LEARNER, REQUESTED } from 'constants/user';
+import { LEARNER, REQUESTED } from '@constants/user';
 
 import styles from './bookSession.module.scss';
 const cx = classnames.bind(styles);

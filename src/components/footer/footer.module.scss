@@ -1,6 +1,8 @@
+@import 'scss/accessibility.scss';
 @import 'scss/breakpoints.scss';
 @import 'scss/constants.scss';
 @import 'scss/colors.scss';
+@import 'scss/focus.scss';
 @import 'scss/spacings.scss';
 @import 'scss/wrapper.scss';
 
@@ -26,11 +28,34 @@ $icon-size: 20px;
       padding-bottom: size(4);
     }
 
+    .legal {
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+
+      > button.cookies {
+        background: white;
+        border: none !important;
+        font-family: 'Poppins';
+        font-size: 16px !important;
+        color: $blue !important;
+        padding: 0px !important;
+
+        &:focus-visible {
+          @include focus($orange);
+        }
+        &:hover {
+          background: white !important;
+        }
+      }
+    }
+
     .socials {
       display: flex;
       align-items: flex-end;
       justify-content: flex-end;
       padding-bottom: size(0.5);
+      position: relative;
 
       .socialLink {
         height: $icon-size;
@@ -40,6 +65,10 @@ $icon-size: 20px;
         &:not(:last-child) {
           margin-right: size(1.5);
         }
+      }
+
+      .socialLabel {
+        @include visibleHidden;
       }
     }
   }

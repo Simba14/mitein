@@ -1,7 +1,7 @@
 import React from 'react';
 import classnames from 'classnames/bind';
 import { useTranslation } from 'next-i18next';
-import { GERMAN } from 'constants/defaultOptions';
+import { GERMAN } from '@constants/defaultOptions';
 
 import Logo from 'assets/miteinanderEggshell.svg';
 import styles from './hero.module.scss';

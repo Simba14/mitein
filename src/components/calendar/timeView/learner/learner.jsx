@@ -20,7 +20,7 @@ const cx = classnames.bind(styles);
 
 const GET_AVAILABILITY_QUERY = 'GetAvailability';
 
-const LearnerCalendar = ({ userId }) => {
+const LearnerCalendar = ({ userId, userType }) => {
   const { t } = useTranslation('calendar');
 
   const [selectedEvents, setSelectedEvents] = useState([]);
@@ -40,6 +40,7 @@ const LearnerCalendar = ({ userId }) => {
         userId,
         start: startStr,
         end: endStr,
+        userType,
       },
       refetchQueries: [GET_AVAILABILITY_QUERY],
     });
@@ -96,6 +97,7 @@ const LearnerCalendar = ({ userId }) => {
 
 LearnerCalendar.propTypes = {
   userId: string.isRequired,
+  userType: string.isRequired,
 };
 
 export default LearnerCalendar;

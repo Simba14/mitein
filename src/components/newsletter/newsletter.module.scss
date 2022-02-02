@@ -1,4 +1,5 @@
 @import 'scss/breakpoints.scss';
+@import 'scss/focus.scss';
 @import 'scss/spacings.scss';
 @import 'scss/colors.scss';
 @import 'scss/constants.scss';
@@ -44,8 +45,7 @@
     width: 100%;
 
     &:focus {
-      box-shadow: 0 0 3pt 3pt$orange;
-      outline: none;
+      @include focus($orange);
     }
 
     @include mq($from: tablet) {

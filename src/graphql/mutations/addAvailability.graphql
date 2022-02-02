@@ -1,5 +1,15 @@
-mutation addAvailability($userId: ID!, $start: String!, $end: String!) {
-  addAvailability(userId: $userId, start: $start, end: $end) {
+mutation addAvailability(
+  $userId: ID!
+  $start: String!
+  $end: String!
+  $userType: UserType!
+) {
+  addAvailability(
+    userId: $userId
+    start: $start
+    end: $end
+    userType: $userType
+  ) {
     id
     start
     end

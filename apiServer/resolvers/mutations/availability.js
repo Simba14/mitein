@@ -2,7 +2,12 @@ import { v4 as uuidv4 } from 'uuid';
 import Availability from '@api/firebase/availability';
 
 const SessionsMutation = {
-  addAvailability: async (parent, { start, end, userId }, context, info) => {
+  addAvailability: async (
+    parent,
+    { start, end, userId, userType },
+    context,
+    info,
+  ) => {
     const id = uuidv4();
     const dayIndex = new Date(start).getDay();
 
@@ -14,6 +19,7 @@ const SessionsMutation = {
         start,
         end,
         userId,
+        userType,
       },
     });
 

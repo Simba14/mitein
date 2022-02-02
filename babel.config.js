@@ -1,5 +1,6 @@
 module.exports = {
   presets: [
+    ['@babel/preset-env', { targets: { node: 'current' } }],
     '@babel/preset-react', // necessary for all .jsx files
   ],
   // fullcalendar attempts to import its own CSS files, but next.js does not allow this.

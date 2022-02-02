@@ -1,6 +1,7 @@
 @import 'scss/button.scss';
 @import 'scss/breakpoints.scss';
 @import 'scss/colors.scss';
+@import 'scss/focus.scss';
 @import 'scss/spacings.scss';
 
 $slot-width: 180px;
@@ -46,7 +47,6 @@ $slot-width: 180px;
         background: $teal !important;
         border-color: $teal !important;
         color: white !important;
-        width: 85px;
       }
     }
 
@@ -73,8 +73,7 @@ $slot-width: 180px;
 
           &:focus,
           &:focus-visible {
-            outline: none;
-            box-shadow: 0 0 3pt 2pt $teal;
+            @include focus($teal);
             border-color: $teal;
           }
         }

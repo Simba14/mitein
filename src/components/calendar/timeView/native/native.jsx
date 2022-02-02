@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react';
+import React, { useState } from 'react';
 import classnames from 'classnames/bind';
 import { useMutation, useQuery } from '@apollo/client';
 import { useTranslation } from 'next-i18next';
@@ -7,31 +7,31 @@ import { get } from 'lodash/fp';
 
 import Calendar, { DELETE_SELECTED } from 'components/calendar/timeView/shared';
 import Loading from 'components/loading';
-import GET_AVAILABILITY from '@graphql/queries/getSessions.graphql';
+import GET_AVAILABILITY from '@graphql/queries/getAvailability.graphql';
 import CREATE_SESSIONS from '@graphql/mutations/createSession.graphql';
 import DELETE_SESSIONS from '@graphql/mutations/deleteSessions.graphql';
-import { AVAILABLE, REJECTED } from 'constants/user';
+import { AVAILABLE } from '@constants/user';
 import useWindowDimensions from 'hooks/useWindowDimensions';
 import { getIsMobile } from 'helpers/index';
 
 import styles from './native.module.scss';
 const cx = classnames.bind(styles);
 
-const GET_SESSIONS_QUERY = 'GetSessions';
+const GET_AVAILABILITY_QUERY = 'GetAvailability';
 
-const NativeCalendar = ({ userId }) => {
+const NativeCalendar = ({ userId, userType }) => {
   const { t } = useTranslation('calendar');
 
   const [selectedEvents, setSelectedEvents] = useState([]);
   const [deleteAvailabilities] = useMutation(DELETE_SESSIONS);
   const [updateAvailability] = useMutation(CREATE_SESSIONS);
   const { data, loading, error } = useQuery(GET_AVAILABILITY, {
-    variables: { participant1Id: userId, notOneOf: [REJECTED] },
+    variables: { userId },
   });
   const { width } = useWindowDimensions();
   const isMobile = getIsMobile(width);
 
-  const availability = get('sessions', data);
+  const availability = get('availability', data);
 
   const onCreateEvent = ({ startStr, endStr }) => {
     updateAvailability({
@@ -40,8 +40,9 @@ const NativeCalendar = ({ userId }) => {
         status: AVAILABLE,
         start: startStr,
         end: endStr,
+        userType,
       },
-      refetchQueries: [GET_SESSIONS_QUERY],
+      refetchQueries: [GET_AVAILABILITY_QUERY],
     });
   };
 
@@ -65,7 +66,7 @@ const NativeCalendar = ({ userId }) => {
         headerToolbar={headerToolbar}
         onCreateEvent={onCreateEvent}
         onDelete={deleteAvailabilities}
-        refetchQueries={[GET_SESSIONS_QUERY]}
+        refetchQueries={[GET_AVAILABILITY_QUERY]}
         selectedEvents={selectedEvents}
         setSelectedEvents={setSelectedEvents}
       />
@@ -75,6 +76,7 @@ const NativeCalendar = ({ userId }) => {
 
 NativeCalendar.propTypes = {
   userId: string.isRequired,
+  userType: string.isRequired,
 };
 
 export default NativeCalendar;

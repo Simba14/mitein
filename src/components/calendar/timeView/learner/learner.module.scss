@@ -1,4 +1,5 @@
 @import 'scss/breakpoints.scss';
+@import 'scss/button.scss';
 @import 'scss/colors.scss';
 @import 'scss/spacings.scss';
 
@@ -14,11 +15,11 @@
     }
 
     .delete {
+      @extend %btn;
+
       display: none;
       align-self: flex-end;
       border-radius: 0.25em;
-      width: 85px;
-      height: size(5);
 
       @include mq($from: tablet) {
         display: block;

@@ -9,6 +9,9 @@ import Modal from 'components/modal';
 import styles from './confirmPopUp.module.scss';
 const cx = classnames.bind(styles);
 
+const TITLE_ID = 'confirmPopUpTitle';
+const DESC_ID = 'confirmPopUpTitle';
+
 const ConfirmPopUp = ({
   error,
   handleConfirmClick,
@@ -21,9 +24,16 @@ const ConfirmPopUp = ({
 
   return (
     <Modal open={modalOpen} onClose={() => setModalOpen(false)}>
-      <div className={cx('modal')}>
-        <h3 className={cx('heading')}>{t(`${namespace}.modal.title`)}</h3>
-        <div className={cx('disclaimer')}>
+      <div
+        role="dialog"
+        className={cx('modal')}
+        aria-labelledby={TITLE_ID}
+        aria-describedby={DESC_ID}
+      >
+        <h3 id={TITLE_ID} className={cx('heading')}>
+          {t(`${namespace}.modal.title`)}
+        </h3>
+        <div id={DESC_ID} className={cx('disclaimer')}>
           {t(`${namespace}.modal.disclaimer`)}
         </div>
         <Cta
@@ -31,9 +41,13 @@ const ConfirmPopUp = ({
           fullWidth
           onClick={handleConfirmClick}
           text={t(`${namespace}.modal.cta`)}
-          disabled={error}
+          disabled={Boolean(error)}
         />
-        {error && <div className={cx('error')}>{error}</div>}
+        {error && (
+          <div role="alert" className={cx('error')}>
+            {error}
+          </div>
+        )}
       </div>
     </Modal>
   );

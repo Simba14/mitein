@@ -30,6 +30,7 @@ const typeDefs = gql`
 
   type Session {
     id: ID!
+    availabilityId: ID
     start: String!
     end: String!
     link: String
@@ -91,15 +92,21 @@ const typeDefs = gql`
   }
 
   type Mutation {
-    addAvailability(start: String!, end: String!, userId: ID!): Availability
+    addAvailability(
+      start: String!
+      end: String!
+      userId: ID!
+      userType: UserType!
+    ): Availability
     deleteAvailability(ids: [ID!]!): Boolean
-    createSession(
+    createSessionsFromAvailability(
       participant1Id: ID
       participant2Id: ID
       status: EventStatus!
       start: String
       end: String
-    ): [Session]
+      userType: UserType!
+    ): Availability
     deleteSessions(ids: [ID!]!): Boolean
     updateSession(
       id: ID
@@ -118,7 +125,7 @@ const typeDefs = gql`
       email: String!
       password: String!
       displayName: String!
-      type: String!
+      type: UserType!
     ): User
     verifyEmail(token: String!): Boolean!
   }

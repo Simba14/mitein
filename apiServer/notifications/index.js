@@ -32,7 +32,7 @@ export const subscribeContactToNewsletter = async email => {
     )
     .catch(error => {
       const errorCode = get('code', error);
-      console.error({ errorCode, error });
+
       if (errorCode === MEMBER_EXISTS_CODE)
         throw new NewsletterEmailAlreadySubscribedError();
 

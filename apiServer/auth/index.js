@@ -1,7 +1,7 @@
 import User from '@api/firebase/user';
 import * as firebaseAuth from '@api/firebase/auth';
-import publishUserCreatedMessage from '@api/pubsub/publishers/publishUserCreatedMessage';
 import { FirebaseEmailAlreadyExistsError } from '@api/firebase/errors';
+import UserCreatedMessageHandler from '@api/pubsub/handlers/users/userCreatedMessageHandler';
 
 export const Auth = ({ firebase = firebaseAuth } = {}) => {
   const auth = {};
@@ -21,7 +21,7 @@ export const Auth = ({ firebase = firebaseAuth } = {}) => {
 
     if (!user) throw new FirebaseEmailAlreadyExistsError();
 
-    publishUserCreatedMessage(user);
+    UserCreatedMessageHandler({ message: { user } });
 
     return {
       ...user,
