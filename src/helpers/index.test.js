@@ -36,7 +36,7 @@ describe('isSpecifiedBreakpoint', () => {
     expect(
       isSpecifiedBreakpoint({
         breakpoint: MOBILE,
-        width: breakpoints.mobile,
+        width: breakpoints.tablet,
       }),
     ).toBe(false);
   });
