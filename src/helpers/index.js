@@ -1,7 +1,8 @@
 import breakpoints from '@constants/breakpoints';
 import { GERMAN } from '@constants/defaultOptions';
 
-export const getIsMobile = width => width <= breakpoints.mobile;
+export const isSpecifiedBreakpoint = ({ breakpoint, width }) =>
+  width <= breakpoints[breakpoint];
 
 const DE_LOCALE = 'de-DE';
 const EN_LOCALE = 'en-GB';

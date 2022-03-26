@@ -21,7 +21,7 @@
       align-self: flex-end;
       border-radius: 0.25em;
 
-      @include mq($from: tablet) {
+      @include mq($from: tabletWide) {
         display: block;
       }
     }
@@ -29,10 +29,5 @@
     .instructions {
       width: 80%;
     }
-  }
-
-  h2 {
-    font-family: 'LilGrotesk', sans-serif;
-    color: $blue;
   }
 }

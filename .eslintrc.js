@@ -27,4 +27,9 @@ module.exports = {
     quotes: ['error', 'single'],
     'prettier/prettier': 'error',
   },
+  settings: {
+    react: {
+      version: 'latest',
+    },
+  },
 };

@@ -13,7 +13,7 @@
     "start": "next start",
     "start-emulator": "CLOUD_RUNTIME_CONFIG=$(pwd)/functions/.runtimeconfig.json firebase emulators:start --import=./firebase-emulator-data --export-on-exit",
     "test": "jest",
-    "lint": "eslint src apiServer",
+    "lint": "eslint src",
     "lint-functions": "eslint ./functions",
     "serve-functions": "firebase emulators:start --only functions",
     "functions-shell": "firebase functions:shell",

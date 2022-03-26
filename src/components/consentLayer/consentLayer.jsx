@@ -4,6 +4,7 @@ import { useTranslation } from 'next-i18next';
 
 import Cta from 'components/cta';
 import Modal from 'components/modal';
+import Text, { HEADING_4 } from 'components/text';
 import { sessionProps, withSessionContext } from 'context/session';
 
 import styles from './consentLayer.module.scss';
@@ -47,8 +48,10 @@ const ConsentLayer = ({ session }) => {
     >
       <div className={cx('container')}>
         <div className={cx('text')}>
-          <h3 className={cx('heading')}>{t('heading')}</h3>
-          <div className={cx('description')}>{t('description')}</div>
+          <Text className={cx('heading')} tag="h3" type={HEADING_4}>
+            {t('heading')}
+          </Text>
+          <Text className={cx('description')}>{t('description')}</Text>
         </div>
         <div className={cx('actions')}>
           <Cta

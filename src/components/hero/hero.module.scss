@@ -9,7 +9,6 @@ $logo-width-desktop: 190px;
   position: relative;
   width: 100%;
   padding: size(3) size(4);
-  scroll-snap-align: start;
 
   .hero {
     display: flex;
@@ -40,7 +39,6 @@ $logo-width-desktop: 190px;
       position: relative;
       display: flex;
       align-items: center;
-      font-size: 32px;
       line-height: 1.6;
       color: white;
       max-width: 800px;
@@ -54,13 +52,13 @@ $logo-width-desktop: 190px;
 
       @include mq($from: tablet) {
         font-weight: normal;
-        font-size: 48px;
         line-height: 1.4;
       }
     }
 
     .comingSoon {
       color: $egg-shell;
+      z-index: 1;
 
       .logo {
         width: $logo-width-mobile;

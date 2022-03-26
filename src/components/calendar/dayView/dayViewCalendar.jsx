@@ -44,13 +44,14 @@ const Calendar = ({ locale, onClick, selectedDate, slots }) => {
     end: 'prev,next',
   };
 
+  console.log('IS DAY VIEW');
   return (
     <FullCalendar
       dateClick={handleDateClick}
       height="auto"
       locale={locale}
       eventClick={null}
-      eventOverlap={false}
+      // eventOverlap={false}
       fixedWeekCount={false}
       showNonCurrentDates={true}
       headerToolbar={headerToolbar}

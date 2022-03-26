@@ -1,5 +1,6 @@
 const React = require('react');
 const reactI18next = require('react-i18next');
+const { ENGLISH } = require('@constants/defaultOptions');
 
 const hasChildren = node =>
   node && (node.children || (node.props && node.props.children));
@@ -36,7 +37,7 @@ const renderNodes = reactNodes => {
 
 const useMock = [k => k, {}];
 useMock.t = k => k;
-useMock.i18n = {};
+useMock.i18n = { language: ENGLISH };
 
 module.exports = {
   Trans: ({ children }) =>

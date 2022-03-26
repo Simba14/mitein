@@ -2,13 +2,16 @@
   "sessionLink": "Open Zoom chat",
   "slots": {
     "title": "Request a session",
+    "cta": "Request Session",
     "step1": "1. Select an available date",
     "step2": "Request a time slot{{date}}",
     "step2Number": "2.",
     "noAvailability": "No availabile sessions for this date. Please select a different date in the calendar.",
     "note": "Note: only one session can be requested at a time.\nPlease choose a time slot that you can definitely commit to. You will receive an answer to your request in good time.",
     "noneAvailable": "No Available Slots",
-    "checkBack": "Check back here in the next few days.\nWe are working hard to partner with more Retirement homes and native speakers."
+    "checkBack": "Check back here in the next few days.\nWe are working hard to partner with more Retirement homes and native speakers.",
+    "alreadyRequested": "You have already requested a session. Check the status of it on your profile.",
+    "returnToProfile": "View profile"
   },
   "LEARNER": {
     "BOOKED": {

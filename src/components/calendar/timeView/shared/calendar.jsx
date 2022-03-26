@@ -129,10 +129,13 @@ const Calendar = ({
         locale={language}
         plugins={[interactionPlugin, timeGridPlugin]}
         select={handleCreateEvent}
+        selectOverlap={false}
+        selectLongPressDelay={250}
         selectMirror={true}
         selectable={true}
         slotMaxTime={MAX_TIME}
         slotMinTime={MIN_TIME}
+        stickyHeaderDates={false}
         unselectAuto={true}
         validRange={getValidRange}
         {...rest}

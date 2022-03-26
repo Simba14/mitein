@@ -18,7 +18,7 @@ import {
   PASSWORD_NOT_VALID,
 } from '@api/auth/errors';
 
-const notLoggeableErrors = [
+const notLoggableErrors = [
   ACCOUNT_NOT_FOUND,
   BAD_USER_INPUT,
   EMAIL_NOT_FOUND_ERROR_MESSAGE,
@@ -57,8 +57,8 @@ const maskSensitiveData = variables => {
   return variables;
 };
 
-const isLoggeable = error => {
-  if (notLoggeableErrors.includes(get('extensions.code', error))) {
+const isLoggable = error => {
+  if (notLoggableErrors.includes(get('extensions.code', error))) {
     return false;
   }
 
@@ -66,7 +66,7 @@ const isLoggeable = error => {
 };
 
 const logError = error => {
-  if (isLoggeable(error)) {
+  if (isLoggable(error)) {
     log('', 'error', error);
   } else {
     log('', 'debug', error);

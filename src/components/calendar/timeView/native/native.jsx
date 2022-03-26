@@ -12,7 +12,8 @@ import CREATE_SESSIONS from '@graphql/mutations/createSession.graphql';
 import DELETE_SESSIONS from '@graphql/mutations/deleteSessions.graphql';
 import { AVAILABLE } from '@constants/user';
 import useWindowDimensions from 'hooks/useWindowDimensions';
-import { getIsMobile } from 'helpers/index';
+import { isSpecifiedBreakpoint } from 'helpers/index';
+import { TABLET_WIDE } from '@constants/breakpoints';
 
 import styles from './native.module.scss';
 const cx = classnames.bind(styles);
@@ -29,7 +30,10 @@ const NativeCalendar = ({ userId, userType }) => {
     variables: { userId },
   });
   const { width } = useWindowDimensions();
-  const isMobile = getIsMobile(width);
+  const isSmallerViewport = isSpecifiedBreakpoint({
+    breakpoint: TABLET_WIDE,
+    width,
+  });
 
   const availability = get('availability', data);
 
@@ -49,7 +53,7 @@ const NativeCalendar = ({ userId, userType }) => {
   const headerToolbar = {
     start: 'title',
     end: `${selectedEvents.length ? `${DELETE_SELECTED} ` : ''}${
-      isMobile ? '' : 'today '
+      isSmallerViewport ? '' : 'today '
     }prev,next`,
   };
 
@@ -61,7 +65,7 @@ const NativeCalendar = ({ userId, userType }) => {
       <div className={cx('instructions')}>{t('instructions')}</div>
       <Calendar
         events={availability}
-        duration={isMobile ? 2 : 6}
+        duration={isSmallerViewport ? 2 : 6}
         fixedWeekCount={false}
         headerToolbar={headerToolbar}
         onCreateEvent={onCreateEvent}

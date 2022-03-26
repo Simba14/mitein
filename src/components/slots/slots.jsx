@@ -9,6 +9,7 @@ import classnames from 'classnames/bind';
 import Cta from 'components/cta';
 import ConfirmPopUp from 'components/confirmPopUp';
 import DayViewCalendar from 'components/calendar/dayView';
+import Text, { HEADING_4 } from 'components/text';
 import REQUEST_SESSION from '@graphql/mutations/updateSession.graphql';
 import GET_SLOTS from '@graphql/queries/getAvailableSlots.graphql';
 import { formatSessionDate, formatSessionTime } from 'helpers/index';
@@ -17,6 +18,8 @@ import { ROUTE_PROFILE } from 'routes';
 
 import styles from './slots.module.scss';
 const cx = classnames.bind(styles);
+
+const DROPDOWN_LABEL = 'timeDropdownLabel';
 
 map.convert({ cap: false });
 
@@ -27,6 +30,7 @@ const Slots = ({ userId, onSelect }) => {
   } = useTranslation('session', { keyPrefix: 'slots' });
 
   const router = useRouter();
+  const [modalOpen, setModalOpen] = useState(false);
   const [selectedDate, setSelectedDate] = useState(null);
   const [selectedSession, selectSession] = useState(null);
   const [sessionRequested, setSessionRequested] = useState(false);
@@ -35,6 +39,11 @@ const Slots = ({ userId, onSelect }) => {
   const { data, loading, error: getSlotsError } = useQuery(GET_SLOTS);
   const [requestSession] = useMutation(REQUEST_SESSION);
   const availableSlots = get('availableSlots', data);
+
+  const handleSelectSession = ({ target }) => {
+    const session = availableSlots.find(slot => slot.id === target.value);
+    selectSession(session);
+  };
 
   const handleConfirmClick = () => {
     requestSession({
@@ -53,7 +62,7 @@ const Slots = ({ userId, onSelect }) => {
       })
       .catch(e => {
         onSelect();
-        setRequestSessionError(get('graphqlErrors[0].message', e) || e.message);
+        setRequestSessionError(get('graphQLErrors[0].message', e) || e.message);
       });
   };
 
@@ -62,8 +71,10 @@ const Slots = ({ userId, onSelect }) => {
   if (getSlotsError || isEmpty(availableSlots))
     return (
       <div className={cx('noneAvailable')}>
-        <h3 className={cx('noneAvailableTitle')}>{t('noneAvailable')}</h3>
-        <div>{t('checkBack')}</div>
+        <Text className={cx('noneAvailableTitle')} tag="h3" type={HEADING_4}>
+          {t('noneAvailable')}
+        </Text>
+        <Text>{t('checkBack')}</Text>
       </div>
     );
   else {
@@ -79,7 +90,9 @@ const Slots = ({ userId, onSelect }) => {
         <div className={cx('note')}>{t('note')}</div>
         <section className={cx('selectionContainer')}>
           <div className={cx('calendar')}>
-            <h3 className={cx('step')}>{t('step1')}</h3>
+            <Text className={cx('step')} tag="h3" type={HEADING_4}>
+              {t('step1')}
+            </Text>
             <DayViewCalendar
               locale={language}
               onClick={setSelectedDate}
@@ -89,29 +102,48 @@ const Slots = ({ userId, onSelect }) => {
           </div>
           <div className={cx('requestSlot')}>
             <div className={cx('step2Container')}>
-              <h3 className={cx('step')}>{t('step2Number')}</h3>
-              <h3 className={cx('step')}>
+              <Text className={cx('step')} tag="h3" type={HEADING_4}>
+                {t('step2Number')}
+              </Text>
+              <Text
+                className={cx('step')}
+                tag="h3"
+                type={HEADING_4}
+                id={DROPDOWN_LABEL}
+              >
                 {t('step2', {
                   date:
                     selectedDate &&
                     ` for ${formatSessionDate(selectedDate, language)}`,
                 })}
-              </h3>
+              </Text>
             </div>
             {selectedDate ? (
               <div className={cx('slots')}>
-                {slots[selectedDate].map(slot => (
-                  <Cta
-                    className={cx('slot')}
-                    key={slot.id}
-                    onClick={() => selectSession(slot)}
-                    disabled={Boolean(sessionRequested)}
-                    text={formatSessionTime({
-                      start: slot.start,
-                      end: slot.end,
-                    })}
-                  />
-                ))}
+                <select
+                  aria-labelledby={DROPDOWN_LABEL}
+                  className={cx('dropdown')}
+                  default={slots[selectedDate][0]}
+                  disabled={Boolean(sessionRequested)}
+                  onSelect={handleSelectSession}
+                >
+                  {slots[selectedDate].map(slot => (
+                    <option
+                      key={slot.id}
+                      onClick={() => selectSession(slot)}
+                      value={slot.id}
+                    >
+                      {formatSessionTime({ start: slot.start, end: slot.end })}
+                    </option>
+                  ))}
+                </select>
+                <Cta
+                  className={cx('cta')}
+                  fullWidth
+                  onClick={() => setModalOpen(true)}
+                  disabled={Boolean(sessionRequested)}
+                  text={t('cta')}
+                />
               </div>
             ) : (
               <div>{t('noAvailability')}</div>
@@ -121,10 +153,9 @@ const Slots = ({ userId, onSelect }) => {
         <ConfirmPopUp
           error={requestSessionError}
           handleConfirmClick={handleConfirmClick}
-          modalOpen={Boolean(selectedSession)}
+          modalOpen={modalOpen}
           namespace={LEARNER}
-          setModalOpen={selectSession}
-          t={t}
+          setModalOpen={setModalOpen}
         />
       </div>
     );

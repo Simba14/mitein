@@ -4,7 +4,8 @@
 @import 'scss/focus.scss';
 @import 'scss/spacings.scss';
 
-$btn-width-small: 34px;
+$btn-width-small: 50px;
+$toolbar-mobile-height: 76px;
 
 .calendar {
   h2 {
@@ -19,13 +20,6 @@ $btn-width-small: 34px;
     border-color: $blue !important;
     color: white !important;
 
-    &.fc-next-button,
-    &.fc-prev-button {
-      @include mq($until: mobile) {
-        width: $btn-width-small;
-      }
-    }
-
     &:focus {
       @include focus($orange, 2pt, 1.5pt, true);
     }
@@ -33,6 +27,31 @@ $btn-width-small: 34px;
 
   div > div > div > div:last-of-type > button:not(:first-child) {
     margin-left: 2px !important;
+  }
+
+  // style toolbar for smaller viewports
+  @include mq($until: tablet) {
+    > div:first-child > div:first-child {
+      align-items: flex-end;
+      height: $toolbar-mobile-height;
+
+      > div:last-child {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+        justify-content: flex-end;
+
+        // delete button
+        > button {
+          margin-bottom: size(1.5);
+        }
+
+        // arrows
+        > div > button {
+          width: $btn-width-small;
+        }
+      }
+    }
   }
 
   a > div {
@@ -53,6 +72,6 @@ $btn-width-small: 34px;
   > div > div > div > table {
     background: white;
     border-radius: 15px 0px 0px;
-    font-size: 16px !important;
+    font-size: 1rem !important;
   }
 }

@@ -8,11 +8,13 @@ import { get } from 'lodash/fp';
 import Calendar, { DELETE_SELECTED } from 'components/calendar/timeView/shared';
 import Cta from 'components/cta';
 import Loading from 'components/loading';
+import Text, { HEADING_4 } from 'components/text';
 import GET_AVAILABILITY from '@graphql/queries/getAvailability.graphql';
 import CREATE_AVAILABILITY from '@graphql/mutations/addAvailability.graphql';
 import DELETE_AVAILABILITY from '@graphql/mutations/deleteAvailability.graphql';
 import useWindowDimensions from 'hooks/useWindowDimensions';
-import { getIsMobile } from 'helpers/index';
+import { isSpecifiedBreakpoint } from 'helpers/index';
+import { TABLET_WIDE } from '@constants/breakpoints';
 
 import styles from './learner.module.scss';
 
@@ -30,7 +32,10 @@ const LearnerCalendar = ({ userId, userType }) => {
     variables: { userId },
   });
   const { width } = useWindowDimensions();
-  const isMobile = getIsMobile(width);
+  const isSmallerViewport = isSpecifiedBreakpoint({
+    breakpoint: TABLET_WIDE,
+    width,
+  });
 
   const availability = get('availability', data);
 
@@ -58,7 +63,7 @@ const LearnerCalendar = ({ userId, userType }) => {
   if (loading) return <Loading />;
   if (error) return null;
 
-  const headerToolbar = isMobile
+  const headerToolbar = isSmallerViewport
     ? {
         start: selectedEvents.length ? DELETE_SELECTED : '',
         end: 'prev,next',
@@ -69,8 +74,10 @@ const LearnerCalendar = ({ userId, userType }) => {
     <section className={cx('calendar')}>
       <div className={cx('toolbar')}>
         <div>
-          <h3 className={cx('title')}>{t('availabilityTitle')}</h3>
-          <div className={cx('instructions')}>{t('availabilityNote')}</div>
+          <Text className={cx('title')} tag="h3" type={HEADING_4}>
+            {t('availabilityTitle')}
+          </Text>
+          <Text className={cx('instructions')}>{t('availabilityNote')}</Text>
         </div>
         <Cta
           className={cx('delete')}
@@ -81,7 +88,7 @@ const LearnerCalendar = ({ userId, userType }) => {
       </div>
       <Calendar
         dayHeaderFormat={{ weekday: 'long' }}
-        duration={isMobile ? 2 : 7}
+        duration={isSmallerViewport ? 2 : 7}
         events={availability}
         headerToolbar={headerToolbar}
         initialDate="Mon Oct 04 2021"

@@ -1,9 +1,8 @@
-import React, { useEffect } from 'react';
-import { useTranslation } from 'next-i18next';
+import React from 'react';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import classnames from 'classnames/bind';
-import { useRouter } from 'next/router';
 
+import Text, { BODY_4, HEADING_1, HEADING_4, HEADING_5 } from 'components/text';
 import { withLayout } from 'components/layout';
 
 import styles from './careers.module.scss';
@@ -43,11 +42,17 @@ const text = {
 const Careers = () => {
   return (
     <div className={cx('careers')}>
-      <h1 className={cx('heading')}>Become a Founder</h1>
-      <h3 className={cx('jobTitle')}>Position: Cofounder/*in</h3>
-      <div className={cx('paragraph')}>{text.paragraph1}</div>
-      <div className={cx('paragraph')}>{text.paragraph2}</div>
-      <h4 className={cx('subheading')}>{text.list1Title}</h4>
+      <Text className={cx('heading')} tag="h1" type={HEADING_1}>
+        Become a Founder
+      </Text>
+      <Text className={cx('jobTitle')} tag="h3" type={HEADING_4}>
+        Position: Cofounder/*in
+      </Text>
+      <Text className={cx('paragraph')}>{text.paragraph1}</Text>
+      <Text className={cx('paragraph')}>{text.paragraph2}</Text>
+      <Text className={cx('subheading')} tag="h4" type={HEADING_5}>
+        {text.list1Title}
+      </Text>
       <ul className={cx('list')}>
         {text.list1.map((item, index) => (
           <li className={cx('listItem')} key={`list1${index}`}>
@@ -55,7 +60,9 @@ const Careers = () => {
           </li>
         ))}
       </ul>
-      <h4 className={cx('subheading')}>{text.list2Title}</h4>
+      <Text className={cx('subheading')} tag="h4" type={HEADING_5}>
+        {text.list2Title}
+      </Text>
       <ul className={cx('list')}>
         {text.list2.map((item, index) => (
           <li className={cx('listItem')} key={`list2${index}`}>
@@ -63,9 +70,9 @@ const Careers = () => {
           </li>
         ))}
       </ul>
-      <div className={cx('apply')}>
-        If you're interested please reach out to info@mitein.de!
-      </div>
+      <Text className={cx('apply')} type={BODY_4}>
+        If you&apos;re interested please reach out to info@mitein.de!
+      </Text>
     </div>
   );
 };

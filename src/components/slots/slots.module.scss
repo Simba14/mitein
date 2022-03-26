@@ -1,17 +1,21 @@
 @import 'scss/button.scss';
 @import 'scss/breakpoints.scss';
 @import 'scss/colors.scss';
-@import 'scss/focus.scss';
+@import 'scss/constants.scss';
+@import 'scss/form.scss';
 @import 'scss/spacings.scss';
 
 $slot-width: 180px;
 
 .container {
   .selectionContainer {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    column-gap: size(3);
     width: 100%;
+
+    @include mq($from: tablet) {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      column-gap: size(3);
+    }
 
     .step2Container {
       display: flex;
@@ -29,8 +33,10 @@ $slot-width: 180px;
 
     .calendar {
       width: 100%;
+      margin-bottom: size(6);
 
       @include mq($from: tablet) {
+        margin-bottom: 0;
         margin-right: size(3);
       }
 
@@ -38,7 +44,7 @@ $slot-width: 180px;
         font-family: revert;
         color: $teal;
         display: inline;
-        font-size: 24px;
+        font-size: 1.5rem;
       }
 
       button {
@@ -53,29 +59,24 @@ $slot-width: 180px;
     .requestSlot {
       .slots {
         display: flex;
-        flex-wrap: wrap;
+        flex-direction: column;
 
-        .slot {
-          border: 1px solid black;
-          border-radius: size(3);
-          padding-left: size(3);
-          padding-right: size(3);
-          margin-right: size(3);
-          margin-bottom: size(2);
-          background: white;
-          color: black;
-          white-space: nowrap;
-          width: $slot-width;
+        @include mq($from: tablet) {
+          padding-top: size(0.75);
+        }
 
-          &:hover {
-            background: $light-grey;
+        @include mq($from: widescreen) {
+          .dropdown {
+            max-width: 80%;
           }
 
-          &:focus,
-          &:focus-visible {
-            @include focus($teal);
-            border-color: $teal;
+          .cta {
+            max-width: 80%;
           }
+        }
+
+        .dropdown {
+          @extend %formField;
         }
       }
     }

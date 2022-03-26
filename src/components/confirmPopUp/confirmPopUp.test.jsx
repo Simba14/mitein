@@ -2,7 +2,6 @@ import React from 'react';
 import { render, screen, userEvent } from 'testUtils';
 import ConfirmPopUp from './confirmPopUp';
 import { BACKDROP_LABEL } from 'components/modal';
-import { mockT } from 'unitTests/sharedMocks';
 
 test('ConfirmPopUp renders null when not open', () => {
   const onConfirm = jest.fn();
@@ -13,7 +12,6 @@ test('ConfirmPopUp renders null when not open', () => {
       handleConfirmClick={onConfirm}
       namespace={'default'}
       setModalOpen={setModalOpenMock}
-      t={mockT}
     />,
   );
 
@@ -30,7 +28,6 @@ test('ConfirmPopUp renders correctly when open with no error', () => {
       handleConfirmClick={onConfirm}
       namespace={'default'}
       setModalOpen={setModalOpenMock}
-      t={mockT}
     />,
   );
 
@@ -56,7 +53,6 @@ test('ConfirmPopUp renders correctly when open', () => {
       handleConfirmClick={onConfirm}
       namespace={'default'}
       setModalOpen={setModalOpenMock}
-      t={mockT}
     />,
   );
 
@@ -81,7 +77,6 @@ test('ConfirmPopUp user clicks calls the appropriate callbacks', () => {
       handleConfirmClick={onConfirm}
       namespace={'default'}
       setModalOpen={setModalOpenMock}
-      t={mockT}
     />,
   );
 

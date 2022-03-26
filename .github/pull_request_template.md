@@ -6,11 +6,9 @@
 
 _What problem are you trying to solve?_
 
-
 ## Solution
 
 _How did you solve the problem?_
-
 
 ## Before & After Screenshots
 
@@ -22,8 +20,8 @@ _How did you solve the problem?_
 
 [insert screenshot here]
 
-
 ## Checklist
+
 - [ ] Added / updated tests (Unit & Integration)
 - [ ] Integration tests passed on this branch
 - [ ] Locally tested

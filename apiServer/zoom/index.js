@@ -9,7 +9,7 @@ const payload = {
 };
 const token = jwt.sign(payload, config.zoom.apiSecret);
 
-export const generateZoomLink = (start) =>
+export const generateZoomLink = start =>
   axios({
     method: 'post',
     url: `${config.zoom.baseUrl}/users/${config.zoom.hostEmail}/meetings`,
@@ -26,10 +26,10 @@ export const generateZoomLink = (start) =>
       join_before_host: true,
     },
   })
-    .then((res) => {
+    .then(res => {
       console.log({ join: get('data.join_url', res), start });
       return get('data.join_url', res);
     })
-    .catch((error) => {
+    .catch(error => {
       console.log({ error });
     });

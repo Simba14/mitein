@@ -7,6 +7,11 @@
     "heading": "We don't have any tracking",
     "description": "but we do use cookies to make the site work as expected. Please provide your consent and confirmation that you are 16+ years old. You can find more details in our Terms of Service.",
     "confirmBtn": "Accept all",
-    "reject": "Reject all"
+    "reject": "Reject all",
+    "cookieSettings": "More info"
+  },
+  "suspended": {
+    "until": "ACCOUNT RESTRICTED: Due to exceeding the cancellation limit.\nYou will not be able to book any new sessions until {{date}}.",
+    "note": "Note: Any sessions you have booked already will still take place."
   }
 }

@@ -4,6 +4,7 @@ import { useTranslation } from 'next-i18next';
 import { GERMAN } from '@constants/defaultOptions';
 
 import Logo from 'assets/miteinanderEggshell.svg';
+import Text, { HEADING_2, HEADING_6 } from 'components/text';
 import styles from './hero.module.scss';
 const cx = classnames.bind(styles);
 
@@ -16,12 +17,18 @@ const Hero = () => {
   return (
     <div className={cx('wrapper')}>
       <div className={cx('hero')}>
-        <h2 className={cx('content', { german: language === GERMAN })}>
+        <Text
+          className={cx('content', { german: language === GERMAN })}
+          tag="h2"
+          type={HEADING_2}
+        >
           {t('description')}
-        </h2>
+        </Text>
         <div className={cx('comingSoon')}>
           <Logo className={cx('logo')} />
-          <h5 className={cx('text')}>{t('comingSoon')}</h5>
+          <Text className={cx('text')} tag="h5" type={HEADING_6}>
+            {t('comingSoon')}
+          </Text>
         </div>
       </div>
     </div>

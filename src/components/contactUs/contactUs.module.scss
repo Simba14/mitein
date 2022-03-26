@@ -3,14 +3,12 @@
 @import 'scss/spacings.scss';
 
 .contactUs {
-  font-size: size(4);
-  padding: size(8) 0;
+  padding: size(12) 0;
   color: $orange;
   text-align: center;
   width: 100%;
 
   @include mq($from: tablet) {
-    font-size: size(5);
     padding: size(15) 0;
   }
 

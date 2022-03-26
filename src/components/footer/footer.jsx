@@ -3,8 +3,7 @@ import { string } from 'prop-types';
 import classnames from 'classnames/bind';
 
 import Anchor from 'components/anchor';
-import FacebookIcon from 'assets/facebook.svg';
-import InstagramIcon from 'assets/instagram.svg';
+import Svg, { FB, INSTA } from 'components/svg';
 
 import styles from './footer.module.scss';
 const cx = classnames.bind(styles);
@@ -14,13 +13,11 @@ export const FB_URL = 'https://facebook.com/mitein.berlin';
 export const IG_URL = 'https://instagram.com/mitein.berlin';
 const SOCIALS = [
   {
-    key: 'facebook',
-    Icon: FacebookIcon,
+    key: FB,
     url: FB_URL,
   },
   {
-    key: 'instagram',
-    Icon: InstagramIcon,
+    key: INSTA,
     url: IG_URL,
   },
 ];
@@ -42,10 +39,9 @@ const Footer = ({ className }) => {
           </button>
         </div>
         <div className={cx('socials')}>
-          {SOCIALS.map(({ Icon, url, key }) => (
+          {SOCIALS.map(({ url, key }) => (
             <a className={cx('socialLink')} href={url} key={key}>
-              <Icon className={cx('socialLink')} aria-hidden="true" />
-              <span className={cx('socialLabel')}>{key}</span>
+              <Svg className={cx('socialLink')} aria-hidden="true" name={key} />
             </a>
           ))}
         </div>

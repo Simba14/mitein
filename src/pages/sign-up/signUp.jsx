@@ -39,7 +39,7 @@ const SignUp = ({ session }) => {
     signUp({
       variables: { accountType, displayName, email, password },
     }).catch(e => {
-      setError(get('graphqlErrors[0].message', e) || e.message);
+      setError(get('graphQLErrors[0].message', e) || e.message);
       setIsSigningUp(false);
     });
   };

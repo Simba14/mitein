@@ -1,6 +1,7 @@
 import React from 'react';
 import { appWithTranslation } from 'next-i18next';
 import { ApolloProvider } from '@apollo/client';
+import { AppProps } from 'next/app';
 
 import { client } from 'apollo/client';
 import { SessionContextProvider } from 'context/session';
@@ -32,5 +33,7 @@ const Mitein = ({ Component, pageProps }) => (
     </SessionContextProvider>
   </ApolloProvider>
 );
+
+Mitein.propTypes = AppProps;
 
 export default appWithTranslation(Mitein);

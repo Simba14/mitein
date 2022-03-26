@@ -14,23 +14,21 @@ import NativeCalendar from 'components/calendar/timeView/native';
 import Cta from 'components/cta';
 import Loading from 'components/loading';
 import SessionCard from 'components/sessionCard';
+import Suspended from 'components/suspended';
+import Text, { HEADING_2 } from 'components/text';
 import { withLayout } from 'components/layout';
 
 import { sessionProps, withSessionContext } from 'context/session';
 import GET_PROFILE from '@graphql/queries/getProfile.graphql';
 import SIGN_OUT from '@graphql/mutations/signOut.graphql';
 import { ROUTE_LOGIN, ROUTE_SESSIONS_BOOK } from 'routes';
-import { formatSessionDate } from 'helpers/index';
 import { LEARNER, NATIVE, BOOKED, REJECTED, REQUESTED } from '@constants/user';
 
 import styles from './profile.module.scss';
 const cx = classnames.bind(styles);
 
 const Profile = ({ session }) => {
-  const {
-    i18n: { language },
-    t,
-  } = useTranslation('profile');
+  const { t } = useTranslation('profile');
   const router = useRouter();
   const userId = get('userId', session);
   const { data, loading, error } = useQuery(GET_PROFILE, {
@@ -90,10 +88,12 @@ const Profile = ({ session }) => {
     <div className={cx('wrapper')}>
       <div className={cx('topContainer')}>
         <div>
-          <h1 className={cx('title')}>{t('title')}</h1>
-          <div>Email: {email}</div>
-          <div>Display Name: {displayName}</div>
-          <div>Account type: {type}</div>
+          <Text className={cx('title')} tag="h1" type={HEADING_2}>
+            {t('title')}
+          </Text>
+          <Text>Email: {email}</Text>
+          <Text>Display Name: {displayName}</Text>
+          <Text>Account type: {type}</Text>
         </div>
 
         <div>
@@ -110,14 +110,7 @@ const Profile = ({ session }) => {
           </Mutation>
         </div>
       </div>
-      {isSuspended && (
-        <div className={cx('suspended')}>
-          {t('suspendedUntil', {
-            date: formatSessionDate(suspendedUntil, language),
-          })}
-          <div className={cx('suspendedNote')}>{t('suspendedNote')}</div>
-        </div>
-      )}
+      {isSuspended && <Suspended suspendedUntil={suspendedUntil} />}
       {!isEmpty(bookedSessions) && (
         <Accordion
           className={cx('accordion')}
@@ -161,10 +154,10 @@ const Profile = ({ session }) => {
           text={'Request a Session'}
         />
       )}
-      {isNative && Boolean(!suspendedUntil) && (
+      {isNative && !isSuspended && (
         <NativeCalendar userId={userId} userType={type} />
       )}
-      {isLearner && Boolean(!suspendedUntil) && (
+      {isLearner && !isSuspended && (
         <LearnerCalendar userId={userId} userType={type} />
       )}
     </div>

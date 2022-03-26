@@ -27,7 +27,7 @@ const SignIn = ({ session }) => {
   const onLogin = useCallback(
     ({ email, password }) =>
       signIn({ variables: { email, password } }).catch(e => {
-        setError(get('graphqlErrors[0].message', e) || e.message);
+        setError(get('graphQLErrors[0].message', e) || e.message);
       }),
     [signIn, setError],
   );

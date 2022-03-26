@@ -36,7 +36,7 @@ export const getServerSideProps = async ({ locale }) => {
   });
 
   const organizations = get('data.volunteerWith', organizationsQuery);
-
+  console.log({ organizations });
   return {
     props: {
       className: cx('volunteerLayout'),

@@ -48,7 +48,6 @@ $icon-size: size(3);
     opacity: 0;
     padding: 0;
     visibility: hidden;
-    font-family: 'Cabin Sketch', sans-serif;
     height: $menu-height-desktop;
 
     @include mq($until: tablet) {
@@ -67,26 +66,22 @@ $icon-size: size(3);
       padding: size(4) 0;
 
       @include mq($from: tablet) {
-        padding: size(3) 0;
+        padding: size(2.5) 0;
       }
     }
 
     .navItem {
       color: $dark-blue;
-      font-size: 18px;
-      line-height: 18px;
       text-transform: uppercase;
       opacity: 1;
 
       @include mq($until: tablet) {
         &:not(:last-child) {
-          margin-bottom: size(4);
+          margin-bottom: size(3);
         }
       }
 
       @include mq($from: tablet) {
-        font-size: 14px;
-
         &:not(:last-child) {
           margin-right: size(3);
         }

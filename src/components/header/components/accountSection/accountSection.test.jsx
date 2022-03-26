@@ -1,21 +1,20 @@
 import React from 'react';
 import { render, screen, waitFor } from 'testUtils';
-import { MOCK_EMAIL } from 'unitTests/sharedMocks';
+import { MOCK_EMAIL, MOCK_ID } from 'unitTests/sharedMocks';
 import AccountSection from './accountSection';
 import GET_EMAIL from '@graphql/queries/getEmail.graphql';
 import { ROUTE_LOGIN, ROUTE_PROFILE, ROUTE_SIGN_UP } from 'routes';
 
-const USER_ID_MOCK = '1';
 const VALID_EMAIL_MOCK = {
   request: {
     query: GET_EMAIL,
     variables: {
-      id: USER_ID_MOCK,
+      id: MOCK_ID,
     },
   },
   result: {
     data: {
-      user: { id: USER_ID_MOCK, email: MOCK_EMAIL },
+      user: { id: MOCK_ID, email: MOCK_EMAIL },
     },
   },
 };
@@ -24,7 +23,7 @@ const INVALID_EMAIL_MOCK = {
   request: {
     query: GET_EMAIL,
     variables: {
-      id: USER_ID_MOCK,
+      id: MOCK_ID,
     },
   },
   result: {
@@ -33,7 +32,7 @@ const INVALID_EMAIL_MOCK = {
 };
 
 test('AccountSection correctly renders when user logged in and loading', () => {
-  const sessionMock = { userId: USER_ID_MOCK };
+  const sessionMock = { userId: MOCK_ID };
   render(<AccountSection session={sessionMock} />, {
     mocks: [VALID_EMAIL_MOCK],
   });
@@ -44,7 +43,7 @@ test('AccountSection correctly renders when user logged in and loading', () => {
 });
 
 test('AccountSection correctly renders when user logged in and valid response', async () => {
-  const sessionMock = { userId: USER_ID_MOCK };
+  const sessionMock = { userId: MOCK_ID };
   render(<AccountSection session={sessionMock} />, {
     mocks: [VALID_EMAIL_MOCK],
   });
@@ -59,7 +58,7 @@ test('AccountSection correctly renders when user logged in and valid response', 
 });
 
 test('AccountSection correctly renders when userId exists but with invalid response', async () => {
-  const sessionMock = { userId: USER_ID_MOCK };
+  const sessionMock = { userId: MOCK_ID };
   render(<AccountSection session={sessionMock} />, {
     mocks: [INVALID_EMAIL_MOCK],
   });

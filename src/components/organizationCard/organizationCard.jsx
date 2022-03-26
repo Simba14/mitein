@@ -1,54 +1,68 @@
 import React from 'react';
 import { arrayOf, any, bool, shape, func, string } from 'prop-types';
 import { map } from 'lodash';
+import classnames from 'classnames/bind';
 
 import Svg from 'components/svg';
+import Text, { BODY_6, HEADING_5 } from 'components/text';
 import styles from './organizationCard.module.scss';
 
+const cx = classnames.bind(styles);
 const TYPENAME = '__typename';
 
 const OrganizationCard = ({ loading, organization, t }) => {
   return (
-    <div className={styles.organization}>
-      <div className={`${styles.info}, ${loading ? styles.loading : ''}`}>
+    <li className={cx('organization')}>
+      <div className={cx('info', { loading })}>
         <div
-          className={styles.logo}
+          className={cx('logo')}
           style={{ backgroundImage: `url(${organization.logo})` }}
           role="img"
-          aria-label={`logo - ${organization.name}`}
+          aria-label={`logo - ${organization.name || 'loading'}`}
         />
-        <div className={styles.name}>{organization.name}</div>
-        <div className={styles.description}>{organization.description}</div>
-        <div className={styles.tags}>
-          <div className={styles.tag}>{organization.city}</div>
+        <Text className={cx('name')} tag="h4" type={HEADING_5}>
+          {organization.name}
+        </Text>
+        <Text className={cx('description')} type={BODY_6}>
+          {organization.description}
+        </Text>
+        <ul className={cx('tags')}>
+          <li className={cx('tag')}>
+            <Text type={BODY_6}>{organization.city}</Text>
+          </li>
           {organization.tags &&
-            organization.tags.map((tag) => (
-              <div key={`tag: ${tag}`} className={styles.tag}>
-                {tag}
-              </div>
+            organization.tags.map(tag => (
+              <li key={`tag: ${tag}`} className={cx('tag')}>
+                <Text type={BODY_6}>{tag}</Text>
+              </li>
             ))}
-        </div>
+        </ul>
         {organization.socials &&
           map(organization.socials, (value, key) =>
-            value && key !== TYPENAME ? (
+            key !== TYPENAME ? (
               <a
-                className={styles.socialLink}
+                className={cx('socialLink')}
                 key={`${organization.name} ${key}`}
                 href={value}
                 target="_blank"
                 rel="noreferrer"
               >
-                <Svg className={styles.socialIcon} name={key} />
+                <Svg className={cx('socialIcon')} name={key} />
               </a>
             ) : null,
           )}
       </div>
       {organization.website && (
-        <a className={styles.website} href={organization.website}>
+        <a
+          className={cx('website')}
+          href={organization.website}
+          target="_blank"
+          rel="noreferrer"
+        >
           {t('learnMore')}
         </a>
       )}
-    </div>
+    </li>
   );
 };
 
@@ -57,6 +71,7 @@ OrganizationCard.defaultProps = {
   organization: {
     name: null,
     city: null,
+    description: null,
     logo: null,
     website: null,
     socials: null,
@@ -68,6 +83,7 @@ OrganizationCard.propTypes = {
   loading: bool,
   organization: shape({
     name: string,
+    description: string,
     city: string,
     logo: string,
     socials: any,
