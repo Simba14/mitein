@@ -163,7 +163,7 @@ const content = [
       'To send you marketing and promotional communications. We may process the personal information you send to us for our marketing purposes, if this is in accordance with your marketing preferences. You can opt out of our marketing emails at any time. For more information, see "WHAT ARE YOUR PRIVACY RIGHTS?" below).',
       'To protect our Services. We may process your information as part of our efforts to keep our Services safe and secure, including fraud monitoring and prevention.',
       'To identify usage trends. We may process information about how you use our Services to better understand how they are being used so we can improve them.',
-      "To save or protect an individual's vital interest. We may process your information when necessary to save or protect an individual’s vital interest, such as to prevent harm.",
+      "To save or protect an individual's vital interest. We may process your information when necessary to save or protect an individual’s vital interest, such as to prevent harm.", // eslint-disable-line quotes
     ],
     type: LIST,
   },
