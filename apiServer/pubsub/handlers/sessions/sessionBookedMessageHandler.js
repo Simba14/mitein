@@ -11,6 +11,7 @@ const SessionBookedMessageHandler = ({
   const {
     participant: { displayLanguage, email },
     session: { start, end, link },
+    topics,
   } = message;
 
   const {
@@ -23,12 +24,14 @@ const SessionBookedMessageHandler = ({
 
   const date = formatSessionDate(start);
   const time = formatSessionTime({ start, end });
+
   return sendConfirmationEmail({
     emails: [{ email }],
     params: {
       date,
       link,
       time,
+      topics,
     },
     templateId,
   });

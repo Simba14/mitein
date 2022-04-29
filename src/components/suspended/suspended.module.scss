@@ -1,12 +1,6 @@
-@import 'scss/colors.scss';
 @import 'scss/spacings.scss';
 
 .suspended {
-  background: $red-background;
-  color: $red;
-  padding: size(3);
-  margin-bottom: size(3);
-  white-space: break-spaces;
   text-align: center;
 
   .suspendedNote {

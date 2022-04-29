@@ -1,0 +1,31 @@
+@import 'scss/colors.scss';
+@import 'scss/spacings.scss';
+
+.box {
+  color: black;
+  background: $light-grey;
+  padding: size(4);
+  margin-bottom: size(4);
+  white-space: pre-wrap;
+  width: 100%;
+
+  &.info {
+    background: $egg-shell;
+  }
+
+  &.tip {
+    background: $sky;
+  }
+
+  &.alert {
+    background: $red-background;
+  }
+
+  &.warning {
+    background: $orange;
+  }
+
+  &.success {
+    background: $green-background;
+  }
+}

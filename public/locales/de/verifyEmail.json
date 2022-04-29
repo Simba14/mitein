@@ -1,10 +1,10 @@
 {
-  "emailVerified": "Ihre E-Mail Adresse wurde überprüft.",
-  "featuresEnabled": "Sie werden nun alle Funktionen von Mitein nutzen können",
+  "emailVerified": "Ihre E-Mail-Adresse wurde überprüft.",
+  "featuresEnabled": "Sie können nun alle Funktionen von Mitein nutzen",
   "redirect": "Jetzt eine Sitzung buchen",
   "invalidToken": {
     "title": "Token ungültig",
-    "description": "Ihre E-Mail Adresse wurde nicht verifiziert",
+    "description": "Ihre E-Mail-Adresse wurde nicht verifiziert.",
     "cta": "Verifizierungs-E-Mail erneut senden"
   }
 }

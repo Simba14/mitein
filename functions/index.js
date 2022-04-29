@@ -2,39 +2,42 @@ const functions = require('firebase-functions');
 const { initializeApp, applicationDefault } = require('firebase-admin/app');
 const { getFirestore } = require('firebase-admin/firestore');
 const { sendEmail } = require('./notifications/sendEmail');
+const { getUsersWithAvailabilityMatch } = require('./helpers');
+
+const DATABASE_URL = 'https://mitein-3c0d1.firebaseio.com';
 
 initializeApp({
   credential: applicationDefault(),
-  databaseURL: 'https://mitein-3c0d1.firebaseio.com',
+  databaseURL: DATABASE_URL,
 });
 
 const db = getFirestore();
 
-const { PubSub } = require('@google-cloud/pubsub');
-const { getUsersWithAvailabilityMatch } = require('./helpers');
+// Comment out the below to test the scheduled function locally
+// const { PubSub } = require('@google-cloud/pubsub');
 
-const pubsub = new PubSub({
-  projectId: 'mitein-3c0d1',
-  apiEndpoint: 'localhost:8085',
-});
+// const pubsub = new PubSub({
+//   projectId: 'mitein-3c0d1',
+//   apiEndpoint: 'localhost:8085',
+// });
 
-const SCHEDULED_FUNCTION_TOPIC =
-  'firebase-schedule-scheduledAvailableSessionsNotification';
+// const SCHEDULED_FUNCTION_TOPIC =
+//   'firebase-schedule-scheduledAvailableSessionsNotification';
 
-setInterval(async () => {
-  console.log(
-    `Trigger scheduled function via PubSub topic: ${SCHEDULED_FUNCTION_TOPIC}`,
-  );
-  const msg = await pubsub
-    .topic(SCHEDULED_FUNCTION_TOPIC)
-    .publishJSON(
-      {
-        foo: 'bar',
-      },
-      { attr1: 'value1' },
-    )
-    .catch(error => console.log({ error }));
-}, 1 * 60 * 1000);
+// setInterval(async () => {
+//   console.log(
+//     `Trigger scheduled function via PubSub topic: ${SCHEDULED_FUNCTION_TOPIC}`,
+//   );
+//   const msg = await pubsub
+//     .topic(SCHEDULED_FUNCTION_TOPIC)
+//     .publishJSON(
+//       {
+//         foo: 'bar',
+//       },
+//       { attr1: 'value1' },
+//     )
+//     .catch(error => console.log({ error }));
+// }, 1 * 60 * 1000);
 
 const AVAILABILITY = 'availability';
 const LEARNER = 'LEARNER';
@@ -93,8 +96,8 @@ exports.scheduledAvailableSessionsNotification = functions.pubsub
       functions.config().sendinblue.template_session_available_en,
     );
 
-    // return sendEmail({
-    //   to: emails,
-    //   templateId,
-    // });
+    return sendEmail({
+      to: emails,
+      templateId,
+    });
   });

@@ -44,7 +44,6 @@ const Calendar = ({ locale, onClick, selectedDate, slots }) => {
     end: 'prev,next',
   };
 
-  console.log('IS DAY VIEW');
   return (
     <FullCalendar
       dateClick={handleDateClick}

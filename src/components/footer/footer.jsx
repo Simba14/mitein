@@ -1,9 +1,12 @@
 import React from 'react';
 import { string } from 'prop-types';
 import classnames from 'classnames/bind';
+import { useTranslation } from 'next-i18next';
 
 import Anchor from 'components/anchor';
 import Svg, { FB, INSTA } from 'components/svg';
+import Text from 'components/text';
+import { ROUTE_PRIVACY, ROUTE_TERMS } from 'routes';
 
 import styles from './footer.module.scss';
 const cx = classnames.bind(styles);
@@ -23,11 +26,12 @@ const SOCIALS = [
 ];
 
 const Footer = ({ className }) => {
+  const { t } = useTranslation('common');
   return (
     <footer className={cx('footer', className)}>
       <div className={cx('content')}>
-        <div>
-          <div>Mitein 2021</div>
+        <div className={cx('companyInfo')}>
+          <Text>{t('miteinWithYear')}</Text>
           <Anchor href={`mailto: ${INFO_EMAIL}`}>{INFO_EMAIL}</Anchor>
         </div>
         <div className={cx('legal')}>
@@ -35,8 +39,10 @@ const Footer = ({ className }) => {
             id="ot-sdk-btn"
             className={`ot-sdk-show-settings ${cx('cookies')}`}
           >
-            Cookie Settings
+            {t('cookies')}
           </button>
+          <Anchor to={ROUTE_PRIVACY}>{t('privacy')}</Anchor>
+          <Anchor to={ROUTE_TERMS}>{t('terms')}</Anchor>
         </div>
         <div className={cx('socials')}>
           {SOCIALS.map(({ url, key }) => (

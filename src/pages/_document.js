@@ -97,9 +97,9 @@ class MyDocument extends Document {
             src="https://cdn.cookielaw.org/scripttemplates/otSDKStub.js"
             type="text/javascript"
             charSet="UTF-8"
-            data-domain-script="6eea10bb-218f-4159-ba6b-33ff34977e58-test"
+            data-domain-script="6eea10bb-218f-4159-ba6b-33ff34977e58"
           ></script>
-          <script type="text/javascript">function OptanonWrapper() {}</script>
+          <script type="text/javascript">{function OptanonWrapper() {}}</script>
           {/* OneTrust Cookies Consent Notice end for mitein.de --> */}
         </Head>
         <body>

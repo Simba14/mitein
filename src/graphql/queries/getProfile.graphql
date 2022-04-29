@@ -12,6 +12,7 @@ query Profile($id: ID!) {
     id
     displayName
     email
+    interests
     suspendedUntil
     type
   }

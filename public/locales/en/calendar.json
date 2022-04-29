@@ -1,6 +1,6 @@
 {
   "deleteSelected": "Delete",
   "instructions": "Select your availability for chats in the calendar below. This will allow other users to see your availability anonymously and request sessions with you. Any requests will immediately appear above, which will then require your confirmation.",
-  "availabilityTitle": "Add your availability",
+  "availabilityTitle": "When are you available?",
   "availabilityNote": "Select your availability for chats in the calendar below. You will then be notified when a chat at one of those times becomes available."
 }

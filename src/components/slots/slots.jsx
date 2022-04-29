@@ -9,6 +9,7 @@ import classnames from 'classnames/bind';
 import Cta from 'components/cta';
 import ConfirmPopUp from 'components/confirmPopUp';
 import DayViewCalendar from 'components/calendar/dayView';
+import Notice, { ALERT } from 'components/notice';
 import Text, { HEADING_4 } from 'components/text';
 import REQUEST_SESSION from '@graphql/mutations/updateSession.graphql';
 import GET_SLOTS from '@graphql/queries/getAvailableSlots.graphql';
@@ -41,6 +42,7 @@ const Slots = ({ userId, onSelect }) => {
   const availableSlots = get('availableSlots', data);
 
   const handleSelectSession = ({ target }) => {
+    if (!target.selectedIndex) return;
     const session = availableSlots.find(slot => slot.id === target.value);
     selectSession(session);
   };
@@ -87,7 +89,7 @@ const Slots = ({ userId, onSelect }) => {
 
     return (
       <div className={cx('container')}>
-        <div className={cx('note')}>{t('note')}</div>
+        <Notice type={ALERT}>{t('note')}</Notice>
         <section className={cx('selectionContainer')}>
           <div className={cx('calendar')}>
             <Text className={cx('step')} tag="h3" type={HEADING_4}>
@@ -125,8 +127,9 @@ const Slots = ({ userId, onSelect }) => {
                   className={cx('dropdown')}
                   default={slots[selectedDate][0]}
                   disabled={Boolean(sessionRequested)}
-                  onSelect={handleSelectSession}
+                  onChange={handleSelectSession}
                 >
+                  <option value={null}>{t('defaultOption')}</option>
                   {slots[selectedDate].map(slot => (
                     <option
                       key={slot.id}
@@ -141,7 +144,7 @@ const Slots = ({ userId, onSelect }) => {
                   className={cx('cta')}
                   fullWidth
                   onClick={() => setModalOpen(true)}
-                  disabled={Boolean(sessionRequested)}
+                  disabled={Boolean(sessionRequested || !selectedSession)}
                   text={t('cta')}
                 />
               </div>

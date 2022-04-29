@@ -3,9 +3,11 @@
 @import 'scss/constants.scss';
 @import 'scss/spacings.scss';
 
-.careers {
+.container {
   max-width: $content-max-width;
   margin: auto;
+  margin-bottom: size(8);
+  line-height: 2;
 
   .heading {
     background: $egg-shell;
@@ -14,18 +16,17 @@
     padding: size(3) 0;
   }
 
-  .jobTitle {
-    margin-bottom: size(4);
+  .title {
+    margin-bottom: size(2);
   }
 
-  .subheading {
+  .subtitle {
     color: $blue;
     margin-bottom: size(2);
   }
 
-  .apply {
+  .emphasize {
     font-weight: bold;
-    margin-bottom: size(8);
   }
 
   .paragraph {
@@ -34,15 +35,17 @@
 
   .list {
     margin-bottom: size(4);
+    padding-inline-start: size(2);
 
-    .list-item {
+    .listItem {
       display: list-item;
     }
   }
 
   .paragraph,
   .list,
-  .apply {
+  .emphasize,
+  .sentence {
     line-height: 2;
   }
 }

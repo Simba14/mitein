@@ -25,7 +25,13 @@ export const SessionContextProvider = ({
 
   const getConsentRecorded = () => {
     const consentRecordedCookie = cookie.get(cookieConsentRecordedIdentifier);
-    return Boolean(consentRecordedCookie);
+    let consentRecordedStorage;
+    if (typeof window !== 'undefined') {
+      consentRecordedStorage = localStorage.getItem(
+        cookieConsentRecordedIdentifier,
+      ); // for incognito mode
+    }
+    return Boolean(consentRecordedCookie || consentRecordedStorage);
   };
 
   const [userId, setUserId] = useState(getUserId());
@@ -49,6 +55,7 @@ export const SessionContextProvider = ({
 
   const onConsentSelection = () => {
     setConsentRecorded(true);
+    localStorage.setItem(cookieConsentRecordedIdentifier, true);
   };
 
   return (

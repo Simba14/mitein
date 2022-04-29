@@ -52,6 +52,9 @@ export default {
     listId: Number(process.env.SENDINBLUE_LIST_ID),
     template: {
       de: {
+        sessionCancellation: Number(
+          process.env.SENDINBLUE_TEMPLATE_SESSION_CANCELLATION_DE,
+        ),
         sessionConfirmation: Number(
           process.env.SENDINBLUE_TEMPLATE_SESSION_CONFIRMATION_DE,
         ),
@@ -65,6 +68,9 @@ export default {
       en: {
         sessionAvailable: Number(
           process.env.SENDINBLUE_TEMPLATE_SESSION_AVAILABLE_EN,
+        ),
+        sessionCancellation: Number(
+          process.env.SENDINBLUE_TEMPLATE_SESSION_CANCELLATION_EN,
         ),
         sessionConfirmation: Number(
           process.env.SENDINBLUE_TEMPLATE_SESSION_CONFIRMATION_EN,

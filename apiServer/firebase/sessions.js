@@ -124,8 +124,14 @@ Sessions.onConfirmation = async session => {
     User.byId(participant2Id),
   ]);
 
-  participants.forEach(participant =>
-    SessionBookedMessageHandler({ message: { participant, session } }),
+  participants.forEach((participant, index) =>
+    SessionBookedMessageHandler({
+      message: {
+        participant,
+        session,
+        topics: participants[index ? 0 : 1]?.interests,
+      },
+    }),
   );
 };
 

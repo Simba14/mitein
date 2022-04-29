@@ -8,6 +8,7 @@ import {
   SESSION_STATUS_BOOKED,
   SESSION_STATUS_REQUESTED,
 } from '@api/firebase/constants';
+import SessionCancellationMessageHandler from '@api/pubsub/handlers/sessions/sessionCancellationMessageHandler';
 
 const createSessions = async ({
   availabilityId,
@@ -93,7 +94,14 @@ const SessionsMutation = {
     return Promise.all(deleteActions).then(() => true);
   },
   updateSession: async (parent, { id, ...fields }, context, info) => {
-    const { cancellationReason, cancelledBy, participant2Id, status } = fields;
+    const {
+      cancellationReason,
+      cancelledBy,
+      participant1Id,
+      participant2Id,
+      status,
+    } = fields;
+
     if (id) {
       if (status === SESSION_STATUS_BOOKED) {
         const bookedSession = await Sessions.book({
@@ -115,6 +123,7 @@ const SessionsMutation = {
           id,
           fields,
         });
+
         return requestedSession;
       }
 
@@ -126,6 +135,17 @@ const SessionsMutation = {
       });
 
       if (cancellationReason && cancelledBy) {
+        const cancelledOnUserId =
+          cancelledBy !== participant1Id ? participant1Id : participant2Id;
+        const cancelledOnUser = await User.byId(cancelledOnUserId);
+
+        SessionCancellationMessageHandler({
+          message: {
+            participant: cancelledOnUser,
+            session,
+          },
+        });
+
         await User.updateCancellations({
           sessionId: id,
           userId: cancelledBy,

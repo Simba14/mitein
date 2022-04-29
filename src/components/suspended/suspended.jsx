@@ -6,6 +6,7 @@ import { useTranslation } from 'next-i18next';
 import Text from 'components/text';
 import { formatSessionDate } from 'helpers/index';
 import styles from './suspended.module.scss';
+import Notice, { ALERT } from 'components/notice';
 
 const cx = classnames.bind(styles);
 
@@ -16,14 +17,14 @@ const Suspended = ({ suspendedUntil }) => {
   } = useTranslation('common', { keyPrefix: 'suspended' });
 
   return (
-    <div className={cx('suspended')}>
+    <Notice className={cx('suspended')} type={ALERT}>
       <Text>
         {t('until', {
           date: formatSessionDate(suspendedUntil, locale),
         })}
       </Text>
       <Text className={cx('suspendedNote')}>{t('note')}</Text>
-    </div>
+    </Notice>
   );
 };
 

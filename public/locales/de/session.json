@@ -1,56 +1,57 @@
 {
-  "sessionLink": "Click here to open Zoom chat",
+  "sessionLink": "Hier klicken, um den Zoom-Chat zu öffnen",
   "slots": {
-    "title": "Request a session",
-    "cta": "Request Session",
-    "step1": "1. Select an available date",
-    "step2": "Request a time{{date}}",
+    "title": "Eine Sitzung anfragen",
+    "cta": "Sitzung anfragen",
+    "defaultOption": "Bitte wählen Sie eine Zeit",
+    "step1": "1. Wählen Sie ein verfügbares Datum",
+    "step2": "Fragen Sie die gewünschte Zeit an{{date}}",
     "step2Number": "2.",
-    "noAvailability": "No availabile sessions for this date. Please select a different date in the calendar.",
-    "note": "Note: only one session can be requested at a time. Please choose a\n    time slot that you can definitely commit to. You will receive an\n    answer to your request in good time.",
-    "noneAvailable": "No Available Slots",
-    "checkBack": "Check back here in the next few days.\nWe are working hard to partner with more Retirement homes and native speakers.",
-    "alreadyRequested": "You have already requested a session. Check the status of it on your profile.",
-    "returnToProfile": "View profile"
+    "noAvailability": "Es sind keine Sitzungen an diesem Datum verfügbar. Bitte wählen Sie ein anderes Datum im Kalender.",
+    "note": "Hinweis: Es kann jeweils nur eine Sitzung angefragt werden.\n Bitte wählen Sie ein Zeitfenster, das Sie mit Sicherheit wahrnehmen können. Sie bekommen rechtzeitig eine Antwort auf Ihre Anfrage.",
+    "noneAvailable": "Keine Sitzungen verfügbar",
+    "checkBack": "Schauen Sie in den nächsten Tagen nochmal rein.\nWir arbeiten intensiv daran, mit weiteren Seniorenheimen und Muttersprachler:innen zu kooperieren.",
+    "alreadyRequested": "Sie haben bereits eine Anfrage gestellt. Überprüfen Sie den Status in Ihrem Profil.",
+    "returnToProfile": "Profil ansehen"
   },
   "LEARNER": {
     "BOOKED": {
-      "title": "Session booked for:",
-      "cancelCta": "Cancel session"
+      "title": "Sitzung gebucht für:",
+      "cancelCta": "Sitzung stornieren"
     },
     "REQUESTED": {
-      "title": "Session Requested for:",
-      "cancelCta": "Cancel session",
-      "moreInfo": "You will be notified via email as soon as your request has a response"
+      "title": "Sitzung angefragt für:",
+      "cancelCta": "Sitzung stornieren",
+      "moreInfo": "Sie bekommen eine E-Mail, sobald Ihre Anfrage beantwortet wurde"
     },
     "REJECTED": {
-      "title": "Session Unavailable:",
-      "moreInfo": "This session is no longer available. Please request another one."
+      "title": "Sitzung nicht verfügbar:",
+      "moreInfo": "Diese Sitzung ist nicht mehr verfügbar. Bitte stellen Sie eine neue Anfrage."
     },
     "modal": {
-      "title": "Are you sure?",
-      "disclaimer": "Request the session only if you defininitely can attend.\nMitein is a charity and free service. Cancellations make our life tough.\nTherefore, we only allow one cancellation per user once a session is booked.",
-      "cta": "Request session"
+      "title": "Sind Sie sicher?",
+      "disclaimer": "Stellen Sie die Anfrage für die Sitzung nur, wenn Sie ganz sicher daran teilnehmen können.\nMitein ist eine gemeinnützige und kostenlose Plattform. Stornierungen machen uns das Leben schwer.\nDeshalb erlauben wir nur eine Stornierung pro Nutzer:in, sobald eine Sitzung gebucht wurde.",
+      "cta": "Sitzung anfragen"
     }
   },
   "NATIVE": {
     "BOOKED": {
-      "title": "Session booked for:",
-      "cancelCta": "Cancel session"
+      "title": "Sitzung gebucht für:",
+      "cancelCta": "Sitzung stornieren"
     },
     "REQUESTED": {
-      "title": "Session Requested for:",
-      "confirmCta": "Confirm session",
-      "cancelCta": "Cancel request"
+      "title": "Sitzung angefragt für:",
+      "confirmCta": "Sitzung bestätigen",
+      "cancelCta": "Sitzung stornieren"
     },
     "REJECTED": {
-      "title": "Session Declined:",
-      "moreInfo": "You declined this session. It is now no longer scheduled or available"
+      "title": "Sitzung abgesagt:",
+      "moreInfo": "Sie haben diese Sitzung abgesagt. Sie ist nicht mehr geplant oder verfügbar."
     },
     "modal": {
-      "title": "Are you sure?",
-      "disclaimer": "Click confirm only if you defininitely can attend.\nMitein is a charity and free service. Cancellations make our life tough.\nTherefore, we only allow one cancellation per user.",
-      "cta": "Confirm session"
+      "title": "Sind Sie sicher?",
+      "disclaimer": "Bitte bestätigen Sie nur, wenn Sie ganz sicher teilnehmen können.\nMitein ist eine gemeinnützige und kostenlose Plattform. Stornierungen machen uns das Leben schwer.\nDeshalb erlauben wir nur eine Stornierung pro Nutzer:in.",
+      "cta": "Sitzung bestätigen"
     }
   }
 }

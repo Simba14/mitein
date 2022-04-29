@@ -53,11 +53,17 @@ const typeDefs = gql`
     email: String
     isEmailVerified: Boolean
     id: ID!
+    interests: [String]
     name: String
     phoneNumber: String
     suspendedUntil: String
     cancellations: [Cancellation]
     type: UserType
+  }
+
+  input UpdateUserInput {
+    displayName: String
+    interests: [String]
   }
 
   type Socials {
@@ -127,6 +133,7 @@ const typeDefs = gql`
       displayName: String!
       type: UserType!
     ): User
+    updateUser(id: ID!, fields: UpdateUserInput!): User!
     verifyEmail(token: String!): Boolean!
   }
 `;

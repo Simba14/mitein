@@ -1,16 +1,16 @@
 {
-  "email": "Email",
+  "email": "E-mail",
   "password": "Passwort",
-  "confirmPassword": "Passwort Bestätigen",
+  "confirmPassword": "Passwort bestätigen",
   "displayName": {
-    "label": "Display Name",
-    "placeholder": "Your display name"
+    "label": "Anzeigename",
+    "placeholder": "Ihr Anzeigename"
   },
   "accountType": {
     "label": "Ich...",
     "learner": "lerne Deutsch",
-    "native": "bin Muttersprachler",
-    "representative": "bin ein Vertreter"
+    "native": "bin Muttersprachler:in",
+    "representative": "bin Vertreter:in einer Organisation"
   },
   "signUp": {
     "submitBtn": "Anmelden",
@@ -22,7 +22,7 @@
   "login": {
     "submitBtn": "Einloggen",
     "changeLocation": {
-      "text": "Neu bei?",
+      "text": "Neu bei Mitein?",
       "cta": "Hier anmelden"
     }
   },

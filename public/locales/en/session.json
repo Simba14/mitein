@@ -3,6 +3,7 @@
   "slots": {
     "title": "Request a session",
     "cta": "Request Session",
+    "defaultOption": "Please select a time",
     "step1": "1. Select an available date",
     "step2": "Request a time slot{{date}}",
     "step2Number": "2.",
