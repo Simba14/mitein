@@ -27,6 +27,12 @@ const UsersMutation = {
     await subscribeContactToNewsletter(email);
     return email;
   },
+  updateUser: async (obj, args, context, info) => {
+    console.log({ ...args });
+    const user = await User.updateById(args);
+    console.log({ user });
+    return user;
+  },
   verifyEmail: async (parent, { token }) => {
     let decodedToken;
 

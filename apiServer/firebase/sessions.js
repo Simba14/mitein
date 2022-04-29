@@ -2,8 +2,6 @@ import { Firestore } from '@api/firebase';
 import { getDocData, getQuerySnapshotData } from '@api/firebase/helpers';
 import { generateZoomLink } from '@api/zoom';
 import User from '@api/firebase/user';
-import publishSessionBookedMessage from '@api/pubsub/publishers/publishSessionBookedMessage';
-import publishSessionRequestedMessage from '@api/pubsub/publishers/publishSessionRequestedMessage';
 import {
   FirebaseCreateDocError,
   FirebaseGetDocError,
@@ -14,6 +12,8 @@ import {
   FIELD_PARTICIPANT_TWO,
   SESSION_STATUS_AVAILABLE,
 } from '@api/firebase/constants';
+import SessionBookedMessageHandler from '@api/pubsub/handlers/sessions/sessionBookedMessageHandler';
+import SessionRequestedMessageHandler from '@api/pubsub/handlers/sessions/sessionRequestedMessageHandler';
 
 const Sessions = {};
 
@@ -107,9 +107,7 @@ Sessions.getOnlyAvailable = async () => {
     .where('status', '==', SESSION_STATUS_AVAILABLE)
     .where('start', '>', dateConstraint.toISOString())
     .get()
-    .then(querySnapshot => {
-      return querySnapshot.docs.map(doc => doc.data());
-    });
+    .then(getQuerySnapshotData);
 };
 
 Sessions.updateById = async ({ id, fields }) =>
@@ -126,10 +124,14 @@ Sessions.onConfirmation = async session => {
     User.byId(participant2Id),
   ]);
 
-  participants.forEach(participant =>
-    publishSessionBookedMessage({ participant, session }).catch(error =>
-      console.log(error),
-    ),
+  participants.forEach((participant, index) =>
+    SessionBookedMessageHandler({
+      message: {
+        participant,
+        session,
+        topics: participants[index ? 0 : 1]?.interests,
+      },
+    }),
   );
 };
 
@@ -148,10 +150,12 @@ Sessions.onRequested = async session => {
   const { participant1Id } = session;
   const participant1 = await User.byId(participant1Id);
 
-  publishSessionRequestedMessage({
-    participant: participant1,
-    session,
-  }).catch(error => console.log(error));
+  SessionRequestedMessageHandler({
+    message: {
+      participant: participant1,
+      session,
+    },
+  });
 };
 
 Sessions.request = async ({ id, fields }) => {
@@ -166,5 +170,11 @@ Sessions.request = async ({ id, fields }) => {
 
 Sessions.deleteById = id =>
   Firestore.collection(COLLECTION_SESSIONS).doc(id).delete();
+
+Sessions.deleteByAvailabilityId = id =>
+  Firestore.collection(COLLECTION_SESSIONS)
+    .where('availabilityId', '==', id)
+    .get()
+    .then(querySnapshot => querySnapshot.forEach(doc => doc.ref.delete()));
 
 export default Sessions;

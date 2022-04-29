@@ -6,7 +6,6 @@
 
 .session {
   color: black;
-  font-size: 14px;
   border-radius: $card-border-radius;
   border: 1px solid $blue;
   background: white;
@@ -41,7 +40,6 @@
 
   .title {
     color: $blue;
-    font-size: size(3);
     margin-bottom: size(1);
   }
 
@@ -64,11 +62,13 @@
   }
 
   .moreInfo {
+    display: block;
   }
 
   .link {
     color: $blue;
     display: inline-block;
+    margin: size(1) 0;
   }
 }
 
@@ -82,8 +82,7 @@
   padding: size(4);
 
   .heading {
-    font-family: '
-        LilGrotesk ', sans-serif;
+    font-family: 'LilGrotesk', sans-serif;
     color: $orange;
     margin-bottom: size(3);
   }

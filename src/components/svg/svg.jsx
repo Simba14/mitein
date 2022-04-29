@@ -1,9 +1,14 @@
 import React from 'react';
+import classnames from 'classnames/bind';
+import { string } from 'prop-types';
 
 import Logo from 'assets/conversation.svg';
 import Facebook from 'assets/facebook.svg';
 import Instagram from 'assets/instagram.svg';
 import Twitter from 'assets/twitter.svg';
+
+import styles from './svg.module.scss';
+const cx = classnames.bind(styles);
 
 export const LOGO = 'logo';
 export const FB = 'facebook';
@@ -25,23 +30,22 @@ const getPath = (name, props) => {
   }
 };
 
-const Svg = ({ name, ...rest }) => getPath(name, rest);
-// <svg
-//   className={className}
-//   height={height}
-//   viewBox={viewBox}
-//   width={width}
-//   xmlns="http://www.w3.org/2000/svg"
-//   xmlnsXlink="http://www.w3.org/1999/xlink"
-// >
-//   {getPath(name)}
-// </svg>
+const Svg = ({ name, ...rest }) => (
+  <>
+    {getPath(name, rest)}
+    <span className={cx('label')}>{name}</span>
+  </>
+);
 
 Svg.defaultProps = {
   height: '100%',
   name: LOGO,
   width: '100%',
   className: '',
+};
+
+Svg.propTypes = {
+  name: string,
 };
 
 export default Svg;

@@ -25,11 +25,16 @@ export const SessionContextProvider = ({
 
   const getConsentRecorded = () => {
     const consentRecordedCookie = cookie.get(cookieConsentRecordedIdentifier);
-    return Boolean(consentRecordedCookie);
+    let consentRecordedStorage;
+    if (typeof window !== 'undefined') {
+      consentRecordedStorage = localStorage.getItem(
+        cookieConsentRecordedIdentifier,
+      ); // for incognito mode
+    }
+    return Boolean(consentRecordedCookie || consentRecordedStorage);
   };
 
   const [userId, setUserId] = useState(getUserId());
-  const [consent, setConsent] = useState(getConsentRecorded());
   const [consentRecorded, setConsentRecorded] = useState(getConsentRecorded);
 
   const setUserLoggedIn = id => {
@@ -48,10 +53,9 @@ export const SessionContextProvider = ({
     setUserId(undefined);
   };
 
-  const onConsentSelection = value => {
-    setConsent(value);
+  const onConsentSelection = () => {
     setConsentRecorded(true);
-    cookie.set(cookieConsentRecordedIdentifier, true);
+    localStorage.setItem(cookieConsentRecordedIdentifier, true);
   };
 
   return (
@@ -80,10 +84,14 @@ SessionContextProvider.propTypes = {
 
 const SessionContextConsumer = SessionContext.Consumer;
 
-export const withSessionContext = WrappedComponent => props => (
-  <SessionContextConsumer>
-    {sessionContextConsumerProps => (
-      <WrappedComponent {...props} {...sessionContextConsumerProps} />
-    )}
-  </SessionContextConsumer>
-);
+export const withSessionContext = WrappedComponent => {
+  const SessionContext = props => (
+    <SessionContextConsumer>
+      {sessionContextConsumerProps => (
+        <WrappedComponent {...props} {...sessionContextConsumerProps} />
+      )}
+    </SessionContextConsumer>
+  );
+  SessionContext.displayName = 'SessionContext';
+  return SessionContext;
+};

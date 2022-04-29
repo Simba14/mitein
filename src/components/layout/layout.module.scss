@@ -23,6 +23,7 @@
   margin-top: 0;
   background: white;
   overflow-y: scroll;
+  overflow-x: hidden;
   height: calc(100vh - #{$header-height});
   width: 100%;
   transition: $menu-transition-duration;
@@ -62,6 +63,11 @@
   }
 
   .footer {
+    &:only-child {
+      position: absolute;
+      bottom: 0;
+    }
+
     &.withContentPadding {
       width: 100vw;
       margin-left: -$wrapper-padding-x-mobile;

@@ -1,12 +1,21 @@
 import React, { useEffect, useMemo, useRef, useState } from 'react';
 import classnames from 'classnames/bind';
 import { createPortal } from 'react-dom';
-import { bool, func, node, oneOfType, string } from 'prop-types';
+import {
+  bool,
+  element,
+  func,
+  node,
+  object,
+  oneOfType,
+  string,
+} from 'prop-types';
 
 import styles from './modal.module.scss';
 const cx = classnames.bind(styles);
 
 const NEXT_ROOT_ID = '#__next';
+export const BACKDROP_LABEL = 'dialog backdrop';
 
 const Modal = ({ children, open, onClose, locked, parent, className }) => {
   const [active, setActive] = useState(false);
@@ -16,7 +25,6 @@ const Modal = ({ children, open, onClose, locked, parent, className }) => {
 
   useEffect(() => {
     const target = parent && parent.appendChild ? parent : document.body;
-
     target.appendChild(el);
 
     return () => {
@@ -53,13 +61,14 @@ const Modal = ({ children, open, onClose, locked, parent, className }) => {
         current.removeEventListener('click', clickHandler);
       }
 
-      document.querySelector(NEXT_ROOT_ID).removeAttribute('inert');
+      document.querySelector(NEXT_ROOT_ID)?.removeAttribute('inert');
       window.removeEventListener('keyup', keyHandler);
     };
   }, [open, locked, onClose]);
 
   const Backdrop = (
     <div
+      aria-label={BACKDROP_LABEL}
       ref={backdrop}
       className={cx('backdrop', className, { active: active && open })}
     >
@@ -68,6 +77,7 @@ const Modal = ({ children, open, onClose, locked, parent, className }) => {
   );
 
   if (open || active) return createPortal(Backdrop, el);
+  return null;
 };
 
 Modal.propTypes = {
@@ -76,7 +86,7 @@ Modal.propTypes = {
   locked: bool,
   open: oneOfType([bool, string]).isRequired,
   onClose: func.isRequired,
-  parent: node,
+  parent: oneOfType([element, object]),
 };
 
 Modal.defaultProps = {

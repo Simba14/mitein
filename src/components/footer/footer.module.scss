@@ -1,6 +1,8 @@
+@import 'scss/accessibility.scss';
 @import 'scss/breakpoints.scss';
 @import 'scss/constants.scss';
 @import 'scss/colors.scss';
+@import 'scss/focus.scss';
 @import 'scss/spacings.scss';
 @import 'scss/wrapper.scss';
 
@@ -17,20 +19,62 @@ $icon-size: 20px;
 
     padding-top: size(8);
     padding-bottom: size(13);
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    column-gap: size(3);
     width: 100%;
 
     @include mq($from: tablet) {
       padding-bottom: size(4);
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      column-gap: size(3);
+    }
+
+    .companyInfo {
+      @include mq($until: tablet) {
+        margin-bottom: size(4);
+      }
+    }
+
+    .legal {
+      display: flex;
+      margin-bottom: size(4);
+
+      @include mq($from: tablet) {
+        align-items: flex-end;
+        justify-content: center;
+        margin-bottom: 0;
+      }
+
+      > button.cookies {
+        background: white;
+        border: none !important;
+        font-family: 'Poppins';
+        font-size: 1rem !important;
+        color: $blue !important;
+        padding: 0px !important;
+        line-height: size(3) !important;
+
+        &:focus-visible {
+          @include focus($orange);
+        }
+        &:hover {
+          background: white !important;
+        }
+      }
+
+      :not(:last-child) {
+        margin-right: size(2);
+      }
     }
 
     .socials {
       display: flex;
-      align-items: flex-end;
-      justify-content: flex-end;
       padding-bottom: size(0.5);
+      position: relative;
+
+      @include mq($from: tablet) {
+        align-items: flex-end;
+        justify-content: flex-end;
+      }
 
       .socialLink {
         height: $icon-size;

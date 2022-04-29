@@ -3,9 +3,10 @@ import NextLink from 'next/link';
 import { oneOfType, func, node, string } from 'prop-types';
 import { useRouter } from 'next/router';
 import { polyfill } from 'seamless-scroll-polyfill';
+import { ROUTE_BASE } from 'routes';
 
 const handleScroll = ({ event, elementId, pathname, push }) => {
-  if (pathname === '/') {
+  if (pathname === ROUTE_BASE) {
     event.preventDefault();
     polyfill();
     const element = document.getElementById(elementId);

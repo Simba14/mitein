@@ -1,4 +1,8 @@
+@import 'scss/wrapper.scss';
+
 .backdrop {
+  @include gutter;
+
   position: fixed;
   top: 0;
   right: 0;

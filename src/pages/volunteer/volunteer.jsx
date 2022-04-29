@@ -10,6 +10,7 @@ import OrganizationCard from 'components/organizationCard';
 import { withLayout } from 'components/layout';
 
 import styles from './volunteer.module.scss';
+import Text, { BODY_3, HEADING_2, HEADING_5 } from 'components/text';
 const cx = classnames.bind(styles);
 
 const Volunteer = ({ organizations }) => {
@@ -51,10 +52,16 @@ const Volunteer = ({ organizations }) => {
 
   return (
     <div className={cx('container')}>
-      <h1 className={cx('headline')}>{t('headline')}</h1>
-      <h2 className={cx('subheadline')}>{t('subheadline')}</h2>
+      <Text className={cx('headline')} tag="h1" type={HEADING_2}>
+        {t('headline')}
+      </Text>
+      <Text className={cx('subheadline')} tag="h2" type={HEADING_5}>
+        {t('subheadline')}
+      </Text>
       <div className={cx('filters')}>
-        <div className={cx('filterTitle')}>{t('filterBy')}</div>
+        <Text className={cx('filterTitle')} type={BODY_3}>
+          {t('filterBy')}
+        </Text>
         {filterOptions &&
           filterOptions.map(filter => (
             <button
@@ -68,22 +75,22 @@ const Volunteer = ({ organizations }) => {
             </button>
           ))}
       </div>
-      <div className={cx('organizations')}>
-        {firstResult ? (
-          results.map((organization, index) => (
+      {firstResult ? (
+        <div className={cx('organizations')}>
+          {results.map((organization, index) => (
             <OrganizationCard
               key={`organization${index}${firstResult}`}
               loading={false}
               organization={organization}
               t={t}
             />
-          ))
-        ) : (
-          <div className={cx('noResults')}>
-            No Opportunities at the moment. Check back here soon!
-          </div>
-        )}
-      </div>
+          ))}
+        </div>
+      ) : (
+        <Text className={cx('noResults')}>
+          No Opportunities at the moment. Check back here soon!
+        </Text>
+      )}
       <NewsletterBanner className={cx('newsletterBanner')} />
       <ContactUs translation="volunteer" />
     </div>

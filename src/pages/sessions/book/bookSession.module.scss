@@ -1,7 +1,30 @@
+@import 'scss/breakpoints.scss';
+@import 'scss/constants.scss';
+@import 'scss/colors.scss';
 @import 'scss/spacings';
 
-.title {
-  margin-bottom: size(4);
-  text-transform: capitalize;
-  text-align: center;
+.wrapper {
+  margin-bottom: $wrapper-padding-y-desktop-large;
+
+  .title {
+    margin-bottom: size(4);
+    text-transform: capitalize;
+    text-align: center;
+
+    @include mq($from: tablet) {
+      margin-bottom: size(6);
+    }
+  }
+
+  .content {
+    max-width: $content-max-width;
+    margin: auto;
+
+    .text {
+      background: $light-grey;
+      padding: size(3);
+      margin-bottom: size(3);
+      text-align: center;
+    }
+  }
 }

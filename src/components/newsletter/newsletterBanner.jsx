@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import { useTranslation } from 'next-i18next';
 import { string } from 'prop-types';
 import { useForm } from 'react-hook-form';
@@ -8,6 +8,7 @@ import classnames from 'classnames/bind';
 
 import NEWSLETTER_SIGN_UP from '@graphql/mutations/newsletterSignUp.graphql';
 import Cta from 'components/cta';
+import Text, { HEADING_3 } from 'components/text';
 import styles from './newsletter.module.scss';
 const cx = classnames.bind(styles);
 
@@ -20,7 +21,7 @@ const NewsletterBanner = ({ className, heading, description }) => {
     onError: error => {
       setError('submit', {
         type: 'manual',
-        message: get('graphqlErrors[0].message', error),
+        message: get('graphQLErrors[0].message', error) || 'Network error',
       });
     },
   });
@@ -38,33 +39,47 @@ const NewsletterBanner = ({ className, heading, description }) => {
     newsletterSignUp({ variables: { email } });
   };
 
+  const registerInput = useCallback(() => {
+    const { onChange, ...rest } = register('email', {
+      required: t('form:errorMsg.required'),
+      validate: true,
+    });
+    return {
+      ...rest,
+      onChange: e => {
+        onChange(e);
+        if (formMessage) {
+          clearErrors('submit');
+          setSuccessMessage(null);
+        }
+      },
+    };
+  }, [register, clearErrors, formMessage]);
+
   return (
     <div className={cx('container', className)}>
-      <h3 className={cx('heading')}>{heading || t('newsletter:heading')}</h3>
-      <div className={cx('description')}>
+      <Text className={cx('heading')} tag="h3" type={HEADING_3}>
+        {heading || t('newsletter:heading')}
+      </Text>
+      <Text className={cx('description')}>
         {description || t('newsletter:description')}
-      </div>
+      </Text>
       <form className={cx('form')} onSubmit={handleSubmit(onSubmit)}>
         <input
-          {...register('email', {
-            required: t('form:errorMsg.required'),
-            validate: true,
-          })}
+          {...registerInput()}
           className={cx('emailInput')}
           id="email"
           placeholder={t('newsletter:placeholder')}
           type="email"
-          onChange={() => {
-            clearErrors('submit');
-            setSuccessMessage(null);
-          }}
         />
         <Cta
           className={cx('submitBtn')}
           text={t('newsletter:cta')}
           disabled={loading}
+          type="submit"
         />
         <div
+          role="alert"
           className={cx('formMessage', {
             error: errors.submit,
             visible: formMessage,

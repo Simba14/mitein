@@ -11,19 +11,32 @@ const withTM = require('next-transpile-modules')([
 module.exports = withTM({
   i18n,
   trailingSlash: true,
+  experimental: {
+    esmExternals: false,
+  },
   webpack(config) {
     config.module.rules.push({
-      test: /\.svg$/,
-      issuer: {
-        test: /\.(js|ts)x?$/,
-      },
+      test: /\.svg$/i,
+      issuer: { and: [/\.(js|ts|md)x?$/] },
       use: [
         {
           loader: '@svgr/webpack',
           options: {
+            svgo: true,
             svgoConfig: {
-              plugins: [{ removeViewBox: false }],
+              plugins: [
+                'prefixIds',
+                {
+                  name: 'preset-default',
+                  params: {
+                    overrides: {
+                      removeViewBox: false,
+                    },
+                  },
+                },
+              ],
             },
+            titleProp: true,
           },
         },
       ],

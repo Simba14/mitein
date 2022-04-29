@@ -3,15 +3,19 @@ import { string } from 'prop-types';
 import { useRouter } from 'next/router';
 
 import Link from 'components/link';
-import { ENGLISH, GERMAN } from 'constants/defaultOptions';
+import { ENGLISH, GERMAN } from '@constants/defaultOptions';
 import styles from './languageSelector.module.scss';
+
+export const ACTIVE_LANG_ID = 'selected language';
 
 const LanguageSelector = () => {
   const { locale, pathname } = useRouter();
 
   const Element = ({ language }) =>
     locale === language ? (
-      <div className={styles.language}>{language}</div>
+      <div data-testid={ACTIVE_LANG_ID} className={styles.language}>
+        {language}
+      </div>
     ) : (
       <Link
         aria-label={`Change language to ${language}`}

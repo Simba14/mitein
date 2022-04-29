@@ -1,0 +1,10 @@
+@import 'scss/spacings.scss';
+
+.suspended {
+  text-align: center;
+
+  .suspendedNote {
+    color: black;
+    margin-top: size(1);
+  }
+}

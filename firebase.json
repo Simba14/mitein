@@ -1,5 +1,12 @@
 {
+  "functions": {
+    "predeploy": ["yarn --prefix \"$RESOURCE_DIR\" lint-functions"],
+    "source": "."
+  },
   "emulators": {
+    "functions": {
+      "port": 5001
+    },
     "firestore": {
       "port": 8080
     },
@@ -9,6 +16,9 @@
     },
     "auth": {
       "port": 9090
+    },
+    "pubsub": {
+      "port": 8085
     }
   }
 }

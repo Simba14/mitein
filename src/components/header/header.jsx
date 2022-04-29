@@ -13,7 +13,7 @@ const cx = classnames.bind(styles);
 
 const Header = () => {
   return (
-    <div className={cx('headerWrapper')}>
+    <header className={cx('headerWrapper')}>
       <Menu />
       <Link to={ROUTE_BASE} className={cx('title')}>
         <Logo className={cx('logo')} />
@@ -22,7 +22,7 @@ const Header = () => {
         {/* <AccountSection /> */}
         <LanguageSelector />
       </div>
-    </div>
+    </header>
   );
 };
 

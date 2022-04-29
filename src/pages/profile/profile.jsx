@@ -1,42 +1,61 @@
 import React, { useEffect } from 'react';
+import { useMutation } from '@apollo/client';
 import classnames from 'classnames/bind';
 import { useRouter } from 'next/router';
 import { useQuery } from '@apollo/client';
-import { Mutation } from '@apollo/client/react/components';
 import { compose, get, groupBy, isEmpty, take } from 'lodash/fp';
 import { useTranslation } from 'next-i18next';
+// import { without } from 'lodash';
 // import { COLLECTION_SESSIONS } from '@api/firebase/constants';
 // import { Firestore } from '@api/firebase';
 
 import Accordion from 'components/accordion';
-import Availability from 'components/availability';
-import Calendar from 'components/calendar';
 import Cta from 'components/cta';
+// import DeleteIcon from 'assets/close.svg';
+import LearnerCalendar from 'components/calendar/timeView/learner';
+import NativeCalendar from 'components/calendar/timeView/native';
 import Loading from 'components/loading';
 import SessionCard from 'components/sessionCard';
+import Suspended from 'components/suspended';
+import Text, { BODY_6, HEADING_2 } from 'components/text';
 import { withLayout } from 'components/layout';
 
 import { sessionProps, withSessionContext } from 'context/session';
 import GET_PROFILE from '@graphql/queries/getProfile.graphql';
 import SIGN_OUT from '@graphql/mutations/signOut.graphql';
+// import UPDATE_PROFILE from '@graphql/mutations/updateUser.graphql';
 import { ROUTE_LOGIN, ROUTE_SESSIONS_BOOK } from 'routes';
-import { formatSessionDate } from 'helpers/index';
-import { LEARNER, NATIVE, BOOKED, REJECTED, REQUESTED } from 'constants/user';
+import {
+  LEARNER,
+  NATIVE,
+  BOOKED,
+  REJECTED,
+  REQUESTED,
+  // INTERESTS,
+} from '@constants/user';
 
 import styles from './profile.module.scss';
 const cx = classnames.bind(styles);
 
 const Profile = ({ session }) => {
-  const {
-    i18n: { language },
-    t,
-  } = useTranslation('profile');
+  const { t } = useTranslation('profile');
   const router = useRouter();
   const userId = get('userId', session);
   const { data, loading, error } = useQuery(GET_PROFILE, {
     variables: { id: userId },
     skip: !userId,
   });
+
+  const signOutSuccessful = () => {
+    router.push(ROUTE_LOGIN);
+    session.userLoggedOut();
+  };
+
+  const [signOut, { loading: signOutLoading }] = useMutation(SIGN_OUT, {
+    onCompleted: signOutSuccessful,
+  });
+
+  // const [updateProfile] = useMutation(UPDATE_PROFILE);
 
   // useEffect(() => {
   //   const unsubscribe = Firestore.db
@@ -53,6 +72,19 @@ const Profile = ({ session }) => {
   //   };
   // }, []);
 
+  // const handleUpdateProfile = ({ addInterest, deleteInterest }) => {
+  //   updateProfile({
+  //     variables: {
+  //       id: userId,
+  //       fields: {
+  //         interests: deleteInterest
+  //           ? without(interests, deleteInterest)
+  //           : [...(interests || []), addInterest],
+  //       },
+  //     },
+  //   });
+  // };
+
   useEffect(() => {
     if (!(userId || loading || data) || error) {
       session.userLoggedOut();
@@ -64,13 +96,8 @@ const Profile = ({ session }) => {
   if (error || !data) return null;
 
   const {
-    user: { sessions, displayName, email, suspendedUntil, type },
+    user: { sessions, displayName, email, interests, suspendedUntil, type },
   } = data;
-
-  const signOutSuccessful = () => {
-    router.push(ROUTE_LOGIN);
-    session.userLoggedOut();
-  };
 
   const sessionsByStatus = groupBy('status', sessions);
   const requestedSessions = sessionsByStatus[REQUESTED];
@@ -90,34 +117,74 @@ const Profile = ({ session }) => {
     <div className={cx('wrapper')}>
       <div className={cx('topContainer')}>
         <div>
-          <h1 className={cx('title')}>{t('title')}</h1>
-          <div>Email: {email}</div>
-          <div>Display Name: {displayName}</div>
-          <div>Account type: {type}</div>
-        </div>
-
-        <div>
-          <Mutation mutation={SIGN_OUT} onCompleted={signOutSuccessful}>
-            {(signOut, { loading: signOutLoading }) => (
-              <Cta
-                className={cx('logOut')}
-                onClick={signOut}
-                outline
-                disabled={signOutLoading}
-                text={t('logOut')}
-              />
+          <Text className={cx('title')} tag="h1" type={HEADING_2}>
+            {t('title')}
+          </Text>
+          <Text>Email: {email}</Text>
+          <Text>Display Name: {displayName}</Text>
+          <Text>Account type: {type}</Text>
+          {/* <div className={cx('interests')}>
+            <Text className={cx('label')} tag="label">
+              {'Interests:'}
+            </Text>
+            {interests?.length ? (
+              interests.map(interest => (
+                <button
+                  key={`selected ${interest}`}
+                  className={cx('interest')}
+                  onClick={() =>
+                    handleUpdateProfile({ deleteInterest: interest })
+                  }
+                >
+                  {interest}
+                  <DeleteIcon className={cx('delete')} />
+                </button>
+              ))
+            ) : (
+              <Text type={BODY_6}>No Interests yet. Add Some below!</Text>
             )}
-          </Mutation>
+            <Cta
+              className={cx('add')}
+              onClick={signOut}
+              text={t('addInterest')}
+            />
+          </div>
+          <div className={cx('addInterests')}>
+            <Text className={cx('instruction')} tag="label" type={BODY_6}>
+              {
+                'These are shared before meetings and can be used as conversation topics.'
+              }
+            </Text>
+            <div className={cx('interests')}>
+              {INTERESTS.map(interest => {
+                const selected = interests?.find(el => el === interest);
+                return (
+                  <button
+                    key={interest}
+                    className={cx('interest', { selected })}
+                    disabled={selected}
+                    onClick={() =>
+                      handleUpdateProfile({ addInterest: interest })
+                    }
+                  >
+                    {interest}
+                  </button>
+                );
+              })}
+            </div>
+          </div> */}
+        </div>
+        <div>
+          <Cta
+            className={cx('logOut')}
+            onClick={signOut}
+            outline
+            disabled={signOutLoading}
+            text={t('logOut')}
+          />
         </div>
       </div>
-      {isSuspended && (
-        <div className={cx('suspended')}>
-          {t('suspendedUntil', {
-            date: formatSessionDate(suspendedUntil, language),
-          })}
-          <div className={cx('suspendedNote')}>{t('suspendedNote')}</div>
-        </div>
-      )}
+      {isSuspended && <Suspended suspendedUntil={suspendedUntil} />}
       {!isEmpty(bookedSessions) && (
         <Accordion
           className={cx('accordion')}
@@ -161,9 +228,11 @@ const Profile = ({ session }) => {
           text={'Request a Session'}
         />
       )}
-      {isNative && Boolean(!suspendedUntil) && <Calendar userId={userId} />}
-      {isLearner && Boolean(!suspendedUntil) && (
-        <Availability userId={userId} />
+      {isNative && !isSuspended && (
+        <NativeCalendar userId={userId} userType={type} />
+      )}
+      {isLearner && !isSuspended && (
+        <LearnerCalendar userId={userId} userType={type} />
       )}
     </div>
   );

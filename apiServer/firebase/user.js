@@ -56,7 +56,10 @@ User.byIdWithAvailability = async id => {
 };
 
 User.updateById = ({ id, fields }) =>
-  Firestore.collection(COLLECTION_USERS).doc(id).set(fields, { merge: true });
+  Firestore.collection(COLLECTION_USERS)
+    .doc(id)
+    .update(fields)
+    .then(() => ({ id, ...fields }));
 
 User.updateCancellations = async ({ sessionId, userId }) => {
   const { cancellations } = await User.byId(userId);

@@ -60,7 +60,7 @@ const Form = ({ submitError, loadingSubmit, onChange, onSubmit, type }) => {
       1000,
       { trailing: false },
     ),
-    [],
+    [onChange, clearErrors],
   );
 
   const registerInput = name => {

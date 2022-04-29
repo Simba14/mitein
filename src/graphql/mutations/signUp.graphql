@@ -1,7 +1,7 @@
 mutation SignUp(
   $email: String!
   $password: String!
-  $accountType: String!
+  $accountType: UserType!
   $displayName: String!
 ) {
   signUp(

@@ -1,51 +1,32 @@
 import React from 'react';
-import renderer from 'react-test-renderer';
-import { shallow } from 'enzyme';
+import { render, screen } from 'testUtils';
+import { MOCK_TEXT } from 'unitTests/sharedMocks';
 import AccordionContent from './accordionContent';
 
-describe('AccordionContent', () => {
-  it('should render correctly', () => {
-    const rendered = renderer.create(
-      <AccordionContent isOpen ariaId="panel-01" ariaLabelledBy="button-01">
-        <div>this is the content</div>
-      </AccordionContent>,
-    );
-    expect(rendered.toJSON()).toMatchSnapshot();
-  });
+test('AccordionContent renders correctly when it is open', () => {
+  render(
+    <AccordionContent isOpen ariaId="panel-01" ariaLabelledBy="button-01">
+      <div>{MOCK_TEXT}</div>
+    </AccordionContent>,
+  );
 
-  describe('when is open', () => {
-    let wrapper;
+  const content = screen.getByRole('region');
+  expect(content.textContent).toEqual(MOCK_TEXT);
+  expect(content.classList.contains('isOpen')).toBe(true);
+});
 
-    beforeEach(() => {
-      wrapper = shallow(
-        <AccordionContent isOpen ariaId="panel-01" ariaLabelledBy="button-01">
-          <div>this is the content</div>
-        </AccordionContent>,
-      );
-    });
+test('AccordionContent renders correctly when it is open', () => {
+  render(
+    <AccordionContent
+      isOpen={false}
+      ariaId="panel-01"
+      ariaLabelledBy="button-01"
+    >
+      <div>{MOCK_TEXT}</div>
+    </AccordionContent>,
+  );
 
-    it('should show the container', () => {
-      expect(wrapper.find('.accordionContent')).toHaveLength(1);
-    });
-
-    it('should show the content', () => {
-      expect(wrapper.hasClass('isOpen')).toEqual(true);
-    });
-  });
-
-  describe('when is not open', () => {
-    let wrapper;
-
-    beforeEach(() => {
-      wrapper = shallow(
-        <AccordionContent isOpen={false} ariaId="panel-01" ariaLabelledBy="button-01">
-          <div>this is the content</div>
-        </AccordionContent>,
-      );
-    });
-
-    it('should not show the content', () => {
-      expect(wrapper.hasClass('isOpen')).toEqual(false);
-    });
-  });
+  const content = screen.getByRole('region');
+  expect(content.textContent).toEqual(MOCK_TEXT);
+  expect(content.classList.contains('isOpen')).toBe(false);
 });

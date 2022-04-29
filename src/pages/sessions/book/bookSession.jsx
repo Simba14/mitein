@@ -5,24 +5,23 @@ import { useQuery } from '@apollo/client';
 import { compose, get, groupBy } from 'lodash/fp';
 import { useTranslation } from 'next-i18next';
 
+import Cta from 'components/cta';
 import Loading from 'components/loading';
 import Slots from 'components/slots';
+import Suspended from 'components/suspended';
+import Text, { HEADING_1 } from 'components/text';
 import { withLayout } from 'components/layout';
 
 import { sessionProps, withSessionContext } from 'context/session';
 import GET_PROFILE from '@graphql/queries/getProfile.graphql';
 import { ROUTE_LOGIN, ROUTE_PROFILE } from 'routes';
-import { formatSessionDate } from 'helpers/index';
-import { LEARNER, REQUESTED } from 'constants/user';
+import { LEARNER, REQUESTED } from '@constants/user';
 
 import styles from './bookSession.module.scss';
 const cx = classnames.bind(styles);
 
 const BookSession = ({ session }) => {
-  const {
-    i18n: { language },
-    t,
-  } = useTranslation('session');
+  const { t } = useTranslation('session');
   const router = useRouter();
   const userId = get('userId', session);
   const { data, loading, error, refetch } = useQuery(GET_PROFILE, {
@@ -58,20 +57,37 @@ const BookSession = ({ session }) => {
   const isLearner = type === LEARNER;
   const isSuspended = suspendedUntil > new Date().toISOString();
 
+  const getContent = () => {
+    const baseContent = component => (
+      <div className={cx('content')}>
+        {component}
+        <Cta
+          to={ROUTE_PROFILE}
+          className={cx('cta')}
+          text={t('slots.returnToProfile')}
+          fullWidth
+        />
+      </div>
+    );
+    if (isSuspended)
+      return baseContent(<Suspended suspendedUntil={suspendedUntil} />);
+
+    if (requestedSessions)
+      return baseContent(
+        <Text className={cx('text')}>{t('slots.alreadyRequested')}</Text>,
+      );
+
+    if (isLearner) return <Slots userId={userId} onSelect={refetch} />;
+
+    return null;
+  };
+
   return (
-    <div>
-      <h1 className={cx('title')}>{t('slots.title')}</h1>
-      {isSuspended && (
-        <div className={cx('suspended')}>
-          {t('suspendedUntil', {
-            date: formatSessionDate(suspendedUntil, language),
-          })}
-          <div className={cx('suspendedNote')}>{t('suspendedNote')}</div>
-        </div>
-      )}
-      {isLearner && !requestedSessions && Boolean(!suspendedUntil) && (
-        <Slots userId={userId} onSelect={refetch} />
-      )}
+    <div className={cx('wrapper')}>
+      <Text className={cx('title')} tag="h1" type={HEADING_1}>
+        {t('slots.title')}
+      </Text>
+      {getContent()}
     </div>
   );
 };

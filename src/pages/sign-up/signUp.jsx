@@ -16,6 +16,7 @@ const cx = classnames.bind(styles);
 
 const SignUp = ({ session }) => {
   const [error, setError] = useState(null);
+  const [isSigningUp, setIsSigningUp] = useState(false);
   const router = useRouter();
 
   const signUpSuccessful = data => {
@@ -28,16 +29,18 @@ const SignUp = ({ session }) => {
   });
 
   const userId = get('userId', session);
-  if (userId) {
+  if (userId && !isSigningUp) {
     router.push(ROUTE_PROFILE);
     return null;
   }
 
   const onSignUp = ({ accountType, displayName, email, password }) => {
+    setIsSigningUp(true);
     signUp({
       variables: { accountType, displayName, email, password },
     }).catch(e => {
-      setError(get('graphqlErrors[0].message', e) || e.message);
+      setError(get('graphQLErrors[0].message', e) || e.message);
+      setIsSigningUp(false);
     });
   };
 

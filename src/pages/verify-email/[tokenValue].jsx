@@ -9,6 +9,7 @@ import { useTranslation } from 'next-i18next';
 
 import Cta from 'components/cta';
 import Loading from 'components/loading';
+import Text, { HEADING_4 } from 'components/text';
 import { withLayout } from 'components/layout';
 import VERIFY_EMAIL from '@graphql/mutations/verifyEmail.graphql';
 // import { sessionProps, withSessionContext } from 'context/session';
@@ -72,14 +73,18 @@ const VerifyEmail = ({ tokenValue }) => {
 
   return tokenValid ? (
     <div className={cx('wrapper')}>
-      <h3 className={cx('heading')}>{t('emailVerified')}</h3>
-      <div className={cx('description')}>{t('featuresEnabled')}</div>
+      <Text className={cx('heading')} tag="h3" type={HEADING_4}>
+        {t('emailVerified')}
+      </Text>
+      <Text className={cx('description')}>{t('featuresEnabled')}</Text>
       <Cta to={ROUTE_PROFILE} className={cx('cta')} text={t('redirect')} />
     </div>
   ) : (
     <div className={cx('wrapper')}>
-      <h3 className={cx('heading')}>{t('invalidToken.title')}</h3>
-      <div className={cx('description')}>{t('invalidToken.description')}</div>
+      <Text className={cx('heading')} tag="h3" type={HEADING_4}>
+        {t('invalidToken.title')}
+      </Text>
+      <Text className={cx('description')}>{t('invalidToken.description')}</Text>
       <Cta className={cx('cta')} onClick={null} text={t('invalidToken.cta')} />
     </div>
   );

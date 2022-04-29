@@ -1,12 +1,21 @@
 {
+  "cookies": "Cookies",
   "login": "Einloggen",
-  "menu": "Menu",
+  "menu": "Menü",
   "mitein": "Mitein(ander)",
+  "miteinWithYear": "Mitein 2022",
+  "privacy": "Privacy",
+  "terms": "Terms",
   "signUp": "Anmelden",
   "consentLayer": {
-    "heading": "We don't have any tracking",
-    "description": "but we do use cookies to make the site work as expected. Please provide your consent and confirmation that you are 16+ years old. You can find more details in our Terms of Service.",
-    "confirmBtn": "Accept all",
-    "reject": "Reject all"
+    "heading": "Wir nutzen keine Tracking-Cookies",
+    "description": "aber wir verwenden Cookies, um alle Funktionen der Seite zu ermöglichen. Bitte stimmen Sie dem zu und bestätigen Sie, dass Sie mindestens 16 Jahre alt sind. Sie finden weitere Informationen in unseren Nutzungsbedingungen.",
+    "confirmBtn": "Alle akzeptieren",
+    "reject": "Alle ablehnen",
+    "cookieSettings": "Mehr erfahren"
+  },
+  "suspended": {
+    "until": "KONTO GESPERRT: Sie haben zu viele Sitzungen storniert.\n Sie können bis zum {{date}} keine neuen Sitzungen buchen.",
+    "note": "Hinweis: Sitzungen, die Sie bereits gebucht haben, finden wie geplant statt."
   }
 }

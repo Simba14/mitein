@@ -2,6 +2,7 @@ import React from 'react';
 import { bool, func, oneOfType, string, object } from 'prop-types';
 import classnames from 'classnames/bind';
 import ArrowIcon from 'assets/arrowDown.svg';
+import Text, { HEADING_4 } from 'components/text';
 
 import styles from './accordionHeader.module.scss';
 
@@ -22,7 +23,9 @@ const AccordionHeader = ({
     id={ariaId}
     aria-controls={ariaControls}
   >
-    <h3>{text}</h3>
+    <Text tag="h3" type={HEADING_4}>
+      {text}
+    </Text>
     <ArrowIcon className={cx('arrow')} />
   </button>
 );

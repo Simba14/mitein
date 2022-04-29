@@ -2,7 +2,7 @@ import i18n from 'i18next';
 import { initReactI18next } from 'next-i18next';
 
 import locales from 'locales';
-import { ENGLISH } from 'constants/defaultOptions';
+import { ENGLISH } from '@constants/defaultOptions';
 
 export const i18nOptions = {
   lng: ENGLISH,

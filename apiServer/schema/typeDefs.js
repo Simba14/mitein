@@ -22,6 +22,7 @@ const typeDefs = gql`
 
   type Availability {
     id: ID!
+    dayIndex: Int
     start: String!
     end: String!
     userId: ID!
@@ -29,6 +30,7 @@ const typeDefs = gql`
 
   type Session {
     id: ID!
+    availabilityId: ID
     start: String!
     end: String!
     link: String
@@ -51,11 +53,17 @@ const typeDefs = gql`
     email: String
     isEmailVerified: Boolean
     id: ID!
+    interests: [String]
     name: String
     phoneNumber: String
     suspendedUntil: String
     cancellations: [Cancellation]
     type: UserType
+  }
+
+  input UpdateUserInput {
+    displayName: String
+    interests: [String]
   }
 
   type Socials {
@@ -90,15 +98,21 @@ const typeDefs = gql`
   }
 
   type Mutation {
-    addAvailability(start: String!, end: String!, userId: ID!): Availability
+    addAvailability(
+      start: String!
+      end: String!
+      userId: ID!
+      userType: UserType!
+    ): Availability
     deleteAvailability(ids: [ID!]!): Boolean
-    createSession(
+    createSessionsFromAvailability(
       participant1Id: ID
       participant2Id: ID
       status: EventStatus!
       start: String
       end: String
-    ): [Session]
+      userType: UserType!
+    ): Availability
     deleteSessions(ids: [ID!]!): Boolean
     updateSession(
       id: ID
@@ -117,8 +131,9 @@ const typeDefs = gql`
       email: String!
       password: String!
       displayName: String!
-      type: String!
+      type: UserType!
     ): User
+    updateUser(id: ID!, fields: UpdateUserInput!): User!
     verifyEmail(token: String!): Boolean!
   }
 `;

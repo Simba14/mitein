@@ -1,6 +1,7 @@
 @import 'scss/breakpoints.scss';
 @import 'scss/colors.scss';
 @import 'scss/constants.scss';
+@import 'scss/focus.scss';
 @import 'scss/spacings.scss';
 
 .volunteerLayout {
@@ -13,13 +14,11 @@
 
   .headline {
     color: white;
-    font-size: size(6);
     text-align: center;
   }
 
   .subheadline {
     color: $orange;
-    font-size: 24px;
     font-family: 'LilGrotesk ', sans-serif;
     text-align: center;
     margin-bottom: size(6);
@@ -34,7 +33,6 @@
     border-bottom: 1px solid white;
 
     .filterTitle {
-      font-size: 24px;
       line-height: size(4);
       margin-right: size(2);
     }
@@ -51,31 +49,28 @@
       opacity: 0.5;
 
       &:hover {
-        box-shadow: 0 0 3pt 2pt$orange;
+        @include focus($orange);
       }
 
       &:focus {
-        box-shadow: 0 0 3pt 2pt $grey;
-        outline: none;
+        @include focus($grey);
       }
 
       &.selected {
         opacity: 1;
 
         &:focus {
-          box-shadow: 0 0 3pt 2pt$orange;
-          outline: none;
+          @include focus($orange);
         }
       }
     }
   }
 
   .noResults {
-    font-family: 'Cabin Sketch', sans-serif;
-    font-size: 16px;
     text-align: center;
     padding: size(8) 0;
     width: 100%;
+    margin-bottom: size(6);
   }
 
   .organizations {

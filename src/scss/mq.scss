@@ -33,10 +33,20 @@ $mq-responsive: true !default;
 /// @type Map
 /// @link https://github.com/sass-mq/sass-mq#seeing-the-currently-active-breakpoint Full documentation and examples
 $mq-breakpoints: (
-  mobile: 320px,
-  tablet: 740px,
-  desktop: 980px,
-  wide: 1300px,
+  mobile: 0px,
+  mobile-large: 375px,
+  mobile-landscape: 480px,
+  tablet: 640px,
+  tablet-wide: 800px,
+  header-large: 1000px,
+  newsletter-popup: 1024px,
+  desktop: 1024px,
+  desktop-plus: 1124px,
+  widescreen: 1260px,
+  widescreen-plus: 1360px,
+  widescreen-large: 1600px,
+  uhd: 2500px,
+  qhd: 3800px,
 ) !default;
 
 /// Static breakpoint (for fixed-width layouts)
@@ -193,14 +203,18 @@ $mq-media-type: all !default;
     @if type-of($until) == number {
       $max-width: mq-px2em($until);
     } @else {
-      $max-width: mq-px2em(mq-get-breakpoint-width($until, $breakpoints)) - 0.01em;
+      $max-width: mq-px2em(mq-get-breakpoint-width($until, $breakpoints)) -
+        0.01em;
     }
   }
 
   // Responsive support is disabled, rasterize the output outside @media blocks
   // The browser will rely on the cascade itself.
   @if $responsive == false {
-    $static-breakpoint-width: mq-get-breakpoint-width($static-breakpoint, $breakpoints);
+    $static-breakpoint-width: mq-get-breakpoint-width(
+      $static-breakpoint,
+      $breakpoints
+    );
     $target-width: mq-px2em($static-breakpoint-width);
 
     // Output only rules that start at or span our target width
@@ -334,7 +348,10 @@ $mq-media-type: all !default;
 ///
 ///  // Show breakpoints using custom settings
 ///  @include mq-show-breakpoints((L, XL), (S: 300px, L: 800px, XL: 1200px));
-@mixin mq-show-breakpoints($show-breakpoints: $mq-show-breakpoints, $breakpoints: $mq-breakpoints) {
+@mixin mq-show-breakpoints(
+  $show-breakpoints: $mq-show-breakpoints,
+  $breakpoints: $mq-breakpoints
+) {
   body:before {
     background-color: #fcf8e3;
     border-bottom: 1px solid #fbeed5;

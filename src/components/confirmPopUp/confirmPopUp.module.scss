@@ -3,14 +3,20 @@
 @import 'scss/constants.scss';
 @import 'scss/spacings.scss';
 
+$modal-width: 400px;
+
 .modal {
   border-radius: $card-border-radius;
   background: white;
-  width: 400px;
   display: flex;
   align-items: center;
   flex-direction: column;
   padding: size(4);
+  width: 100%;
+
+  @include mq($from: tablet) {
+    width: $modal-width;
+  }
 
   .heading {
     color: $orange;
@@ -27,7 +33,6 @@
     color: black;
     padding: size(1.5);
     margin-top: size(2);
-    font-size: 12px;
     opacity: 0;
     transition: opacity 1s;
     text-transform: capitalize;

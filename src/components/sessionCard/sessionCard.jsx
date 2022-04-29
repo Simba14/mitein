@@ -7,6 +7,7 @@ import { useTranslation } from 'next-i18next';
 import Anchor from 'components/anchor';
 import Cta from 'components/cta';
 import ConfirmPopUp from 'components/confirmPopUp';
+import Text, { BODY_3, BODY_6 } from 'components/text';
 import UPDATE_SESSION from '@graphql/mutations/updateSession.graphql';
 import GET_AVAILABILITY from '@graphql/queries/getSessions.graphql';
 import GET_PROFILE from '@graphql/queries/getProfile.graphql';
@@ -19,7 +20,7 @@ import {
   REJECTED,
   LEARNER,
   NATIVE,
-} from 'constants/user';
+} from '@constants/user';
 
 import styles from './sessionCard.module.scss';
 const cx = classnames.bind(styles);
@@ -95,13 +96,15 @@ const SessionCard = ({ session, status, userType, userId }) => {
 
   return (
     <div className={cx('session', { unavailable: isRejected })}>
-      <div className={cx('title')}>{t(`${userType}.${status}.title`)}</div>
-      <div className={cx('date')}>
+      <Text className={cx('title')} type={BODY_3}>
+        {t(`${userType}.${status}.title`)}
+      </Text>
+      <Text className={cx('date')} type={BODY_6}>
         {formatSessionDate(session.start, language)}
-      </div>
-      <div className={cx('time')}>
+      </Text>
+      <Text className={cx('time')} type={BODY_6}>
         {formatSessionTime({ start: session.start, end: session.end })}
-      </div>
+      </Text>
 
       {!isLearner && isRequested ? (
         <Cta
@@ -112,7 +115,9 @@ const SessionCard = ({ session, status, userType, userId }) => {
           text={t(`${userType}.${status}.confirmCta`)}
         />
       ) : (
-        <i className={cx('moreInfo')}>{t(`${userType}.${status}.moreInfo`)}</i>
+        <Text className={cx('moreInfo')} tag="i" type={BODY_6}>
+          {t(`${userType}.${status}.moreInfo`)}
+        </Text>
       )}
       {isBooked && (
         <Anchor
@@ -139,7 +144,6 @@ const SessionCard = ({ session, status, userType, userId }) => {
         modalOpen={modalOpen}
         namespace={userType}
         setModalOpen={setModalOpen}
-        t={t}
       />
     </div>
   );

@@ -3,7 +3,7 @@ import SelectCalendarSvg from 'assets/selectCalendar.svg';
 import OnlineChatSvg from 'assets/onlineChat.svg';
 import RequestSvg from 'assets/emailRequest.svg';
 import YesNoSvg from 'assets/yesNo.svg';
-import { LEARNER } from 'constants/user';
+import { LEARNER } from '@constants/user';
 
 const getUserSteps = userType =>
   userType === LEARNER

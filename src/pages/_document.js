@@ -43,37 +43,37 @@ class MyDocument extends Document {
             rel="preload"
             href="/fonts/LilGrotesk/LilGrotesk-Regular.ttf"
             as="font"
-            crossOrigin=""
+            crossOrigin="true"
           />
           <link
             rel="preload"
             href="/fonts/LilGrotesk/LilGrotesk-Regular.woff"
             as="font"
-            crossOrigin=""
+            crossOrigin="true"
           />
           <link
             rel="preload"
             href="/fonts/LilGrotesk/LilGrotesk-Regular.woff2"
             as="font"
-            crossOrigin=""
+            crossOrigin="true"
           />
           <link
             rel="preload"
             href="/fonts/LilGrotesk/LilGrotesk-Bold.ttf"
             as="font"
-            crossOrigin=""
+            crossOrigin="true"
           />
           <link
             rel="preload"
             href="/fonts/LilGrotesk/LilGrotesk-Bold.woff"
             as="font"
-            crossOrigin=""
+            crossOrigin="true"
           />
           <link
             rel="preload"
             href="/fonts/LilGrotesk/LilGrotesk-Bold.woff2"
             as="font"
-            crossOrigin=""
+            crossOrigin="true"
           />
           <meta property="og:title" content="Mitein" />
           <meta
@@ -92,6 +92,15 @@ class MyDocument extends Document {
             content="A non-profit aiming to enrich communities through connection, language and learning."
           />
           <meta name="twitter:image" content="https://mitein.de/ogImage.png" />
+          {/* OneTrust Cookies Consent Notice start for mitein.de --> */}
+          <script
+            src="https://cdn.cookielaw.org/scripttemplates/otSDKStub.js"
+            type="text/javascript"
+            charSet="UTF-8"
+            data-domain-script="6eea10bb-218f-4159-ba6b-33ff34977e58"
+          ></script>
+          <script type="text/javascript">{function OptanonWrapper() {}}</script>
+          {/* OneTrust Cookies Consent Notice end for mitein.de --> */}
         </Head>
         <body>
           <Main />

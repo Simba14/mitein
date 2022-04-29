@@ -1,48 +1,48 @@
 {
     "LEARNER": {
-        "cta": "Get started",
+        "cta": "Los geht’s",
         "intro": {
-            "title": "You're in! Here's how it works",
-            "description": "Follow the simple steps below to start chatting with others"
+            "title": "Sie sind dabei! So funktioniert’s:",
+            "description": "Nur noch ein paar Schritte bis Sie sich mit anderen unterhalten können"
         },
         "step1": {
-            "title": "Step 1.",
-            "content": "Request an available session."
+            "title": "Schritt 1.",
+            "content": "Wählen Sie ein angebotenes Zeitfenster aus."
         },
         "step2": {
-            "title": "Step 2.",
-            "content": "You will be notified via email when your request is confirmed."
+            "title": "Schritt 2.",
+            "content": "Sie bekommen eine E-Mail, sobald ihre Anfrage bestätigt wird."
         },
         "step3": {
-            "title": "Step 3.",
-            "content": "Have a great conversation at the specified time and date!\nTo access the chat you just need to click on the special link provided. Easy!"
+            "title": "Schritt 3.",
+            "content": "Einem Gespräch zur vereinbarten Zeit steht nichts mehr im Wege!\nKlicken Sie einfach auf den angezeigten Link, um zum Video-Chat zu gelangen."
         },
         "step4": {
-            "title": "Step 4.",
-            "content": "If there are no available sessions, you can set your own availability in your profile.\nYou will then be notified when a suitable chat becomes available."
+            "title": "Schritt 4.",
+            "content": "Falls keine Zeitfenster angeboten werden, können Sie Ihre eigene Verfügbarkeit in Ihrem Profil angeben.\n Sie bekommen eine Mitteilung, sobald ein Gespräch zu einer passenden Zeit angeboten wird."
         }
     },
     "NATIVE": {
-        "cta": "Get started",
+        "cta": "Los geht’s",
        "intro": {
-            "title": "You're in! Here's how it works",
-            "description": "Follow the simple steps below to start chatting with others"
+            "title": "Sie sind dabei! So funktioniert’s:",
+            "description": "Nur noch ein paar Schritte bis Sie sich mit anderen unterhalten können"
         },
         "step1": {
-            "title": "Step 1.",
-            "content": "Highlight your availability in the calendar on your profile."
+            "title": "Schritt 1.",
+            "content": "Geben Sie Ihre Verfügbarkeit im Kalender in Ihrem Profil an."
         },
         "step2": {
-            "title": "Step 2.",
-            "content": "Others will then be able to see your available times and request a chat with you.\nYou will be notified via email when a request is made."
+            "title": "Schritt 2.",
+            "content": "Andere Nutzer:innen können so Ihre Verfügbarkeit anonym einsehen und eine Anfrage für ein Gespräch schicken.\n Sie bekommen eine Mitteilung per E-Mail wenn eine Anfrage gestellt wird."
         },
         "step3": {
-            "title": "Step 3.",
-            "content": "Confirm the chat if the time and date still works for you."
+            "title": "Schritt 3.",
+            "content": "Bestätigen Sie die Sitzung und überprüfen Sie Zeit und Datum."
         },
         "step4": {
-            "title": "Step 4.",
-            "content": "Have a great conversation at the specified time and date!\nTo access the chat you just need to click on the special link provided. Easy!"
+            "title": "Schritt 4.",
+            "content": "Einem Gespräch zur vereinbarten Zeit steht nichts mehr im Wege!\nKlicken Sie einfach auf den angezeigten Link, um zum Video-Chat zu gelangen."
         }
     }
 }

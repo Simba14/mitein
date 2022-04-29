@@ -31,6 +31,7 @@ export const createAccount = ({ displayName, email, password, type }) => {
         displayName,
         displayLanguage: type === USER_TYPE_LEARNER ? ENGLISH : GERMAN,
         email,
+        interests: [],
         isEmailVerified: emailVerified,
         type,
       };

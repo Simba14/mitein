@@ -11,8 +11,6 @@
   .container {
     @include wrapper;
 
-    scroll-snap-align: start;
-    scroll-snap-stop: always;
     display: flex;
     flex-direction: column;
     margin: auto;
@@ -20,13 +18,13 @@
     padding-bottom: size(14);
 
     @include mq($from: tabletWide) {
-      padding-bottom: size(6);
+      padding-top: size(8);
+      padding-bottom: size(12);
     }
   }
 
   .title {
     color: $blue;
-    font-size: 40px;
     margin-bottom: size(2);
   }
 
@@ -35,7 +33,6 @@
     white-space: pre-line;
 
     @include mq($from: tablet) {
-      line-height: 1.3;
       text-align: justify;
     }
   }

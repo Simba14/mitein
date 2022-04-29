@@ -1,12 +1,8 @@
 import emailSender from '@api/pubsub/drivers/emailSender';
 
-const sendSessionEmail = ({ email, params, templateId }) => {
+const sendSessionEmail = ({ emails, params, templateId }) => {
   return emailSender({
-    to: [
-      {
-        email,
-      },
-    ],
+    to: emails,
     templateId,
     params,
   });

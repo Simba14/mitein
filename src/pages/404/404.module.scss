@@ -8,17 +8,8 @@
   justify-content: center;
   padding-top: size(6);
 
-  h1 {
+  .title {
     color: $orange;
     margin-bottom: size(4);
-  }
-
-  .returnHome {
-    font-size: 16px;
-    color: white;
-
-    .homeAnchor {
-      color: white;
-    }
   }
 }

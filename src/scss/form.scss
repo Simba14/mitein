@@ -1,0 +1,21 @@
+@import 'scss/colors.scss';
+@import 'scss/spacings.scss';
+@import 'scss/breakpoints.scss';
+
+$form-width: 500px;
+
+%formField {
+  width: 100%;
+  font-family: 'Poppins', sans-serif;
+  font-size: 1rem;
+  padding: size(2) size(1);
+  margin-bottom: size(2);
+  background-color: #5a8be20f;
+  border: 1px solid gainsboro;
+  border-radius: 5px;
+  transition: border-color 1s;
+
+  @include mq($from: tablet) {
+    margin-bottom: size(3);
+  }
+}

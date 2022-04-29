@@ -1,13 +1,17 @@
 import React from 'react';
-
+import { useTranslation } from 'next-i18next';
 import classnames from 'classnames/bind';
 import { bool, func, oneOfType, string } from 'prop-types';
 
 import Cta from 'components/cta';
 import Modal from 'components/modal';
+import Text, { BODY_6, HEADING_4 } from 'components/text';
 
 import styles from './confirmPopUp.module.scss';
 const cx = classnames.bind(styles);
+
+const TITLE_ID = 'confirmPopUpTitle';
+const DESC_ID = 'confirmPopUpTitle';
 
 const ConfirmPopUp = ({
   error,
@@ -15,25 +19,36 @@ const ConfirmPopUp = ({
   modalOpen,
   namespace,
   setModalOpen,
-  t,
 }) => {
+  const { t } = useTranslation('session');
   if (!modalOpen) return null;
 
   return (
     <Modal open={modalOpen} onClose={() => setModalOpen(false)}>
-      <div className={cx('modal')}>
-        <h3 className={cx('heading')}>{t(`${namespace}.modal.title`)}</h3>
-        <div className={cx('disclaimer')}>
+      <div
+        role="dialog"
+        className={cx('modal')}
+        aria-labelledby={TITLE_ID}
+        aria-describedby={DESC_ID}
+      >
+        <Text id={TITLE_ID} className={cx('heading')} tag="h3" type={HEADING_4}>
+          {t(`${namespace}.modal.title`)}
+        </Text>
+        <Text id={DESC_ID} className={cx('disclaimer')}>
           {t(`${namespace}.modal.disclaimer`)}
-        </div>
+        </Text>
         <Cta
           className={cx('cta')}
           fullWidth
           onClick={handleConfirmClick}
           text={t(`${namespace}.modal.cta`)}
-          disabled={error}
+          disabled={Boolean(error)}
         />
-        {error && <div className={cx('error')}>{error}</div>}
+        {error && (
+          <Text role="alert" className={cx('error')} type={BODY_6}>
+            {error}
+          </Text>
+        )}
       </div>
     </Modal>
   );
@@ -45,7 +60,6 @@ ConfirmPopUp.propTypes = {
   modalOpen: oneOfType([bool, string]).isRequired,
   namespace: string.isRequired,
   setModalOpen: func.isRequired,
-  t: func.isRequired,
 };
 
 export default ConfirmPopUp;

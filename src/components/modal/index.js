@@ -1,1 +1,1 @@
-export { default } from './modal';
+export { default, BACKDROP_LABEL } from './modal';

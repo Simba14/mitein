@@ -23,14 +23,14 @@ const SessionRequestedMessageHandler = ({
   const localePath = langIsGerman ? `/${GERMAN}` : '';
   const link = `${uiHost}${localePath}${ROUTE_PROFILE}/`;
   const templateId = langIsGerman
-    ? template.de.sessionRequested
-    : template.en.sessionRequested;
+    ? template.de.sessionRequest
+    : template.en.sessionRequest;
 
   const date = formatSessionDate(start);
   const time = formatSessionTime({ start, end });
 
   return sendRequestedEmail({
-    email,
+    emails: [{ email }],
     params: {
       date,
       time,
