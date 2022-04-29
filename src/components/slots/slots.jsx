@@ -89,7 +89,9 @@ const Slots = ({ userId, onSelect }) => {
 
     return (
       <div className={cx('container')}>
-        <Notice type={ALERT}>{t('note')}</Notice>
+        <Notice type={ALERT}>
+          <Text>{t('note')}</Text>
+        </Notice>
         <section className={cx('selectionContainer')}>
           <div className={cx('calendar')}>
             <Text className={cx('step')} tag="h3" type={HEADING_4}>
