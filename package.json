@@ -65,6 +65,7 @@
     "firebase": "^8.10.0",
     "firebase-admin": "^10.0.0",
     "firebase-functions": "^3.15.7",
+    "focus-trap-react": "^8.11.0",
     "graphql": "^15.5.3",
     "graphql-extensions": "^0.15.0",
     "graphql-tag": "^2.11.0",

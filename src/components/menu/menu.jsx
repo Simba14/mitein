@@ -4,13 +4,11 @@ import classnames from 'classnames/bind';
 
 import { MenuContextConsumer } from 'context/menu/';
 import Anchor from 'components/anchor';
-import CloseIcon from 'assets/close.svg';
-import MenuIcon from 'assets/menu.svg';
+import Svg, { CLOSE, MENU } from 'components/svg';
+import { ROUTE_ABOUT, ROUTE_HOW, ROUTE_VOLUNTEER } from 'routes';
 
 import styles from './menu.module.scss';
 const cx = classnames.bind(styles);
-
-import { ROUTE_ABOUT, ROUTE_HOW, ROUTE_VOLUNTEER } from 'routes';
 
 const MENU_ITEMS = [
   {
@@ -53,11 +51,7 @@ const Menu = () => {
               })}
               onClick={handleOnClick}
             >
-              {isMenuOpen ? (
-                <CloseIcon className={cx('icon')} />
-              ) : (
-                <MenuIcon className={cx('icon')} />
-              )}
+              <Svg className={cx('icon')} name={isMenuOpen ? CLOSE : MENU} />
             </button>
             <nav
               className={cx('nav', {
