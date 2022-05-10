@@ -4,5 +4,17 @@
   "accordionHeader": {
     "requested": "Angefragt",
     "upcoming": "Kommende"
+  },
+  "email": "Email: {{email}}",
+  "name": "Anzeige Name: {{displayName}}",
+  "account": "Konto: {{type}}",
+  "interests": {
+    "label": "Interessen",
+    "edit": "Bearbeiten",
+    "editLabel": "Ihre Interessen bearbeiten",
+    "none": "Noch keine Interessen. Fügen Sie einige hinzu!",
+    "heading": "Worüber möchten Sie sprechen?",
+    "description": "Diese werden vor Besprechungen freigegeben und können als Gesprächsthemen verwendet werden.",
+    "instructions": "Klicken Sie, um ein Interesse hinzuzufügen. Um ein Interesse wieder abzuwählen, klicken Sie erneut darauf."
   }
 }

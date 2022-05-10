@@ -42,13 +42,14 @@ const Text = ({ children, className, tag, type, ...props }) => {
 };
 
 Text.propTypes = {
-  children: oneOfType([node, string]).isRequired,
+  children: oneOfType([node, string]),
   className: string,
   tag: string,
   type: oneOf(TYPES),
 };
 
 Text.defaultProps = {
+  children: '',
   className: null,
   tag: 'p',
   type: BODY_5,

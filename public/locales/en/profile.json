@@ -4,5 +4,17 @@
   "accordionHeader": {
     "requested": "Requested",
     "upcoming": "Upcoming"
+  },
+  "email": "Email: {{email}}",
+  "name": "Display Name: {{displayName}}",
+  "account": "Account: {{type}}",
+  "interests": {
+    "label": "Interests",
+    "edit": "Edit",
+    "editLabel": "Edit your interests",
+    "none": "No interests yet. Add Some!",
+    "heading": "What would you like to chat about?",
+    "description": "These are shared with participants before your chats to help start the conversation.",
+    "instructions": "Click to add an interest. To unselect an interest, click on it again."
   }
 }

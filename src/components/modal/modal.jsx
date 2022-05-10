@@ -1,6 +1,7 @@
 import React, { useEffect, useMemo, useRef, useState } from 'react';
 import classnames from 'classnames/bind';
 import { createPortal } from 'react-dom';
+import FocusTrap from 'focus-trap-react';
 import {
   bool,
   element,
@@ -12,6 +13,7 @@ import {
 } from 'prop-types';
 
 import styles from './modal.module.scss';
+import Svg, { CLOSE } from 'components/svg';
 const cx = classnames.bind(styles);
 
 const NEXT_ROOT_ID = '#__next';
@@ -67,13 +69,19 @@ const Modal = ({ children, open, onClose, locked, parent, className }) => {
   }, [open, locked, onClose]);
 
   const Backdrop = (
-    <div
-      aria-label={BACKDROP_LABEL}
-      ref={backdrop}
-      className={cx('backdrop', className, { active: active && open })}
-    >
-      {children}
-    </div>
+    <FocusTrap>
+      <div
+        aria-modal={true}
+        aria-label={BACKDROP_LABEL}
+        ref={backdrop}
+        className={cx('backdrop', className, { active: active && open })}
+      >
+        <button className={cx('close')} onClick={onClose}>
+          <Svg aria-hidden={true} name={CLOSE} />
+        </button>
+        {children}
+      </div>
+    </FocusTrap>
   );
 
   if (open || active) return createPortal(Backdrop, el);

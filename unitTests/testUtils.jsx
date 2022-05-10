@@ -55,20 +55,6 @@ function render(ui, { wrapper, router, mocks = [], ...options } = {}) {
   });
 }
 
-// import { render } from '@testing-library/react';
-// import { TranslationProvider } from 'my-i18n-lib';
-
-// const AllTheProviders = ({ children }) => {
-//   return (
-//     <TranslationProvider messages={defaultStrings}>
-//       {children}
-//     </TranslationProvider>
-//   );
-// };
-
-// const customRender = (ui, options) =>
-//   render(ui, { wrapper: AllTheProviders, ...options });
-
 // re-export everything
 export * from '@testing-library/react';
 export { default as userEvent } from '@testing-library/user-event';

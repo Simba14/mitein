@@ -1,3 +1,5 @@
+@import 'scss/breakpoints.scss';
+@import 'scss/spacings.scss';
 @import 'scss/wrapper.scss';
 
 .backdrop {
@@ -17,6 +19,20 @@
   align-items: center;
   justify-content: center;
   z-index: 100;
+
+  .close {
+    position: absolute;
+    cursor: pointer;
+    top: size(2);
+    right: size(2);
+    width: size(5);
+    height: size(5);
+
+    @include mq($from: tablet) {
+      top: size(4);
+      right: size(4);
+    }
+  }
 
   > div {
     transform: translateY(100px);

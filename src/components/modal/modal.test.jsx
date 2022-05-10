@@ -30,7 +30,9 @@ test('Modal renders correctly when open', () => {
 
   const backdrop = screen.getByLabelText(BACKDROP_LABEL);
   const children = screen.getByTestId(CHILDREN_TEST_ID);
+  const closeBtn = screen.getByRole('button');
   expect(children).toBeInTheDocument();
+  expect(closeBtn).toBeInTheDocument();
   expect(backdrop).toBeInTheDocument();
 });
 
@@ -46,11 +48,26 @@ test('Modal is correctly appended to parent element if provided', () => {
   );
 
   const backdrop = screen.getByLabelText(BACKDROP_LABEL);
+  const closeBtn = screen.getByRole('button');
   const parent = screen.getByTestId(PARENT_TEST_ID);
 
   expect(parent).toBeInTheDocument();
+  expect(closeBtn).toBeInTheDocument();
   // content gets appended to div
   expect(parent.firstChild.firstChild).toEqual(backdrop);
+});
+
+test('Modal can be closed by clicking on close button', () => {
+  const onCloseMock = jest.fn();
+  render(
+    <Modal open onClose={onCloseMock}>
+      <div data-testid={CHILDREN_TEST_ID} />
+    </Modal>,
+  );
+
+  const closeBtn = screen.getByRole('button');
+  userEvent.click(closeBtn);
+  expect(onCloseMock).toHaveBeenCalled();
 });
 
 test('Modal can be closed by clicking on backdrop', () => {

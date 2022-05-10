@@ -1,1 +1,1 @@
-export { default, LOGO, FB, INSTA, TWITTER } from './svg';
+export { default, CLOSE, LOGO, MENU, FB, INSTA, TWITTER } from './svg';

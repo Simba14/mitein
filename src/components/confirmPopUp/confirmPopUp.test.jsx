@@ -33,7 +33,7 @@ test('ConfirmPopUp renders correctly when open with no error', () => {
 
   const dialog = screen.getByRole('dialog');
   const heading = screen.getByRole('heading');
-  const cta = screen.getByRole('button');
+  const [, cta] = screen.getAllByRole('button');
   const error = screen.queryByRole('alert');
   expect(dialog).toBeInTheDocument();
   expect(heading).toBeInTheDocument();
@@ -58,7 +58,7 @@ test('ConfirmPopUp renders correctly when open', () => {
 
   const dialog = screen.getByRole('dialog');
   const heading = screen.getByRole('heading');
-  const cta = screen.getByRole('button');
+  const [, cta] = screen.getAllByRole('button');
   const error = screen.getByRole('alert');
   expect(dialog).toBeInTheDocument();
   expect(heading).toBeInTheDocument();
@@ -81,7 +81,7 @@ test('ConfirmPopUp user clicks calls the appropriate callbacks', () => {
   );
 
   // click confirm
-  const cta = screen.getByRole('button');
+  const [, cta] = screen.getAllByRole('button');
   userEvent.click(cta);
   expect(onConfirm).toHaveBeenCalled();
   // close modal

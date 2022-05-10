@@ -1,29 +1,30 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useMutation } from '@apollo/client';
 import classnames from 'classnames/bind';
 import { useRouter } from 'next/router';
 import { useQuery } from '@apollo/client';
 import { compose, get, groupBy, isEmpty, take } from 'lodash/fp';
 import { useTranslation } from 'next-i18next';
-// import { without } from 'lodash';
+import { without } from 'lodash';
 // import { COLLECTION_SESSIONS } from '@api/firebase/constants';
 // import { Firestore } from '@api/firebase';
 
 import Accordion from 'components/accordion';
 import Cta from 'components/cta';
-// import DeleteIcon from 'assets/close.svg';
 import LearnerCalendar from 'components/calendar/timeView/learner';
+import Modal from 'components/modal';
 import NativeCalendar from 'components/calendar/timeView/native';
 import Loading from 'components/loading';
 import SessionCard from 'components/sessionCard';
 import Suspended from 'components/suspended';
-import Text, { BODY_6, HEADING_2 } from 'components/text';
+import Text, { BODY_6, HEADING_2, HEADING_4 } from 'components/text';
 import { withLayout } from 'components/layout';
 
+import Svg, { CLOSE } from 'components/svg';
 import { sessionProps, withSessionContext } from 'context/session';
 import GET_PROFILE from '@graphql/queries/getProfile.graphql';
 import SIGN_OUT from '@graphql/mutations/signOut.graphql';
-// import UPDATE_PROFILE from '@graphql/mutations/updateUser.graphql';
+import UPDATE_PROFILE from '@graphql/mutations/updateUser.graphql';
 import { ROUTE_LOGIN, ROUTE_SESSIONS_BOOK } from 'routes';
 import {
   LEARNER,
@@ -31,7 +32,7 @@ import {
   BOOKED,
   REJECTED,
   REQUESTED,
-  // INTERESTS,
+  INTERESTS,
 } from '@constants/user';
 
 import styles from './profile.module.scss';
@@ -41,6 +42,7 @@ const Profile = ({ session }) => {
   const { t } = useTranslation('profile');
   const router = useRouter();
   const userId = get('userId', session);
+  const [interestsOpen, setInterestsOpen] = useState(false);
   const { data, loading, error } = useQuery(GET_PROFILE, {
     variables: { id: userId },
     skip: !userId,
@@ -55,7 +57,7 @@ const Profile = ({ session }) => {
     onCompleted: signOutSuccessful,
   });
 
-  // const [updateProfile] = useMutation(UPDATE_PROFILE);
+  const [updateProfile] = useMutation(UPDATE_PROFILE);
 
   // useEffect(() => {
   //   const unsubscribe = Firestore.db
@@ -72,18 +74,18 @@ const Profile = ({ session }) => {
   //   };
   // }, []);
 
-  // const handleUpdateProfile = ({ addInterest, deleteInterest }) => {
-  //   updateProfile({
-  //     variables: {
-  //       id: userId,
-  //       fields: {
-  //         interests: deleteInterest
-  //           ? without(interests, deleteInterest)
-  //           : [...(interests || []), addInterest],
-  //       },
-  //     },
-  //   });
-  // };
+  const handleUpdateProfile = ({ addInterest, deleteInterest }) => {
+    updateProfile({
+      variables: {
+        id: userId,
+        fields: {
+          interests: deleteInterest
+            ? without(interests, deleteInterest)
+            : [...(interests || []), addInterest],
+        },
+      },
+    });
+  };
 
   useEffect(() => {
     if (!(userId || loading || data) || error) {
@@ -120,12 +122,12 @@ const Profile = ({ session }) => {
           <Text className={cx('title')} tag="h1" type={HEADING_2}>
             {t('title')}
           </Text>
-          <Text>Email: {email}</Text>
-          <Text>Display Name: {displayName}</Text>
-          <Text>Account type: {type}</Text>
-          {/* <div className={cx('interests')}>
+          <Text>{t('email', { email })}</Text>
+          <Text>{t('name', { displayName })}</Text>
+          <Text className={cx('accountType')}>{t('account', { type })}</Text>
+          <div className={cx('interests')}>
             <Text className={cx('label')} tag="label">
-              {'Interests:'}
+              {t('interests.label')}
             </Text>
             {interests?.length ? (
               interests.map(interest => (
@@ -137,42 +139,53 @@ const Profile = ({ session }) => {
                   }
                 >
                   {interest}
-                  <DeleteIcon className={cx('delete')} />
+                  <Svg className={cx('delete')} name={CLOSE} />
                 </button>
               ))
             ) : (
-              <Text type={BODY_6}>No Interests yet. Add Some below!</Text>
+              <Text type={BODY_6}>{t('interests.none')}</Text>
             )}
             <Cta
-              className={cx('add')}
-              onClick={signOut}
-              text={t('addInterest')}
+              aria-label={t('editLabel')}
+              aria-haspopup="dialog"
+              className={cx('edit')}
+              onClick={() => setInterestsOpen(true)}
+              text={t('interests.edit')}
             />
           </div>
-          <div className={cx('addInterests')}>
-            <Text className={cx('instruction')} tag="label" type={BODY_6}>
-              {
-                'These are shared before meetings and can be used as conversation topics.'
-              }
-            </Text>
-            <div className={cx('interests')}>
-              {INTERESTS.map(interest => {
-                const selected = interests?.find(el => el === interest);
-                return (
-                  <button
-                    key={interest}
-                    className={cx('interest', { selected })}
-                    disabled={selected}
-                    onClick={() =>
-                      handleUpdateProfile({ addInterest: interest })
-                    }
-                  >
-                    {interest}
-                  </button>
-                );
-              })}
+
+          <Modal open={interestsOpen} onClose={() => setInterestsOpen(false)}>
+            <div className={cx('addInterests')}>
+              <Text className={cx('interestsHeading')} type={HEADING_4}>
+                {t('interests.heading')}
+              </Text>
+              <Text className={cx('description')} type={BODY_6}>
+                {t('interests.description')}
+              </Text>
+              <Text className={cx('instruction')} type={BODY_6} tag="strong">
+                {t('interests.instructions')}
+              </Text>
+              <div className={cx('options')}>
+                {INTERESTS.map(interest => {
+                  const selected = interests?.find(el => el === interest);
+                  return (
+                    <button
+                      key={interest}
+                      className={cx('interest', { selected })}
+                      onClick={() =>
+                        handleUpdateProfile({
+                          [selected ? 'deleteInterest' : 'addInterest']:
+                            interest,
+                        })
+                      }
+                    >
+                      {interest}
+                    </button>
+                  );
+                })}
+              </div>
             </div>
-          </div> */}
+          </Modal>
         </div>
         <div>
           <Cta
