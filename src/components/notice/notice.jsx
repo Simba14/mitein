@@ -12,7 +12,7 @@ export const SUCCESS = 'success';
 export const TIP = 'tip';
 export const WARNING = 'warning';
 
-export const NOTICE_TYPES = [ALERT, INFO, SUCCESS, TIP, WARNING];
+export const NOTICE_TYPES = [ALERT, DEFAULT, INFO, SUCCESS, TIP, WARNING];
 
 const Notice = ({ children, className, type }) => {
   return <div className={cx('box', className, type)}>{children}</div>;
