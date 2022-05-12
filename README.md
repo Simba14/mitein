@@ -69,8 +69,8 @@ Please, request the actual values for the environment variables and replace them
 
 ## Commands
 
-| Command               | Description                                                 |
-| --------------------- | ----------------------------------------------------------- |
+| Command                  | Description                                                 |
+| ------------------------ | ----------------------------------------------------------- |
 | `npm run`                | Install the dependencies                                    |
 | `npm run dev`            | Starts development server                                   |
 | `npm run build`          | Compiles application                                        |
