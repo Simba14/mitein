@@ -1,6 +1,6 @@
 {
   "functions": {
-    "predeploy": ["yarn --prefix \"$RESOURCE_DIR\" lint-functions"],
+    "predeploy": ["npm run --prefix \"$RESOURCE_DIR\" lint-functions"],
     "source": "."
   },
   "emulators": {

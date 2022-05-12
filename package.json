@@ -17,7 +17,7 @@
     "lint-functions": "eslint ./functions",
     "serve-functions": "firebase emulators:start --only functions",
     "functions-shell": "firebase functions:shell",
-    "start-functions": "yarn shell",
+    "start-functions": "npm run shell",
     "deploy-functions": "firebase deploy --only functions",
     "logs-functions": "firebase functions:log",
     "prepare": "husky install"
@@ -86,8 +86,7 @@
     "seamless-scroll-polyfill": "^2.1.4",
     "sib-api-v3-sdk": "^8.2.1",
     "uuid": "^8.3.2",
-    "winston": "^3.3.3",
-    "yarn": "^1.22.10"
+    "winston": "^3.3.3"
   },
   "jest": {
     "setupFilesAfterEnv": [

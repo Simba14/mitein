@@ -12,7 +12,7 @@ security features and ease of production deploys. You can learn more about Next.
 ## 🚀 Quick start
 
 1.  **Before developing.**
-    Firebase CLI is required in order to use features such as the emulator. Install it by doing the following `yarn global firebase-tools`.
+    Firebase CLI is required in order to use features such as the emulator. Install it by doing the following `npm install -g firebase-tools`.
 
     Once installed you will need to authenticate by running `firebase login`
 
@@ -26,8 +26,8 @@ security features and ease of production deploys. You can learn more about Next.
 
     ```shell
     cd mitein/
-    yarn firebase emulators:start
-    yarn dev
+    npm run firebase emulators:start
+    npm run dev
     ```
 
 3.  **Open the source code and start editing!**
@@ -71,12 +71,12 @@ Please, request the actual values for the environment variables and replace them
 
 | Command               | Description                                                 |
 | --------------------- | ----------------------------------------------------------- |
-| `yarn`                | Install the dependencies                                    |
-| `yarn dev`            | Starts development server                                   |
-| `yarn build`          | Compiles application                                        |
-| `yarn start-emulator` | Starts the firebase emulator required for local development |
-| `yarn clean`          | clears the cache (.cache folder) and public directories     |
-| `yarn test`           | Runs the tests files                                        |
+| `npm run`                | Install the dependencies                                    |
+| `npm run dev`            | Starts development server                                   |
+| `npm run build`          | Compiles application                                        |
+| `npm run start-emulator` | Starts the firebase emulator required for local development |
+| `npm run clean`          | clears the cache (.cache folder) and public directories     |
+| `npm run test`           | Runs the tests files                                        |
 
 ## Data Fetching
 
