@@ -115,7 +115,7 @@ test('NewsletterBanner unsuccessful subscription should display the error', asyn
 
   userEvent.type(textInput, MOCK_EMAIL);
   userEvent.click(submit);
-  await waitFor(() => new Promise(resolve => setTimeout(resolve, 0)));
+  await waitFor(() => new Promise(resolve => setTimeout(resolve, 100)));
   expect(formMessage).toHaveTextContent(MOCK_ERROR);
 });
 
@@ -129,6 +129,6 @@ test('NewsletterBanner subscription with network error should display the error'
 
   userEvent.type(textInput, MOCK_EMAIL);
   userEvent.click(submit);
-  await waitFor(() => new Promise(resolve => setTimeout(resolve, 0)));
+  await waitFor(() => new Promise(resolve => setTimeout(resolve, 100)));
   expect(formMessage).toHaveTextContent('Network error');
 });
