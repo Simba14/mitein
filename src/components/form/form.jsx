@@ -8,13 +8,14 @@ import { throttle } from 'lodash';
 
 import Anchor from 'components/anchor';
 import Cta from 'components/cta';
-import { ROUTE_LOGIN, ROUTE_SIGN_UP } from 'routes';
+import { ROUTE_FORGOT_PASSWORD, ROUTE_LOGIN, ROUTE_SIGN_UP } from 'routes';
 
 import styles from './form.module.scss';
 const cx = classnames.bind(styles);
 
 export const SIGN_UP_TYPE = 'signUp';
 export const LOGIN_TYPE = 'login';
+export const FORGOT_PASSWORD = 'forgotPassword';
 const LEARNER_TYPE = 'LEARNER';
 const NATIVE_TYPE = 'NATIVE';
 const REPRESENTATIVE_TYPE = 'REPRESENTATIVE';
@@ -25,13 +26,21 @@ const userType = {
   representative: REPRESENTATIVE_TYPE,
 };
 
-const Form = ({ submitError, loadingSubmit, onChange, onSubmit, type }) => {
+const Form = ({
+  displaySuccessMsg,
+  submitError,
+  loadingSubmit,
+  onChange,
+  onSubmit,
+  type,
+}) => {
   const { t } = useTranslation('form');
   const {
     clearErrors,
     register,
     handleSubmit,
     formState: { errors },
+    getValues,
     setError,
     setFocus,
   } = useForm();
@@ -63,9 +72,10 @@ const Form = ({ submitError, loadingSubmit, onChange, onSubmit, type }) => {
     [onChange, clearErrors],
   );
 
-  const registerInput = name => {
+  const registerInput = (name, validation) => {
     const { onChange, ...rest } = register(name, {
       required: t('errorMsg.required'),
+      ...validation,
     });
     return {
       ...rest,
@@ -76,22 +86,33 @@ const Form = ({ submitError, loadingSubmit, onChange, onSubmit, type }) => {
     };
   };
 
+  const EmailInput = (
+    <div className={cx('fieldContainer', { hasError: errors.email })}>
+      <label htmlFor="email">{t('email')}</label>
+      <input
+        {...registerInput('email')}
+        className={cx('textInput')}
+        id="email"
+        placeholder={t('email')}
+        type="email"
+      />
+
+      <div className={cx('fieldError', { show: errors.email })}>
+        {get('email.message', errors)}
+      </div>
+    </div>
+  );
+
+  if (type === FORGOT_PASSWORD)
+    return (
+      <form className={cx('form')} onSubmit={handleSubmit(onSubmit)}>
+        <EmailInput />
+      </form>
+    );
+
   return (
     <form className={cx('form')} onSubmit={handleSubmit(onSubmit)}>
-      <div className={cx('fieldContainer', { hasError: errors.email })}>
-        <label htmlFor="email">{t('email')}</label>
-        <input
-          {...registerInput('email')}
-          className={cx('textInput')}
-          id="email"
-          placeholder={t('email')}
-          type="email"
-        />
-
-        <div className={cx('fieldError', { show: errors.email })}>
-          {get('email.message', errors)}
-        </div>
-      </div>
+      <EmailInput />
       <div className={cx('fieldContainer', { hasError: errors.password })}>
         <label htmlFor="password">{t('password')}</label>
         <input
@@ -114,7 +135,12 @@ const Form = ({ submitError, loadingSubmit, onChange, onSubmit, type }) => {
           >
             <label htmlFor="confirmPassword">{t('confirmPassword')}</label>
             <input
-              {...registerInput('customPassword')}
+              {...registerInput('confirmPassword', {
+                validate: {
+                  passwordsMatch: v =>
+                    getValues().password === v || t('confirmPasswordError'),
+                },
+              })}
               className={cx('password')}
               id="confirmPassword"
               placeholder={t('password')}
@@ -163,25 +189,42 @@ const Form = ({ submitError, loadingSubmit, onChange, onSubmit, type }) => {
         disabled={loadingSubmit}
         text={t(`${type}.submitBtn`)}
       />
-      <div>
+      <div className={cx('changeLocation')}>
         {t(`${type}.changeLocation.text`)}{' '}
         <Anchor to={isSignUp ? ROUTE_LOGIN : ROUTE_SIGN_UP}>
           {t(`${type}.changeLocation.cta`)}
         </Anchor>
       </div>
+      {!isSignUp && (
+        <Anchor className={cx('forgotPassword')} to={ROUTE_FORGOT_PASSWORD}>
+          Forgotten you password?
+        </Anchor>
+      )}
       <div className={cx('error', { visible: errors.submit })}>
         {get('submit.message', errors)}
       </div>
+      {displaySuccessMsg && (
+        <div className={cx('error', { visible: displaySuccessMsg })}>
+          {get('submit.message', errors)}
+        </div>
+      )}
     </form>
   );
 };
 
+Form.defaultProps = {
+  displaySuccessMsg: false,
+  loadingSubmit: false,
+  submitError: null,
+};
+
 Form.propTypes = {
+  displaySuccessMsg: bool,
   loadingSubmit: bool,
   onChange: func.isRequired,
   onSubmit: func.isRequired,
   submitError: string,
-  type: oneOf([SIGN_UP_TYPE, LOGIN_TYPE]).isRequired,
+  type: oneOf([SIGN_UP_TYPE, LOGIN_TYPE, FORGOT_PASSWORD]).isRequired,
 };
 
 export default Form;

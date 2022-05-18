@@ -2,6 +2,7 @@
   "email": "Email",
   "password": "Password",
   "confirmPassword": "Confirm Password",
+  "confirmPasswordError": "Passwords must match",
   "displayName": {
     "label": "Display Name",
     "placeholder": "Your display name"
@@ -24,7 +25,8 @@
     "changeLocation": {
       "text": "New to Mitein?",
       "cta": "Sign up here"
-    }
+    },
+    "forgotPassword": "Forgotten Password?"
   },
   "errorMsg": {
     "required": "required*"

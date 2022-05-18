@@ -68,6 +68,7 @@ User.updateCancellations = async ({ sessionId, userId }) => {
   const recentCancellations =
     !isEmpty(cancellations) &&
     cancellations.filter(item => item.date > dateConstraint.toISOString());
+
   const suspendedUntil =
     !isEmpty(recentCancellations) &&
     recentCancellations.length >= MAX_NUMBER_OF_CANCELLATIONS

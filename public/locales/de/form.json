@@ -2,6 +2,7 @@
   "email": "E-mail",
   "password": "Passwort",
   "confirmPassword": "Passwort bestätigen",
+  "confirmPasswordError": "Passwörter müssen übereinstimmen",
   "displayName": {
     "label": "Anzeigename",
     "placeholder": "Ihr Anzeigename"
@@ -24,7 +25,8 @@
     "changeLocation": {
       "text": "Neu bei Mitein?",
       "cta": "Hier anmelden"
-    }
+    },
+    "forgotPassword": "Passwort vergessen?"
   },
   "errorMsg": {
     "required": "erforderlich*"

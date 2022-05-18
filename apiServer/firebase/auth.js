@@ -14,6 +14,7 @@ import {
   FirebaseEmailTooManyAttemptsError,
   FirebaseWrongCredentialsError,
 } from '@api/firebase/errors';
+import ResetPasswordRequestHandler from '@api/pubsub/handlers/users/resetPasswordRequestMessageHandler';
 
 export const deleteAccount = () => {
   const user = FireAuth.currentUser;
@@ -53,6 +54,18 @@ export const createAccount = ({ displayName, email, password, type }) => {
     });
 };
 
+export const handleResetPasswordRequest = async email => {
+  try {
+    const user = await FireAuth.getUserByEmail(email);
+    console.log({ user });
+    ResetPasswordRequestHandler({
+      message: { user },
+    });
+    return true;
+  } catch (error) {
+    return false;
+  }
+};
 //
 // export const setPasswordByEmail = async ({ email, password }) => {
 //   try {

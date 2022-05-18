@@ -59,7 +59,7 @@
     color: $red-error-with-background;
     min-height: size(6);
     padding: size(1);
-    margin-top: size(3);
+
     opacity: 0;
     transition: opacity 1s;
     text-transform: capitalize;
@@ -68,6 +68,15 @@
     &.visible {
       opacity: 1;
     }
+  }
+
+  .changeLocation {
+    margin-bottom: size(1);
+  }
+
+  .forgotPassword {
+    margin-bottom: size(3);
+    width: max-content;
   }
 
   label {

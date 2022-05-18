@@ -3,6 +3,7 @@ import User from '@api/firebase/user';
 import { InvalidTokenError, ValidationError } from '@api/auth/errors';
 import { subscribeContactToNewsletter } from '@api/notifications';
 import config from '@api/config';
+import { handleResetPasswordRequest } from '@api/firebase/auth';
 
 const UsersMutation = {
   signIn: async (obj, args, { auth }, info) => {
@@ -27,10 +28,11 @@ const UsersMutation = {
     await subscribeContactToNewsletter(email);
     return email;
   },
+  resetPasswordRequest: async (obj, { email }, context, info) => {
+    return handleResetPasswordRequest(email);
+  },
   updateUser: async (obj, args, context, info) => {
-    console.log({ ...args });
     const user = await User.updateById(args);
-    console.log({ user });
     return user;
   },
   verifyEmail: async (parent, { token }) => {
