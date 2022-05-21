@@ -17,7 +17,7 @@ const db = getFirestore();
 // const { PubSub } = require('@google-cloud/pubsub');
 
 // const pubsub = new PubSub({
-//   projectId: 'mitein-3c0d1',
+//   projectId: 'REQUEST FROM DEVELOPER',
 //   apiEndpoint: 'localhost:8085',
 // });
 

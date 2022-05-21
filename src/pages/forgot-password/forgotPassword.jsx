@@ -2,19 +2,24 @@ import React, { useCallback, useState } from 'react';
 import { useMutation } from '@apollo/client';
 import { useRouter } from 'next/router';
 import { compose, get } from 'lodash/fp';
+import { useTranslation } from 'next-i18next';
+import classnames from 'classnames/bind';
 
 import Form, { FORGOT_PASSWORD } from 'components/form';
+import Text, { HEADING_3 } from 'components/text';
 import { ROUTE_PROFILE } from 'routes';
 import { withLayout } from 'components/layout';
 import { sessionProps, withSessionContext } from 'context/session';
 import RESET_PASSWORD_REQUEST from '@graphql/mutations/resetPasswordRequest.graphql';
 
 import styles from './forgotPassword.module.scss';
+const cx = classnames.bind(styles);
 
 const ForgotPassword = ({ session }) => {
   const [error, setError] = useState(null);
   const [submitted, setSubmitted] = useState(null);
   const router = useRouter();
+  const { t } = useTranslation('form', { keyPrefix: 'forgotPassword' });
 
   const [passwordForgotten, { loading }] = useMutation(RESET_PASSWORD_REQUEST, {
     onCompleted: () => setSubmitted(true),
@@ -37,7 +42,11 @@ const ForgotPassword = ({ session }) => {
   }
 
   return (
-    <div className={styles.wrapper}>
+    <div className={cx('wrapper')}>
+      <Text className={cx('title')} type={HEADING_3}>
+        {t('title')}
+      </Text>
+      <Text className={cx('description')}>{t('description')}</Text>
       <Form
         displaySuccessMsg={submitted}
         loadingSubmit={loading}

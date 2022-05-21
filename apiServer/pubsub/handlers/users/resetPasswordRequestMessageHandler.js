@@ -1,5 +1,6 @@
-import sendResetPasswordRequestEmail from '@api/pubsub/drivers/sendResetPasswordRequestEmail';
-import { RESET_PASSWORD_REQUEST_EMAIL } from '@api/pubsub/drivers/sendUserTokenEmail';
+import sendResetPasswordRequestEmail, {
+  RESET_PASSWORD_REQUEST_EMAIL,
+} from '@api/pubsub/drivers/sendUserTokenEmail';
 import { ROUTE_RESET_PASSWORD } from 'routes';
 
 const ResetPasswordRequestHandler = ({ message }) => {

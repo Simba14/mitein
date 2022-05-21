@@ -28,6 +28,26 @@
     },
     "forgotPassword": "Passwort vergessen?"
   },
+    "forgotPassword": {
+    "submitBtn": "Passwort zurücksetzen",
+    "changeLocation": {
+      "text": "Kennen Sie Ihr Passwort?",
+      "cta": "Hier einloggen"
+    },
+    "title": "Ihr Passwort vergessen?",
+    "description": "Geben Sie Ihre E-Mail-Adresse ein und wir senden Ihnen die Anweisungen zur Erstellung Ihres neuen Passworts zu.",
+    "successMsg": "Antrag auf Passwortrücksetzung eingereicht. Prüfen Sie Ihren Posteingang für die nächsten Schritte."
+  },
+  "resetPassword": {
+    "submitBtn": "Neues Passwort festlegen",
+    "title": "Ihr Passwort zurücksetzen",
+        "changeLocation": {
+      "text": "Neues Passwort festgelegt?",
+      "cta": "Hier einloggen"
+    },
+    "description": "Legen Sie ein neues Passwort für Ihr Konto fest",
+    "successMsg": "Ihr neues Passwort wurde festgelegt. Sie können sich jetzt damit einloggen."
+  },
   "errorMsg": {
     "required": "erforderlich*"
   }

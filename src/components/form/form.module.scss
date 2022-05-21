@@ -51,12 +51,11 @@
     transition: visibility 1s, opacity 1s;
   }
 
-  .error {
+  .error,
+  .success {
     display: flex;
     align-items: center;
     justify-content: center;
-    background: $red-background;
-    color: $red-error-with-background;
     min-height: size(6);
     padding: size(1);
 
@@ -68,6 +67,16 @@
     &.visible {
       opacity: 1;
     }
+  }
+
+  .error {
+    background: $red-background;
+    color: $red-error-with-background;
+  }
+
+  .success {
+    background: $green-background;
+    color: black;
   }
 
   .changeLocation {

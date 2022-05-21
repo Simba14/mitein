@@ -28,6 +28,26 @@
     },
     "forgotPassword": "Forgotten Password?"
   },
+  "forgotPassword": {
+    "submitBtn": "Reset Password",
+    "changeLocation": {
+      "text": "Know your password?",
+      "cta": "Login here"
+    },
+    "title": "Forgotten your Password?",
+    "description": "Enter your email and we'll send you the instructions to create your new password",
+    "successMsg": "Reset password request submitted. Check your inbox for the next steps."
+  },
+  "resetPassword": {
+    "submitBtn": "Set new password",
+    "title": "Reset your password",
+        "changeLocation": {
+      "text": "New password set?",
+      "cta": "Login here"
+    },
+    "description": "Set a new password for your account",
+    "successMsg": "Your new password has been set. You can now login with it."
+  },
   "errorMsg": {
     "required": "required*"
   }

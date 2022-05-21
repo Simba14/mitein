@@ -5,7 +5,7 @@ import config from '@api/config';
 import { GERMAN } from '@api/firebase/constants';
 
 export const USER_VERIFICATION_EMAIL = 'userVerification';
-export const RESET_PASSWORD_REQUEST_EMAIL = 'resetPasswordRequest';
+export const RESET_PASSWORD_REQUEST_EMAIL = 'resetPassword';
 
 const sendUserTokenEmail = ({
   displayLanguage,

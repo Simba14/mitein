@@ -2,6 +2,7 @@ import React, { useCallback, useState } from 'react';
 import { useMutation } from '@apollo/client';
 import { useRouter } from 'next/router';
 import { compose, get } from 'lodash/fp';
+import classnames from 'classnames/bind';
 
 import Form, { LOGIN_TYPE } from 'components/form';
 import { ROUTE_PROFILE } from 'routes';
@@ -10,6 +11,7 @@ import { sessionProps, withSessionContext } from 'context/session';
 import SIGN_IN from '@graphql/mutations/signIn.graphql';
 
 import styles from './login.module.scss';
+const cx = classnames.bind(styles);
 
 const SignIn = ({ session }) => {
   const [error, setError] = useState(null);
@@ -41,7 +43,7 @@ const SignIn = ({ session }) => {
   }
 
   return (
-    <div className={styles.wrapper}>
+    <div className={cx('wrapper')}>
       <Form
         loadingSubmit={loading}
         onSubmit={onLogin}

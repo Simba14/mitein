@@ -1,9 +1,7 @@
-import jwt from 'jsonwebtoken';
 import User from '@api/firebase/user';
-import { InvalidTokenError, ValidationError } from '@api/auth/errors';
+import { ValidationError } from '@api/auth/errors';
 import { subscribeContactToNewsletter } from '@api/notifications';
 import config from '@api/config';
-import { handleResetPasswordRequest } from '@api/firebase/auth';
 
 const UsersMutation = {
   signIn: async (obj, args, { auth }, info) => {
@@ -15,12 +13,11 @@ const UsersMutation = {
       throw new ValidationError('Incorrect login details');
     }
   },
-  signOut: async (parent, args, { auth }, info) => {
+  signOut: async (obj, args, { auth }, info) => {
     return auth.signOut();
   },
   signUp: async (obj, args, { auth }, info) => {
     const user = await auth.signUp(args);
-
     return user;
   },
   newsletterSignUp: async (obj, args, context, info) => {
@@ -28,30 +25,25 @@ const UsersMutation = {
     await subscribeContactToNewsletter(email);
     return email;
   },
-  resetPasswordRequest: async (obj, { email }, context, info) => {
-    return handleResetPasswordRequest(email);
+  resetPassword: async (obj, { token, password }, { auth }) => {
+    return auth.resetPassword({
+      jwtSecret: config.auth.resetPassword.jwtSecret,
+      token,
+      password,
+    });
+  },
+  resetPasswordRequest: async (obj, { email }, { auth }, info) => {
+    return auth.resetPasswordRequest(email);
   },
   updateUser: async (obj, args, context, info) => {
     const user = await User.updateById(args);
     return user;
   },
-  verifyEmail: async (parent, { token }) => {
-    let decodedToken;
-
-    try {
-      decodedToken = jwt.verify(token, config.auth.verifyEmail.jwtSecret);
-    } catch (error) {
-      throw new InvalidTokenError();
-    }
-
-    await User.updateById({
-      id: decodedToken.authId,
-      fields: {
-        isEmailVerified: true,
-      },
+  verifyEmail: async (obj, { token }, { auth }) => {
+    return auth.verifyEmail({
+      token,
+      jwtSecret: config.auth.verifyEmail.jwtSecret,
     });
-
-    return true;
   },
 };
 

@@ -13,12 +13,9 @@ export default {
     introspection: process.env.NODE_ENV !== PRODUCTION,
   },
   auth: {
-    resetPasswordRequest: {
-      jwtSecret: process.env.RESET_PASSWORD_REQUEST_JWT_SECRET,
-      jwtExpSeconds: parseInt(
-        process.env.RESET_PASSWORD_REQUEST_JWT_EXP_SECONDS,
-        10,
-      ),
+    resetPassword: {
+      jwtSecret: process.env.RESET_PASSWORD_JWT_SECRET,
+      jwtExpSeconds: parseInt(process.env.RESET_PASSWORD_JWT_EXP_SECONDS, 10),
     },
     userVerification: {
       jwtSecret: process.env.VERIFY_EMAIL_JWT_SECRET,
@@ -68,7 +65,7 @@ export default {
         sessionRequest: Number(
           process.env.SENDINBLUE_TEMPLATE_SESSION_REQUEST_DE,
         ),
-        resetPasswordRequest: Number(
+        resetPassword: Number(
           process.env.SENDINBLUE_TEMPLATE_RESET_PASSWORD_REQUEST_DE,
         ),
         userVerification: Number(
@@ -88,7 +85,7 @@ export default {
         sessionRequest: Number(
           process.env.SENDINBLUE_TEMPLATE_SESSION_REQUEST_EN,
         ),
-        resetPasswordRequest: Number(
+        resetPassword: Number(
           process.env.SENDINBLUE_TEMPLATE_RESET_PASSWORD_REQUEST_EN,
         ),
         userVerification: Number(

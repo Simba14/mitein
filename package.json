@@ -23,7 +23,7 @@
     "prepare": "husky install"
   },
   "engines": {
-    "node": "^16"
+    "node": "16"
   },
   "devDependencies": {
     "@babel/core": "^7.15.5",
@@ -43,7 +43,7 @@
     "eslint-config-prettier": "^3.1.0",
     "eslint-plugin-prettier": "^3.0.0",
     "eslint-plugin-react": "^7.25.2",
-    "firebase-functions-test": "^0.2.0",
+    "firebase-functions-test": "^2.1.0",
     "husky": "^7.0.0",
     "jest": "^27.4.7",
     "jest-transform-graphql": "^2.1.0",
@@ -64,7 +64,7 @@
     "classnames": "^2.2.6",
     "firebase": "^8.10.0",
     "firebase-admin": "^10.0.0",
-    "firebase-functions": "^3.15.7",
+    "firebase-functions": "^3.21.2",
     "focus-trap-react": "^8.11.0",
     "graphql": "^15.5.3",
     "graphql-extensions": "^0.15.0",

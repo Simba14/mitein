@@ -3,7 +3,7 @@ import { v4 as uuidv4 } from 'uuid';
 import { isEmpty } from 'lodash/fp';
 import { Firestore } from '@api/firebase';
 import Sessions from '@api/firebase/sessions';
-import { getDocData } from '@api/firebase/helpers';
+import { getDocData, getQuerySnapshotData } from '@api/firebase/helpers';
 import {
   COLLECTION_USERS,
   USER_TYPE_LEARNER,
@@ -54,6 +54,13 @@ User.byIdWithAvailability = async id => {
     sessions,
   };
 };
+
+User.byEmail = async email =>
+  Firestore.collection(COLLECTION_USERS)
+    .where('email', '==', email)
+    .get()
+    .then(getQuerySnapshotData)
+    .then(users => users[0]);
 
 User.updateById = ({ id, fields }) =>
   Firestore.collection(COLLECTION_USERS)
