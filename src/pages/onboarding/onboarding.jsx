@@ -64,6 +64,7 @@ const Onboarding = ({ session }) => {
               className={cx('continue')}
               text={t(`${userType}.cta`)}
               to={ROUTE_PROFILE}
+              fullWidth
             />
           </ContentSection>
         </div>

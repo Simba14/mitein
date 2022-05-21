@@ -5,10 +5,7 @@
 .wrapper {
   display: flex;
   flex-direction: column;
-  height: 100%;
   width: 100%;
-  overflow-y: scroll;
-  scroll-snap-type: y proximity;
   -webkit-overflow-scrolling: touch;
   padding: $wrapper-padding-y-mobile $wrapper-padding-x-mobile;
 
@@ -17,14 +14,7 @@
       $wrapper-padding-y-desktop-large;
   }
 
-  @include mq($from: desktop) {
-    // scroll-snap-type: y mandatory;
-    max-height: 100vh;
-  }
-
   .intro {
-    scroll-snap-align: start;
-    scroll-snap-stop: always;
     padding: size(4);
     margin: auto;
     max-width: $content-max-width;
@@ -64,7 +54,7 @@
     }
 
     .continue {
-      width: $cta-max-width;
+      width: calc(#{$content-max-width} / 2);
     }
   }
 }
