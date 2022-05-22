@@ -78,7 +78,7 @@ const Form = ({ submitError, loadingSubmit, onChange, onSubmit, type }) => {
 
   return (
     <form className={cx('form')} onSubmit={handleSubmit(onSubmit)}>
-      <div className={cx('fieldContainer', { hasError: errors.email })}>
+      <div className={cx('fieldContainer', { hasError: errors?.email })}>
         <label htmlFor="email">{t('email')}</label>
         <input
           {...registerInput('email')}
@@ -88,11 +88,9 @@ const Form = ({ submitError, loadingSubmit, onChange, onSubmit, type }) => {
           type="email"
         />
 
-        <div className={cx('fieldError', { show: errors.email })}>
-          {get('email.message', errors)}
-        </div>
+        <div className={cx('fieldError')}>{get('email.message', errors)}</div>
       </div>
-      <div className={cx('fieldContainer', { hasError: errors.password })}>
+      <div className={cx('fieldContainer', { hasError: errors?.password })}>
         <label htmlFor="password">{t('password')}</label>
         <input
           {...registerInput('password')}
@@ -109,7 +107,7 @@ const Form = ({ submitError, loadingSubmit, onChange, onSubmit, type }) => {
         <>
           <div
             className={cx('fieldContainer', {
-              hasError: errors.confirmPassword,
+              hasError: errors?.confirmPassword,
             })}
           >
             <label htmlFor="confirmPassword">{t('confirmPassword')}</label>
@@ -125,7 +123,7 @@ const Form = ({ submitError, loadingSubmit, onChange, onSubmit, type }) => {
             </div>
           </div>
           <div
-            className={cx('fieldContainer', { hasError: errors.displayName })}
+            className={cx('fieldContainer', { hasError: errors?.displayName })}
           >
             <label htmlFor="displayName">{t('displayName.label')}</label>
             <input
@@ -169,7 +167,7 @@ const Form = ({ submitError, loadingSubmit, onChange, onSubmit, type }) => {
           {t(`${type}.changeLocation.cta`)}
         </Anchor>
       </div>
-      <div className={cx('error', { visible: errors.submit })}>
+      <div className={cx('error', { visible: errors?.submit })}>
         {get('submit.message', errors)}
       </div>
     </form>
