@@ -10,11 +10,20 @@
   "account": "Konto: {{type}}",
   "interests": {
     "label": "Interessen",
+    "cta": "Auswahl bestätigen",
     "edit": "Bearbeiten",
     "editLabel": "Ihre Interessen bearbeiten",
     "none": "Noch keine Interessen. Fügen Sie einige hinzu!",
     "heading": "Worüber würden Sie sich gerne unterhalten?",
     "description": "Ihre Interessen werden vor Sitzungen geteilt und können zu Gesprächsthemen anregen.",
-    "instructions": "Klicken Sie, um ein Interesse hinzuzufügen. Um ein Interesse wieder abzuwählen, klicken Sie erneut darauf."
+    "instructions": "Klicken Sie, um ein Interesse hinzuzufügen. Um ein Interesse wieder abzuwählen, klicken Sie erneut darauf.",
+    "sport": "Sport",
+    "cooking": "Kochen",
+    "travelling": "Reisen",
+    "music": "Musik",
+    "history": "Geschicte",
+    "books": "Bücher",
+    "art": "Kunst",
+    "movies": "Movies"
   }
 }

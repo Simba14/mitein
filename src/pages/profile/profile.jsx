@@ -123,8 +123,9 @@ const Profile = ({ session }) => {
             {t('title')}
           </Text>
           <Text>{t('email', { email })}</Text>
-          <Text>{t('name', { displayName })}</Text>
-          <Text className={cx('accountType')}>{t('account', { type })}</Text>
+          <Text className={cx('displayName')}>
+            {t('name', { displayName })}
+          </Text>
           <div className={cx('interests')}>
             <Text className={cx('label')} tag="label">
               {t('interests.label')}
@@ -138,7 +139,7 @@ const Profile = ({ session }) => {
                     handleUpdateProfile({ deleteInterest: interest })
                   }
                 >
-                  {interest}
+                  {t(`interests.${interest}`)}
                   <Svg className={cx('delete')} name={CLOSE} />
                 </button>
               ))
@@ -146,7 +147,7 @@ const Profile = ({ session }) => {
               <Text type={BODY_6}>{t('interests.none')}</Text>
             )}
             <Cta
-              aria-label={t('editLabel')}
+              aria-label={t('interests.editLabel')}
               aria-haspopup="dialog"
               className={cx('edit')}
               onClick={() => setInterestsOpen(true)}
@@ -179,11 +180,15 @@ const Profile = ({ session }) => {
                         })
                       }
                     >
-                      {interest}
+                      {t(`interests.${interest}`)}
                     </button>
                   );
                 })}
               </div>
+              <Cta
+                onClick={() => setInterestsOpen(false)}
+                text={t('interests.cta')}
+              />
             </div>
           </Modal>
         </div>
