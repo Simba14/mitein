@@ -65,7 +65,13 @@ A quick look at the some of the important specific top-level files and directori
 
 Next.js loads environment variables from `.env.locale`. In order to expose environment variables to the browser, prefix them with `NEXT_PUBLIC_`.
 
+The required env variables can be viewed in `.env.local.example`.
 Please, request the actual values for the environment variables and replace them accordingly.
+
+Unfortunately, Vercel has a 4kb limit on env variable storage.
+Therefore, most env variables have been encrypted to a single value, which is then decrypted using the appropriate keys.
+
+More information on this can be found [here](https://vercel.com/support/articles/how-do-i-workaround-vercel-s-4-kb-environment-variables-limit)
 
 ## Commands
 

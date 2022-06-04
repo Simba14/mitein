@@ -7,6 +7,7 @@ import { useTranslation } from 'next-i18next';
 import { any, arrayOf, func, number, string } from 'prop-types';
 import { get } from 'lodash/fp';
 
+import { deLocale } from 'components/calendar/locales';
 import { BLUE, GREEN, GREY, RED } from '@constants/colors';
 import { AVAILABLE, BOOKED, REQUESTED } from '@constants/user';
 
@@ -126,6 +127,7 @@ const Calendar = ({
         height="auto"
         initialDate={initialDate}
         initialView="timeGrid"
+        locales={[deLocale]}
         locale={language}
         plugins={[interactionPlugin, timeGridPlugin]}
         select={handleCreateEvent}

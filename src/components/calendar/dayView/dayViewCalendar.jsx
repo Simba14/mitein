@@ -6,6 +6,7 @@ import dayGridPlugin from '@fullcalendar/daygrid';
 import { any, func, string } from 'prop-types';
 import { isEmpty } from 'lodash/fp';
 
+import { deLocale } from 'components/calendar/locales';
 import styles from './dayViewCalendar.module.scss';
 const cx = classnames.bind(styles);
 
@@ -52,6 +53,7 @@ const Calendar = ({ locale, onClick, selectedDate, slots }) => {
       eventClick={null}
       // eventOverlap={false}
       fixedWeekCount={false}
+      locales={[deLocale]}
       showNonCurrentDates={true}
       headerToolbar={headerToolbar}
       initialView="dayGridMonth"

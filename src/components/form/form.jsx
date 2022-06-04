@@ -29,7 +29,7 @@ const userType = {
 };
 
 const EmailInput = ({ errors, registerInput, t }) => (
-  <div className={cx('fieldContainer', { hasError: errors.email })}>
+  <div className={cx('fieldContainer', { hasError: errors?.email })}>
     <label htmlFor="email">{t('email')}</label>
     <input
       {...registerInput('email')}
@@ -39,9 +39,7 @@ const EmailInput = ({ errors, registerInput, t }) => (
       type="email"
     />
 
-    <div className={cx('fieldError', { show: errors.email })}>
-      {get('email.message', errors)}
-    </div>
+    <div className={cx('fieldError')}>{get('email.message', errors)}</div>
   </div>
 );
 
@@ -124,7 +122,7 @@ const Form = ({
         <EmailInput errors={errors} registerInput={registerInput} t={t} />
       )}
       {!isForgotPassword && (
-        <div className={cx('fieldContainer', { hasError: errors.password })}>
+        <div className={cx('fieldContainer', { hasError: errors?.password })}>
           <label htmlFor="password">{t('password')}</label>
           <input
             {...registerInput('password')}
@@ -141,7 +139,7 @@ const Form = ({
       {(isSignUp || isResetPassword) && (
         <div
           className={cx('fieldContainer', {
-            hasError: errors.confirmPassword,
+            hasError: errors?.confirmPassword,
           })}
         >
           <label htmlFor="confirmPassword">{t('confirmPassword')}</label>
@@ -165,7 +163,7 @@ const Form = ({
       {isSignUp && (
         <>
           <div
-            className={cx('fieldContainer', { hasError: errors.displayName })}
+            className={cx('fieldContainer', { hasError: errors?.displayName })}
           >
             <label htmlFor="displayName">{t('displayName.label')}</label>
             <input
@@ -214,7 +212,7 @@ const Form = ({
           {t(`${type}.forgotPassword`)}
         </Anchor>
       )}
-      <div className={cx('error', { visible: errors.submit })}>
+      <div className={cx('error', { visible: errors?.submit })}>
         {get('submit.message', errors)}
       </div>
       {displaySuccessMsg && (
