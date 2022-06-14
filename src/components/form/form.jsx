@@ -212,12 +212,13 @@ const Form = ({
           {t(`${type}.forgotPassword`)}
         </Anchor>
       )}
-      <div className={cx('error', { visible: errors?.submit })}>
-        {get('submit.message', errors)}
-      </div>
-      {displaySuccessMsg && (
+      {displaySuccessMsg ? (
         <div className={cx('success', { visible: displaySuccessMsg })}>
           {t(`${type}.successMsg`)}
+        </div>
+      ) : (
+        <div className={cx('error', { visible: errors?.submit })}>
+          {get('submit.message', errors)}
         </div>
       )}
     </form>

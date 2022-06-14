@@ -6,7 +6,6 @@ import config from '@api/config';
 const UsersMutation = {
   signIn: async (obj, args, { auth }, info) => {
     const user = await auth.signIn(args);
-
     if (user) {
       return user;
     } else {

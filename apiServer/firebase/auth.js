@@ -1,4 +1,5 @@
 import { FireAuth } from '@api/firebase';
+import FireAdmin from '@api/firebase/admin';
 import User from '@api/firebase/user';
 import { GERMAN, ENGLISH, USER_TYPE_LEARNER } from '@api/firebase/constants';
 import {
@@ -13,6 +14,7 @@ import {
   FirebaseEmailTooManyAttemptsError,
   FirebaseWrongCredentialsError,
 } from '@api/firebase/errors';
+import ResetPasswordRequestHandler from '@api/pubsub/handlers/users/resetPasswordRequestMessageHandler';
 
 export const deleteAccount = () => {
   const user = FireAuth.currentUser;
@@ -55,39 +57,30 @@ export const createAccount = ({ displayName, email, password, type }) => {
 export const handleResetPasswordRequest = async email => {
   try {
     const user = await User.byEmail(email);
-    return user;
+    console.log('handleResetPasswordRequest', { user });
+    ResetPasswordRequestHandler({ message: { user } });
+    return true;
   } catch (error) {
     console.log('error handling reset password request', { error });
     throw error;
   }
 };
 
-// export const setPasswordByEmail = async ({ code, email, password }) => {
-//   try {
-//     // const user = await FireAuth.getUserByEmail(email);
-//     const validEmail = await FireAuth.verifyPasswordResetCode(code);
-//     const isValid = validEmail === email;
-//     console.log(validEmail);
-//     // return FireAuth.updateUser(user.uid, { password });
-//     if (isValid) await FireAuth.confirmPasswordReset(code, password);
-//     return true;
-//   } catch (error) {
-//     if (error.code === USER_NOT_FOUND_ERROR_CODE)
-//       throw new FirebaseAccountNotFoundError();
-//     throw error;
-//   }
-// };
-
 export const setPassword = async ({ id, password }) => {
-  try {
-    const user = await FireAuth.updateCurrentUser({ uid: id });
-
-    return await user.updatePassword(password);
-  } catch (error) {
-    if (error.code === USER_NOT_FOUND_ERROR_CODE)
-      throw new FirebaseAccountNotFoundError();
-    throw error;
-  }
+  console.log({ id, password });
+  FireAdmin.auth()
+    .updateUser(id, {
+      password,
+    })
+    .then(userRecord => {
+      // See the UserRecord reference doc for the contents of userRecord.
+      console.log('Successfully updated user', userRecord.toJSON());
+    })
+    .catch(error => {
+      if (error.code === USER_NOT_FOUND_ERROR_CODE)
+        throw new FirebaseAccountNotFoundError();
+      throw error;
+    });
 };
 
 export const signIn = ({ email, password }) =>

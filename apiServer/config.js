@@ -56,6 +56,8 @@ export default {
       projectId: config.FIREBASE_PROJECT_ID,
       storageBucket: config.FIREBASE_STORAGE_BUCKET,
     },
+    serviceAccountKeyPath:
+      '/Users/sblundell/Documents/Mitein/App/serviceAccountKeys.json', // config.FIREBASE_SERVICE_ACCOUNT_KEY_PATH,
   },
   gcp: {
     email: config.GCP_EMAIL,
