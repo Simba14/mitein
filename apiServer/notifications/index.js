@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { get } from 'lodash/fp';
 import config from '@api/config';
+import { log } from '@api/logger';
 
 import { NewsletterEmailAlreadySubscribedError } from '@api/notifications/errors';
 
@@ -31,9 +32,7 @@ export const subscribeContactToNewsletter = async email => {
     )
     .catch(error => {
       const errorCode = get('response.data.code', error);
-      console.log({
-        errorCode,
-      });
+      log('Newsletter subscription error', 'error', error);
       if (errorCode === DUPLICATE_CODE)
         throw new NewsletterEmailAlreadySubscribedError();
 

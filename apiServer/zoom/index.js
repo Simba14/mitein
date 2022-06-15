@@ -2,6 +2,7 @@ import jwt from 'jsonwebtoken';
 import { get } from 'lodash/fp';
 import axios from 'axios';
 import config from '@api/config';
+import { log } from '@api/logger';
 
 const payload = {
   iss: config.zoom.apiKey,
@@ -27,9 +28,9 @@ export const generateZoomLink = start =>
     },
   })
     .then(res => {
-      console.log({ join: get('data.join_url', res), start });
+      log({ join: get('data.join_url', res), start });
       return get('data.join_url', res);
     })
     .catch(error => {
-      console.log({ error });
+      log({ error });
     });

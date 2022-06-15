@@ -85,7 +85,8 @@
     "seamless-scroll-polyfill": "^2.1.4",
     "sib-api-v3-sdk": "^8.2.1",
     "uuid": "^8.3.2",
-    "winston": "^3.3.3"
+    "winston": "^3.3.3",
+    "winston-transport-sentry-node": "^2.3.0"
   },
   "jest": {
     "setupFilesAfterEnv": [

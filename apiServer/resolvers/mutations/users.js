@@ -5,7 +5,7 @@ import { subscribeContactToNewsletter } from '@api/notifications';
 import config from '@api/config';
 
 const UsersMutation = {
-  signIn: async (obj, args, { auth }, info) => {
+  signIn: async (parent, args, { auth }) => {
     const user = await auth.signIn(args);
 
     if (user) {
@@ -14,23 +14,21 @@ const UsersMutation = {
       throw new ValidationError('Incorrect login details');
     }
   },
-  signOut: async (parent, args, { auth }, info) => {
+  signOut: async (parent, args, { auth }) => {
     return auth.signOut();
   },
-  signUp: async (obj, args, { auth }, info) => {
+  signUp: async (parent, args, { auth }) => {
     const user = await auth.signUp(args);
 
     return user;
   },
-  newsletterSignUp: async (obj, args, context, info) => {
+  newsletterSignUp: async (parent, args) => {
     const { email } = args;
     await subscribeContactToNewsletter(email);
     return email;
   },
-  updateUser: async (obj, args, context, info) => {
-    console.log({ ...args });
+  updateUser: async (parent, args) => {
     const user = await User.updateById(args);
-    console.log({ user });
     return user;
   },
   verifyEmail: async (parent, { token }) => {

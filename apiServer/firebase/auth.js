@@ -14,6 +14,7 @@ import {
   FirebaseEmailTooManyAttemptsError,
   FirebaseWrongCredentialsError,
 } from '@api/firebase/errors';
+import { log } from '@api/logger';
 
 export const deleteAccount = () => {
   const user = FireAuth.currentUser;
@@ -40,7 +41,7 @@ export const createAccount = ({ displayName, email, password, type }) => {
         await User.create({ id: uid, user });
       } catch (error) {
         deleteAccount();
-        console.log('error creating user', { error });
+        log('error creating user', 'error', error);
       }
 
       return user;
@@ -49,7 +50,7 @@ export const createAccount = ({ displayName, email, password, type }) => {
       if (error.code === EMAIL_EXISTS_CODE) {
         throw new FirebaseEmailAlreadyExistsError();
       }
-      console.log({ error });
+      log(error.message, 'error', error);
     });
 };
 
@@ -83,7 +84,7 @@ export const signIn = ({ email, password }) =>
   FireAuth.signInWithEmailAndPassword(email, password)
     .then(({ user }) => user.uid)
     .catch(error => {
-      console.log('Firebase Sign In', { error });
+      log('Firebase Sign In', 'error', error);
       if (
         error.message === EMAIL_NOT_FOUND_ERROR_MESSAGE ||
         error.message === INVALID_PASSWORD_ERROR_MESSAGE ||
