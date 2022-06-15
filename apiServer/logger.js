@@ -12,12 +12,16 @@ export const logger = createLogger({
   exitOnError: false,
   transports: [
     new transports.Console(),
-    new Sentry({
-      sentry: {
-        dsn: config.sentry.dsn,
-      },
-      level: config.winston.winstonLevel || DEFAULT_LEVEL,
-    }),
+    ...(config.isDevelopment
+      ? []
+      : [
+          new Sentry({
+            sentry: {
+              dsn: config.sentry.dsn,
+            },
+            level: config.winston.winstonLevel || DEFAULT_LEVEL,
+          }),
+        ]),
   ],
 });
 

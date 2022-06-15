@@ -98,6 +98,9 @@ export default {
       },
     },
   },
+  sentry: {
+    dsn: config.SENTRY_DSN,
+  },
   winston: {
     winstonLevel: process.env.WINSTON_LEVEL,
   },
