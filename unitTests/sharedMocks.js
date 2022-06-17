@@ -10,6 +10,7 @@ export const MOCK_START_UTC = '2022-02-18T13:00:00.000Z';
 export const MOCK_START_EN = 'Friday, 18 February 2022';
 export const MOCK_START_DE = 'Freitag, 18. Februar 2022';
 export const MOCK_END_UTC = '2022-02-18T13:30:00.000Z';
-export const MOCK_TIME = '02:00 PM - 02:30 PM GMT+1';
+export const MOCK_TIME_EN = '14:00 - 14:30 CET';
+export const MOCK_TIME_DE = '14:00 - 14:30 MEZ';
 
 export const mockT = string => string;

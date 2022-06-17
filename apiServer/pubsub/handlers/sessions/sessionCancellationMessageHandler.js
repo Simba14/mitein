@@ -26,8 +26,8 @@ const SessionCancellationMessageHandler = ({
     ? template.de.sessionCancellation
     : template.en.sessionCancellation;
 
-  const date = formatSessionDate(start);
-  const time = formatSessionTime({ start, end });
+  const date = formatSessionDate(start, displayLanguage);
+  const time = formatSessionTime({ start, end, language: displayLanguage });
 
   return sendCancellationEmail({
     emails: [{ email }],

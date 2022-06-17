@@ -138,7 +138,11 @@ const Slots = ({ userId, onSelect }) => {
                       onClick={() => selectSession(slot)}
                       value={slot.id}
                     >
-                      {formatSessionTime({ start: slot.start, end: slot.end })}
+                      {formatSessionTime({
+                        start: slot.start,
+                        end: slot.end,
+                        language,
+                      })}
                     </option>
                   ))}
                 </select>

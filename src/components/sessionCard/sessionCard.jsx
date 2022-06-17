@@ -103,7 +103,11 @@ const SessionCard = ({ session, status, userType, userId }) => {
         {formatSessionDate(session.start, language)}
       </Text>
       <Text className={cx('time')} type={BODY_6}>
-        {formatSessionTime({ start: session.start, end: session.end })}
+        {formatSessionTime({
+          start: session.start,
+          end: session.end,
+          language,
+        })}
       </Text>
 
       {!isLearner && isRequested ? (
