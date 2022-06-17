@@ -12,5 +12,10 @@ export const MOCK_START_DE = 'Freitag, 18. Februar 2022';
 export const MOCK_END_UTC = '2022-02-18T13:30:00.000Z';
 export const MOCK_TIME_EN = '14:00 - 14:30 CET';
 export const MOCK_TIME_DE = '14:00 - 14:30 MEZ';
+export const MOCK_SESSION_VARS = {
+  cookieConsentRecordedIdentifier: 'cookieConsentRecordedIdentifier',
+  cookieUserIdExpireDays: 'cookieUserIdExpireDays',
+  cookieUserIdIdentifier: 'cookieUserIdIdentifier',
+};
 
 export const mockT = string => string;

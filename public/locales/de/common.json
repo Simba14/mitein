@@ -14,6 +14,12 @@
     "reject": "Alle ablehnen",
     "cookieSettings": "Mehr erfahren"
   },
+  "error": {
+    "title": "Ups, etwas ist schief gelaufen",
+    "cta": "Nochmal versuchen?",
+    "returnTo": "Oder zurück zur",
+    "link": "Startseite"
+  },
   "suspended": {
     "until": "KONTO GESPERRT: Sie haben zu viele Sitzungen storniert.\n Sie können bis zum {{date}} keine neuen Sitzungen buchen.",
     "note": "Hinweis: Sitzungen, die Sie bereits gebucht haben, finden wie geplant statt."
