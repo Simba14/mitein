@@ -40,9 +40,10 @@ export const Auth = ({ firebase = firebaseAuth } = {}) => {
       throw new InvalidTokenError();
     }
 
-    await firebase.setPassword({ id: decodedToken.authId, password });
-
-    return true;
+    return await firebase.setPassword({
+      id: decodedToken.authId,
+      password,
+    });
   };
 
   auth.resetPasswordRequest = async email => {

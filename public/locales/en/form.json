@@ -34,7 +34,7 @@
       "text": "Know your password?",
       "cta": "Login here"
     },
-    "title": "Forgotten your Password?",
+    "title": "Forgotten your password?",
     "description": "Enter your email and we'll send you the instructions to create your new password",
     "successMsg": "Reset password request submitted. Check your inbox for the next steps."
   },

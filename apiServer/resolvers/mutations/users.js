@@ -25,7 +25,7 @@ const UsersMutation = {
     return email;
   },
   resetPassword: async (obj, { token, password }, { auth }) => {
-    return auth.resetPassword({
+    return await auth.resetPassword({
       jwtSecret: config.auth.resetPassword.jwtSecret,
       token,
       password,

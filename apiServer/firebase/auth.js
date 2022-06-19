@@ -6,13 +6,15 @@ import {
   EMAIL_EXISTS_CODE,
   EMAIL_NOT_FOUND_ERROR_MESSAGE,
   INVALID_PASSWORD_ERROR_MESSAGE,
-  INVALID_PASSWORD_ERROR_CODE,
+  WRONG_PASSWORD_ERROR_CODE,
   TOO_MANY_ATTEMPTS_TRY_LATER_ERROR_MESSAGE,
   USER_NOT_FOUND_ERROR_CODE,
+  INVALID_PASSWORD_ERROR_CODE,
   FirebaseAccountNotFoundError,
   FirebaseEmailAlreadyExistsError,
   FirebaseEmailTooManyAttemptsError,
   FirebaseWrongCredentialsError,
+  FirebaseInvalidPasswordError,
 } from '@api/firebase/errors';
 import ResetPasswordRequestHandler from '@api/pubsub/handlers/users/resetPasswordRequestMessageHandler';
 
@@ -66,22 +68,23 @@ export const handleResetPasswordRequest = async email => {
   }
 };
 
-export const setPassword = async ({ id, password }) => {
-  console.log({ id, password });
-  FireAdmin.auth()
-    .updateUser(id, {
-      password,
-    })
+export const setPassword = ({ id, password }) =>
+  FireAdmin.auth
+    .updateUser(id, { password })
     .then(userRecord => {
       // See the UserRecord reference doc for the contents of userRecord.
       console.log('Successfully updated user', userRecord.toJSON());
+      return true;
     })
     .catch(error => {
       if (error.code === USER_NOT_FOUND_ERROR_CODE)
         throw new FirebaseAccountNotFoundError();
+
+      if (error.code === INVALID_PASSWORD_ERROR_CODE)
+        throw new FirebaseInvalidPasswordError(error);
+
       throw error;
     });
-};
 
 export const signIn = ({ email, password }) =>
   FireAuth.signInWithEmailAndPassword(email, password)
@@ -91,7 +94,7 @@ export const signIn = ({ email, password }) =>
       if (
         error.message === EMAIL_NOT_FOUND_ERROR_MESSAGE ||
         error.message === INVALID_PASSWORD_ERROR_MESSAGE ||
-        error.code === INVALID_PASSWORD_ERROR_CODE ||
+        error.code === WRONG_PASSWORD_ERROR_CODE ||
         error.code === USER_NOT_FOUND_ERROR_CODE
       )
         throw new FirebaseWrongCredentialsError();

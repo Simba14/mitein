@@ -3,15 +3,22 @@ import { getAuth } from 'firebase-admin/auth';
 import config from '@api/config';
 
 const FireAdmin = {};
-if (!getApp()) {
-  FireAdmin.app = initializeApp({
-    credential: applicationDefault(),
-    databaseURL: config.firebase.clientKeys.databaseURL,
-  });
+export const initializeFirebaseAdmin = () => {
+  try {
+    const app = getApp();
+    FireAdmin.app = app;
+  } catch {
+    FireAdmin.app = initializeApp({
+      credential: applicationDefault(),
+      databaseURL: config.firebase.clientKeys.databaseURL,
+      projectId: config.firebase.clientKeys.projectId,
+    });
+  }
 
-  FireAdmin.auth = getAuth;
-}
+  if (!FireAdmin.auth) FireAdmin.auth = getAuth();
+};
 
-console.log({ app: applicationDefault() });
+initializeFirebaseAdmin();
+// console.log({ app: applicationDefault() });
 
 export default FireAdmin;

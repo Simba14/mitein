@@ -198,7 +198,7 @@ const Form = ({
       <Cta
         className={cx('submitButton')}
         type="submit"
-        disabled={loadingSubmit}
+        disabled={loadingSubmit || displaySuccessMsg}
         text={t(`${type}.submitBtn`)}
       />
       <div className={cx('changeLocation')}>
