@@ -1,6 +1,4 @@
-<h1 align="center">
-  Mitein
-</h1>
+![Mitein](./src/assets/wordmark.svg)
 
 Access the site [here](https://mitein.de/)
 
@@ -112,7 +110,7 @@ More info [here](https://nextjs.org/docs/basic-features/data-fetching#getservers
 
 ## 💫 Deploy
 
-[Mitein](https://mitein.de/) is deployed via Netlify. Automatic deployment is set up in relation to this repositories `master` branch.
-Therefore, once a PR is merged into master, a deployment will automatically be triggered.
+[Mitein](https://mitein.de/) is deployed via Vercel. Automatic deployment is set up in relation to this repositories `main` branch.
+Therefore, once a PR is merged, a deployment will automatically be triggered.
 
-The status of deployments can be monitored [here](https://app.netlify.com/sites/determined-yonath-21e6e6/deploys)
+The status of deployments can be monitored [here](https://vercel.com/simba14/mitein/deployments)
