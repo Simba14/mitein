@@ -22,7 +22,7 @@ export class ErrorBoundary extends React.Component {
     return { hasError: true };
   }
 
-  componentDidCatch(error, errorInfo) {
+  componentDidCatch() {
     // TODO: add Sentry logging
     // console.log({ error, errorInfo });
   }
