@@ -1,4 +1,4 @@
-![Mitein](./src/assets/wordmark.svg)
+<center><img alt='Mitein' src='./src/assets/wordmark.svg' width=400 /></center>
 
 Access the site [here](https://mitein.de/)
 
