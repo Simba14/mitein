@@ -22,8 +22,8 @@ const SessionBookedMessageHandler = ({
       ? template.en.sessionConfirmation
       : template.de.sessionConfirmation;
 
-  const date = formatSessionDate(start);
-  const time = formatSessionTime({ start, end });
+  const date = formatSessionDate(start, displayLanguage);
+  const time = formatSessionTime({ start, end, language: displayLanguage });
 
   return sendConfirmationEmail({
     emails: [{ email }],

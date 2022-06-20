@@ -23,7 +23,13 @@ const sendUserVerificationEmail = ({ displayLanguage, email, id }) => {
 
     const localePath = langIsGerman ? `/${GERMAN}` : '';
     const verifyEmailUrl = `${uiHost}${localePath}${ROUTE_VERIFY_EMAIL}${token}/`;
-
+    log('VERIFY EMAIL URL', 'warning', {
+      verifyEmailUrl,
+      uiHost,
+      localePath,
+      ROUTE_VERIFY_EMAIL,
+      token,
+    });
     return emailSender({
       to: [
         {

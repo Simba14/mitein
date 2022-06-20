@@ -10,7 +10,8 @@ import {
   MOCK_START_DE,
   MOCK_START_UTC,
   MOCK_END_UTC,
-  MOCK_TIME,
+  MOCK_TIME_EN,
+  MOCK_TIME_DE,
 } from 'unitTests/sharedMocks';
 
 describe('isSpecifiedBreakpoint', () => {
@@ -53,9 +54,23 @@ describe('formatSessionDate', () => {
 });
 
 describe('formatSessionTime', () => {
-  test('returns correctly formatted time', () => {
+  test('returns correctly formatted time when English language', () => {
     expect(
-      formatSessionTime({ start: MOCK_START_UTC, end: MOCK_END_UTC }),
-    ).toBe(MOCK_TIME);
+      formatSessionTime({
+        start: MOCK_START_UTC,
+        end: MOCK_END_UTC,
+        language: ENGLISH,
+      }),
+    ).toBe(MOCK_TIME_EN);
+  });
+
+  test('returns correctly formatted time when German language', () => {
+    expect(
+      formatSessionTime({
+        start: MOCK_START_UTC,
+        end: MOCK_END_UTC,
+        language: GERMAN,
+      }),
+    ).toBe(MOCK_TIME_DE);
   });
 });

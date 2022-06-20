@@ -51,8 +51,6 @@ const SessionsMutation = {
   createSessionsFromAvailability: async (
     parent,
     { participant1Id, participant2Id, status, start, end, userType },
-    context,
-    info,
   ) => {
     const id = uuidv4();
     const availability = await Availability.create({
@@ -77,7 +75,7 @@ const SessionsMutation = {
 
     return availability;
   },
-  deleteSessions: async (obj, { ids }, context, info) => {
+  deleteSessions: async (parent, { ids }) => {
     const deleteActions = ids.map(
       id =>
         new Promise(async (res, rej) => {
@@ -93,7 +91,7 @@ const SessionsMutation = {
 
     return Promise.all(deleteActions).then(() => true);
   },
-  updateSession: async (parent, { id, ...fields }, context, info) => {
+  updateSession: async (parent, { id, ...fields }) => {
     const {
       cancellationReason,
       cancelledBy,

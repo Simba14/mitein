@@ -1,0 +1,21 @@
+@import 'scss/spacings.scss';
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+
+  .title {
+    margin-bottom: size(3);
+  }
+
+  .cta {
+    margin-bottom: size(3);
+  }
+
+  .link {
+    margin-left: size(0.5);
+  }
+}
