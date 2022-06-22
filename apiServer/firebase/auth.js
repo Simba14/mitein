@@ -60,11 +60,10 @@ export const createAccount = ({ displayName, email, password, type }) => {
 export const handleResetPasswordRequest = async email => {
   try {
     const user = await User.byEmail(email);
-    console.log('handleResetPasswordRequest', { user });
     ResetPasswordRequestHandler({ message: { user } });
     return true;
   } catch (error) {
-    console.log('error handling reset password request', { error });
+    log('error handling reset password request', 'error', error);
     throw error;
   }
 };
@@ -72,12 +71,9 @@ export const handleResetPasswordRequest = async email => {
 export const setPassword = ({ id, password }) =>
   FireAdmin.auth
     .updateUser(id, { password })
-    .then(userRecord => {
-      // See the UserRecord reference doc for the contents of userRecord.
-      console.log('Successfully updated user', userRecord.toJSON());
-      return true;
-    })
+    .then(() => true)
     .catch(error => {
+      log('error resetting password', 'error', error);
       if (error.code === USER_NOT_FOUND_ERROR_CODE)
         throw new FirebaseAccountNotFoundError();
 

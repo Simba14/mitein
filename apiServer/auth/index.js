@@ -4,7 +4,6 @@ import * as firebaseAuth from '@api/firebase/auth';
 import { FirebaseEmailAlreadyExistsError } from '@api/firebase/errors';
 import { InvalidTokenError } from '@api/auth/errors';
 import UserCreatedMessageHandler from '@api/pubsub/handlers/users/userCreatedMessageHandler';
-import ResetPasswordRequestHandler from '@api/pubsub/handlers/users/resetPasswordRequestMessageHandler';
 
 export const Auth = ({ firebase = firebaseAuth } = {}) => {
   const auth = {};
@@ -47,11 +46,7 @@ export const Auth = ({ firebase = firebaseAuth } = {}) => {
   };
 
   auth.resetPasswordRequest = async email => {
-    const user = await firebase.handleResetPasswordRequest(email);
-    ResetPasswordRequestHandler({
-      message: { user },
-    });
-    return true;
+    return await firebase.handleResetPasswordRequest(email);
   };
 
   auth.signIn = async ({ email, password }) => {
