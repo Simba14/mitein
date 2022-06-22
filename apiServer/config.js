@@ -18,7 +18,7 @@ try {
   decrypted += decipher.final('utf8');
   config = JSON.parse(decrypted);
 } catch (error) {
-  console.log('Error decrypting env variables', { error });
+  console.error('Error decrypting env variables', 'error', error);
 }
 
 export default {
@@ -109,6 +109,9 @@ export default {
         ),
       },
     },
+  },
+  sentry: {
+    dsn: config.SENTRY_DSN,
   },
   winston: {
     winstonLevel: process.env.WINSTON_LEVEL,

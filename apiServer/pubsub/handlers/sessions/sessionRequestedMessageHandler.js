@@ -26,8 +26,8 @@ const SessionRequestedMessageHandler = ({
     ? template.de.sessionRequest
     : template.en.sessionRequest;
 
-  const date = formatSessionDate(start);
-  const time = formatSessionTime({ start, end });
+  const date = formatSessionDate(start, displayLanguage);
+  const time = formatSessionTime({ start, end, language: displayLanguage });
 
   return sendRequestedEmail({
     emails: [{ email }],

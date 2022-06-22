@@ -1,8 +1,7 @@
 import { Firestore } from '@api/firebase';
 import { COLLECTION_ORGANIZATIONS } from '@api/firebase/constants';
 import { v4 as uuidv4 } from 'uuid';
-
-// TODO: initialize firebase
+import { log } from '@api/logger';
 
 const docRef = Firestore.collection(COLLECTION_ORGANIZATIONS).doc('FILL ME IN');
 
@@ -26,9 +25,9 @@ const addOrganization = async () => {
       },
     });
 
-    console.log('Successfully Added Organization');
+    log('Successfully Added Organization');
   } catch (err) {
-    console.log({ err });
+    log({ err });
   }
 };
 

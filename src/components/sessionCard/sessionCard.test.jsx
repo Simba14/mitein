@@ -9,7 +9,7 @@ import {
   MOCK_END_UTC,
   MOCK_URL,
   MOCK_START_EN,
-  MOCK_TIME,
+  MOCK_TIME_EN,
 } from 'unitTests/sharedMocks';
 import {
   BOOKED,
@@ -61,7 +61,7 @@ describe('User is a LEARNER', () => {
     const link = screen.getByRole('link');
     expect(container).toHaveTextContent(`${textKey}.title`);
     expect(container).toHaveTextContent(MOCK_START_EN);
-    expect(container).toHaveTextContent(MOCK_TIME);
+    expect(container).toHaveTextContent(MOCK_TIME_EN);
     expect(container).toHaveTextContent(`${textKey}.moreInfo`);
     expect(cancelBtn).toHaveTextContent(`${textKey}.cancelCta`);
     expect(link).toHaveAttribute('href', mockSession.link);
@@ -82,7 +82,7 @@ describe('User is a LEARNER', () => {
     const link = screen.queryByRole('link');
     expect(container).toHaveTextContent(`${textKey}.title`);
     expect(container).toHaveTextContent(MOCK_START_EN);
-    expect(container).toHaveTextContent(MOCK_TIME);
+    expect(container).toHaveTextContent(MOCK_TIME_EN);
     expect(container).toHaveTextContent(`${textKey}.moreInfo`);
     expect(cancelBtn).toHaveTextContent(`${textKey}.cancelCta`);
     expect(link).not.toBeInTheDocument();
@@ -104,7 +104,7 @@ describe('User is a LEARNER', () => {
     expect(container).toHaveTextContent(`${textKey}.title`);
     expect(container.firstChild).toHaveClass('unavailable');
     expect(container).toHaveTextContent(MOCK_START_EN);
-    expect(container).toHaveTextContent(MOCK_TIME);
+    expect(container).toHaveTextContent(MOCK_TIME_EN);
     expect(container).toHaveTextContent(`${textKey}.moreInfo`);
     expect(cancelBtn).not.toBeInTheDocument();
     expect(link).not.toBeInTheDocument();
@@ -149,7 +149,7 @@ describe('User is a NATIVE', () => {
     const link = screen.queryByRole('link');
     expect(container).toHaveTextContent(`${textKey}.title`);
     expect(container).toHaveTextContent(MOCK_START_EN);
-    expect(container).toHaveTextContent(MOCK_TIME);
+    expect(container).toHaveTextContent(MOCK_TIME_EN);
     expect(container).not.toHaveTextContent(`${textKey}.moreInfo`);
     expect(confirmBtn).toHaveTextContent(`${textKey}.confirmCta`);
     expect(cancelBtn).toHaveTextContent(`${textKey}.cancelCta`);

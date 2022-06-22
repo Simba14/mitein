@@ -52,4 +52,5 @@ module.exports = {
   getDefaults: reactI18next.getDefaults,
   setI18n: reactI18next.setI18n,
   getI18n: reactI18next.getI18n,
+  withTranslation: reactI18next.withTranslation,
 };

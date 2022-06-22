@@ -30,7 +30,12 @@ const sendUserTokenEmail = ({
 
     const localePath = langIsGerman ? `/${GERMAN}` : '';
     const userUrl = `${uiHost}${localePath}${route}${token}/`;
-
+    log('VERIFY EMAIL URL', 'warning', {
+      userUrl,
+      uiHost,
+      localePath,
+      token,
+    });
     return emailSender({
       to: [
         {

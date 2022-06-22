@@ -4,7 +4,7 @@ import { subscribeContactToNewsletter } from '@api/notifications';
 import config from '@api/config';
 
 const UsersMutation = {
-  signIn: async (obj, args, { auth }, info) => {
+  signIn: async (parent, args, { auth }) => {
     const user = await auth.signIn(args);
     if (user) {
       return user;
@@ -12,29 +12,29 @@ const UsersMutation = {
       throw new ValidationError('Incorrect login details');
     }
   },
-  signOut: async (obj, args, { auth }, info) => {
+  signOut: async (parent, args, { auth }) => {
     return auth.signOut();
   },
-  signUp: async (obj, args, { auth }, info) => {
+  signUp: async (parent, args, { auth }) => {
     const user = await auth.signUp(args);
     return user;
   },
-  newsletterSignUp: async (obj, args, context, info) => {
+  newsletterSignUp: async (parent, args) => {
     const { email } = args;
     await subscribeContactToNewsletter(email);
     return email;
   },
-  resetPassword: async (obj, { token, password }, { auth }) => {
+  resetPassword: async (parent, { token, password }, { auth }) => {
     return await auth.resetPassword({
       jwtSecret: config.auth.resetPassword.jwtSecret,
       token,
       password,
     });
   },
-  resetPasswordRequest: async (obj, { email }, { auth }, info) => {
+  resetPasswordRequest: async (parent, { email }, { auth }) => {
     return auth.resetPasswordRequest(email);
   },
-  updateUser: async (obj, args, context, info) => {
+  updateUser: async (parent, args) => {
     const user = await User.updateById(args);
     return user;
   },

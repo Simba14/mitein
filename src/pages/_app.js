@@ -9,6 +9,7 @@ import 'scss/main.scss';
 import '@fullcalendar/common/main.css';
 import '@fullcalendar/daygrid/main.css';
 import '@fullcalendar/timegrid/main.css';
+import ErrorBoundary from 'components/errorBoundary';
 
 const cookieConsentRecordedIdentifier =
   process.env.NEXT_PUBLIC_COOKIE_CONSENT_RECORDED_IDENTIFIER;
@@ -29,7 +30,9 @@ const SESSION = {
 const Mitein = ({ Component, pageProps }) => (
   <ApolloProvider client={client}>
     <SessionContextProvider {...SESSION}>
-      <Component {...pageProps} />
+      <ErrorBoundary>
+        <Component {...pageProps} />
+      </ErrorBoundary>
     </SessionContextProvider>
   </ApolloProvider>
 );
