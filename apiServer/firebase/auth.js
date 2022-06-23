@@ -60,7 +60,7 @@ export const createAccount = ({ displayName, email, password, type }) => {
 export const handleResetPasswordRequest = async email => {
   try {
     const user = await User.byEmail(email);
-    ResetPasswordRequestHandler({ message: { user } });
+    if (user) await ResetPasswordRequestHandler({ message: { user } });
     return true;
   } catch (error) {
     log('error handling reset password request', 'error', error);
