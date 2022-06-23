@@ -6,8 +6,6 @@ import { useQuery } from '@apollo/client';
 import { compose, get, groupBy, isEmpty, take } from 'lodash/fp';
 import { useTranslation } from 'next-i18next';
 import { without } from 'lodash';
-// import { COLLECTION_SESSIONS } from '@api/firebase/constants';
-// import { Firestore } from '@api/firebase';
 
 import Accordion from 'components/accordion';
 import Cta from 'components/cta';
@@ -58,21 +56,6 @@ const Profile = ({ session }) => {
   });
 
   const [updateProfile] = useMutation(UPDATE_PROFILE);
-
-  // useEffect(() => {
-  //   const unsubscribe = Firestore.db
-  //     .collection(COLLECTION_SESSIONS)
-  //     .onSnapshot(snapshot => {
-  //       if (snapshot.size) {
-  //         console.log({ snapshot });
-  //       } else {
-  //         // it's empty
-  //       }
-  //     });
-  //   return () => {
-  //     unsubscribe();
-  //   };
-  // }, []);
 
   const handleUpdateProfile = ({ addInterest, deleteInterest }) => {
     updateProfile({

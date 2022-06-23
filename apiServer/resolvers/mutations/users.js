@@ -41,7 +41,7 @@ const UsersMutation = {
   verifyEmail: async (obj, { token }, { auth }) => {
     return auth.verifyEmail({
       token,
-      jwtSecret: config.auth.verifyEmail.jwtSecret,
+      jwtSecret: config.auth.userVerification.jwtSecret,
     });
   },
 };
