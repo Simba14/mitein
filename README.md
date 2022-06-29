@@ -2,6 +2,8 @@
 
 Access the site [here](https://mitein.de/)
 
+Mitein is a non-profit aimed at strengthening local communinities through learning and connection. You can read more about our mission [here](https://www.mitein.de/#about)
+
 This is the frontend repository written in React, which utilises the Next.js framework.
 Next.js allows for static site generation (it creates a single HTML file with the required assets at build time).
 This means page loads are very quick. In addition to its performance benefits, it was also chosen for its accessibility, SSR,
@@ -25,7 +27,7 @@ security features and ease of production deploys. You can learn more about Next.
     ```shell
     cd mitein/
     npm run firebase emulators:start
-    npm run dev
+    npm run dev // in a separate terminal tab
     ```
 
 3.  **Open the source code and start editing!**
@@ -107,6 +109,12 @@ If a page has dynamic routes and uses getStaticProps it needs to define a list o
 **When to use:** only if you need to pre-render a page whose data must be fetched at request time. Time to first byte (TTFB) will be slower than getStaticProps because the server must compute the result on every request, and the result cannot be cached by a CDN without extra configuration
 
 More info [here](https://nextjs.org/docs/basic-features/data-fetching#getserversideprops-server-side-rendering)
+
+## 🤝 Contributing 
+
+Mitein's goal is to help strengthen connections and communities. Therefore, it makes perfect sense for Mitein to be open-source and invite the power of community to its code! Any contribution is greatly appreciated and needed. Mitein is volunteer led and will never be a for-profit platform. 
+
+You can find out [here](https://github.com/Simba14/mitein/CONTRIBUTING.md) how you can start contributing to our codebase right away.
 
 ## 💫 Deploy
 
