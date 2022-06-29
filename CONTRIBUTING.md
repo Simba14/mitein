@@ -51,7 +51,7 @@ Please include the following with each issue:
 
 ## Contributing Fixes & Adding New Features
 
-If you are interested in writing code to fix issues or adding a new feature, follow the guidelines in our [README](https://github.com/Simba14/mitein/README.md), to get set up. 
+If you are interested in writing code to fix issues or adding a new feature, follow the guidelines in our [README](https://github.com/Simba14/mitein/blob/main/README.md), to get set up. 
 Please also comment on an issue or feature request, or if one doesn't exist, create one before starting to code.
 All progress and findings should be also be communicated via the issue / feature section.   
 
