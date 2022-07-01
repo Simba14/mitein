@@ -125,5 +125,5 @@ The status of deployments can be monitored [here](https://vercel.com/simba14/mit
 
 ## 📖 License
 
-Copyright (c) Mitein. All rights reserved.
+Copyright (c), Sean Blundell. All rights reserved.
 Licensed under the [GNU Affero General Public License v3.0](https://github.com/Simba14/mitein/blob/main/LICENSE.txt).
