@@ -3,7 +3,7 @@
   "private": true,
   "description": "A platform to connect and learn",
   "version": "0.1.0",
-  "license": "MIT",
+  "license": "GNU Affero General Public License v3.0",
   "main": "functions.js",
   "scripts": {
     "build": "next build",
