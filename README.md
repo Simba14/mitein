@@ -122,3 +122,8 @@ You can find out [here](https://github.com/Simba14/mitein/blob/main/CONTRIBUTING
 Therefore, once a PR is merged, a deployment will automatically be triggered.
 
 The status of deployments can be monitored [here](https://vercel.com/simba14/mitein/deployments)
+
+## 📖 License
+
+Copyright (c) Mitein. All rights reserved.
+Licensed under the [GNU Affero General Public License v3.0](https://github.com/Simba14/mitein/blob/main/LICENSE.txt).
