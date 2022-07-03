@@ -4,6 +4,7 @@ export const EMAIL_NOT_VERIFIED = 'EMAIL_NOT_VERIFIED';
 export const TOO_MANY_ATTEMPTS = 'TOO_MANY_ATTEMPTS';
 export const WRONG_CREDENTIALS = 'WRONG_CREDENTIALS';
 export const INVALID_PASSWORD = 'INVALID_PASSWORD';
+export const SESSION_UNAVAILABLE = 'SESSION_UNAVAILABLE';
 
 export const EMAIL_NOT_FOUND_ERROR_MESSAGE = 'EMAIL_NOT_FOUND';
 export const INVALID_PASSWORD_ERROR_MESSAGE = 'INVALID_PASSWORD';
@@ -107,6 +108,19 @@ export class FirebaseInvalidPasswordError extends Error {
     this.message = message;
     this.extensions = {
       code: code || INVALID_PASSWORD,
+      errors,
+    };
+  }
+}
+
+export class FirebaseSessionUnavailableError extends Error {
+  constructor(message, code, errors) {
+    super();
+    this.message =
+      message ||
+      'Session was cancelled by the other participant and is no longer available';
+    this.extensions = {
+      code: code || SESSION_UNAVAILABLE,
       errors,
     };
   }

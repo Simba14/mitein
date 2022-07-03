@@ -38,6 +38,7 @@ const typeDefs = gql`
     participant2Id: ID
     status: EventStatus!
     cancellationReason: ID
+    lastUpdated: String
   }
 
   type Cancellation {
