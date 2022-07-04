@@ -74,11 +74,12 @@ More information on this can be found [here](https://vercel.com/support/articles
 ## Commands
 
 | Command                  | Description                                                 |
-| ------------------------ | ----------------------------------------------------------- |
+| ------------------------ | ----------------------------------------------------------- | --- |
 | `npm run`                | Install the dependencies                                    |
 | `npm run dev`            | Starts development server                                   |
 | `npm run build`          | Compiles application                                        |
-| `npm run start-emulator` | Starts the firebase emulator required for local development |
+| `npm run start-emulator` | Starts the firebase emulator required for local development | \   |
+| `npm run stop-emulator`  | Stops the firebase emulator safely                          |
 | `npm run clean`          | clears the cache (.cache folder) and public directories     |
 | `npm run test`           | Runs the tests files                                        |
 
