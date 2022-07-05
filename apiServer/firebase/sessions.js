@@ -5,12 +5,14 @@ import User from '@api/firebase/user';
 import {
   FirebaseCreateDocError,
   FirebaseGetDocError,
+  FirebaseSessionUnavailableError,
 } from '@api/firebase/errors';
 import {
   COLLECTION_SESSIONS,
   FIELD_PARTICIPANT_ONE,
   FIELD_PARTICIPANT_TWO,
   SESSION_STATUS_AVAILABLE,
+  SESSION_STATUS_REQUESTED,
 } from '@api/firebase/constants';
 import SessionBookedMessageHandler from '@api/pubsub/handlers/sessions/sessionBookedMessageHandler';
 import SessionRequestedMessageHandler from '@api/pubsub/handlers/sessions/sessionRequestedMessageHandler';
@@ -20,7 +22,7 @@ const Sessions = {};
 Sessions.create = async ({ id, session }) =>
   Firestore.collection(COLLECTION_SESSIONS)
     .doc(id)
-    .set(session)
+    .set({ lastUpdated: new Date().toISOString(), ...session })
     .then(() => session)
     .catch(() => {
       throw new FirebaseCreateDocError('Creation of Session doc failed');
@@ -110,11 +112,13 @@ Sessions.getOnlyAvailable = async () => {
     .then(getQuerySnapshotData);
 };
 
-Sessions.updateById = async ({ id, fields }) =>
-  Firestore.collection(COLLECTION_SESSIONS)
+Sessions.updateById = async ({ id, fields }) => {
+  const lastUpdated = new Date().toISOString();
+  return Firestore.collection(COLLECTION_SESSIONS)
     .doc(id)
-    .update(fields)
-    .then(() => ({ id, ...fields }));
+    .update({ lastUpdated, ...fields })
+    .then(() => ({ id, lastUpdated, ...fields }));
+};
 
 Sessions.onConfirmation = async session => {
   const { participant1Id, participant2Id } = session;
@@ -136,6 +140,10 @@ Sessions.onConfirmation = async session => {
 };
 
 Sessions.book = async ({ id, fields }) => {
+  const isRequested =
+    (await Sessions.byId(id)?.status) === SESSION_STATUS_REQUESTED;
+  if (!isRequested) throw new FirebaseSessionUnavailableError();
+
   const link = await generateZoomLink(fields.start);
   const session = await Sessions.updateById({
     id,
@@ -149,13 +157,28 @@ Sessions.book = async ({ id, fields }) => {
 Sessions.onRequested = async session => {
   const { participant1Id } = session;
   const participant1 = await User.byId(participant1Id);
+  const participant1Sessions =
+    await Sessions.byParticipantIdWithStatusCondition({
+      id: participant1Id,
+      field: FIELD_PARTICIPANT_ONE,
+      status: SESSION_STATUS_REQUESTED,
+      condition: '==',
+    });
 
-  SessionRequestedMessageHandler({
-    message: {
-      participant: participant1,
-      session,
-    },
-  });
+  const requestsToday = participant1Sessions.filter(
+    session =>
+      new Date(session.lastUpdated).toDateString() ===
+      new Date().toDateString(),
+  ).length;
+
+  // limit session requested emails to 1 per day
+  if (requestsToday <= 1)
+    SessionRequestedMessageHandler({
+      message: {
+        participant: participant1,
+        session,
+      },
+    });
 };
 
 Sessions.request = async ({ id, fields }) => {

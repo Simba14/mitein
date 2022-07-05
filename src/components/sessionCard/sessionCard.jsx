@@ -3,6 +3,7 @@ import { useMutation } from '@apollo/client';
 import classnames from 'classnames/bind';
 import { oneOf, shape, string } from 'prop-types';
 import { useTranslation } from 'next-i18next';
+import { toast } from 'react-toastify';
 
 import Anchor from 'components/anchor';
 import Cta from 'components/cta';
@@ -23,6 +24,7 @@ import {
 } from '@constants/user';
 
 import styles from './sessionCard.module.scss';
+
 const cx = classnames.bind(styles);
 
 const SessionCard = ({ session, status, userType, userId }) => {
@@ -36,8 +38,6 @@ const SessionCard = ({ session, status, userType, userId }) => {
   const isRejected = status === REJECTED;
   const isRequested = status === REQUESTED;
   const { id, ...sessionFields } = session;
-
-  const [amendSession] = useMutation(UPDATE_SESSION);
 
   const refetchQueries = [
     ...(isLearner
@@ -53,6 +53,14 @@ const SessionCard = ({ session, status, userType, userId }) => {
       variables: { id: userId },
     },
   ];
+
+  const [amendSession, mutationStatus] = useMutation(UPDATE_SESSION, {
+    onError: error => {
+      setModalOpen(false);
+      toast.error(error?.message);
+      mutationStatus.client.refetchQueries({ include: refetchQueries });
+    },
+  });
 
   const handleConfirmClick = () => {
     amendSession({

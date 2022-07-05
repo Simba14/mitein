@@ -1,0 +1,13 @@
+@import 'scss/colors.scss';
+
+// override react-toastify classes
+
+.Toastify__toast--success {
+  background: $green-background !important;
+  color: black;
+}
+
+.Toastify__toast--error {
+  background: $red-background !important;
+  color: black;
+}

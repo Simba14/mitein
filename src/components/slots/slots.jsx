@@ -37,7 +37,7 @@ const Slots = ({ userId, onSelect }) => {
   const [sessionRequested, setSessionRequested] = useState(false);
   const [requestSessionError, setRequestSessionError] = useState(null);
 
-  const { data, loading, error: getSlotsError } = useQuery(GET_SLOTS);
+  const { data, loading, error: getSlotsError, refetch } = useQuery(GET_SLOTS);
   const [requestSession] = useMutation(REQUEST_SESSION);
   const availableSlots = get('availableSlots', data);
 
@@ -57,14 +57,16 @@ const Slots = ({ userId, onSelect }) => {
     })
       .then(() => {
         router.push(ROUTE_PROFILE);
-        onSelect();
+        onSelect(true);
         selectSession(null);
         setSessionRequested(true);
         setSelectedDate(null);
       })
       .catch(e => {
-        onSelect();
+        onSelect(false);
         setRequestSessionError(get('graphQLErrors[0].message', e) || e.message);
+        selectSession(null);
+        refetch();
       });
   };
 

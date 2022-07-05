@@ -3,6 +3,7 @@ import { bool, node, string } from 'prop-types';
 import { convert } from 'lodash/fp';
 import { MenuContextConsumer, MenuContextProvider } from 'context/menu';
 import classnames from 'classnames/bind';
+import 'react-toastify/dist/ReactToastify.css';
 
 import ConsentLayer from 'components/consentLayer/consentLayer';
 import Header from 'components/header';

@@ -7,7 +7,7 @@ exports.GERMAN = GERMAN;
 exports.DEFAULT_OPTIONS = {
   supportedLanguages: [ENGLISH, GERMAN],
   defaultLanguage: ENGLISH,
-  siteUrl: process.env.UI_HOST || 'localhost:8080',
+  siteUrl: process.env.UI_HOST || 'localhost:8000',
   notFoundPage: '/404/',
   excludedPages: [],
   deleteOriginalPages: true,
