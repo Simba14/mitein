@@ -6,6 +6,7 @@ import { useQuery } from '@apollo/client';
 import { compose, get, groupBy, isEmpty, take } from 'lodash/fp';
 import { useTranslation } from 'next-i18next';
 import { without } from 'lodash';
+import { toast } from 'react-toastify';
 
 import Accordion from 'components/accordion';
 import Cta from 'components/cta';
@@ -34,6 +35,7 @@ import {
 } from '@constants/user';
 
 import styles from './profile.module.scss';
+
 const cx = classnames.bind(styles);
 
 const Profile = ({ session }) => {

@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import classnames from 'classnames/bind';
 import { useRouter } from 'next/router';
 import { useQuery } from '@apollo/client';
@@ -23,11 +23,20 @@ const cx = classnames.bind(styles);
 const BookSession = ({ session }) => {
   const { t } = useTranslation('session');
   const router = useRouter();
+  const [bookingSuccessful, setBookingSuccessful] = useState();
   const userId = get('userId', session);
   const { data, loading, error, refetch } = useQuery(GET_PROFILE, {
     variables: { id: userId },
     skip: !userId,
   });
+
+  const onSelect = useCallback(
+    status => {
+      refetch();
+      setBookingSuccessful(status);
+    },
+    [refetch, setBookingSuccessful],
+  );
 
   useEffect(() => {
     if (!userId || (!loading && (!data || error))) {
@@ -45,7 +54,7 @@ const BookSession = ({ session }) => {
   }, [data]);
 
   if (loading) return <Loading />;
-  if (error || !data) return null;
+  if (error || !data || bookingSuccessful) return null;
 
   const {
     user: { sessions, suspendedUntil, type },
@@ -77,7 +86,7 @@ const BookSession = ({ session }) => {
         <Text className={cx('text')}>{t('slots.alreadyRequested')}</Text>,
       );
 
-    if (isLearner) return <Slots userId={userId} onSelect={refetch} />;
+    if (isLearner) return <Slots userId={userId} onSelect={onSelect} />;
 
     return null;
   };

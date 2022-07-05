@@ -164,18 +164,13 @@ Sessions.onRequested = async session => {
       status: SESSION_STATUS_REQUESTED,
       condition: '==',
     });
-  console.log({ participant1Sessions });
-  const multipleRequestsToday = participant1Sessions.some(
-    session =>
-      new Date(session.lastUpdated).toDateString() ===
-      new Date().toDateString(),
-  );
+
   const requestsToday = participant1Sessions.filter(
     session =>
       new Date(session.lastUpdated).toDateString() ===
       new Date().toDateString(),
   ).length;
-  console.log({ multipleRequestsToday, requestsToday });
+
   // limit session requested emails to 1 per day
   if (requestsToday <= 1)
     SessionRequestedMessageHandler({
