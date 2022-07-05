@@ -1,19 +1,22 @@
 import { FireAuth } from '@api/firebase';
+import FireAdmin from '@api/firebase/admin';
 import User from '@api/firebase/user';
 import { GERMAN, ENGLISH, USER_TYPE_LEARNER } from '@api/firebase/constants';
 import {
   EMAIL_EXISTS_CODE,
   EMAIL_NOT_FOUND_ERROR_MESSAGE,
   INVALID_PASSWORD_ERROR_MESSAGE,
-  INVALID_PASSWORD_ERROR_CODE,
+  WRONG_PASSWORD_ERROR_CODE,
   TOO_MANY_ATTEMPTS_TRY_LATER_ERROR_MESSAGE,
   USER_NOT_FOUND_ERROR_CODE,
-  // UNABLE_TO_PARSE_ERROR_CODE,
-  // FirebaseAccountNotFoundError,
+  INVALID_PASSWORD_ERROR_CODE,
+  FirebaseAccountNotFoundError,
   FirebaseEmailAlreadyExistsError,
   FirebaseEmailTooManyAttemptsError,
   FirebaseWrongCredentialsError,
+  FirebaseInvalidPasswordError,
 } from '@api/firebase/errors';
+import ResetPasswordRequestHandler from '@api/pubsub/handlers/users/resetPasswordRequestMessageHandler';
 import { log } from '@api/logger';
 
 export const deleteAccount = () => {
@@ -54,31 +57,31 @@ export const createAccount = ({ displayName, email, password, type }) => {
     });
 };
 
-//
-// export const setPasswordByEmail = async ({ email, password }) => {
-//   try {
-//     const user = await FireAuth.getUserByEmail(email);
-//     return FireAuth.updateUser(user.uid, { password });
-//   } catch (error) {
-//     if (error.code === USER_NOT_FOUND_ERROR_CODE)
-//       throw new FirebaseAccountNotFoundError();
-//     throw error;
-//   }
-// };
+export const handleResetPasswordRequest = async email => {
+  try {
+    const user = await User.byEmail(email);
+    if (user) await ResetPasswordRequestHandler({ message: { user } });
+    return true;
+  } catch (error) {
+    log('error handling reset password request', 'error', error);
+    throw error;
+  }
+};
 
-// export const updatePasswordByEmail = async ({
-//   email,
-//   newPassword,
-//   oldPassword
-// }) => {
-//   validate.password(newPassword);
-//   const account = await rest.findAccountByCreds({
-//     email,
-//     password: oldPassword
-//   });
-//   if (!account) throw new FirebaseWrongCredentialsError();
-//   await setPasswordByEmail({ email, password: newPassword });
-// };
+export const setPassword = ({ id, password }) =>
+  FireAdmin.auth
+    .updateUser(id, { password })
+    .then(() => true)
+    .catch(error => {
+      log('error resetting password', 'error', error);
+      if (error.code === USER_NOT_FOUND_ERROR_CODE)
+        throw new FirebaseAccountNotFoundError();
+
+      if (error.code === INVALID_PASSWORD_ERROR_CODE)
+        throw new FirebaseInvalidPasswordError(error);
+
+      throw error;
+    });
 
 export const signIn = ({ email, password }) =>
   FireAuth.signInWithEmailAndPassword(email, password)
@@ -88,7 +91,7 @@ export const signIn = ({ email, password }) =>
       if (
         error.message === EMAIL_NOT_FOUND_ERROR_MESSAGE ||
         error.message === INVALID_PASSWORD_ERROR_MESSAGE ||
-        error.code === INVALID_PASSWORD_ERROR_CODE ||
+        error.code === WRONG_PASSWORD_ERROR_CODE ||
         error.code === USER_NOT_FOUND_ERROR_CODE
       )
         throw new FirebaseWrongCredentialsError();

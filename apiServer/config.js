@@ -31,7 +31,11 @@ export default {
     introspection: process.env.NODE_ENV !== PRODUCTION,
   },
   auth: {
-    verifyEmail: {
+    resetPassword: {
+      jwtSecret: config.RESET_PASSWORD_JWT_SECRET,
+      jwtExpSeconds: parseInt(config.RESET_PASSWORD_JWT_EXP_SECONDS, 10),
+    },
+    userVerification: {
       jwtSecret: config.VERIFY_EMAIL_JWT_SECRET,
       jwtExpSeconds: parseInt(config.VERIFY_EMAIL_JWT_EXP_SECONDS, 10),
     },
@@ -52,6 +56,7 @@ export default {
       projectId: config.FIREBASE_PROJECT_ID,
       storageBucket: config.FIREBASE_STORAGE_BUCKET,
     },
+    serviceAccountKeys: JSON.parse(config.FIREBASE_SERVICE_ACCOUNT_KEYS),
   },
   gcp: {
     email: config.GCP_EMAIL,
@@ -80,6 +85,9 @@ export default {
         userVerification: Number(
           config.SENDINBLUE_TEMPLATE_USER_VERIFICATION_DE,
         ),
+        resetPassword: Number(
+          process.env.SENDINBLUE_TEMPLATE_RESET_PASSWORD_REQUEST_DE,
+        ),
       },
       en: {
         sessionAvailable: Number(
@@ -90,6 +98,9 @@ export default {
         ),
         sessionConfirmation: Number(
           config.SENDINBLUE_TEMPLATE_SESSION_CONFIRMATION_EN,
+        ),
+        resetPassword: Number(
+          config.SENDINBLUE_TEMPLATE_RESET_PASSWORD_REQUEST_EN,
         ),
         sessionRequest: Number(config.SENDINBLUE_TEMPLATE_SESSION_REQUEST_EN),
         userVerification: Number(

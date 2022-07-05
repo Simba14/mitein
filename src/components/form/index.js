@@ -1,1 +1,7 @@
-export { default, SIGN_UP_TYPE, LOGIN_TYPE } from './form.jsx';
+export {
+  default,
+  FORGOT_PASSWORD,
+  SIGN_UP_TYPE,
+  LOGIN_TYPE,
+  RESET_PASSWORD,
+} from './form.jsx';

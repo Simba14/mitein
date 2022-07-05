@@ -125,6 +125,8 @@ const typeDefs = gql`
       cancellationReason: UserType
     ): Session
     newsletterSignUp(email: String!): String
+    resetPassword(password: String!, token: String!): Boolean!
+    resetPasswordRequest(email: String!): Boolean!
     signIn(email: String!, password: String!): User
     signOut: Boolean
     signUp(

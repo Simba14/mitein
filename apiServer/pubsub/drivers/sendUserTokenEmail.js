@@ -4,11 +4,18 @@ import emailSender from '@api/pubsub/drivers/emailSender';
 import config from '@api/config';
 import { GERMAN } from '@api/firebase/constants';
 
-import { ROUTE_VERIFY_EMAIL } from 'routes';
+export const USER_VERIFICATION_EMAIL = 'userVerification';
+export const RESET_PASSWORD_REQUEST_EMAIL = 'resetPassword';
 
-const sendUserVerificationEmail = ({ displayLanguage, email, id }) => {
+const sendUserTokenEmail = ({
+  displayLanguage,
+  email,
+  id,
+  route,
+  emailType,
+}) => {
   try {
-    const { jwtExpSeconds: expiresIn, jwtSecret } = config.auth.verifyEmail;
+    const { jwtExpSeconds: expiresIn, jwtSecret } = config.auth[emailType];
     const token = jwt.sign({ authId: id }, jwtSecret, { expiresIn });
 
     const {
@@ -18,16 +25,15 @@ const sendUserVerificationEmail = ({ displayLanguage, email, id }) => {
 
     const langIsGerman = displayLanguage === GERMAN;
     const templateId = langIsGerman
-      ? template.de.userVerification
-      : template.en.userVerification;
+      ? template.de[emailType]
+      : template.en[emailType];
 
     const localePath = langIsGerman ? `/${GERMAN}` : '';
-    const verifyEmailUrl = `${uiHost}${localePath}${ROUTE_VERIFY_EMAIL}${token}/`;
-    log('VERIFY EMAIL URL', 'warning', {
-      verifyEmailUrl,
+    const userUrl = `${uiHost}${localePath}${route}${token}/`;
+    log('VERIFY EMAIL URL', 'warn', {
+      userUrl,
       uiHost,
       localePath,
-      ROUTE_VERIFY_EMAIL,
       token,
     });
     return emailSender({
@@ -38,17 +44,13 @@ const sendUserVerificationEmail = ({ displayLanguage, email, id }) => {
       ],
       templateId,
       params: {
-        verifyEmailUrl,
+        userUrl,
       },
     });
   } catch (error) {
-    log(
-      '[Notifications] Error sending user verification email',
-      'error',
-      error,
-    );
+    log(`[Notifications] Error sending ${emailType} email`, 'error', error);
     throw error;
   }
 };
 
-export default sendUserVerificationEmail;
+export default sendUserTokenEmail;

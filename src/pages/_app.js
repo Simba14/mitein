@@ -5,11 +5,11 @@ import { AppProps } from 'next/app';
 
 import { client } from 'apollo/client';
 import { SessionContextProvider } from 'context/session';
+import ErrorBoundary from 'components/errorBoundary';
 import 'scss/main.scss';
 import '@fullcalendar/common/main.css';
 import '@fullcalendar/daygrid/main.css';
 import '@fullcalendar/timegrid/main.css';
-import ErrorBoundary from 'components/errorBoundary';
 
 const cookieConsentRecordedIdentifier =
   process.env.NEXT_PUBLIC_COOKIE_CONSENT_RECORDED_IDENTIFIER;
