@@ -30,6 +30,7 @@
     "@babel/core": "^7.15.5",
     "@babel/preset-env": "^7.15.6",
     "@babel/preset-react": "^7.0.0",
+    "@graphql-tools/jest-transform": "^1.2.0",
     "@svgr/webpack": "^6.2.0",
     "@testing-library/dom": "^8.11.2",
     "@testing-library/jest-dom": "^5.16.1",
@@ -47,7 +48,6 @@
     "firebase-functions-test": "^2.1.0",
     "husky": "^7.0.0",
     "jest": "^27.4.7",
-    "jest-transform-graphql": "^2.1.0",
     "prettier": "2.4.1",
     "react-test-renderer": "^16.6.0"
   },
@@ -118,7 +118,7 @@
       "^unitTests(.*)$": "<rootDir>/unitTests$1"
     },
     "transform": {
-      "\\.(gql|graphql)$": "jest-transform-graphql",
+      "\\.(gql|graphql)$": "@graphql-tools/jest-transform",
       ".*": "babel-jest"
     },
     "testEnvironment": "jsdom"
