@@ -21,7 +21,7 @@ const SessionRequestedMessageHandler = ({
 
   const langIsGerman = displayLanguage === GERMAN;
   const localePath = langIsGerman ? `/${GERMAN}` : '';
-  const link = `${uiHost}${localePath}${ROUTE_PROFILE}/`;
+  const link = `${uiHost}${localePath}${ROUTE_PROFILE}`;
   const templateId = langIsGerman
     ? template.de.sessionRequest
     : template.en.sessionRequest;
