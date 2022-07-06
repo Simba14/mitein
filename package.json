@@ -76,7 +76,7 @@
     "jwks-rsa": "^2.1.4",
     "micro-cors": "^0.1.1",
     "next": "^12.2.0",
-    "next-i18next": "^8.8.0",
+    "next-i18next": "^11.0.0",
     "next-transpile-modules": "^9.0.0",
     "prop-types": "^15.7.2",
     "react": "^17.0.2",
