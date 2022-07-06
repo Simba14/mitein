@@ -56,11 +56,11 @@ const Slots = ({ userId, onSelect }) => {
       },
     })
       .then(() => {
-        router.push(ROUTE_PROFILE);
         onSelect(true);
         selectSession(null);
         setSessionRequested(true);
         setSelectedDate(null);
+        router.push(ROUTE_PROFILE);
       })
       .catch(e => {
         onSelect(false);

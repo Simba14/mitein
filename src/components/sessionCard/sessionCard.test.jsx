@@ -1,8 +1,8 @@
 import React from 'react';
 import { render, screen, userEvent } from 'testUtils';
 import SessionCard from './sessionCard';
-import GET_AVAILABILITY from '@graphql/queries/getSessions.graphql';
-import GET_PROFILE from '@graphql/queries/getProfile.graphql';
+// import GET_AVAILABILITY from '@graphql/queries/getSessions.graphql';
+// import GET_PROFILE from '@graphql/queries/getProfile.graphql';
 import {
   MOCK_ID,
   MOCK_START_UTC,
