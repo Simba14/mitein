@@ -5,31 +5,30 @@ import User from '@api/firebase/user';
 import { Firestore } from '@api/firebase';
 
 const Query = {
-  user: async (obj, { id }, context, info) => {
+  user: async (parent, { id }) => {
     if (id) {
       return User.byIdWithAvailability(id);
     }
   },
   sessions: async (
-    obj,
-    { participant1Id, participant2Id, status, notOneOf },
-    context,
-    info,
+    parent,
+    { participant1Id, participant2Id, status, notOneOf, upcoming },
   ) => {
     return Sessions.byFilters({
       participant1Id,
       participant2Id,
       status,
       notOneOf,
+      upcoming,
     });
   },
-  availability: async (obj, { userId }, context, info) => {
+  availability: async (parent, { userId }) => {
     return await Availability.byUserId(userId);
   },
-  availableSlots: async (obj, args, context, info) => {
+  availableSlots: async () => {
     return sortBy('start')(await Sessions.getOnlyAvailable());
   },
-  volunteerWith: async (obj, args, context, info) => {
+  volunteerWith: async () => {
     const collection = await Firestore.collection('organizations').get();
     const coll = collection.docs.map(doc => doc.data());
 

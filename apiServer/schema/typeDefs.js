@@ -49,6 +49,7 @@ const typeDefs = gql`
 
   type User {
     sessions: [Session]
+    requests: [Session]
     displayName: String
     displayLanguage: Language
     email: String
@@ -92,8 +93,9 @@ const typeDefs = gql`
     sessions(
       participant1Id: ID
       participant2Id: ID
-      status: EventStatus
       notOneOf: [EventStatus]
+      status: EventStatus
+      upcoming: Boolean
     ): [Session]
     volunteerWith(city: String!): [Organization]
   }

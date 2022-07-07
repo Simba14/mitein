@@ -83,7 +83,15 @@ const Profile = ({ session }) => {
   if (error || !data) return null;
 
   const {
-    user: { sessions, displayName, email, interests, suspendedUntil, type },
+    user: {
+      displayName,
+      email,
+      interests,
+      requests,
+      sessions,
+      suspendedUntil,
+      type,
+    },
   } = data;
 
   const sessionsByStatus = groupBy('status', sessions);
@@ -91,11 +99,9 @@ const Profile = ({ session }) => {
   const latestSessionIsRejected = get('[0].status', sessions) === REJECTED;
   const requestedAccordionData =
     requestedSessions || (latestSessionIsRejected && take(1, sessions));
-  const bookedSessions =
-    sessionsByStatus[BOOKED] &&
-    sessionsByStatus[BOOKED].filter(
-      session => session.end > new Date().toISOString(),
-    );
+  const bookedSessions = sessionsByStatus[BOOKED]?.filter(
+    session => session.end > new Date().toISOString(),
+  );
   const isLearner = type === LEARNER;
   const isNative = type === NATIVE;
   const isSuspended = suspendedUntil > new Date().toISOString();
