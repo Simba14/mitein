@@ -1,13 +1,42 @@
 query Profile($id: ID!) {
   user(id: $id) {
-    sessions {
-      id
-      participant1Id
-      participant2Id
-      link
-      status
-      start
-      end
+    chats {
+      booked {
+        id
+        participant1Id
+        participant2Id
+        link
+        status
+        start
+        end
+      }
+      cancelled {
+        id
+        participant1Id
+        participant2Id
+        link
+        status
+        start
+        end
+      }
+      rejected {
+        id
+        participant1Id
+        participant2Id
+        link
+        status
+        start
+        end
+      }
+      requested {
+        id
+        participant1Id
+        participant2Id
+        link
+        status
+        start
+        end
+      }
     }
     id
     displayName

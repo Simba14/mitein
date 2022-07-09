@@ -105,6 +105,7 @@ class MyDocument extends Document {
         <body>
           <Main />
           <NextScript />
+          {/* Needed to fix chromium bug https://bugs.chromium.org/p/chromium/issues/detail?id=167083 */}
           <script> </script>
         </body>
       </Html>

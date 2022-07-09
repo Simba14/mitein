@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { get, isEmpty, map } from 'lodash/fp';
 import { func, string } from 'prop-types';
-import { useRouter } from 'next/router';
 import { useMutation, useQuery } from '@apollo/client';
 import { useTranslation } from 'next-i18next';
 import classnames from 'classnames/bind';
@@ -15,7 +14,6 @@ import REQUEST_SESSION from '@graphql/mutations/updateSession.graphql';
 import GET_SLOTS from '@graphql/queries/getAvailableSlots.graphql';
 import { formatSessionDate, formatSessionTime } from 'helpers/index';
 import { LEARNER, REQUESTED } from '@constants/user';
-import { ROUTE_PROFILE } from 'routes';
 
 import styles from './slots.module.scss';
 const cx = classnames.bind(styles);
@@ -30,7 +28,6 @@ const Slots = ({ userId, onSelect }) => {
     t,
   } = useTranslation('session', { keyPrefix: 'slots' });
 
-  const router = useRouter();
   const [modalOpen, setModalOpen] = useState(false);
   const [selectedDate, setSelectedDate] = useState(null);
   const [selectedSession, selectSession] = useState(null);
@@ -56,16 +53,15 @@ const Slots = ({ userId, onSelect }) => {
       },
     })
       .then(() => {
-        onSelect(true);
         selectSession(null);
         setSessionRequested(true);
         setSelectedDate(null);
-        router.push(ROUTE_PROFILE);
+        onSelect();
       })
       .catch(e => {
-        onSelect(false);
         setRequestSessionError(get('graphQLErrors[0].message', e) || e.message);
         selectSession(null);
+        onSelect();
         refetch();
       });
   };

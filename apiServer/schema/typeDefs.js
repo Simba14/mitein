@@ -41,6 +41,14 @@ const typeDefs = gql`
     lastUpdated: String
   }
 
+  type Chats {
+    available: [Session]
+    booked: [Session]
+    cancelled: [Session]
+    rejected: [Session]
+    requested: [Session]
+  }
+
   type Cancellation {
     id: ID!
     sessionId: ID!
@@ -48,7 +56,7 @@ const typeDefs = gql`
   }
 
   type User {
-    sessions: [Session]
+    chats: Chats
     displayName: String
     displayLanguage: Language
     email: String
@@ -92,8 +100,9 @@ const typeDefs = gql`
     sessions(
       participant1Id: ID
       participant2Id: ID
-      status: EventStatus
       notOneOf: [EventStatus]
+      status: EventStatus
+      upcoming: Boolean
     ): [Session]
     volunteerWith(city: String!): [Organization]
   }

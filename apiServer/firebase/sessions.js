@@ -52,25 +52,33 @@ Sessions.byParticipantId = async ({ field, id }) =>
     });
 
 Sessions.byParticipantIdWithStatusCondition = async ({
+  condition,
   field,
   id,
   status,
-  condition,
-}) =>
-  Firestore.collection(COLLECTION_SESSIONS)
+  upcoming,
+}) => {
+  let baseQuery = Firestore.collection(COLLECTION_SESSIONS)
     .where(field, '==', id)
-    .where('status', condition, status)
+    .where('status', condition, status);
+
+  if (upcoming) {
+    baseQuery = baseQuery.where('start', '>', new Date().toISOString());
+  }
+  return baseQuery
     .get()
     .then(getQuerySnapshotData)
     .catch(() => {
       throw new FirebaseGetDocError('Could not return session by user/status');
     });
+};
 
 Sessions.byFilters = async ({
+  notOneOf,
   participant1Id,
   participant2Id,
   status,
-  notOneOf,
+  upcoming,
 }) => {
   const participantArgs = {
     field: participant1Id ? FIELD_PARTICIPANT_ONE : FIELD_PARTICIPANT_TWO,
@@ -81,16 +89,18 @@ Sessions.byFilters = async ({
     if (status) {
       return await Sessions.byParticipantIdWithStatusCondition({
         ...participantArgs,
-        status,
         condition: '==',
+        status,
+        upcoming,
       });
     }
 
     if (notOneOf) {
       return await Sessions.byParticipantIdWithStatusCondition({
         ...participantArgs,
-        status: notOneOf,
         condition: 'not-in',
+        status: notOneOf,
+        upcoming,
       });
     }
 

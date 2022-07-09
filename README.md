@@ -111,9 +111,9 @@ If a page has dynamic routes and uses getStaticProps it needs to define a list o
 
 More info [here](https://nextjs.org/docs/basic-features/data-fetching#getserversideprops-server-side-rendering)
 
-## 🤝 Contributing 
+## 🤝 Contributing
 
-Mitein's goal is to help strengthen connections and communities. Therefore, it makes perfect sense for Mitein to be open-source and invite the power of community to its code! Any contribution is greatly appreciated and needed. Mitein is volunteer led and will never be a for-profit platform. 
+Mitein's goal is to help strengthen connections and communities. Therefore, it makes perfect sense for Mitein to be open-source and invite the power of community to its code! Any contribution is greatly appreciated and needed. Mitein is volunteer led and will never be a for-profit platform.
 
 You can find out [here](https://github.com/Simba14/mitein/blob/main/CONTRIBUTING.md) how you can start contributing to our codebase right away.
 

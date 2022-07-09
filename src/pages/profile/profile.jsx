@@ -1,40 +1,28 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { useMutation } from '@apollo/client';
 import classnames from 'classnames/bind';
 import { useRouter } from 'next/router';
 import { useQuery } from '@apollo/client';
-import { compose, get, groupBy, isEmpty, take } from 'lodash/fp';
+import { compose, get } from 'lodash/fp';
 import { useTranslation } from 'next-i18next';
-import { without } from 'lodash';
-import { toast } from 'react-toastify';
 
 import Accordion from 'components/accordion';
 import Cta from 'components/cta';
 import LearnerCalendar from 'components/calendar/timeView/learner';
-import Modal from 'components/modal';
 import NativeCalendar from 'components/calendar/timeView/native';
 import Loading from 'components/loading';
 import SessionCard from 'components/sessionCard';
 import Suspended from 'components/suspended';
-import Text, { BODY_6, HEADING_2, HEADING_4 } from 'components/text';
 import { withLayout } from 'components/layout';
 
-import Svg, { CLOSE } from 'components/svg';
 import { sessionProps, withSessionContext } from 'context/session';
 import GET_PROFILE from '@graphql/queries/getProfile.graphql';
 import SIGN_OUT from '@graphql/mutations/signOut.graphql';
-import UPDATE_PROFILE from '@graphql/mutations/updateUser.graphql';
 import { ROUTE_LOGIN, ROUTE_SESSIONS_BOOK } from 'routes';
-import {
-  LEARNER,
-  NATIVE,
-  BOOKED,
-  REJECTED,
-  REQUESTED,
-  INTERESTS,
-} from '@constants/user';
+import { LEARNER, NATIVE, BOOKED, REJECTED, REQUESTED } from '@constants/user';
 
 import styles from './profile.module.scss';
+import PersonalInfo from 'components/personalInfo';
 
 const cx = classnames.bind(styles);
 
@@ -42,7 +30,6 @@ const Profile = ({ session }) => {
   const { t } = useTranslation('profile');
   const router = useRouter();
   const userId = get('userId', session);
-  const [interestsOpen, setInterestsOpen] = useState(false);
   const { data, loading, error } = useQuery(GET_PROFILE, {
     variables: { id: userId },
     skip: !userId,
@@ -57,21 +44,6 @@ const Profile = ({ session }) => {
     onCompleted: signOutSuccessful,
   });
 
-  const [updateProfile] = useMutation(UPDATE_PROFILE);
-
-  const handleUpdateProfile = ({ addInterest, deleteInterest }) => {
-    updateProfile({
-      variables: {
-        id: userId,
-        fields: {
-          interests: deleteInterest
-            ? without(interests, deleteInterest)
-            : [...(interests || []), addInterest],
-        },
-      },
-    });
-  };
-
   useEffect(() => {
     if (!(userId || loading || data) || error) {
       session.userLoggedOut();
@@ -83,118 +55,40 @@ const Profile = ({ session }) => {
   if (error || !data) return null;
 
   const {
-    user: { sessions, displayName, email, interests, suspendedUntil, type },
+    user: {
+      displayName,
+      email,
+      interests,
+      chats: { booked, rejected, requested },
+      suspendedUntil,
+      type,
+    },
   } = data;
 
-  const sessionsByStatus = groupBy('status', sessions);
-  const requestedSessions = sessionsByStatus[REQUESTED];
-  const latestSessionIsRejected = get('[0].status', sessions) === REJECTED;
-  const requestedAccordionData =
-    requestedSessions || (latestSessionIsRejected && take(1, sessions));
-  const bookedSessions =
-    sessionsByStatus[BOOKED] &&
-    sessionsByStatus[BOOKED].filter(
-      session => session.end > new Date().toISOString(),
-    );
+  const requestedAccordionData = requested || rejected;
+
   const isLearner = type === LEARNER;
   const isNative = type === NATIVE;
   const isSuspended = suspendedUntil > new Date().toISOString();
 
   return (
     <div className={cx('wrapper')}>
-      <div className={cx('topContainer')}>
-        <div>
-          <Text className={cx('title')} tag="h1" type={HEADING_2}>
-            {t('title')}
-          </Text>
-          <Text>{t('email', { email })}</Text>
-          <Text className={cx('displayName')}>
-            {t('name', { displayName })}
-          </Text>
-          <div className={cx('interests')}>
-            <Text className={cx('label')} tag="label">
-              {t('interests.label')}
-            </Text>
-            {interests?.length ? (
-              interests.map(interest => (
-                <button
-                  key={`selected ${interest}`}
-                  className={cx('interest')}
-                  onClick={() =>
-                    handleUpdateProfile({ deleteInterest: interest })
-                  }
-                >
-                  {t(`interests.${interest}`)}
-                  <Svg className={cx('delete')} name={CLOSE} />
-                </button>
-              ))
-            ) : (
-              <Text type={BODY_6}>{t('interests.none')}</Text>
-            )}
-            <Cta
-              aria-label={t('interests.editLabel')}
-              aria-haspopup="dialog"
-              className={cx('edit')}
-              onClick={() => setInterestsOpen(true)}
-              text={t('interests.edit')}
-            />
-          </div>
-
-          <Modal open={interestsOpen} onClose={() => setInterestsOpen(false)}>
-            <div className={cx('addInterests')}>
-              <Text className={cx('interestsHeading')} type={HEADING_4}>
-                {t('interests.heading')}
-              </Text>
-              <Text className={cx('description')} type={BODY_6}>
-                {t('interests.description')}
-              </Text>
-              <Text className={cx('instruction')} type={BODY_6} tag="strong">
-                {t('interests.instructions')}
-              </Text>
-              <div className={cx('options')}>
-                {INTERESTS.map(interest => {
-                  const selected = interests?.find(el => el === interest);
-                  return (
-                    <button
-                      key={interest}
-                      className={cx('interest', { selected })}
-                      onClick={() =>
-                        handleUpdateProfile({
-                          [selected ? 'deleteInterest' : 'addInterest']:
-                            interest,
-                        })
-                      }
-                    >
-                      {t(`interests.${interest}`)}
-                    </button>
-                  );
-                })}
-              </div>
-              <Cta
-                onClick={() => setInterestsOpen(false)}
-                text={t('interests.cta')}
-              />
-            </div>
-          </Modal>
-        </div>
-        <div>
-          <Cta
-            className={cx('logOut')}
-            onClick={signOut}
-            outline
-            disabled={signOutLoading}
-            text={t('logOut')}
-          />
-        </div>
-      </div>
+      <PersonalInfo
+        displayName={displayName}
+        email={email}
+        interests={interests}
+        signOut={signOut}
+        signOutDisabled={signOutLoading}
+        userId={userId}
+      />
       {isSuspended && <Suspended suspendedUntil={suspendedUntil} />}
-      {!isEmpty(bookedSessions) && (
+      {booked && (
         <Accordion
           className={cx('accordion')}
           contentClassName={cx('sessionsContainer')}
           ariaId="booked sessions accordion"
           headerText={t('accordionHeader.upcoming')}
-          content={bookedSessions.map(session => (
+          content={booked.map(session => (
             <SessionCard
               key={session.id}
               session={session}
@@ -216,7 +110,7 @@ const Profile = ({ session }) => {
             <SessionCard
               key={session.id}
               session={session}
-              status={requestedSessions ? REQUESTED : REJECTED}
+              status={requested ? REQUESTED : REJECTED}
               userType={type}
               userId={userId}
             />
@@ -224,7 +118,7 @@ const Profile = ({ session }) => {
           open={true}
         />
       )}
-      {isLearner && !requestedSessions && Boolean(!suspendedUntil) && (
+      {isLearner && !requested && Boolean(!suspendedUntil) && (
         <Cta
           to={ROUTE_SESSIONS_BOOK}
           className={cx('requestCta')}

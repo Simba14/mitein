@@ -1,8 +1,8 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useEffect } from 'react';
 import classnames from 'classnames/bind';
 import { useRouter } from 'next/router';
 import { useQuery } from '@apollo/client';
-import { compose, get, groupBy } from 'lodash/fp';
+import { compose, get } from 'lodash/fp';
 import { useTranslation } from 'next-i18next';
 
 import Cta from 'components/cta';
@@ -15,7 +15,7 @@ import { withLayout } from 'components/layout';
 import { sessionProps, withSessionContext } from 'context/session';
 import GET_PROFILE from '@graphql/queries/getProfile.graphql';
 import { ROUTE_LOGIN, ROUTE_PROFILE } from 'routes';
-import { LEARNER, REQUESTED } from '@constants/user';
+import { LEARNER } from '@constants/user';
 
 import styles from './bookSession.module.scss';
 const cx = classnames.bind(styles);
@@ -23,20 +23,16 @@ const cx = classnames.bind(styles);
 const BookSession = ({ session }) => {
   const { t } = useTranslation('session');
   const router = useRouter();
-  const [bookingSuccessful, setBookingSuccessful] = useState();
   const userId = get('userId', session);
   const { data, loading, error, refetch } = useQuery(GET_PROFILE, {
     variables: { id: userId },
     skip: !userId,
   });
 
-  const onSelect = useCallback(
-    status => {
-      refetch();
-      setBookingSuccessful(status);
-    },
-    [refetch, setBookingSuccessful],
-  );
+  const onSelect = useCallback(() => {
+    router.push(ROUTE_PROFILE);
+    refetch();
+  }, [refetch]);
 
   useEffect(() => {
     if (!userId || (!loading && (!data || error))) {
@@ -54,14 +50,15 @@ const BookSession = ({ session }) => {
   }, [data]);
 
   if (loading) return <Loading />;
-  if (error || !data || bookingSuccessful) return null;
+  if (error || !data) return null;
 
   const {
-    user: { sessions, suspendedUntil, type },
+    user: {
+      chats: { requested },
+      suspendedUntil,
+      type,
+    },
   } = data;
-
-  const sessionsByStatus = groupBy('status', sessions);
-  const requestedSessions = sessionsByStatus[REQUESTED];
 
   const isLearner = type === LEARNER;
   const isSuspended = suspendedUntil > new Date().toISOString();
@@ -78,10 +75,11 @@ const BookSession = ({ session }) => {
         />
       </div>
     );
+
     if (isSuspended)
       return baseContent(<Suspended suspendedUntil={suspendedUntil} />);
 
-    if (requestedSessions)
+    if (requested)
       return baseContent(
         <Text className={cx('text')}>{t('slots.alreadyRequested')}</Text>,
       );
