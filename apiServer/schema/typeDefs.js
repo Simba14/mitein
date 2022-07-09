@@ -41,6 +41,14 @@ const typeDefs = gql`
     lastUpdated: String
   }
 
+  type Chats {
+    available: [Session]
+    booked: [Session]
+    cancelled: [Session]
+    rejected: [Session]
+    requested: [Session]
+  }
+
   type Cancellation {
     id: ID!
     sessionId: ID!
@@ -48,8 +56,7 @@ const typeDefs = gql`
   }
 
   type User {
-    sessions: [Session]
-    requests: [Session]
+    chats: Chats
     displayName: String
     displayLanguage: Language
     email: String

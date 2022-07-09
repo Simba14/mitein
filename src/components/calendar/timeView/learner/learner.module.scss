@@ -20,6 +20,7 @@
       display: none;
       align-self: flex-end;
       border-radius: 0.25em;
+      padding: 0 size(1) !important;
 
       @include mq($from: tabletWide) {
         display: block;

@@ -11,6 +11,9 @@ import {
   FIELD_PARTICIPANT_TWO,
   MAX_NUMBER_OF_CANCELLATIONS,
   SUSPENSION_DURATION,
+  SESSION_STATUS_BOOKED,
+  SESSION_STATUS_REQUESTED,
+  SESSION_STATUS_REJECTED,
 } from '@api/firebase/constants';
 import {
   FirebaseCreateDocError,
@@ -44,14 +47,38 @@ User.byIdWithAvailability = async id => {
       ? FIELD_PARTICIPANT_TWO
       : FIELD_PARTICIPANT_ONE;
 
-  const sessions = await Sessions.byParticipantId({
+  const allSessions = await Sessions.byParticipantId({
     field: participantField,
     id,
   });
 
+  const dateConstraint = new Date();
+  dateConstraint.setTime(dateConstraint.getTime() - 60 * 60 * 1000); // set 1 hour into past
+
+  const [booked, requested, rejected] = allSessions?.reduce(
+    ([bookings, requests, rejections], chat) => {
+      // only include upcoming chats
+      if (chat.start < dateConstraint.toISOString())
+        return [bookings, requests, rejections];
+      if (chat.status === SESSION_STATUS_BOOKED)
+        return [[...bookings, chat], requests, rejections];
+      if (chat.status === SESSION_STATUS_REQUESTED)
+        return [bookings, [...requests, chat], rejections];
+      if (chat.status === SESSION_STATUS_REJECTED)
+        return [bookings, requests, [...rejections, chat]];
+
+      return [bookings, requests, rejections];
+    },
+    [[], [], []],
+  );
+
   return {
     ...user,
-    sessions,
+    chats: {
+      booked: isEmpty(booked) ? null : booked,
+      requested: isEmpty(requested) ? null : requested,
+      rejected: isEmpty(rejected) ? null : rejected,
+    },
   };
 };
 
