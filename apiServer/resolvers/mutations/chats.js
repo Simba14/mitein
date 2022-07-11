@@ -8,7 +8,7 @@ import {
   CHAT_STATUS_BOOKED,
   CHAT_STATUS_REQUESTED,
 } from '@api/firebase/constants';
-import chatCancellationMessageHandler from '@api/pubsub/handlers/Chats/chatCancellationMessageHandler';
+import chatCancellationMessageHandler from '@api/pubsub/handlers/chats/chatCancellationMessageHandler';
 
 const createChats = async ({
   availabilityId,

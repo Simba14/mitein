@@ -47,15 +47,16 @@ User.byIdWithAvailability = async id => {
       ? FIELD_PARTICIPANT_TWO
       : FIELD_PARTICIPANT_ONE;
 
-  const allChats = await Chats.byParticipantId({
-    field: participantField,
-    id,
-  });
+  const allChats =
+    (await Chats.byParticipantId({
+      field: participantField,
+      id,
+    })) || [];
 
   const dateConstraint = new Date();
   dateConstraint.setTime(dateConstraint.getTime() - 60 * 60 * 1000); // set 1 hour into past
 
-  const [booked, requested, rejected] = allChats?.reduce(
+  const [booked, requested, rejected] = allChats.reduce(
     ([bookings, requests, rejections], chat) => {
       // only include upcoming chats
       if (chat.start < dateConstraint.toISOString())
