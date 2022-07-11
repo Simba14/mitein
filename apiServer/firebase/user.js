@@ -2,7 +2,7 @@ import firebase from 'firebase/app';
 import { v4 as uuidv4 } from 'uuid';
 import { isEmpty } from 'lodash/fp';
 import { Firestore } from '@api/firebase';
-import Chats from '@api/firebase/chat';
+import Chat from '@api/firebase/chat';
 import { getDocData, getQuerySnapshotData } from '@api/firebase/helpers';
 import {
   COLLECTION_USERS,
@@ -19,6 +19,7 @@ import {
   FirebaseCreateDocError,
   FirebaseGetDocError,
 } from '@api/firebase/errors';
+import { log } from '@api/logger';
 
 const User = {};
 
@@ -47,11 +48,17 @@ User.byIdWithAvailability = async id => {
       ? FIELD_PARTICIPANT_TWO
       : FIELD_PARTICIPANT_ONE;
 
-  const allChats =
-    (await Chats.byParticipantId({
+  let allChats;
+
+  try {
+    allChats = await Chat.byParticipantId({
       field: participantField,
       id,
-    })) || [];
+    });
+  } catch (error) {
+    log('Error retrieving user chats', 'error', error);
+    allChats = [];
+  }
 
   const dateConstraint = new Date();
   dateConstraint.setTime(dateConstraint.getTime() - 60 * 60 * 1000); // set 1 hour into past
