@@ -1,0 +1,57 @@
+{
+  "chatLink": "Hier klicken, um den Zoom-Chat zu öffnen",
+  "slots": {
+    "title": "Eine Sitzung anfragen",
+    "cta": "Sitzung anfragen",
+    "defaultOption": "Bitte wählen Sie eine Zeit",
+    "step1": "1. Wählen Sie ein verfügbares Datum",
+    "step2": "Fragen Sie die gewünschte Zeit an{{date}}",
+    "step2Number": "2.",
+    "noAvailability": "Es sind keine Sitzungen an diesem Datum verfügbar. Bitte wählen Sie ein anderes Datum im Kalender.",
+    "note": "Hinweis: Es kann jeweils nur eine Sitzung angefragt werden.\nBitte wählen Sie ein Zeitfenster, das Sie mit Sicherheit wahrnehmen können. Sie bekommen rechtzeitig eine Antwort auf Ihre Anfrage.",
+    "noneAvailable": "Keine Sitzungen verfügbar",
+    "checkBack": "Schauen Sie in den nächsten Tagen nochmal rein.\nWir arbeiten intensiv daran, mit weiteren Seniorenheimen und Muttersprachler:innen zu kooperieren.",
+    "alreadyRequested": "Sie haben bereits eine Anfrage gestellt. Überprüfen Sie den Status in Ihrem Profil.",
+    "returnToProfile": "Profil ansehen"
+  },
+  "LEARNER": {
+    "BOOKED": {
+      "title": "Sitzung gebucht für:",
+      "cancelCta": "Sitzung stornieren"
+    },
+    "REQUESTED": {
+      "title": "Sitzung angefragt für:",
+      "cancelCta": "Sitzung stornieren",
+      "moreInfo": "Sie bekommen eine E-Mail, sobald Ihre Anfrage beantwortet wurde"
+    },
+    "REJECTED": {
+      "title": "Sitzung nicht verfügbar:",
+      "moreInfo": "Diese Sitzung ist nicht mehr verfügbar. Bitte stellen Sie eine neue Anfrage."
+    },
+    "modal": {
+      "title": "Sind Sie sicher?",
+      "disclaimer": "Stellen Sie die Anfrage für die Sitzung nur, wenn Sie ganz sicher daran teilnehmen können.\nMitein ist eine gemeinnützige und kostenlose Plattform. Stornierungen machen uns das Leben schwer.\nDeshalb erlauben wir nur eine Stornierung pro Nutzer:in, sobald eine Sitzung gebucht wurde.",
+      "cta": "Sitzung anfragen"
+    }
+  },
+  "NATIVE": {
+    "BOOKED": {
+      "title": "Sitzung gebucht für:",
+      "cancelCta": "Sitzung stornieren"
+    },
+    "REQUESTED": {
+      "title": "Sitzung angefragt für:",
+      "confirmCta": "Sitzung bestätigen",
+      "cancelCta": "Sitzung stornieren"
+    },
+    "REJECTED": {
+      "title": "Sitzung abgesagt:",
+      "moreInfo": "Sie haben diese Sitzung abgesagt. Sie ist nicht mehr geplant oder verfügbar."
+    },
+    "modal": {
+      "title": "Sind Sie sicher?",
+      "disclaimer": "Bitte bestätigen Sie nur, wenn Sie ganz sicher teilnehmen können.\nMitein ist eine gemeinnützige und kostenlose Plattform. Stornierungen machen uns das Leben schwer.\nDeshalb erlauben wir nur eine Stornierung pro Nutzer:in.",
+      "cta": "Sitzung bestätigen"
+    }
+  }
+}

@@ -17,20 +17,20 @@ exports.getTimeFromDate = getTimeFromDate;
 exports.dateInTimeRange = dateInTimeRange;
 
 exports.getUsersWithAvailabilityMatch = function ({
-  availableSessions = [],
+  availableChats = [],
   availabilities = [],
 }) {
   const userIds = [];
-  if (!availableSessions.length || !availabilities.length) return userIds;
+  if (!availableChats.length || !availabilities.length) return userIds;
   const availabilityByUserId = groupBy('userId', availabilities);
   const availabilityByDay = groupBy('dayIndex', availabilities);
   const maxUsers = Object.keys(availabilityByUserId).length;
 
-  availableSessions.some(session => {
-    availabilityByDay[session.day] &&
-      availabilityByDay[session.day].some(({ start, end, userId }) => {
+  availableChats.some(chat => {
+    availabilityByDay[chat.day] &&
+      availabilityByDay[chat.day].some(({ start, end, userId }) => {
         const overlapping = dateInTimeRange({
-          date: session.start,
+          date: chat.start,
           start,
           end,
         });

@@ -8,8 +8,8 @@ import TextPage, {
   PARAGRAPH,
   LIST,
   SENTENCE,
-} from 'components/textPage';
-import { withLayout } from 'components/layout';
+} from 'components/blocks/textPage';
+import { withLayout } from 'components/blocks/layout';
 
 export const getStaticProps = async ({ locale }) => ({
   props: {

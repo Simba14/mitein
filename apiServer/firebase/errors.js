@@ -4,7 +4,7 @@ export const EMAIL_NOT_VERIFIED = 'EMAIL_NOT_VERIFIED';
 export const TOO_MANY_ATTEMPTS = 'TOO_MANY_ATTEMPTS';
 export const WRONG_CREDENTIALS = 'WRONG_CREDENTIALS';
 export const INVALID_PASSWORD = 'INVALID_PASSWORD';
-export const SESSION_UNAVAILABLE = 'SESSION_UNAVAILABLE';
+export const CHAT_UNAVAILABLE = 'CHAT_UNAVAILABLE';
 
 export const EMAIL_NOT_FOUND_ERROR_MESSAGE = 'EMAIL_NOT_FOUND';
 export const INVALID_PASSWORD_ERROR_MESSAGE = 'INVALID_PASSWORD';
@@ -113,14 +113,14 @@ export class FirebaseInvalidPasswordError extends Error {
   }
 }
 
-export class FirebaseSessionUnavailableError extends Error {
+export class FirebaseChatUnavailableError extends Error {
   constructor(message, code, errors) {
     super();
     this.message =
       message ||
-      'Session was cancelled by the other participant and is no longer available';
+      'Chat was cancelled by the other participant and is no longer available';
     this.extensions = {
-      code: code || SESSION_UNAVAILABLE,
+      code: code || CHAT_UNAVAILABLE,
       errors,
     };
   }

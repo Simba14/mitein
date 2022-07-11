@@ -1,10 +1,10 @@
 import Availability from './availability';
-import Sessions from './sessions';
+import Chats from './chats';
 import Users from './users';
 
 const Mutation = {
   ...Availability,
-  ...Sessions,
+  ...Chats,
   ...Users,
 };
 

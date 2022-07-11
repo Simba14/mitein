@@ -5,10 +5,10 @@ import { compose, get } from 'lodash/fp';
 import { useTranslation } from 'next-i18next';
 import classnames from 'classnames/bind';
 
-import Form, { FORGOT_PASSWORD } from 'components/form';
-import Text, { HEADING_3 } from 'components/text';
+import Form, { FORGOT_PASSWORD } from 'components/blocks/form';
+import Text, { HEADING_3 } from 'components/atoms/text';
 import { ROUTE_PROFILE } from 'routes';
-import { withLayout } from 'components/layout';
+import { withLayout } from 'components/blocks/layout';
 import { sessionProps, withSessionContext } from 'context/session';
 import RESET_PASSWORD_REQUEST from '@graphql/mutations/resetPasswordRequest.graphql';
 

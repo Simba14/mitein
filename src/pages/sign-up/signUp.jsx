@@ -6,10 +6,10 @@ import classnames from 'classnames/bind';
 import { compose, get } from 'lodash/fp';
 
 import SIGN_UP from '@graphql/mutations/signUp.graphql';
-import Form, { SIGN_UP_TYPE } from 'components/form';
+import Form, { SIGN_UP_TYPE } from 'components/blocks/form';
 import { sessionProps, withSessionContext } from 'context/session';
 import { ROUTE_ONBOARDING, ROUTE_PROFILE } from 'routes';
-import { withLayout } from 'components/layout';
+import { withLayout } from 'components/blocks/layout';
 
 import styles from './signUp.module.scss';
 const cx = classnames.bind(styles);

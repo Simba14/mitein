@@ -1,0 +1,59 @@
+{
+  "chatLink": "Open Zoom chat",
+  "slots": {
+    "title": "Request a chat",
+    "cta": "Request Chat",
+    "defaultOption": "Please select a time",
+    "step1": "1. Select an available date",
+    "step2": "Request a time slot{{date}}",
+    "step2Number": "2.",
+    "noAvailability": "No availabile chats for this date. Please select a different date in the calendar.",
+    "note": "Note: only one chat can be requested at a time.\nPlease choose a time slot that you can definitely commit to. You will receive an answer to your request in good time.",
+    "noneAvailable": "No Available Slots",
+    "checkBack": "Check back here in the next few days.\nWe are working hard to partner with more Retirement homes and native speakers.",
+    "alreadyRequested": "You have already requested a chat. Check the status of it on your profile.",
+    "returnToProfile": "View profile"
+  },
+  "LEARNER": {
+    "BOOKED": {
+      "title": "Chat booked for:",
+      "cancelCta": "Cancel chat",
+      "moreInfo": "Will take place online via the zoom link below:"
+    },
+    "REQUESTED": {
+      "title": "Chat Requested for:",
+      "cancelCta": "Cancel chat",
+      "moreInfo": "You will be notified via email as soon as your request has a response"
+    },
+    "REJECTED": {
+      "title": "Chat Unavailable:",
+      "moreInfo": "This chat is no longer available. Please request another one."
+    },
+    "modal": {
+      "title": "Are you sure?",
+      "disclaimer": "Request the chat only if you defininitely can attend.\nMitein is a charity and free service. Cancellations make our life tough.\nTherefore, we only allow one cancellation per user once a chat is booked.",
+      "cta": "Request chat"
+    }
+  },
+  "NATIVE": {
+    "BOOKED": {
+      "title": "Chat booked for:",
+      "cancelCta": "Cancel chat",
+      "moreInfo": "Chat will be held online via Zoom."
+    },
+    "REQUESTED": {
+      "title": "Chat Requested for:",
+      "confirmCta": "Confirm chat",
+      "cancelCta": "Cancel request"
+    },
+    "REJECTED": {
+      "title": "Chat Declined:",
+      "moreInfo": "You declined this chat. It is now no longer scheduled or available"
+    },
+    "modal": {
+      "title": "Are you sure?",
+      "disclaimer": "Click confirm only if you defininitely can attend.\nMitein is a charity and free service. Cancellations make our life tough.\nTherefore, we only allow one cancellation per user.",
+      "cta": "Confirm chat"
+    }
+  }
+}

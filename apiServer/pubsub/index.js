@@ -2,24 +2,24 @@ import { PubSub } from '@google-cloud/pubsub';
 import { log } from '@api/logger';
 import config from '@api/config';
 import usersMessageHandler from './handlers/users/usersMessageHandler';
-import sessionsMessageHandler from './handlers/sessions/sessionsMessageHandler';
+import chatsMessageHandler from './handlers/chats/chatMessageHandler';
 
 export const USER_CREATED_MESSAGE_TYPE = 'UserCreated';
 export const USER_PASSWORD_RESET_REQUEST_MESSAGE_TYPE =
   'UserPasswordResetRequest';
 export const USER_VERIFY_EMAIL_REQUEST_MESSAGE_TYPE = 'UserVerifyEmailRequest';
-export const SESSION_BOOKED_MESSAGE_TYPE = 'SessionBooked';
-export const SESSION_REQUESTED_MESSAGE_TYPE = 'SessionRequested';
+export const CHAT_BOOKED_MESSAGE_TYPE = 'ChatBooked';
+export const CHAT_REQUESTED_MESSAGE_TYPE = 'ChatRequested';
 
-const SESSIONS = 'sessions';
+const CHATS = 'chats';
 const USERS = 'users';
 const NOTIFICATIONS = 'notifications';
 
 const subscriptions = [
   {
-    topic: SESSIONS,
+    topic: CHATS,
     name: NOTIFICATIONS,
-    messageHandler: sessionsMessageHandler,
+    messageHandler: chatsMessageHandler,
   },
   {
     topic: USERS,
@@ -29,7 +29,7 @@ const subscriptions = [
 ];
 
 const topics = {
-  [SESSIONS]: { name: config.gcp.topics.sessions },
+  [CHATS]: { name: config.gcp.topics.chats },
   [USERS]: { name: config.gcp.topics.users },
 };
 

@@ -6,7 +6,7 @@ import { ToastContainer, toast, Slide } from 'react-toastify';
 
 import { client } from 'apollo/client';
 import { SessionContextProvider } from 'context/session';
-import ErrorBoundary from 'components/errorBoundary';
+import ErrorBoundary from 'components/blocks/errorBoundary';
 import '@fullcalendar/common/main.css';
 import '@fullcalendar/daygrid/main.css';
 import '@fullcalendar/timegrid/main.css';

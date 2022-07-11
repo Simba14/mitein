@@ -2,15 +2,14 @@ import React, { useEffect, useState } from 'react';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { string } from 'prop-types';
 import classnames from 'classnames/bind';
-import { useRouter } from 'next/router';
-import { useQuery, useMutation } from '@apollo/client';
+import { useMutation } from '@apollo/client';
 import { compose, get } from 'lodash/fp';
 import { useTranslation } from 'next-i18next';
 
-import Cta from 'components/cta';
-import Loading from 'components/loading';
-import Text, { HEADING_4 } from 'components/text';
-import { withLayout } from 'components/layout';
+import Cta from 'components/atoms/cta';
+import Loading from 'components/atoms/loading';
+import Text, { HEADING_4 } from 'components/atoms/text';
+import { withLayout } from 'components/blocks/layout';
 import VERIFY_EMAIL from '@graphql/mutations/verifyEmail.graphql';
 // import { sessionProps, withSessionContext } from 'context/session';
 import { ROUTE_PROFILE, ROUTE_LOGIN } from 'routes';
@@ -42,16 +41,10 @@ export const getServerSideProps = async ({ locale, params }) => {
 
 const VerifyEmail = ({ tokenValue }) => {
   const { t } = useTranslation('verifyEmail');
-  // const router = useRouter();
-  // const tokenValue = get('query.tokenValue', router);
   const [loading, setLoading] = useState(true);
   const [tokenValid, setTokenValid] = useState(false);
 
   const [confirmEmail] = useMutation(VERIFY_EMAIL);
-
-  // const {
-  //   user: { sessions, displayName, email, suspendedUntil, type },
-  // } = data;
 
   useEffect(() => {
     confirmEmail({

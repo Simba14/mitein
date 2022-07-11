@@ -6,7 +6,7 @@ export const getStaticProps = async ({ locale }) => ({
       'common',
       'profile',
       'calendar',
-      'session',
+      'chat',
       'menu',
     ])),
   },

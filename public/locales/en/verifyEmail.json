@@ -1,7 +1,7 @@
 {
   "emailVerified": "Your email address has been verified.",
   "featuresEnabled": "You will now be able to use all of Mitein's features",
-  "redirect": "Book a session now",
+  "redirect": "Book a chat now",
   "invalidToken": {
     "title": "Token Invalid",
     "description": "Your email address has not been verified.",

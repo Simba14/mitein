@@ -4,13 +4,13 @@ import { get, uniq, flatMap, intersection } from 'lodash';
 import { useTranslation } from 'next-i18next';
 import classnames from 'classnames/bind';
 
-import ContactUs from 'components/contactUs';
-import NewsletterBanner from 'components/newsletter';
-import OrganizationCard from 'components/organizationCard';
-import { withLayout } from 'components/layout';
+import ContactUs from 'components/blocks/contactUs';
+import NewsletterBanner from 'components/blocks/newsletter';
+import OrganizationCard from 'components/blocks/organizationCard';
+import { withLayout } from 'components/blocks/layout';
 
 import styles from './volunteer.module.scss';
-import Text, { BODY_3, HEADING_2, HEADING_5 } from 'components/text';
+import Text, { BODY_3, HEADING_2, HEADING_5 } from 'components/atoms/text';
 const cx = classnames.bind(styles);
 
 const Volunteer = ({ organizations }) => {

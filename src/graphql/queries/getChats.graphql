@@ -1,0 +1,23 @@
+query GetChats(
+  $participant1Id: ID
+  $participant2Id: ID
+  $status: EventStatus
+  $notOneOf: [EventStatus]
+  $upcoming: Boolean
+) {
+  chats(
+    participant1Id: $participant1Id
+    participant2Id: $participant2Id
+    status: $status
+    notOneOf: $notOneOf
+    upcoming: $upcoming
+  ) {
+    id
+    participant1Id
+    participant2Id
+    status
+    start
+    end
+    link
+  }
+}
