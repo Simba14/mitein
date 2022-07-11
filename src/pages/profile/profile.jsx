@@ -45,11 +45,10 @@ const Profile = ({ session }) => {
   });
 
   useEffect(() => {
-    if (!(userId || loading || data) || error) {
-      session.userLoggedOut();
-      router.push(ROUTE_LOGIN);
+    if (!(userId || data) || error) {
+      signOutSuccessful();
     }
-  }, [userId, loading]);
+  }, [userId]);
 
   if (loading) return <Loading />;
   if (error || !data) return null;
