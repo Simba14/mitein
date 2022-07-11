@@ -5,10 +5,10 @@ import { useTranslation } from 'next-i18next';
 import classnames from 'classnames/bind';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 
-import Form, { RESET_PASSWORD } from 'components/form';
-import Text, { HEADING_3 } from 'components/text';
+import Form, { RESET_PASSWORD } from 'components/blocks/form';
+import Text, { HEADING_3 } from 'components/atoms/text';
 import { ROUTE_LOGIN } from 'routes';
-import { withLayout } from 'components/layout';
+import { withLayout } from 'components/blocks/layout';
 import RESET_PASSWORD_MUTATION from '@graphql/mutations/resetPassword.graphql';
 
 import styles from './resetPassword.module.scss';

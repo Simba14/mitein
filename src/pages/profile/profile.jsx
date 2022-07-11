@@ -6,14 +6,14 @@ import { useQuery } from '@apollo/client';
 import { compose, get } from 'lodash/fp';
 import { useTranslation } from 'next-i18next';
 
-import Accordion from 'components/accordion';
-import Cta from 'components/cta';
-import LearnerCalendar from 'components/calendar/timeView/learner';
-import NativeCalendar from 'components/calendar/timeView/native';
-import Loading from 'components/loading';
-import ChatCard from 'components/chatCard';
-import Suspended from 'components/suspended';
-import { withLayout } from 'components/layout';
+import Accordion from 'components/atoms/accordion';
+import Cta from 'components/atoms/cta';
+import LearnerCalendar from 'components/blocks/calendar/timeView/learner';
+import NativeCalendar from 'components/blocks/calendar/timeView/native';
+import Loading from 'components/atoms/loading';
+import ChatCard from 'components/blocks/chatCard';
+import Suspended from 'components/blocks/suspended';
+import { withLayout } from 'components/blocks/layout';
 
 import { sessionProps, withSessionContext } from 'context/session';
 import GET_PROFILE from '@graphql/queries/getProfile.graphql';
@@ -22,7 +22,7 @@ import { ROUTE_LOGIN, ROUTE_CHATS_BOOK } from 'routes';
 import { LEARNER, NATIVE, BOOKED, REJECTED, REQUESTED } from '@constants/user';
 
 import styles from './profile.module.scss';
-import PersonalInfo from 'components/personalInfo';
+import PersonalInfo from 'components/blocks/personalInfo';
 
 const cx = classnames.bind(styles);
 

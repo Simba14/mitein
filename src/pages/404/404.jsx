@@ -2,9 +2,9 @@ import React from 'react';
 import classnames from 'classnames/bind';
 import { useTranslation } from 'next-i18next';
 
-import Anchor from 'components/anchor';
-import Text, { HEADING_1 } from 'components/text';
-import { withLayout } from 'components/layout';
+import Anchor from 'components/atoms/anchor';
+import Text, { HEADING_1 } from 'components/atoms/text';
+import { withLayout } from 'components/blocks/layout';
 import styles from './404.module.scss';
 
 const cx = classnames.bind(styles);

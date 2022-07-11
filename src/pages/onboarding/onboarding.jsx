@@ -4,11 +4,11 @@ import classnames from 'classnames/bind';
 import { useQuery } from '@apollo/client';
 import { get } from 'lodash/fp';
 
-import Cta from 'components/cta';
-import ContentSection from 'components/contentSection';
-import Layout from 'components/layout';
-import Loading from 'components/loading';
-import Text, { HEADING_1 } from 'components/text';
+import Cta from 'components/atoms/cta';
+import ContentSection from 'components/blocks/contentSection';
+import Layout from 'components/blocks/layout';
+import Loading from 'components/atoms/loading';
+import Text, { HEADING_1 } from 'components/atoms/text';
 import { ROUTE_PROFILE } from 'routes';
 import { sessionProps, withSessionContext } from 'context/session';
 import GET_USER_TYPE from '@graphql/queries/getUserType.graphql';

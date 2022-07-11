@@ -3,13 +3,13 @@ import { useTranslation } from 'next-i18next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import classnames from 'classnames/bind';
 
-import Cta from 'components/cta';
-import ContactUs from 'components/contactUs';
-import ContentSection from 'components/contentSection';
-import Footer from 'components/footer';
-import Hero from 'components/hero';
-import Layout from 'components/layout';
-import NewsletterBanner from 'components/newsletter';
+import Cta from 'components/atoms/cta';
+import ContactUs from 'components/blocks/contactUs';
+import ContentSection from 'components/blocks/contentSection';
+import Footer from 'components/blocks/footer';
+import Hero from 'components/blocks/hero';
+import Layout from 'components/blocks/layout';
+import NewsletterBanner from 'components/blocks/newsletter';
 import { ROUTE_VOLUNTEER } from 'routes';
 
 import styles from './index.module.scss';

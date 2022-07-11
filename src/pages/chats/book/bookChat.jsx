@@ -5,12 +5,12 @@ import { useQuery } from '@apollo/client';
 import { compose, get } from 'lodash/fp';
 import { useTranslation } from 'next-i18next';
 
-import Cta from 'components/cta';
-import Loading from 'components/loading';
-import Slots from 'components/slots';
-import Suspended from 'components/suspended';
-import Text, { HEADING_1 } from 'components/text';
-import { withLayout } from 'components/layout';
+import Cta from 'components/atoms/cta';
+import Loading from 'components/atoms/loading';
+import Slots from 'components/blocks/slots';
+import Suspended from 'components/blocks/suspended';
+import Text, { HEADING_1 } from 'components/atoms/text';
+import { withLayout } from 'components/blocks/layout';
 
 import { sessionProps, withSessionContext } from 'context/session';
 import GET_PROFILE from '@graphql/queries/getProfile.graphql';
