@@ -1,5 +1,5 @@
-const { scheduledAvailableSessionsNotification } = require('./functions/index');
+const { scheduledAvailableChatsNotification } = require('./functions/index');
 
 module.exports = {
-  scheduledAvailableSessionsNotification,
+  scheduledAvailableChatsNotification,
 };

@@ -1,16 +1,16 @@
 import { get } from 'lodash/fp';
 import { v4 as uuidv4 } from 'uuid';
 import Availability from '@api/firebase/availability';
-import Sessions from '@api/firebase/sessions';
+import Chat from '@api/firebase/chat';
 import User from '@api/firebase/user';
 import {
   EVENT_DURATION,
-  SESSION_STATUS_BOOKED,
-  SESSION_STATUS_REQUESTED,
+  CHAT_STATUS_BOOKED,
+  CHAT_STATUS_REQUESTED,
 } from '@api/firebase/constants';
-import SessionCancellationMessageHandler from '@api/pubsub/handlers/sessions/sessionCancellationMessageHandler';
+import chatCancellationMessageHandler from '@api/pubsub/handlers/Chats/chatCancellationMessageHandler';
 
-const createSessions = async ({
+const createChats = async ({
   availabilityId,
   start,
   end,
@@ -20,14 +20,14 @@ const createSessions = async ({
 }) => {
   const startDate = new Date(start);
   const endDate = new Date(end);
-  const numberOfSessions = (endDate - startDate) / EVENT_DURATION;
-  const sessions = [];
+  const numberOfChats = (endDate - startDate) / EVENT_DURATION;
+  const chats = [];
 
-  for (let i = 0; i < numberOfSessions; i++) {
+  for (let i = 0; i < numberOfChats; i++) {
     const id = uuidv4();
-    const session = await Sessions.create({
+    const chat = await Chat.create({
       id,
-      session: {
+      chat: {
         id,
         availabilityId,
         participant1Id,
@@ -41,14 +41,14 @@ const createSessions = async ({
       },
     });
 
-    sessions.push(session);
+    chats.push(chat);
   }
 
-  return sessions;
+  return chats;
 };
 
-const SessionsMutation = {
-  createSessionsFromAvailability: async (
+const ChatsMutation = {
+  createChatsFromAvailability: async (
     parent,
     { participant1Id, participant2Id, status, start, end, userType },
   ) => {
@@ -64,7 +64,7 @@ const SessionsMutation = {
       },
     });
 
-    await createSessions({
+    await createChats({
       availabilityId: availability.id,
       participant1Id,
       participant2Id,
@@ -75,12 +75,12 @@ const SessionsMutation = {
 
     return availability;
   },
-  deleteSessions: async (parent, { ids }) => {
+  deleteChats: async (parent, { ids }) => {
     const deleteActions = ids.map(
       id =>
         new Promise(async (res, rej) => {
           try {
-            await Sessions.deleteByAvailabilityId(id);
+            await Chat.deleteByAvailabilityId(id);
             await Availability.deleteById(id);
             res();
           } catch (error) {
@@ -91,7 +91,7 @@ const SessionsMutation = {
 
     return Promise.all(deleteActions).then(() => true);
   },
-  updateSession: async (parent, { id, ...fields }) => {
+  updateChat: async (parent, { id, ...fields }) => {
     const {
       cancellationReason,
       cancelledBy,
@@ -101,31 +101,31 @@ const SessionsMutation = {
     } = fields;
 
     if (id) {
-      if (status === SESSION_STATUS_BOOKED) {
-        const bookedSession = await Sessions.book({
+      if (status === CHAT_STATUS_BOOKED) {
+        const bookedchat = await Chat.book({
           id,
           fields,
         });
 
-        return bookedSession;
+        return bookedchat;
       }
 
-      if (status === SESSION_STATUS_REQUESTED) {
-        const existingSession = await Sessions.byId(id);
-        const existingParticipant2 = get('participant2Id', existingSession);
+      if (status === CHAT_STATUS_REQUESTED) {
+        const existingchat = await Chat.byId(id);
+        const existingParticipant2 = get('participant2Id', existingchat);
 
         if (existingParticipant2 && existingParticipant2 !== participant2Id)
-          throw new Error('Session no longer available. Please try again.');
+          throw new Error('chat no longer available. Please try again.');
 
-        const requestedSession = await Sessions.request({
+        const requestedchat = await Chat.request({
           id,
           fields,
         });
 
-        return requestedSession;
+        return requestedchat;
       }
 
-      const session = await Sessions.updateById({
+      const chat = await Chat.updateById({
         id,
         fields: {
           ...fields,
@@ -137,25 +137,25 @@ const SessionsMutation = {
           cancelledBy !== participant1Id ? participant1Id : participant2Id;
         const cancelledOnUser = await User.byId(cancelledOnUserId);
 
-        SessionCancellationMessageHandler({
+        chatCancellationMessageHandler({
           message: {
             participant: cancelledOnUser,
-            session,
+            chat,
           },
         });
 
         await User.updateCancellations({
-          sessionId: id,
+          chatId: id,
           userId: cancelledBy,
         });
       }
 
-      return session;
+      return chat;
     } else {
       const newId = uuidv4();
-      return Sessions.create({
+      return Chat.create({
         id: newId,
-        session: {
+        chat: {
           id: newId,
           ...fields,
         },
@@ -164,4 +164,4 @@ const SessionsMutation = {
   },
 };
 
-export default SessionsMutation;
+export default ChatsMutation;

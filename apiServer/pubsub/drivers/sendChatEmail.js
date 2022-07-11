@@ -1,6 +1,6 @@
 import emailSender from '@api/pubsub/drivers/emailSender';
 
-const sendSessionEmail = ({ emails, params, templateId }) => {
+const sendChatEmail = ({ emails, params, templateId }) => {
   return emailSender({
     to: emails,
     templateId,
@@ -8,4 +8,4 @@ const sendSessionEmail = ({ emails, params, templateId }) => {
   });
 };
 
-export default sendSessionEmail;
+export default sendChatEmail;

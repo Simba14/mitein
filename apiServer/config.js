@@ -66,7 +66,7 @@ export default {
       config.GCP_RESTART_SUBSCRIPTION_INTERVAL_IN_MINUTES || 15,
     topics: {
       users: config.GCP_PUBSUB_TOPIC_USERS,
-      sessions: config.GCP_PUBSUB_TOPIC_SESSIONS,
+      chats: config.GCP_PUBSUB_TOPIC_CHATS,
     },
   },
   sendinblue: {
@@ -75,13 +75,13 @@ export default {
     listId: Number(config.SENDINBLUE_LIST_ID),
     template: {
       de: {
-        sessionCancellation: Number(
-          config.SENDINBLUE_TEMPLATE_SESSION_CANCELLATION_DE,
+        chatCancellation: Number(
+          config.SENDINBLUE_TEMPLATE_CHAT_CANCELLATION_DE,
         ),
-        sessionConfirmation: Number(
-          config.SENDINBLUE_TEMPLATE_SESSION_CONFIRMATION_DE,
+        chatConfirmation: Number(
+          config.SENDINBLUE_TEMPLATE_CHAT_CONFIRMATION_DE,
         ),
-        sessionRequest: Number(config.SENDINBLUE_TEMPLATE_SESSION_REQUEST_DE),
+        chatRequest: Number(config.SENDINBLUE_TEMPLATE_CHAT_REQUEST_DE),
         userVerification: Number(
           config.SENDINBLUE_TEMPLATE_USER_VERIFICATION_DE,
         ),
@@ -90,19 +90,17 @@ export default {
         ),
       },
       en: {
-        sessionAvailable: Number(
-          config.SENDINBLUE_TEMPLATE_SESSION_AVAILABLE_EN,
+        chatAvailable: Number(config.SENDINBLUE_TEMPLATE_CHAT_AVAILABLE_EN),
+        chatCancellation: Number(
+          config.SENDINBLUE_TEMPLATE_CHAT_CANCELLATION_EN,
         ),
-        sessionCancellation: Number(
-          config.SENDINBLUE_TEMPLATE_SESSION_CANCELLATION_EN,
-        ),
-        sessionConfirmation: Number(
-          config.SENDINBLUE_TEMPLATE_SESSION_CONFIRMATION_EN,
+        chatConfirmation: Number(
+          config.SENDINBLUE_TEMPLATE_CHAT_CONFIRMATION_EN,
         ),
         resetPassword: Number(
           config.SENDINBLUE_TEMPLATE_RESET_PASSWORD_REQUEST_EN,
         ),
-        sessionRequest: Number(config.SENDINBLUE_TEMPLATE_SESSION_REQUEST_EN),
+        chatRequest: Number(config.SENDINBLUE_TEMPLATE_CHAT_REQUEST_EN),
         userVerification: Number(
           config.SENDINBLUE_TEMPLATE_USER_VERIFICATION_EN,
         ),

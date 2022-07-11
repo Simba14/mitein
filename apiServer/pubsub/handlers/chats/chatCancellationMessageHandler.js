@@ -1,17 +1,17 @@
 import config from '@api/config';
-import sendSessionCancellationEmail from '@api/pubsub/drivers/sendSessionEmail';
+import sendChatCancellationEmail from '@api/pubsub/drivers/sendChatEmail';
 import { GERMAN } from '@api/firebase/constants/';
 
-import { formatSessionDate, formatSessionTime } from 'helpers/index';
+import { formatChatDate, formatChatTime } from 'helpers/index';
 import { ROUTE_PROFILE } from 'routes';
 
-const SessionCancellationMessageHandler = ({
-  sendCancellationEmail = sendSessionCancellationEmail,
+const ChatCancellationMessageHandler = ({
+  sendCancellationEmail = sendChatCancellationEmail,
   message,
 }) => {
   const {
     participant: { displayLanguage, email },
-    session: { start, end },
+    chat: { start, end },
   } = message;
 
   const {
@@ -23,11 +23,11 @@ const SessionCancellationMessageHandler = ({
   const localePath = langIsGerman ? `/${GERMAN}` : '';
   const link = `${uiHost}${localePath}${ROUTE_PROFILE}`;
   const templateId = langIsGerman
-    ? template.de.sessionCancellation
-    : template.en.sessionCancellation;
+    ? template.de.chatCancellation
+    : template.en.chatCancellation;
 
-  const date = formatSessionDate(start, displayLanguage);
-  const time = formatSessionTime({ start, end, language: displayLanguage });
+  const date = formatChatDate(start, displayLanguage);
+  const time = formatChatTime({ start, end, language: displayLanguage });
 
   return sendCancellationEmail({
     emails: [{ email }],
@@ -40,4 +40,4 @@ const SessionCancellationMessageHandler = ({
   });
 };
 
-export default SessionCancellationMessageHandler;
+export default ChatCancellationMessageHandler;

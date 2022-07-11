@@ -1,5 +1,5 @@
 {
-  "sessionLink": "Hier klicken, um den Zoom-Chat zu öffnen",
+  "chatLink": "Hier klicken, um den Zoom-Chat zu öffnen",
   "slots": {
     "title": "Eine Sitzung anfragen",
     "cta": "Sitzung anfragen",

@@ -7,7 +7,7 @@ export const client = new ApolloClient({
     typePolicies: {
       Query: {
         fields: {
-          sessions: {
+          chats: {
             merge(existing, incoming) {
               return incoming;
             },

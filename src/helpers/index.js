@@ -13,13 +13,13 @@ const DATE_OPTIONS = {
   day: 'numeric',
 };
 
-export const formatSessionDate = (date, locale) =>
+export const formatChatDate = (date, locale) =>
   new Date(date).toLocaleDateString(
     locale === GERMAN ? DE_LOCALE : EN_LOCALE,
     DATE_OPTIONS,
   );
 
-export const formatSessionTime = ({ start, end, language }) => {
+export const formatChatTime = ({ start, end, language }) => {
   const dateStart = new Date(start);
   const dateEnd = new Date(end);
   const locale = language === GERMAN ? DE_LOCALE : EN_LOCALE;

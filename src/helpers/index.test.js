@@ -1,8 +1,4 @@
-import {
-  formatSessionDate,
-  formatSessionTime,
-  isSpecifiedBreakpoint,
-} from './index';
+import { formatChatDate, formatChatTime, isSpecifiedBreakpoint } from './index';
 import breakpoints, { MOBILE } from '@constants/breakpoints';
 import { ENGLISH, GERMAN } from '@constants/defaultOptions';
 import {
@@ -43,20 +39,20 @@ describe('isSpecifiedBreakpoint', () => {
   });
 });
 
-describe('formatSessionDate', () => {
+describe('formatChatDate', () => {
   test('returns correct date when German locale provided', () => {
-    expect(formatSessionDate(MOCK_START_UTC, GERMAN)).toBe(MOCK_START_DE);
+    expect(formatChatDate(MOCK_START_UTC, GERMAN)).toBe(MOCK_START_DE);
   });
 
   test('returns correct date when English locale provided', () => {
-    expect(formatSessionDate(MOCK_START_UTC, ENGLISH)).toBe(MOCK_START_EN);
+    expect(formatChatDate(MOCK_START_UTC, ENGLISH)).toBe(MOCK_START_EN);
   });
 });
 
-describe('formatSessionTime', () => {
+describe('formatChatTime', () => {
   test('returns correctly formatted time when English language', () => {
     expect(
-      formatSessionTime({
+      formatChatTime({
         start: MOCK_START_UTC,
         end: MOCK_END_UTC,
         language: ENGLISH,
@@ -66,7 +62,7 @@ describe('formatSessionTime', () => {
 
   test('returns correctly formatted time when German language', () => {
     expect(
-      formatSessionTime({
+      formatChatTime({
         start: MOCK_START_UTC,
         end: MOCK_END_UTC,
         language: GERMAN,

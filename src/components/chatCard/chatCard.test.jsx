@@ -1,7 +1,7 @@
 import React from 'react';
 import { render, screen, userEvent } from 'testUtils';
-import SessionCard from './sessionCard';
-// import GET_AVAILABILITY from '@graphql/queries/getSessions.graphql';
+import ChatCard from './chatCard';
+// import GET_AVAILABILITY from '@graphql/queries/getChats.graphql';
 // import GET_PROFILE from '@graphql/queries/getProfile.graphql';
 import {
   MOCK_ID,
@@ -19,20 +19,20 @@ import {
   LEARNER,
   NATIVE,
 } from '@constants/user';
-import UPDATE_SESSION from '@graphql/mutations/updateSession.graphql';
+import UPDATE_CHAT from '@graphql/mutations/updateChat.graphql';
 
-const mockSession = {
+const mockChat = {
   id: MOCK_ID,
   start: MOCK_START_UTC,
   end: MOCK_END_UTC,
   link: MOCK_URL,
 };
 
-const CANCEL_SESSION = {
+const CANCEL_CHAT = {
   request: {
-    query: UPDATE_SESSION,
+    query: UPDATE_CHAT,
     variables: {
-      ...mockSession,
+      ...mockChat,
       status: CANCELLED,
       cancellationReason: LEARNER,
       cancelledBy: MOCK_ID,
@@ -40,16 +40,16 @@ const CANCEL_SESSION = {
   },
   result: {
     data: {
-      session: mockSession,
+      chat: mockChat,
     },
   },
 };
 
 describe('User is a LEARNER', () => {
-  test('SessionCard renders correctly when status is BOOKED', () => {
+  test('ChatCard renders correctly when status is BOOKED', () => {
     const { container } = render(
-      <SessionCard
-        session={mockSession}
+      <ChatCard
+        chat={mockChat}
         status={BOOKED}
         userType={LEARNER}
         userId={MOCK_ID}
@@ -64,13 +64,13 @@ describe('User is a LEARNER', () => {
     expect(container).toHaveTextContent(MOCK_TIME_EN);
     expect(container).toHaveTextContent(`${textKey}.moreInfo`);
     expect(cancelBtn).toHaveTextContent(`${textKey}.cancelCta`);
-    expect(link).toHaveAttribute('href', mockSession.link);
+    expect(link).toHaveAttribute('href', mockChat.link);
   });
 
-  test('SessionCard renders correctly when status is REQUESTED', () => {
+  test('ChatCard renders correctly when status is REQUESTED', () => {
     const { container } = render(
-      <SessionCard
-        session={mockSession}
+      <ChatCard
+        chat={mockChat}
         status={REQUESTED}
         userType={LEARNER}
         userId={MOCK_ID}
@@ -88,10 +88,10 @@ describe('User is a LEARNER', () => {
     expect(link).not.toBeInTheDocument();
   });
 
-  test('SessionCard renders correctly when status is REJECTED', () => {
+  test('ChatCard renders correctly when status is REJECTED', () => {
     const { container } = render(
-      <SessionCard
-        session={mockSession}
+      <ChatCard
+        chat={mockChat}
         status={REJECTED}
         userType={LEARNER}
         userId={MOCK_ID}
@@ -110,16 +110,16 @@ describe('User is a LEARNER', () => {
     expect(link).not.toBeInTheDocument();
   });
 
-  test('can successfully cancel a session', () => {
-    const { container } = render(
-      <SessionCard
-        session={mockSession}
+  test('can successfully cancel a chat', () => {
+    render(
+      <ChatCard
+        chat={mockChat}
         status={REQUESTED}
         userType={LEARNER}
         userId={MOCK_ID}
       />,
       {
-        mocks: [CANCEL_SESSION],
+        mocks: [CANCEL_CHAT],
       },
     );
 
@@ -131,16 +131,16 @@ describe('User is a LEARNER', () => {
 });
 
 describe('User is a NATIVE', () => {
-  test('SessionCard renders correctly when status is REQUESTED', () => {
+  test('ChatCard renders correctly when status is REQUESTED', () => {
     const { container } = render(
-      <SessionCard
-        session={mockSession}
+      <ChatCard
+        chat={mockChat}
         status={REQUESTED}
         userType={NATIVE}
         userId={MOCK_ID}
       />,
       {
-        mocks: [CANCEL_SESSION],
+        mocks: [CANCEL_CHAT],
       },
     );
 

@@ -9,10 +9,10 @@ import Anchor from 'components/anchor';
 import Cta from 'components/cta';
 import ConfirmPopUp from 'components/confirmPopUp';
 import Text, { BODY_3, BODY_6 } from 'components/text';
-import UPDATE_SESSION from '@graphql/mutations/updateSession.graphql';
-import GET_AVAILABILITY from '@graphql/queries/getSessions.graphql';
+import UPDATE_CHAT from '@graphql/mutations/updateChat.graphql';
+import GET_AVAILABILITY from '@graphql/queries/getChats.graphql';
 import GET_PROFILE from '@graphql/queries/getProfile.graphql';
-import { formatSessionDate, formatSessionTime } from 'helpers/index';
+import { formatChatDate, formatChatTime } from 'helpers/index';
 import {
   AVAILABLE,
   BOOKED,
@@ -23,21 +23,21 @@ import {
   NATIVE,
 } from '@constants/user';
 
-import styles from './sessionCard.module.scss';
+import styles from './chatCard.module.scss';
 
 const cx = classnames.bind(styles);
 
-const SessionCard = ({ session, status, userType, userId }) => {
+const ChatCard = ({ chat, status, userType, userId }) => {
   const {
     i18n: { language },
     t,
-  } = useTranslation('session');
+  } = useTranslation('chat');
   const [modalOpen, setModalOpen] = useState(false);
   const isLearner = userType === LEARNER;
   const isBooked = status === BOOKED;
   const isRejected = status === REJECTED;
   const isRequested = status === REQUESTED;
-  const { id, ...sessionFields } = session;
+  const { id, ...chatFields } = chat;
 
   const refetchQueries = [
     ...(isLearner
@@ -54,7 +54,7 @@ const SessionCard = ({ session, status, userType, userId }) => {
     },
   ];
 
-  const [amendSession, mutationStatus] = useMutation(UPDATE_SESSION, {
+  const [amendChat, mutationStatus] = useMutation(UPDATE_CHAT, {
     onError: error => {
       setModalOpen(false);
       toast.error(error?.message);
@@ -63,10 +63,10 @@ const SessionCard = ({ session, status, userType, userId }) => {
   });
 
   const handleConfirmClick = () => {
-    amendSession({
+    amendChat({
       variables: {
         id,
-        ...sessionFields,
+        ...chatFields,
         status: BOOKED,
       },
       refetchQueries,
@@ -75,10 +75,10 @@ const SessionCard = ({ session, status, userType, userId }) => {
 
   const handleCancelClick = () => {
     if (isBooked) {
-      amendSession({
+      amendChat({
         variables: {
           id,
-          ...sessionFields,
+          ...chatFields,
           status: CANCELLED,
           cancellationReason: userType,
           cancelledBy: userId,
@@ -86,10 +86,10 @@ const SessionCard = ({ session, status, userType, userId }) => {
         refetchQueries,
       });
     } else {
-      amendSession({
+      amendChat({
         variables: {
           id,
-          ...sessionFields,
+          ...chatFields,
           ...(isLearner
             ? {
                 status: AVAILABLE,
@@ -103,17 +103,17 @@ const SessionCard = ({ session, status, userType, userId }) => {
   };
 
   return (
-    <div className={cx('session', { unavailable: isRejected })}>
+    <div className={cx('chat', { unavailable: isRejected })}>
       <Text className={cx('title')} type={BODY_3}>
         {t(`${userType}.${status}.title`)}
       </Text>
       <Text className={cx('date')} type={BODY_6}>
-        {formatSessionDate(session.start, language)}
+        {formatChatDate(chat.start, language)}
       </Text>
       <Text className={cx('time')} type={BODY_6}>
-        {formatSessionTime({
-          start: session.start,
-          end: session.end,
+        {formatChatTime({
+          start: chat.start,
+          end: chat.end,
           language,
         })}
       </Text>
@@ -133,13 +133,13 @@ const SessionCard = ({ session, status, userType, userId }) => {
       )}
       {isBooked && (
         <Anchor
-          href={session.link}
+          href={chat.link}
           className={cx('link')}
           target="_blank"
           rel="noreferrer"
           underlined
         >
-          {t('sessionLink')}
+          {t('chatLink')}
         </Anchor>
       )}
       {!isRejected && (
@@ -161,13 +161,13 @@ const SessionCard = ({ session, status, userType, userId }) => {
   );
 };
 
-SessionCard.defaultProps = {
+ChatCard.defaultProps = {
   hideCta: false,
   userId: null,
 };
 
-SessionCard.propTypes = {
-  session: shape({
+ChatCard.propTypes = {
+  chat: shape({
     id: string.isRequired,
     link: string,
     start: string,
@@ -178,4 +178,4 @@ SessionCard.propTypes = {
   userId: string,
 };
 
-export default SessionCard;
+export default ChatCard;

@@ -11,14 +11,14 @@ import Cta from 'components/cta';
 import LearnerCalendar from 'components/calendar/timeView/learner';
 import NativeCalendar from 'components/calendar/timeView/native';
 import Loading from 'components/loading';
-import SessionCard from 'components/sessionCard';
+import ChatCard from 'components/chatCard';
 import Suspended from 'components/suspended';
 import { withLayout } from 'components/layout';
 
 import { sessionProps, withSessionContext } from 'context/session';
 import GET_PROFILE from '@graphql/queries/getProfile.graphql';
 import SIGN_OUT from '@graphql/mutations/signOut.graphql';
-import { ROUTE_LOGIN, ROUTE_SESSIONS_BOOK } from 'routes';
+import { ROUTE_LOGIN, ROUTE_CHATS_BOOK } from 'routes';
 import { LEARNER, NATIVE, BOOKED, REJECTED, REQUESTED } from '@constants/user';
 
 import styles from './profile.module.scss';
@@ -85,13 +85,13 @@ const Profile = ({ session }) => {
       {booked && (
         <Accordion
           className={cx('accordion')}
-          contentClassName={cx('sessionsContainer')}
-          ariaId="booked sessions accordion"
+          contentClassName={cx('chatsContainer')}
+          ariaId="booked chats accordion"
           headerText={t('accordionHeader.upcoming')}
-          content={booked.map(session => (
-            <SessionCard
-              key={session.id}
-              session={session}
+          content={booked.map(chat => (
+            <ChatCard
+              key={chat.id}
+              chat={chat}
               status={BOOKED}
               userType={type}
               userId={userId}
@@ -103,13 +103,13 @@ const Profile = ({ session }) => {
       {requestedAccordionData && (
         <Accordion
           className={cx('accordion')}
-          contentClassName={cx('sessionsContainer')}
-          ariaId="requested sessions accordion"
+          contentClassName={cx('chatsContainer')}
+          ariaId="requested chats accordion"
           headerText={t('accordionHeader.requested')}
-          content={requestedAccordionData.map(session => (
-            <SessionCard
-              key={session.id}
-              session={session}
+          content={requestedAccordionData.map(chat => (
+            <ChatCard
+              key={chat.id}
+              chat={chat}
               status={requested ? REQUESTED : REJECTED}
               userType={type}
               userId={userId}
@@ -120,7 +120,7 @@ const Profile = ({ session }) => {
       )}
       {isLearner && !requested && Boolean(!suspendedUntil) && (
         <Cta
-          to={ROUTE_SESSIONS_BOOK}
+          to={ROUTE_CHATS_BOOK}
           className={cx('requestCta')}
           text={'Request a Session'}
         />

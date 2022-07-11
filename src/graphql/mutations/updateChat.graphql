@@ -1,4 +1,4 @@
-mutation UpdateSession(
+mutation UpdateChat(
   $id: ID
   $participant1Id: ID
   $participant2Id: ID
@@ -8,7 +8,7 @@ mutation UpdateSession(
   $cancelledBy: ID
   $cancellationReason: UserType
 ) {
-  updateSession(
+  updateChat(
     id: $id
     participant1Id: $participant1Id
     participant2Id: $participant2Id

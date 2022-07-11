@@ -28,7 +28,7 @@ const typeDefs = gql`
     userId: ID!
   }
 
-  type Session {
+  type Chat {
     id: ID!
     availabilityId: ID
     start: String!
@@ -42,16 +42,16 @@ const typeDefs = gql`
   }
 
   type Chats {
-    available: [Session]
-    booked: [Session]
-    cancelled: [Session]
-    rejected: [Session]
-    requested: [Session]
+    available: [Chat]
+    booked: [Chat]
+    cancelled: [Chat]
+    rejected: [Chat]
+    requested: [Chat]
   }
 
   type Cancellation {
     id: ID!
-    sessionId: ID!
+    chatId: ID!
     date: String!
   }
 
@@ -95,15 +95,15 @@ const typeDefs = gql`
 
   type Query {
     availability(userId: ID!): [Availability]
-    availableSlots: [Session]
+    availableSlots: [Chat]
     user(id: ID!): User
-    sessions(
+    chats(
       participant1Id: ID
       participant2Id: ID
       notOneOf: [EventStatus]
       status: EventStatus
       upcoming: Boolean
-    ): [Session]
+    ): [Chat]
     volunteerWith(city: String!): [Organization]
   }
 
@@ -115,7 +115,7 @@ const typeDefs = gql`
       userType: UserType!
     ): Availability
     deleteAvailability(ids: [ID!]!): Boolean
-    createSessionsFromAvailability(
+    createChatsFromAvailability(
       participant1Id: ID
       participant2Id: ID
       status: EventStatus!
@@ -123,8 +123,8 @@ const typeDefs = gql`
       end: String
       userType: UserType!
     ): Availability
-    deleteSessions(ids: [ID!]!): Boolean
-    updateSession(
+    deleteChats(ids: [ID!]!): Boolean
+    updateChat(
       id: ID
       participant1Id: ID
       participant2Id: ID
@@ -133,7 +133,7 @@ const typeDefs = gql`
       end: String
       cancelledBy: ID
       cancellationReason: UserType
-    ): Session
+    ): Chat
     newsletterSignUp(email: String!): String
     resetPassword(password: String!, token: String!): Boolean!
     resetPasswordRequest(email: String!): Boolean!

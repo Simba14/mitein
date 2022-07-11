@@ -17,11 +17,11 @@ import GET_PROFILE from '@graphql/queries/getProfile.graphql';
 import { ROUTE_LOGIN, ROUTE_PROFILE } from 'routes';
 import { LEARNER } from '@constants/user';
 
-import styles from './bookSession.module.scss';
+import styles from './bookChat.module.scss';
 const cx = classnames.bind(styles);
 
-const BookSession = ({ session }) => {
-  const { t } = useTranslation('session');
+const BookChat = ({ session }) => {
+  const { t } = useTranslation('chat');
   const router = useRouter();
   const userId = get('userId', session);
   const { data, loading, error, refetch } = useQuery(GET_PROFILE, {
@@ -99,9 +99,9 @@ const BookSession = ({ session }) => {
   );
 };
 
-BookSession.propTypes = {
+BookChat.propTypes = {
   session: sessionProps,
 };
 
-export { BookSession };
-export default compose(withLayout, withSessionContext)(BookSession);
+export { BookChat };
+export default compose(withLayout, withSessionContext)(BookChat);

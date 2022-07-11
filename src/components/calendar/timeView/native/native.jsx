@@ -8,8 +8,8 @@ import { get } from 'lodash/fp';
 import Calendar, { DELETE_SELECTED } from 'components/calendar/timeView/shared';
 import Loading from 'components/loading';
 import GET_AVAILABILITY from '@graphql/queries/getAvailability.graphql';
-import CREATE_SESSIONS from '@graphql/mutations/createSession.graphql';
-import DELETE_SESSIONS from '@graphql/mutations/deleteSessions.graphql';
+import CREATE_CHATS from '@graphql/mutations/createChat.graphql';
+import DELETE_CHATS from '@graphql/mutations/deleteChats.graphql';
 import { AVAILABLE } from '@constants/user';
 import useWindowDimensions from 'hooks/useWindowDimensions';
 import { isSpecifiedBreakpoint } from 'helpers/index';
@@ -24,8 +24,8 @@ const NativeCalendar = ({ userId, userType }) => {
   const { t } = useTranslation('calendar');
 
   const [selectedEvents, setSelectedEvents] = useState([]);
-  const [deleteAvailabilities] = useMutation(DELETE_SESSIONS);
-  const [updateAvailability] = useMutation(CREATE_SESSIONS);
+  const [deleteAvailabilities] = useMutation(DELETE_CHATS);
+  const [updateAvailability] = useMutation(CREATE_CHATS);
   const { data, loading, error } = useQuery(GET_AVAILABILITY, {
     variables: { userId },
   });

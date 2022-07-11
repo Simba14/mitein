@@ -1,17 +1,17 @@
 import config from '@api/config';
-import sendSessionRequestedEmail from '@api/pubsub/drivers/sendSessionEmail';
+import sendChatRequestedEmail from '@api/pubsub/drivers/sendChatEmail';
 import { GERMAN } from '@api/firebase/constants/';
 
-import { formatSessionDate, formatSessionTime } from 'helpers/index';
+import { formatChatDate, formatChatTime } from 'helpers/index';
 import { ROUTE_PROFILE } from 'routes';
 
-const SessionRequestedMessageHandler = ({
-  sendRequestedEmail = sendSessionRequestedEmail,
+const ChatRequestedMessageHandler = ({
+  sendRequestedEmail = sendChatRequestedEmail,
   message,
 }) => {
   const {
     participant: { displayLanguage, email },
-    session: { start, end },
+    chat: { start, end },
   } = message;
 
   const {
@@ -24,11 +24,11 @@ const SessionRequestedMessageHandler = ({
   const link = `${uiHost}${localePath}${ROUTE_PROFILE}`;
 
   const templateId = langIsGerman
-    ? template.de.sessionRequest
-    : template.en.sessionRequest;
+    ? template.de.chatRequest
+    : template.en.chatRequest;
 
-  const date = formatSessionDate(start, displayLanguage);
-  const time = formatSessionTime({ start, end, language: displayLanguage });
+  const date = formatChatDate(start, displayLanguage);
+  const time = formatChatTime({ start, end, language: displayLanguage });
 
   return sendRequestedEmail({
     emails: [{ email }],
@@ -41,4 +41,4 @@ const SessionRequestedMessageHandler = ({
   });
 };
 
-export default SessionRequestedMessageHandler;
+export default ChatRequestedMessageHandler;

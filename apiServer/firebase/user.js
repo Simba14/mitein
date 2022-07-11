@@ -2,7 +2,7 @@ import firebase from 'firebase/app';
 import { v4 as uuidv4 } from 'uuid';
 import { isEmpty } from 'lodash/fp';
 import { Firestore } from '@api/firebase';
-import Sessions from '@api/firebase/sessions';
+import Chats from '@api/firebase/chat';
 import { getDocData, getQuerySnapshotData } from '@api/firebase/helpers';
 import {
   COLLECTION_USERS,
@@ -11,9 +11,9 @@ import {
   FIELD_PARTICIPANT_TWO,
   MAX_NUMBER_OF_CANCELLATIONS,
   SUSPENSION_DURATION,
-  SESSION_STATUS_BOOKED,
-  SESSION_STATUS_REQUESTED,
-  SESSION_STATUS_REJECTED,
+  CHAT_STATUS_BOOKED,
+  CHAT_STATUS_REQUESTED,
+  CHAT_STATUS_REJECTED,
 } from '@api/firebase/constants';
 import {
   FirebaseCreateDocError,
@@ -47,7 +47,7 @@ User.byIdWithAvailability = async id => {
       ? FIELD_PARTICIPANT_TWO
       : FIELD_PARTICIPANT_ONE;
 
-  const allSessions = await Sessions.byParticipantId({
+  const allChats = await Chats.byParticipantId({
     field: participantField,
     id,
   });
@@ -55,16 +55,16 @@ User.byIdWithAvailability = async id => {
   const dateConstraint = new Date();
   dateConstraint.setTime(dateConstraint.getTime() - 60 * 60 * 1000); // set 1 hour into past
 
-  const [booked, requested, rejected] = allSessions?.reduce(
+  const [booked, requested, rejected] = allChats?.reduce(
     ([bookings, requests, rejections], chat) => {
       // only include upcoming chats
       if (chat.start < dateConstraint.toISOString())
         return [bookings, requests, rejections];
-      if (chat.status === SESSION_STATUS_BOOKED)
+      if (chat.status === CHAT_STATUS_BOOKED)
         return [[...bookings, chat], requests, rejections];
-      if (chat.status === SESSION_STATUS_REQUESTED)
+      if (chat.status === CHAT_STATUS_REQUESTED)
         return [bookings, [...requests, chat], rejections];
-      if (chat.status === SESSION_STATUS_REJECTED)
+      if (chat.status === CHAT_STATUS_REJECTED)
         return [bookings, requests, [...rejections, chat]];
 
       return [bookings, requests, rejections];
@@ -95,7 +95,7 @@ User.updateById = ({ id, fields }) =>
     .update(fields)
     .then(() => ({ id, ...fields }));
 
-User.updateCancellations = async ({ sessionId, userId }) => {
+User.updateCancellations = async ({ chatId, userId }) => {
   const { cancellations } = await User.byId(userId);
   const dateConstraint = new Date(Date.now() - SUSPENSION_DURATION);
 
@@ -111,7 +111,7 @@ User.updateCancellations = async ({ sessionId, userId }) => {
 
   const newCancellation = {
     id: uuidv4(),
-    sessionId,
+    chatId,
     date: new Date().toISOString(),
   };
 

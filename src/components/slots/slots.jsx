@@ -10,9 +10,9 @@ import ConfirmPopUp from 'components/confirmPopUp';
 import DayViewCalendar from 'components/calendar/dayView';
 import Notice, { ALERT } from 'components/notice';
 import Text, { HEADING_4 } from 'components/text';
-import REQUEST_SESSION from '@graphql/mutations/updateSession.graphql';
+import REQUEST_CHAT from '@graphql/mutations/updateChat.graphql';
 import GET_SLOTS from '@graphql/queries/getAvailableSlots.graphql';
-import { formatSessionDate, formatSessionTime } from 'helpers/index';
+import { formatChatDate, formatChatTime } from 'helpers/index';
 import { LEARNER, REQUESTED } from '@constants/user';
 
 import styles from './slots.module.scss';
@@ -26,41 +26,41 @@ const Slots = ({ userId, onSelect }) => {
   const {
     i18n: { language },
     t,
-  } = useTranslation('session', { keyPrefix: 'slots' });
+  } = useTranslation('chat', { keyPrefix: 'slots' });
 
   const [modalOpen, setModalOpen] = useState(false);
   const [selectedDate, setSelectedDate] = useState(null);
-  const [selectedSession, selectSession] = useState(null);
-  const [sessionRequested, setSessionRequested] = useState(false);
-  const [requestSessionError, setRequestSessionError] = useState(null);
+  const [selectedChat, selectChat] = useState(null);
+  const [chatRequested, setChatRequested] = useState(false);
+  const [requestChatError, setRequestChatError] = useState(null);
 
   const { data, loading, error: getSlotsError, refetch } = useQuery(GET_SLOTS);
-  const [requestSession] = useMutation(REQUEST_SESSION);
+  const [requestChat] = useMutation(REQUEST_CHAT);
   const availableSlots = get('availableSlots', data);
 
-  const handleSelectSession = ({ target }) => {
+  const handleSelectChat = ({ target }) => {
     if (!target.selectedIndex) return;
-    const session = availableSlots.find(slot => slot.id === target.value);
-    selectSession(session);
+    const chat = availableSlots.find(slot => slot.id === target.value);
+    selectChat(chat);
   };
 
   const handleConfirmClick = () => {
-    requestSession({
+    requestChat({
       variables: {
-        ...selectedSession,
+        ...selectedChat,
         participant2Id: userId,
         status: REQUESTED,
       },
     })
       .then(() => {
-        selectSession(null);
-        setSessionRequested(true);
+        selectChat(null);
+        setChatRequested(true);
         setSelectedDate(null);
         onSelect();
       })
       .catch(e => {
-        setRequestSessionError(get('graphQLErrors[0].message', e) || e.message);
-        selectSession(null);
+        setRequestChatError(get('graphQLErrors[0].message', e) || e.message);
+        selectChat(null);
         onSelect();
         refetch();
       });
@@ -116,7 +116,7 @@ const Slots = ({ userId, onSelect }) => {
                 {t('step2', {
                   date:
                     selectedDate &&
-                    ` for ${formatSessionDate(selectedDate, language)}`,
+                    ` for ${formatChatDate(selectedDate, language)}`,
                 })}
               </Text>
             </div>
@@ -126,17 +126,17 @@ const Slots = ({ userId, onSelect }) => {
                   aria-labelledby={DROPDOWN_LABEL}
                   className={cx('dropdown')}
                   default={slots[selectedDate][0]}
-                  disabled={Boolean(sessionRequested)}
-                  onChange={handleSelectSession}
+                  disabled={Boolean(chatRequested)}
+                  onChange={handleSelectChat}
                 >
                   <option value={null}>{t('defaultOption')}</option>
                   {slots[selectedDate].map(slot => (
                     <option
                       key={slot.id}
-                      onClick={() => selectSession(slot)}
+                      onClick={() => selectChat(slot)}
                       value={slot.id}
                     >
-                      {formatSessionTime({
+                      {formatChatTime({
                         start: slot.start,
                         end: slot.end,
                         language,
@@ -148,7 +148,7 @@ const Slots = ({ userId, onSelect }) => {
                   className={cx('cta')}
                   fullWidth
                   onClick={() => setModalOpen(true)}
-                  disabled={Boolean(sessionRequested || !selectedSession)}
+                  disabled={Boolean(chatRequested || !selectedChat)}
                   text={t('cta')}
                 />
               </div>
@@ -158,7 +158,7 @@ const Slots = ({ userId, onSelect }) => {
           </div>
         </section>
         <ConfirmPopUp
-          error={requestSessionError}
+          error={requestChatError}
           handleConfirmClick={handleConfirmClick}
           modalOpen={modalOpen}
           namespace={LEARNER}

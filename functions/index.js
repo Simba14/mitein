@@ -22,7 +22,7 @@ const db = getFirestore();
 // });
 
 // const SCHEDULED_FUNCTION_TOPIC =
-//   'firebase-schedule-scheduledAvailableSessionsNotification';
+//   'firebase-schedule-scheduledAvailableChatsNotification';
 
 // setInterval(async () => {
 //   console.log(
@@ -41,8 +41,8 @@ const db = getFirestore();
 
 const AVAILABILITY = 'availability';
 const LEARNER = 'LEARNER';
-const SESSIONS = 'sessions';
-const SESSION_STATUS_AVAILABLE = 'AVAILABLE';
+const CHATS = 'chats';
+const CHAT_STATUS_AVAILABLE = 'AVAILABLE';
 const USERS = 'users';
 
 const TIME_ZONE = 'Europe/Berlin';
@@ -55,7 +55,7 @@ const getUserEmails = docs => {
   return emails;
 };
 
-exports.scheduledAvailableSessionsNotification = functions.pubsub
+exports.scheduledAvailableChatsNotification = functions.pubsub
   .schedule('0 17 * * SUN') // runs every Sunday 5pm CEST
   .timeZone(TIME_ZONE)
   .onRun(async () => {
@@ -63,19 +63,17 @@ exports.scheduledAvailableSessionsNotification = functions.pubsub
     dateConstraint.setDate(dateConstraint.getDate() + 1);
     dateConstraint.setHours(0, 0, 0); // set to tomorrow
 
-    const availableSessions = await db
-      .collection(SESSIONS)
-      .where('status', '==', SESSION_STATUS_AVAILABLE)
+    const availableChats = await db
+      .collection(CHATS)
+      .where('status', '==', CHAT_STATUS_AVAILABLE)
       .where('start', '>', dateConstraint.toISOString())
       .get()
       .then(querySnapshot => querySnapshot.docs.map(doc => doc.data().start));
 
-    const uniqueAvailableStarts = [...new Set(availableSessions)].map(
-      start => ({
-        start,
-        day: new Date(start).getDay(),
-      }),
-    );
+    const uniqueAvailableStarts = [...new Set(availableChats)].map(start => ({
+      start,
+      day: new Date(start).getDay(),
+    }));
 
     const availabilities = await db
       .collection(AVAILABILITY)
@@ -85,7 +83,7 @@ exports.scheduledAvailableSessionsNotification = functions.pubsub
 
     const users = getUsersWithAvailabilityMatch({
       availabilities,
-      availableSessions: uniqueAvailableStarts,
+      availableChats: uniqueAvailableStarts,
     });
 
     if (!users.length) return;
@@ -93,7 +91,7 @@ exports.scheduledAvailableSessionsNotification = functions.pubsub
     const emails = await db.getAll(...refs).then(getUserEmails);
 
     const templateId = Number(
-      functions.config().sendinblue.template_session_available_en,
+      functions.config().sendinblue.template_chat_available_en,
     );
 
     return sendEmail({

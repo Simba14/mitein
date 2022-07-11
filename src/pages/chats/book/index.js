@@ -2,8 +2,8 @@ import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 
 export const getStaticProps = async ({ locale }) => ({
   props: {
-    ...(await serverSideTranslations(locale, ['common', 'session', 'menu'])),
+    ...(await serverSideTranslations(locale, ['common', 'chat', 'menu'])),
   },
 });
 
-export { default } from './bookSession';
+export { default } from './bookChat';

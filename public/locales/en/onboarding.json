@@ -7,7 +7,7 @@
         },
         "step1": {
             "title": "Step 1.",
-            "content": "Request an available session."
+            "content": "Request an available chat."
         },
         "step2": {
             "title": "Step 2.",
@@ -19,7 +19,7 @@
         },
         "step4": {
             "title": "Step 4.",
-            "content": "If there are no available sessions, you can set your own availability in your profile.\nYou will then be notified when a suitable chat becomes available."
+            "content": "If there are no available chats, you can set your own availability in your profile.\nYou will then be notified when a suitable chat becomes available."
         }
     },
     "NATIVE": {

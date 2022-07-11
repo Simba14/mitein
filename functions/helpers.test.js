@@ -87,7 +87,7 @@ describe('dateInTimeRange', () => {
 });
 
 describe('getUsersWithAvailabilityMatch', () => {
-  const defaultAvailableSessions = [
+  const defaultAvailableChats = [
     { start: '2022-10-03T12:30:00.000Z', day: 0 },
     { start: '2022-01-03T13:00:00.000Z', day: 0 },
     { start: '2022-11-03T13:30:00.000Z', day: 1 },
@@ -128,19 +128,19 @@ describe('getUsersWithAvailabilityMatch', () => {
   test('returns empty array if availabilities is undefined', () => {
     expect(
       getUsersWithAvailabilityMatch({
-        availableSessions: defaultAvailableSessions,
+        availableChats: defaultAvailableChats,
       }),
     ).toEqual([]);
   });
 
-  test('returns empty array if availableSessions is undefined', () => {
+  test('returns empty array if availableChats is undefined', () => {
     expect(getUsersWithAvailabilityMatch({ availabilities })).toEqual([]);
   });
 
   test('returns user1 only', () => {
     expect(
       getUsersWithAvailabilityMatch({
-        availableSessions: defaultAvailableSessions,
+        availableChats: defaultAvailableChats,
         availabilities,
       }),
     ).toEqual([1]);
@@ -149,8 +149,8 @@ describe('getUsersWithAvailabilityMatch', () => {
   test('returns user1 and user2 only', () => {
     expect(
       getUsersWithAvailabilityMatch({
-        availableSessions: [
-          ...defaultAvailableSessions,
+        availableChats: [
+          ...defaultAvailableChats,
           { start: '2021-11-03T17:00:00.000Z', day: 3 },
         ],
         availabilities,
@@ -161,8 +161,8 @@ describe('getUsersWithAvailabilityMatch', () => {
   test('returns user1 and user3 only', () => {
     expect(
       getUsersWithAvailabilityMatch({
-        availableSessions: [
-          ...defaultAvailableSessions,
+        availableChats: [
+          ...defaultAvailableChats,
           { start: '2021-11-03T12:00:00.000Z', day: 2 },
         ],
         availabilities,
@@ -173,7 +173,7 @@ describe('getUsersWithAvailabilityMatch', () => {
   test('returns empty array as no matches', () => {
     expect(
       getUsersWithAvailabilityMatch({
-        availableSessions: [
+        availableChats: [
           { start: '2021-11-03T12:00:00.000Z', day: 6 },
           { start: '2021-11-03T10:30:00.000Z', day: 6 },
           { start: '2021-11-03T12:00:00.000Z', day: 6 },

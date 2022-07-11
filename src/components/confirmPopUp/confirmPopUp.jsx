@@ -20,7 +20,7 @@ const ConfirmPopUp = ({
   namespace,
   setModalOpen,
 }) => {
-  const { t } = useTranslation('session');
+  const { t } = useTranslation('chat');
   if (!modalOpen) return null;
 
   return (
