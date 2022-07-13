@@ -150,7 +150,8 @@ Chat.onConfirmation = async chat => {
 };
 
 Chat.book = async ({ id, fields }) => {
-  const isRequested = (await Chat.byId(id)?.status) === CHAT_STATUS_REQUESTED;
+  const existingChat = await Chat.byId(id);
+  const isRequested = existingChat?.status === CHAT_STATUS_REQUESTED;
   if (!isRequested) throw new FirebaseChatUnavailableError();
 
   const link = await generateZoomLink(fields.start);

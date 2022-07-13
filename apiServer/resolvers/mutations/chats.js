@@ -102,17 +102,17 @@ const ChatsMutation = {
 
     if (id) {
       if (status === CHAT_STATUS_BOOKED) {
-        const bookedchat = await Chat.book({
+        const bookedChat = await Chat.book({
           id,
           fields,
         });
 
-        return bookedchat;
+        return bookedChat;
       }
 
       if (status === CHAT_STATUS_REQUESTED) {
-        const existingchat = await Chat.byId(id);
-        const existingParticipant2 = get('participant2Id', existingchat);
+        const existingChat = await Chat.byId(id);
+        const existingParticipant2 = get('participant2Id', existingChat);
 
         if (existingParticipant2 && existingParticipant2 !== participant2Id)
           throw new Error('chat no longer available. Please try again.');
