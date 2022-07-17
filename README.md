@@ -6,8 +6,9 @@ Mitein is a non-profit aimed at strengthening local communinities through learni
 
 This is the frontend repository written in React, which utilises the Next.js framework.
 Next.js allows for static site generation (it creates a single HTML file with the required assets at build time).
-This means page loads are very quick. In addition to its performance benefits, it was also chosen for its accessibility, SSR,
-security features and ease of production deploys. You can learn more about Next.js through their [documentation](https://nextjs.org/).
+This means page loads are very quick. In addition to its performance benefits, it was also chosen for its accessibility, SSR, security features and ease of production deploys. You can learn more about Next.js through their [documentation](https://nextjs.org/).
+
+Mitein is a serverless application. It leverages a [Cloud Firestore](https://firebase.google.com/docs/firestore) database, and which is connected to the frontend via an Apollo GraphQL api.
 
 ## 🚀 Quick start
 
@@ -48,18 +49,18 @@ Any file inside the folder pages/api is mapped to /api/\* and will be treated as
 A quick look at the some of the important specific top-level files and directories.
 
     .
-    ├── api/
+    ├── apiServer/
     ├── functions/
     ├── public/
     ├── src/
 
-1.  **`src`**: This directory will contain all of the code related to what you will see on the front-end of your site (what you see in the browser) such as your site header or a page template. `src` is a convention for “source code”.
+1.  **`src`**: This directory will contain all of the code related to what you will see on the front-end of the site (what you see in the browser).
 
-2.  **`functions`**: This file is where Gatsby expects to find any usage of the [Gatsby browser APIs](https://www.gatsbyjs.org/docs/browser-apis/) (if any). These allow customization/extension of default Gatsby settings affecting the browser.
+2.  **`functions`**: This contains all the responsible for creating and deploying Google Cloud functions. Currently, their is one function that is responsible for sending emails on a scheduled basis to notify users about chats available at their designated times.
 
-3.  **`public`**: This is the main configuration file for a Gatsby site. This is where you can specify information about your site (metadata) like the site title and description, which Gatsby plugins you’d like to include, etc. (Check out the [config docs](https://www.gatsbyjs.org/docs/gatsby-config/) for more detail).
+3.  **`public`**: Stores static assets such as images, fonts, etc. Files inside public directory can then be referenced by your code starting from the base URL (/).
 
-4.  **`api`**: This file is where Gatsby expects to find any usage of the [Gatsby Node APIs](https://www.gatsbyjs.org/docs/node-apis/) (if any). These allow customization/extension of default Gatsby settings affecting pieces of the site build process.
+4.  **`apiServer`**: This directory contains all the relating the "back-end" functionality of the application. This includes the initialisation of the Apollo GraphQL server and it's related schema and resolvers. It also includes the functions and logic responsible for managing and updating the firebase database.
 
 ## Environment variables
 

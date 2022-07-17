@@ -1,4 +1,4 @@
-import firebase from 'firebase/app';
+import firebase from 'firebase/compat/app';
 import { v4 as uuidv4 } from 'uuid';
 import { isEmpty } from 'lodash/fp';
 import { Firestore } from '@api/firebase';
