@@ -3,7 +3,7 @@ const { config } = require('firebase-functions');
 const defaultClient = SibApiV3Sdk.ApiClient.instance;
 
 const apiKey = defaultClient.authentications['api-key'];
-apiKey.apiKey = config().sendinblue.key;
+apiKey.apiKey = process.env.SENDINBLUE_API_KEY; // config().sendinblue.key;
 
 const apiInstance = new SibApiV3Sdk.TransactionalEmailsApi();
 

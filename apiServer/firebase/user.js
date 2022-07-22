@@ -39,7 +39,8 @@ User.byIdWithAvailability = async id => {
     .doc(id)
     .get()
     .then(getDocData)
-    .catch(() => {
+    .catch(error => {
+      console.log({ error });
       throw new FirebaseGetDocError('Could not return user');
     });
 

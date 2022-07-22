@@ -8,36 +8,38 @@ const DATABASE_URL = 'https://mitein-3c0d1.firebaseio.com';
 
 initializeApp({
   credential: applicationDefault(),
-  databaseURL: DATABASE_URL,
+  databaseURL: process.env.FIREBASE_DATABASE_URL,
 });
+
+console.log(process.env.GCLOUD_PROJECT);
 
 const db = getFirestore();
 
 // Comment out the below to test the scheduled function locally
-// const { PubSub } = require('@google-cloud/pubsub');
+const { PubSub } = require('@google-cloud/pubsub');
 
-// const pubsub = new PubSub({
-//   projectId: 'REQUEST FROM DEVELOPER',
-//   apiEndpoint: 'localhost:5005',
-// });
+const pubsub = new PubSub({
+  projectId: process.env.GCLOUD_PROJECT,
+  apiEndpoint: 'localhost:5005',
+});
 
-// const SCHEDULED_FUNCTION_TOPIC =
-//   'firebase-schedule-scheduledAvailableChatsNotification';
+const SCHEDULED_FUNCTION_TOPIC =
+  'firebase-schedule-scheduledAvailableChatsNotification';
 
-// setInterval(async () => {
-//   console.log(
-//     `Trigger scheduled function via PubSub topic: ${SCHEDULED_FUNCTION_TOPIC}`,
-//   );
-//   const msg = await pubsub
-//     .topic(SCHEDULED_FUNCTION_TOPIC)
-//     .publishJSON(
-//       {
-//         foo: 'bar',
-//       },
-//       { attr1: 'value1' },
-//     )
-//     .catch(error => console.log({ error }));
-// }, 1 * 60 * 1000);
+setInterval(async () => {
+  console.log(
+    `Trigger scheduled function via PubSub topic: ${SCHEDULED_FUNCTION_TOPIC}`,
+  );
+  const msg = await pubsub
+    .topic(SCHEDULED_FUNCTION_TOPIC)
+    .publishJSON(
+      {
+        foo: 'bar',
+      },
+      { attr1: 'value1' },
+    )
+    .catch(error => console.log({ error }));
+}, 1 * 60 * 1000);
 
 const AVAILABILITY = 'availability';
 const LEARNER = 'LEARNER';
@@ -55,20 +57,27 @@ const getUserEmails = docs => {
   return emails;
 };
 
-exports.scheduledAvailableChatsNotification = functions.pubsub
-  .schedule('0 17 * * SUN') // runs every Sunday 5pm CEST
+exports.scheduledAvailableChatsNotification = functions
+  .runWith({
+    secrets: ['SENDINBLUE_TEMPLATE_CHAT_AVAILABLE_EN', 'SENDINBLUE_API_KEY'],
+  })
+  .pubsub.schedule('* * * * *') // runs every Sunday 5pm CEST
   .timeZone(TIME_ZONE)
   .onRun(async () => {
     let dateConstraint = new Date();
     dateConstraint.setDate(dateConstraint.getDate() + 1);
     dateConstraint.setHours(0, 0, 0); // set to tomorrow
-
     const availableChats = await db
       .collection(CHATS)
       .where('status', '==', CHAT_STATUS_AVAILABLE)
       .where('start', '>', dateConstraint.toISOString())
       .get()
       .then(querySnapshot => querySnapshot.docs.map(doc => doc.data().start));
+    console.log(
+      { availableChats },
+      process.env,
+      'INSIDEINSIDEINSIDEINSIDEINSIDEINSIDE',
+    );
 
     const uniqueAvailableStarts = [...new Set(availableChats)].map(start => ({
       start,
@@ -91,11 +100,11 @@ exports.scheduledAvailableChatsNotification = functions.pubsub
     const emails = await db.getAll(...refs).then(getUserEmails);
 
     const templateId = Number(
-      functions.config().sendinblue.template_chat_available_en,
+      process.env.SENDINBLUE_TEMPLATE_CHAT_AVAILABLE_EN,
     );
-
-    return sendEmail({
-      to: emails,
-      templateId,
-    });
+    console.log({ templateId });
+    // return sendEmail({
+    //   to: emails,
+    //   templateId,
+    // });
   });
