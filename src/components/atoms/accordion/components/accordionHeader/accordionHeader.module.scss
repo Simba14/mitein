@@ -7,15 +7,13 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: size(1);
+  padding: size(1) 0;
   background: none;
   border: none;
   width: 100%;
   text-transform: capitalize;
 
   @include mq($from: tablet) {
-    padding: size(1) 0;
-
     .arrow {
       width: size(2);
       height: size(2);

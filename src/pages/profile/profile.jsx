@@ -13,6 +13,7 @@ import NativeCalendar from 'components/blocks/calendar/timeView/native';
 import Loading from 'components/atoms/loading';
 import ChatCard from 'components/blocks/chatCard';
 import Suspended from 'components/blocks/suspended';
+import Text from 'components/atoms/text';
 import { withLayout } from 'components/blocks/layout';
 
 import { sessionProps, withSessionContext } from 'context/session';
@@ -23,6 +24,7 @@ import { LEARNER, NATIVE, BOOKED, REJECTED, REQUESTED } from '@constants/user';
 
 import styles from './profile.module.scss';
 import PersonalInfo from 'components/blocks/personalInfo';
+import Anchor from 'components/atoms/anchor';
 
 const cx = classnames.bind(styles);
 
@@ -84,24 +86,37 @@ const Profile = ({ session }) => {
       {booked && (
         <Accordion
           className={cx('accordion')}
-          contentClassName={cx('chatsContainer')}
+          headerClassName={cx('accordionHeader')}
           ariaId="booked chats accordion"
           headerText={t('accordionHeader.upcoming')}
-          content={booked.map(chat => (
-            <ChatCard
-              key={chat.id}
-              chat={chat}
-              status={BOOKED}
-              userType={type}
-              userId={userId}
-            />
-          ))}
+          content={
+            <>
+              <Text className={cx('bookedDescription')}>
+                {t('chatInfo')}
+                <Anchor href={t('zoomHelp')} underlined>
+                  {t('chatInfoClick')}
+                </Anchor>
+              </Text>
+              <div className={cx('chatsContainer')}>
+                {booked.map(chat => (
+                  <ChatCard
+                    key={chat.id}
+                    chat={chat}
+                    status={BOOKED}
+                    userType={type}
+                    userId={userId}
+                  />
+                ))}
+              </div>
+            </>
+          }
           open={true}
         />
       )}
       {requestedAccordionData && (
         <Accordion
           className={cx('accordion')}
+          headerClassName={cx('accordionHeader')}
           contentClassName={cx('chatsContainer')}
           ariaId="requested chats accordion"
           headerText={t('accordionHeader.requested')}

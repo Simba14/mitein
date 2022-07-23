@@ -11,8 +11,15 @@
 }
 
 .accordion {
-  color: $blue;
   margin-bottom: size(4);
+
+  .accordionHeader {
+    color: $blue;
+  }
+
+  .bookedDescription {
+    margin-bottom: size(3);
+  }
 
   .chatsContainer {
     display: flex;
