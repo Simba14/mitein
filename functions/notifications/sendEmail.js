@@ -1,23 +1,23 @@
+// const { log } = require('../../apiServer/logger');
 const SibApiV3Sdk = require('sib-api-v3-sdk');
-const { config } = require('firebase-functions');
 const defaultClient = SibApiV3Sdk.ApiClient.instance;
 
-const apiKey = defaultClient.authentications['api-key'];
-apiKey.apiKey = process.env.SENDINBLUE_API_KEY; // config().sendinblue.key;
+const sendEmail = key => {
+  const apiKey = defaultClient.authentications['api-key'];
+  apiKey.apiKey = key;
 
-const apiInstance = new SibApiV3Sdk.TransactionalEmailsApi();
-
-const sendEmail = sendSmtpEmail => {
-  apiInstance
-    .sendTransacEmail(sendSmtpEmail)
-    .then(data => {
-      console.log('sent email', { data });
-      return true;
-    })
-    .catch(error => {
-      console.error('send error', error);
-      return false;
-    });
+  const apiInstance = new SibApiV3Sdk.TransactionalEmailsApi();
+  return sendSmtpEmail =>
+    apiInstance
+      .sendTransacEmail(sendSmtpEmail)
+      .then(data => {
+        console.log('sent scheduled email', 'info', { data });
+        return true;
+      })
+      .catch(error => {
+        console.log('error sending scheduled email', 'error', error);
+        return false;
+      });
 };
 
 exports.sendEmail = sendEmail;
