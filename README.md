@@ -56,7 +56,7 @@ A quick look at the some of the important specific top-level files and directori
 
 1.  **`src`**: This directory will contain all of the code related to what you will see on the front-end of the site (what you see in the browser).
 
-2.  **`functions`**: This contains all the responsible for creating and deploying Google Cloud functions. Currently, their is one function that is responsible for sending emails on a scheduled basis to notify users about chats available at their designated times.
+2.  **`functions`**: This contains all the responsible for creating and deploying Google Cloud functions. Currently, there is one function, responsible for sending emails on a scheduled basis to notify users about chats available at their designated times.
 
 3.  **`public`**: Stores static assets such as images, fonts, etc. Files inside public directory can then be referenced by your code starting from the base URL (/).
 
