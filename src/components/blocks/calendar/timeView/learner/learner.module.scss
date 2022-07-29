@@ -1,0 +1,34 @@
+@import 'scss/breakpoints.scss';
+@import 'scss/button.scss';
+@import 'scss/colors.scss';
+@import 'scss/spacings.scss';
+
+.calendar {
+  .toolbar {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: size(4);
+    width: 100%;
+
+    .title {
+      margin-bottom: size(2);
+    }
+
+    .delete {
+      @extend %btn;
+
+      display: none;
+      align-self: flex-end;
+      border-radius: 0.25em;
+      padding: 0 size(1) !important;
+
+      @include mq($from: tabletWide) {
+        display: block;
+      }
+    }
+
+    .instructions {
+      width: 80%;
+    }
+  }
+}

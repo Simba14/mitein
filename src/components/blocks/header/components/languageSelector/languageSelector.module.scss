@@ -1,0 +1,35 @@
+@import 'scss/breakpoints.scss';
+@import 'scss/colors.scss';
+@import 'scss/spacings.scss';
+
+.languageSelector {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 0 0 size(1.5);
+  border-left: solid 1px gainsboro;
+
+  @include mq($from: tablet) {
+    border-right: solid 1px gainsboro;
+    padding: 0 size(2);
+  }
+
+  .language {
+    font-family: 'LilGrotesk';
+    font-weight: bold;
+    border: none;
+    font-size: 1rem;
+    line-height: 16px;
+    padding: 4px 6px;
+    background: white;
+    cursor: not-allowed;
+    color: $blue;
+    text-transform: uppercase;
+
+    &.unselected {
+      background: $light-grey;
+      color: #c6c7ca;
+      cursor: pointer;
+    }
+  }
+}

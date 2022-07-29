@@ -1,0 +1,15 @@
+@import 'scss/colors.scss';
+@import 'scss/spacings.scss';
+
+.notFound {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding-top: size(6);
+
+  .title {
+    color: $orange;
+    margin-bottom: size(4);
+  }
+}

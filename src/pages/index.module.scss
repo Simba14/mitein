@@ -1,0 +1,66 @@
+@import 'scss/breakpoints.scss';
+@import 'scss/colors.scss';
+@import 'scss/wrapper.scss';
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  background: $blue;
+  height: 100%;
+  width: 100%;
+  overflow-y: scroll;
+  -webkit-overflow-scrolling: touch;
+
+  @include mq($from: desktop) {
+    max-height: 100vh;
+  }
+
+  h1 {
+    color: white;
+  }
+
+  .about {
+    background: $blue;
+    color: white;
+
+    h3 {
+      color: white;
+    }
+
+    .btnWrapper {
+      .volunteerBtn {
+        background: white;
+        color: $blue;
+        margin-top: size(4);
+
+        @include mq($until: tablet) {
+          align-self: center;
+          width: 100%;
+          max-width: 100%;
+        }
+      }
+    }
+  }
+
+  .newsletter {
+    background: $egg-shell;
+  }
+
+  .how {
+    h1,
+    h3 {
+      color: $blue;
+    }
+  }
+
+  .contact {
+    @include gutter;
+
+    margin: size(5) 0 size(10);
+
+    @include mq($from: tablet) {
+      max-width: $content-max-width;
+      margin: 0 auto size(8);
+    }
+  }
+}

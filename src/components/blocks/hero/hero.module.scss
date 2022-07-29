@@ -1,0 +1,82 @@
+@import 'scss/breakpoints.scss';
+@import 'scss/colors.scss';
+@import 'scss/spacings.scss';
+
+$logo-width-mobile: 170px;
+$logo-width-desktop: 190px;
+
+.wrapper {
+  position: relative;
+  width: 100%;
+  padding: size(3) size(4);
+
+  .hero {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    text-align: center;
+    height: 70vh;
+
+    @include mq($from: tablet) {
+      align-items: center;
+      justify-content: center;
+    }
+
+    &::before {
+      background-image: url('https://bloximages.chicago2.vip.townnews.com/wcfcourier.com/content/tncms/assets/v3/editorial/7/80/7803c023-b6ab-54ea-9f22-ee41b166b405/5dd6f9aab4ab4.image.jpg');
+      background-size: cover;
+      content: '';
+      display: block;
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      opacity: 0.3;
+    }
+
+    .content {
+      position: relative;
+      display: flex;
+      align-items: center;
+      line-height: 1.6;
+      color: white;
+      max-width: 800px;
+
+      @include mq($until: tablet) {
+        &.german {
+          font-size: 25px;
+          line-height: 1.5;
+        }
+      }
+
+      @include mq($from: tablet) {
+        font-weight: normal;
+        line-height: 1.4;
+      }
+    }
+
+    .comingSoon {
+      color: $egg-shell;
+      z-index: 1;
+
+      .logo {
+        width: $logo-width-mobile;
+      }
+
+      .text {
+        font-family: 'Poppins', sans-serif;
+      }
+
+      @include mq($from: tablet) {
+        position: absolute;
+        bottom: size(4);
+        left: size(4);
+
+        .logo {
+          width: $logo-width-desktop;
+        }
+      }
+    }
+  }
+}

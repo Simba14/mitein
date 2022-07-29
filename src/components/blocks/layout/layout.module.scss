@@ -1,0 +1,84 @@
+@import 'scss/breakpoints.scss';
+@import 'scss/colors.scss';
+@import 'scss/constants.scss';
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+
+  background: $grey;
+  height: 100%;
+  min-height: 100vh;
+  width: 100%;
+
+  h1 {
+    color: $blue;
+  }
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin-top: 0;
+  background: white;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  height: calc(100vh - #{$header-height});
+  width: 100%;
+  transition: $menu-transition-duration;
+
+  @include mq($until: tablet) {
+    position: fixed;
+    top: $header-height;
+  }
+
+  &.menuOpen {
+    height: calc(100vh - #{$header-height} - #{$menu-height-mobile});
+    top: calc(#{$header-height} + #{$menu-height-mobile});
+
+    @include mq($from: tablet) {
+      margin-top: calc(#{size(8)} - 1px);
+      height: calc(100vh - #{$header-height} - #{$menu-height-desktop});
+      top: unset;
+    }
+  }
+
+  &.withPadding {
+    padding: $wrapper-padding-y-mobile $wrapper-padding-x-mobile;
+
+    @include mq($from: tablet) {
+      padding: $wrapper-padding-y-desktop-small $wrapper-padding-x-tablet
+        $wrapper-padding-y-desktop-large;
+    }
+
+    @include mq($from: desktop) {
+      padding: $wrapper-padding-y-desktop-small $wrapper-padding-x-desktop
+        $wrapper-padding-y-desktop-large;
+    }
+
+    &.withFooter {
+      padding-bottom: 0;
+    }
+  }
+
+  .footer {
+    &:only-child {
+      position: absolute;
+      bottom: 0;
+    }
+
+    &.withContentPadding {
+      width: 100vw;
+      margin-left: -$wrapper-padding-x-mobile;
+
+      @include mq($from: tablet) {
+        margin-left: -$wrapper-padding-x-tablet;
+      }
+
+      @include mq($from: desktop) {
+        margin-left: -$wrapper-padding-x-desktop;
+      }
+    }
+  }
+}

@@ -1,0 +1,88 @@
+@import 'scss/breakpoints.scss';
+@import 'scss/focus.scss';
+@import 'scss/spacings.scss';
+@import 'scss/colors.scss';
+@import 'scss/constants.scss';
+
+.container {
+  background: white;
+  width: 100%;
+  text-align: center;
+  padding: size(4);
+
+  .heading {
+    color: $blue;
+    text-transform: capitalize;
+    margin-bottom: size(1);
+  }
+
+  .description {
+    color: black;
+    margin-bottom: size(4);
+  }
+
+  .form {
+    width: 100%;
+
+    @include mq($from: tablet) {
+      margin: auto;
+      width: 470px;
+      width: fit-content;
+    }
+  }
+
+  .emailInput {
+    font-family: 'Poppins', sans-serif;
+    border: none;
+    border-bottom: solid 1px $dark-grey;
+    background: white;
+    margin-bottom: size(2);
+    padding: size(2) size(1);
+    height: size(6);
+    width: 100%;
+
+    &:focus {
+      @include focus($orange);
+    }
+
+    @include mq($from: tablet) {
+      margin-bottom: 0;
+      margin-right: size(2);
+      width: 300px;
+    }
+  }
+
+  .formMessage {
+    color: black;
+    padding: size(1);
+    margin-top: size(2);
+    background: $green-background;
+    opacity: 0;
+    transition: opacity 0s;
+    text-transform: capitalize;
+    text-align: center;
+    height: 38px;
+
+    &.error {
+      background: $red-background;
+    }
+
+    &.visible {
+      opacity: 1;
+      transition: opacity 1s;
+    }
+  }
+
+  .submitBtn {
+    padding-right: size(5);
+    padding-left: size(5);
+
+    @include mq($until: tablet) {
+      width: 100%;
+    }
+
+    @include mq($from: tablet) {
+      display: inline-block;
+    }
+  }
+}

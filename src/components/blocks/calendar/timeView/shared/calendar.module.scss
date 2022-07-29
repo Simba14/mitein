@@ -1,0 +1,77 @@
+@import 'scss/breakpoints.scss';
+@import 'scss/button.scss';
+@import 'scss/colors.scss';
+@import 'scss/focus.scss';
+@import 'scss/spacings.scss';
+
+$btn-width-small: 50px;
+$toolbar-mobile-height: 76px;
+
+.calendar {
+  h2 {
+    font-family: 'LilGrotesk', sans-serif;
+    color: $blue;
+  }
+
+  button {
+    @extend %btn;
+
+    background: $blue !important;
+    border-color: $blue !important;
+    color: white !important;
+
+    &:focus {
+      @include focus($orange, 2pt, 1.5pt, true);
+    }
+  }
+
+  div > div > div > div:last-of-type > button:not(:first-child) {
+    margin-left: 2px !important;
+  }
+
+  // style toolbar for smaller viewports
+  @include mq($until: tablet) {
+    > div:first-child > div:first-child {
+      align-items: flex-end;
+      height: $toolbar-mobile-height;
+
+      > div:last-child {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+        justify-content: flex-end;
+
+        // delete button
+        > button {
+          margin-bottom: size(1.5);
+        }
+
+        // arrows
+        > div > button {
+          width: $btn-width-small;
+        }
+      }
+    }
+  }
+
+  a > div {
+    display: flex;
+    align-items: center;
+    padding: 0 6px !important;
+  }
+
+  a div {
+    font-size: 15px !important;
+    white-space: pre-wrap !important;
+
+    &::after {
+      display: none;
+    }
+  }
+
+  > div > div > div > table {
+    background: white;
+    border-radius: 15px 0px 0px;
+    font-size: 1rem !important;
+  }
+}

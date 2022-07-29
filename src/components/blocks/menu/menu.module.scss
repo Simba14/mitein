@@ -1,0 +1,105 @@
+@import 'scss/breakpoints.scss';
+@import 'scss/constants.scss';
+@import 'scss/colors.scss';
+@import 'scss/spacings.scss';
+
+$items: 4;
+$transition-duration: $menu-transition-duration / 2;
+$icon-size: size(3);
+
+.menu {
+  display: flex;
+  margin-right: size(2);
+
+  @include mq($from: tablet) {
+    flex: 1;
+    margin-right: 0;
+  }
+
+  .buttonToggle {
+    background-color: transparent;
+    border-color: transparent;
+    border: none;
+    margin-right: auto;
+    height: calc(#{$icon-size} + #{size(1)}); // for hover state
+    width: calc(#{$icon-size} + #{size(1)});
+    padding: size(0.5);
+    outline: none;
+    cursor: pointer;
+    transition: $menu-transition-duration;
+
+    .icon {
+      height: $icon-size;
+      width: $icon-size;
+
+      path {
+        stroke: $blue;
+      }
+    }
+
+    &:hover {
+      background: $grey;
+    }
+  }
+
+  .nav {
+    position: absolute;
+    transition: 0s;
+    opacity: 0;
+    padding: 0;
+    visibility: hidden;
+    height: $menu-height-desktop;
+
+    @include mq($until: tablet) {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      height: $menu-height-mobile;
+      width: calc(100% - #{$wrapper-padding-x-mobile} * 2);
+    }
+
+    &.isOpen {
+      opacity: 1;
+      visibility: visible;
+      transition: $transition-duration opacity $transition-duration, 0s padding;
+      top: size(9);
+      padding: size(4) 0;
+
+      @include mq($from: tablet) {
+        padding: size(2.5) 0;
+      }
+    }
+
+    .navItem {
+      color: $dark-blue;
+      text-transform: uppercase;
+      opacity: 1;
+
+      @include mq($until: tablet) {
+        &:not(:last-child) {
+          margin-bottom: size(3);
+        }
+      }
+
+      @include mq($from: tablet) {
+        &:not(:last-child) {
+          margin-right: size(3);
+        }
+      }
+
+      &.active {
+        color: $dark-grey;
+
+        &::before {
+          visibility: visible;
+          transform: scaleX(1);
+        }
+
+        &:hover::before {
+          visibility: hidden;
+          transform: scaleX(0);
+        }
+      }
+    }
+  }
+}

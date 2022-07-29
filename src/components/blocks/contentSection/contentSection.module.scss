@@ -1,0 +1,39 @@
+@import 'scss/colors.scss';
+@import 'scss/constants.scss';
+@import 'scss/breakpoints.scss';
+@import 'scss/spacings.scss';
+@import 'scss/wrapper.scss';
+
+.wrapper {
+  background-color: white;
+  padding: 1px;
+
+  .container {
+    @include wrapper;
+
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+    max-width: $content-max-width;
+    padding-bottom: size(14);
+
+    @include mq($from: tabletWide) {
+      padding-top: size(8);
+      padding-bottom: size(12);
+    }
+  }
+
+  .title {
+    color: $blue;
+    margin-bottom: size(2);
+  }
+
+  .content {
+    line-height: 1.6;
+    white-space: pre-line;
+
+    @include mq($from: tablet) {
+      text-align: justify;
+    }
+  }
+}

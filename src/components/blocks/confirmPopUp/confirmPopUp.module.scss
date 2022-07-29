@@ -1,0 +1,46 @@
+@import 'scss/breakpoints.scss';
+@import 'scss/colors.scss';
+@import 'scss/constants.scss';
+@import 'scss/spacings.scss';
+
+$modal-width: 400px;
+
+.modal {
+  border-radius: $card-border-radius;
+  background: white;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  padding: size(4);
+  width: 100%;
+
+  @include mq($from: tablet) {
+    width: $modal-width;
+  }
+
+  .heading {
+    color: $orange;
+    margin-bottom: size(3);
+  }
+
+  .disclaimer {
+    line-height: 1.5;
+    margin-bottom: size(3);
+  }
+
+  .error {
+    background: $red-background;
+    color: black;
+    padding: size(1.5);
+    margin-top: size(2);
+    opacity: 0;
+    transition: opacity 1s;
+    text-transform: capitalize;
+    text-align: center;
+    height: 38px;
+
+    &.visible {
+      opacity: 1;
+    }
+  }
+}

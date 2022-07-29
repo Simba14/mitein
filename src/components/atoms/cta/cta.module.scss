@@ -1,0 +1,58 @@
+@import 'scss/colors.scss';
+@import 'scss/constants.scss';
+@import 'scss/spacings.scss';
+
+.cta {
+  font-family: 'Poppins', sans-serif;
+  font-size: 1rem;
+  line-height: 1;
+  color: white;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: $blue;
+  padding: size(2);
+  border: none;
+  height: 100%;
+  max-height: size(6);
+  text-transform: capitalize;
+
+  &.fullWidth {
+    width: 100%;
+  }
+
+  &.outline {
+    color: $blue;
+    background: white;
+    border: 1px solid currentColor;
+
+    &:hover {
+      background: $grey;
+    }
+  }
+
+  &:hover {
+    opacity: 0.8;
+  }
+
+  &:focus {
+    outline-color: $orange;
+  }
+
+  &:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+}
+
+a.cta {
+  max-width: $cta-max-width;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &.fullWidth {
+    max-width: 100%;
+  }
+}

@@ -1,0 +1,39 @@
+@import 'scss/breakpoints.scss';
+@import 'scss/constants.scss';
+@import 'scss/colors.scss';
+@import 'scss/spacings.scss';
+@import 'scss/wrapper.scss';
+
+$logo-width: size(12);
+
+.headerWrapper {
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid $grey;
+  padding: $wrapper-padding-x-mobile;
+  position: relative;
+  background-color: white;
+  height: $header-height;
+  z-index: 10;
+  width: 100%;
+
+  @include mq($from: tablet) {
+    @include gutter;
+  }
+
+  .title {
+    display: flex;
+    text-decoration: none;
+    height: 100%;
+
+    .logo {
+      width: $logo-width;
+    }
+  }
+
+  .options {
+    display: flex;
+    flex: 1;
+    justify-content: flex-end;
+  }
+}

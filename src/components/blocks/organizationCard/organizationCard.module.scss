@@ -1,0 +1,128 @@
+@import 'scss/button.scss';
+@import 'scss/colors.scss';
+@import 'scss/constants.scss';
+@import 'scss/spacings.scss';
+@import 'scss/loading.scss';
+
+.organization {
+  min-height: $organization-card-height;
+  color: $blue;
+  border-radius: 15px;
+  background: white;
+  display: flex;
+  flex-direction: column;
+  flex-basis: 100%;
+  padding: size(3);
+  justify-content: space-between;
+  margin-bottom: size(3);
+
+  .info {
+    &.loading {
+      .logo,
+      .name,
+      .description {
+        @extend %loading-element;
+      }
+    }
+  }
+
+  .loading {
+    .logo,
+    .name,
+    .description,
+    .tag {
+      @extend %loading-element;
+    }
+
+    .name {
+      height: size(3);
+      width: 60%;
+    }
+
+    .description {
+      height: size(7);
+    }
+
+    .tag {
+      width: size(8);
+    }
+  }
+
+  .logo {
+    height: 200px;
+    background-position: center;
+    background-size: contain;
+    background-repeat: no-repeat;
+    margin-bottom: size(3);
+    width: 100%;
+  }
+
+  .name {
+    margin-bottom: size(2);
+    font-weight: normal;
+  }
+
+  .description {
+    color: black;
+    margin-bottom: size(2);
+  }
+
+  .socialLink {
+    display: inline-block;
+
+    .socialIcon {
+      width: size(2);
+      height: size(2);
+      fill: $blue;
+      margin-right: size(1);
+      margin-bottom: size(2);
+    }
+  }
+
+  .tags {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    margin-bottom: size(2);
+
+    .tag {
+      border-radius: 15px;
+      background: $grey;
+      display: inline-flex;
+      align-items: center;
+      color: $dark-blue;
+      padding: 0 size(2);
+      margin-right: size(1);
+      height: size(4);
+      line-height: 1;
+    }
+  }
+
+  .website {
+    color: white;
+    width: fit-content;
+    text-transform: capitalize;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: $blue;
+    padding: size(2);
+    border: none;
+    height: 100%;
+    max-height: size(5);
+
+    &:hover {
+      opacity: 0.8;
+    }
+
+    &:focus {
+      outline-color: $orange;
+    }
+
+    &:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+  }
+}

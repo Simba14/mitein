@@ -1,0 +1,15 @@
+@import 'scss/colors.scss';
+
+.daySelected {
+  outline: $blue 2px auto;
+}
+
+.dayAvailable {
+  background: $green-background;
+  cursor: pointer;
+}
+
+.dayUnavailable {
+  background: $light-grey;
+  cursor: not-allowed;
+}

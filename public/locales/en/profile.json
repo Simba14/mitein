@@ -1,0 +1,32 @@
+{
+  "title": "(Profile)",
+  "logOut": "log out",
+  "accordionHeader": {
+    "requested": "Requested",
+    "upcoming": "Upcoming"
+  },
+  "email": "Email: {{email}}",
+  "name": "Display Name: {{displayName}}",
+  "account": "Account: {{type}}",
+  "chatInfo": "Chats will be online via Zoom. To download Zoom for free or learn more about how to use it, click ",
+  "chatInfoClick": "here.",
+  "zoomHelp": "https://support.zoom.us/hc/en-us/articles/201362193-Joining-a-Zoom-meeting",
+  "interests": {
+    "label": "Interests",
+    "cta": "Confirm selection",
+    "edit": "Edit",
+    "editLabel": "Edit your interests",
+    "none": "No interests yet. Add Some!",
+    "heading": "What would you like to chat about?",
+    "description": "These are shared with participants before your chats to help start the conversation.",
+    "instructions": "Click to add an interest. To unselect an interest, click on it again.",
+    "sport": "sport",
+    "cooking": "cooking",
+    "travelling": "travelling",
+    "music": "music",
+    "history": "history",
+    "books": "books",
+    "art": "art",
+    "movies": "movies"
+  }
+}

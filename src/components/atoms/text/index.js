@@ -1,0 +1,15 @@
+export {
+  default,
+  HEADING_1,
+  HEADING_2,
+  HEADING_3,
+  HEADING_4,
+  HEADING_5,
+  HEADING_6,
+  BODY_1,
+  BODY_2,
+  BODY_3,
+  BODY_4,
+  BODY_5,
+  BODY_6,
+} from './text';

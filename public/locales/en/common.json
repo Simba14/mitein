@@ -1,0 +1,27 @@
+{
+  "cookies": "Cookies",
+  "login": "Login",
+  "menu": "Menu",
+  "mitein": "Mitein(ander)",
+  "miteinWithYear": "Mitein 2022",
+  "privacy": "Privacy",
+  "signUp": "Join",
+  "terms": "Terms",
+  "consentLayer": {
+    "heading": "We don't have any tracking",
+    "description": "but we do use cookies to make the site work as expected. Please provide your consent and confirmation that you are 16+ years old. You can find more details in our Terms of Service.",
+    "confirmBtn": "Accept all",
+    "reject": "Reject all",
+    "cookieSettings": "More info"
+  },
+    "error": {
+    "title": "Oops, something went wrong",
+    "cta": "Try again?",
+    "returnTo": "Or return to the",
+    "link": "home page"
+  },
+  "suspended": {
+    "until": "ACCOUNT RESTRICTED: Due to exceeding the cancellation limit.\nYou will not be able to book any new chats until {{date}}.",
+    "note": "Note: Any chats you have booked already will still take place."
+  }
+}

@@ -1,0 +1,94 @@
+@import 'scss/button.scss';
+@import 'scss/breakpoints.scss';
+@import 'scss/colors.scss';
+@import 'scss/constants.scss';
+@import 'scss/form.scss';
+@import 'scss/spacings.scss';
+
+$slot-width: 180px;
+
+.container {
+  .selectionContainer {
+    width: 100%;
+
+    @include mq($from: tablet) {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      column-gap: size(3);
+    }
+
+    .step2Container {
+      display: flex;
+      margin-bottom: size(2);
+
+      :first-child {
+        margin-right: size(1);
+      }
+    }
+
+    .step {
+      color: $teal;
+      margin-bottom: size(2);
+    }
+
+    .calendar {
+      width: 100%;
+      margin-bottom: size(6);
+
+      @include mq($from: tablet) {
+        margin-bottom: 0;
+        margin-right: size(3);
+      }
+
+      h2 {
+        font-family: revert;
+        color: $teal;
+        display: inline;
+        font-size: 1.5rem;
+      }
+
+      button {
+        @extend %btn;
+
+        background: $teal !important;
+        border-color: $teal !important;
+        color: white !important;
+      }
+    }
+
+    .requestSlot {
+      .slots {
+        display: flex;
+        flex-direction: column;
+
+        @include mq($from: tablet) {
+          padding-top: size(0.75);
+        }
+
+        @include mq($from: widescreen) {
+          .dropdown {
+            max-width: 80%;
+          }
+
+          .cta {
+            max-width: 80%;
+          }
+        }
+
+        .dropdown {
+          @extend %formField;
+        }
+      }
+    }
+  }
+}
+
+.noneAvailable {
+  padding: size(6) 0;
+  text-align: center;
+  white-space: pre-wrap;
+
+  .noneAvailableTitle {
+    margin-bottom: size(3);
+  }
+}

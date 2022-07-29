@@ -1,0 +1,47 @@
+@import 'scss/breakpoints.scss';
+@import 'scss/colors.scss';
+@import 'scss/spacings.scss';
+
+$account-icon-size: 21px;
+
+%desktopOnly {
+  display: none;
+
+  @include mq($from: tablet) {
+    display: inline-block;
+  }
+}
+
+.accountContainer {
+  align-items: center;
+  color: $blue;
+  display: flex;
+  margin-right: size(2);
+
+  .login,
+  .signUpText,
+  .email {
+    @extend %desktopOnly;
+  }
+
+  .accountLink {
+    display: flex;
+  }
+
+  .accountIcon {
+    width: $account-icon-size;
+    height: $account-icon-size;
+
+    @include mq($from: tablet) {
+      display: none;
+    }
+  }
+
+  @include mq($from: tablet) {
+    margin-right: size(3);
+
+    .signUp {
+      margin-right: size(2);
+    }
+  }
+}

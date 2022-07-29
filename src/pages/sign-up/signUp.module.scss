@@ -1,0 +1,8 @@
+@import 'scss/spacings.scss';
+
+.wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-bottom: size(4);
+}

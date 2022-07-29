@@ -1,0 +1,8 @@
+@function if-important($important) {
+  @return #{if($important, '!important', '')};
+}
+
+@mixin focus($color, $blur: 3pt, $spread: 2pt, $important: false) {
+  box-shadow: 0 0 3pt $spread $color if-important($important);
+  outline: none if-important($important);
+}
