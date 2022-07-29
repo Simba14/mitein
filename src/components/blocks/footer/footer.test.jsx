@@ -1,7 +1,7 @@
 import React from 'react';
 import { ROUTE_PRIVACY, ROUTE_TERMS } from 'routes';
 import { render, screen } from 'testUtils';
-import Footer, { FB_URL, IG_URL, INFO_EMAIL } from './footer';
+import Footer, { FB_URL, GITHUB_URL, IG_URL, INFO_EMAIL } from './footer';
 
 test('Footer renders correctly', () => {
   render(<Footer />);
@@ -13,7 +13,7 @@ test('Footer renders correctly', () => {
   expect(cookieBtn).toHaveTextContent('cookies');
 
   // links
-  const [info, privacy, terms, facebook, instagram] =
+  const [info, privacy, terms, openSource, facebook, instagram, github] =
     screen.getAllByRole('link');
   expect(info.textContent).toEqual(INFO_EMAIL);
   expect(info).toHaveAttribute('href', `mailto: ${INFO_EMAIL}`);
@@ -21,8 +21,12 @@ test('Footer renders correctly', () => {
   expect(privacy).toHaveAttribute('href', ROUTE_PRIVACY.slice(0, -1));
   expect(terms.textContent).toEqual('terms');
   expect(terms).toHaveAttribute('href', ROUTE_TERMS.slice(0, -1));
+  expect(openSource.textContent).toEqual('openSource');
+  expect(openSource).toHaveAttribute('href', GITHUB_URL);
   expect(facebook.textContent).toEqual('facebook');
   expect(facebook).toHaveAttribute('href', FB_URL);
   expect(instagram.textContent).toEqual('instagram');
   expect(instagram).toHaveAttribute('href', IG_URL);
+  expect(github.textContent).toEqual('github');
+  expect(github).toHaveAttribute('href', GITHUB_URL);
 });

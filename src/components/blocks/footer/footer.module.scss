@@ -37,6 +37,8 @@ $icon-size: 20px;
     .legal {
       display: flex;
       margin-bottom: size(4);
+      flex-wrap: wrap;
+      gap: size(1);
 
       @include mq($from: tablet) {
         align-items: flex-end;

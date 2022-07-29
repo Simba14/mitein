@@ -7,6 +7,7 @@ import Close from 'assets/close.svg';
 import Logo from 'assets/logo.svg';
 import Menu from 'assets/menu.svg';
 import Facebook from 'assets/facebook.svg';
+import Github from 'assets/github.svg';
 import Instagram from 'assets/instagram.svg';
 import Twitter from 'assets/twitter.svg';
 
@@ -18,6 +19,7 @@ export const CLOSE = 'close';
 export const LOGO = 'logo';
 export const MENU = 'menu';
 export const FB = 'facebook';
+export const GITHUB = 'github';
 export const INSTA = 'instagram';
 export const TWITTER = 'twitter';
 
@@ -33,6 +35,8 @@ const getPath = (name, props) => {
       return <Menu {...props} />;
     case FB:
       return <Facebook {...props} />;
+    case GITHUB:
+      return <Github {...props} />;
     case INSTA:
       return <Instagram {...props} />;
     case TWITTER:
