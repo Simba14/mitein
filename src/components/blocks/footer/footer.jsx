@@ -4,7 +4,7 @@ import classnames from 'classnames/bind';
 import { useTranslation } from 'next-i18next';
 
 import Anchor from 'components/atoms/anchor';
-import Svg, { FB, INSTA } from 'components/atoms/svg';
+import Svg, { FB, GITHUB, INSTA } from 'components/atoms/svg';
 import Text from 'components/atoms/text';
 import { ROUTE_PRIVACY, ROUTE_TERMS } from 'routes';
 
@@ -14,6 +14,8 @@ const cx = classnames.bind(styles);
 export const INFO_EMAIL = 'info@mitein.de';
 export const FB_URL = 'https://facebook.com/mitein.berlin';
 export const IG_URL = 'https://instagram.com/mitein.berlin';
+export const GITHUB_URL = 'https://github.com/Simba14/mitein';
+
 const SOCIALS = [
   {
     key: FB,
@@ -22,6 +24,10 @@ const SOCIALS = [
   {
     key: INSTA,
     url: IG_URL,
+  },
+  {
+    key: GITHUB,
+    url: GITHUB_URL,
   },
 ];
 
@@ -43,6 +49,7 @@ const Footer = ({ className }) => {
           </button>
           <Anchor to={ROUTE_PRIVACY}>{t('privacy')}</Anchor>
           <Anchor to={ROUTE_TERMS}>{t('terms')}</Anchor>
+          <Anchor href={GITHUB_URL}>{t('openSource')}</Anchor>
         </div>
         <div className={cx('socials')}>
           {SOCIALS.map(({ url, key }) => (
