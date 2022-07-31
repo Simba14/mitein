@@ -1,5 +1,4 @@
 import React, { useEffect } from 'react';
-import { useMutation } from '@apollo/client';
 import classnames from 'classnames/bind';
 import { useRouter } from 'next/router';
 import { useQuery } from '@apollo/client';
@@ -18,7 +17,6 @@ import { withLayout } from 'components/blocks/layout';
 
 import { sessionProps, withSessionContext } from 'context/session';
 import GET_PROFILE from '@graphql/queries/getProfile.graphql';
-import SIGN_OUT from '@graphql/mutations/signOut.graphql';
 import { ROUTE_LOGIN, ROUTE_CHATS_BOOK } from 'routes';
 import { LEARNER, NATIVE, BOOKED, REJECTED, REQUESTED } from '@constants/user';
 
@@ -37,18 +35,10 @@ const Profile = ({ session }) => {
     skip: !userId,
   });
 
-  const signOutSuccessful = () => {
-    router.push(ROUTE_LOGIN);
-    session.userLoggedOut();
-  };
-
-  const [signOut, { loading: signOutLoading }] = useMutation(SIGN_OUT, {
-    onCompleted: signOutSuccessful,
-  });
-
   useEffect(() => {
     if (!(userId || data) || error) {
-      signOutSuccessful();
+      router.push(ROUTE_LOGIN);
+      session.userLoggedOut();
     }
   }, [userId]);
 
@@ -78,8 +68,6 @@ const Profile = ({ session }) => {
         displayName={displayName}
         email={email}
         interests={interests}
-        signOut={signOut}
-        signOutDisabled={signOutLoading}
         userId={userId}
       />
       {isSuspended && <Suspended suspendedUntil={suspendedUntil} />}

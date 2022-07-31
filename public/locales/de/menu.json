@@ -1,9 +1,12 @@
 {
   "title": "Menü",
-  "about": "Über uns",
-  "how": "So funktioniert’s",
-  "events": "Events",
-  "profile": "Profil",
-  "resources": "Ressourcen",
-  "volunteer": "Ehrenamt"
+  "items": {
+    "about": { "text": "Über uns", "label": "Abschnitt 'Über uns' auf der Startseite"},
+    "how": { "text": "So funktioniert’s", "label": "Abschnitt 'So funktioniert’s' auf der Startseite"},
+    "profile": { "text": "Profil", "label": "Profil seite"},
+    "resources": { "text": "Ressourcen", "label": "Ressourcen seite"},
+    "signUp": { "text": "Anmelden", "label": "Anmelden seite"},
+    "volunteer": { "text": "Ehrenamt", "label": "Ehrenamt seite" }
+  },
+  "signOut": "Abmelden"
 }

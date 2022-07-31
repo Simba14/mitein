@@ -8,15 +8,7 @@
 .container {
   border-bottom: $blue solid 1px;
   padding-bottom: size(4);
-  display: flex;
-  align-items: flex-end;
-  justify-content: space-between;
   margin-bottom: size(4);
-
-  .logOut {
-    text-transform: capitalize;
-    width: size(12);
-  }
 
   .title {
     margin-bottom: size(1);
