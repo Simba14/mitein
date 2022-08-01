@@ -11,7 +11,37 @@ import GET_EMAIL from '@graphql/queries/getEmail.graphql';
 import AccountIcon from 'assets/account.svg';
 
 import styles from './accountSection.module.scss';
+import { bool, func } from 'prop-types';
+import { string } from 'prop-types';
 const cx = classnames.bind(styles);
+
+const NotLoggedInComponent = ({ t }) => (
+  <>
+    <Anchor className={cx('accountLink', 'signUp')} to={ROUTE_SIGN_UP}>
+      <span className={cx('signUpText')}>{t('signUp')}</span>
+      <AccountIcon className={cx('accountIcon')} />
+    </Anchor>
+    <Anchor className={cx('login')} to={ROUTE_LOGIN}>
+      {t('login')}
+    </Anchor>
+  </>
+);
+
+NotLoggedInComponent.propTypes = { t: func };
+
+const LoggedInComponent = ({ loading, email }) => {
+  return loading ? null : (
+    <Anchor className={cx('accountLink')} to={ROUTE_PROFILE}>
+      <AccountIcon className={cx('accountIcon')} />
+      <span className={cx('email')}>{email}</span>
+    </Anchor>
+  );
+};
+
+LoggedInComponent.propTypes = {
+  loading: bool,
+  email: string,
+};
 
 const AccountSection = ({ session }) => {
   const { t } = useTranslation('common');
@@ -21,32 +51,15 @@ const AccountSection = ({ session }) => {
     skip: !userId,
   });
 
-  const NotLoggedInComponent = () => (
-    <>
-      <Anchor className={cx('accountLink', 'signUp')} to={ROUTE_SIGN_UP}>
-        <span className={cx('signUpText')}>{t('signUp')}</span>
-        <AccountIcon className={cx('accountIcon')} />
-      </Anchor>
-      <Anchor className={cx('login')} to={ROUTE_LOGIN}>
-        {t('login')}
-      </Anchor>
-    </>
-  );
-
-  const LoggedInComponent = () => {
-    return loading ? null : (
-      <Anchor className={cx('accountLink')} to={ROUTE_PROFILE}>
-        <AccountIcon className={cx('accountIcon')} />
-        <span className={cx('email')}>{email}</span>
-      </Anchor>
-    );
-  };
-
   const email = get('user.email', data);
 
   return (
     <div className={cx('accountContainer')}>
-      {email || loading ? <LoggedInComponent /> : <NotLoggedInComponent />}
+      {email || loading ? (
+        <LoggedInComponent loading={loading} email={email} />
+      ) : (
+        <NotLoggedInComponent t={t} />
+      )}
     </div>
   );
 };

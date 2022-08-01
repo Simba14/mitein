@@ -1,9 +1,12 @@
 {
   "title": "Menu",
-  "about": "About",
-  "events": "Events",
-  "how": "How",
-  "profile": "Profile",
-  "resources": "Resources",
-  "volunteer": "Volunteer"
+  "items": {
+    "about": { "text": "About", "label": "About section on home page"},
+    "how": { "text": "How", "label": "How section on home page"},
+    "profile": { "text": "Profile", "label": "Profile page"},
+    "resources": { "text": "Resources", "label": "Resources page"},
+    "signUp": { "text": "Sign Up", "label": "Sign up page"},
+    "volunteer": { "text": "Volunteer", "label": "Volunteer page" }
+  },
+  "signOut": "Log Out"
 }

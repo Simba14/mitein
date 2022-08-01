@@ -1,6 +1,7 @@
 @import 'scss/breakpoints.scss';
 @import 'scss/constants.scss';
 @import 'scss/colors.scss';
+@import 'scss/link.scss';
 @import 'scss/spacings.scss';
 
 $items: 4;
@@ -99,6 +100,12 @@ $icon-size: size(3);
           visibility: hidden;
           transform: scaleX(0);
         }
+      }
+
+      &.button {
+        @extend %link;
+
+        color: $dark-blue;
       }
     }
   }

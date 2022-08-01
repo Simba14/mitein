@@ -1,47 +1,61 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import { useTranslation } from 'next-i18next';
 import classnames from 'classnames/bind';
+import { useMutation } from '@apollo/client';
+import { useRouter } from 'next/router';
+import { get } from 'lodash/fp';
 
 import { MenuContextConsumer } from 'context/menu/';
 import Anchor from 'components/atoms/anchor';
 import Svg, { CLOSE, MENU } from 'components/atoms/svg';
-import { ROUTE_ABOUT, ROUTE_HOW, ROUTE_VOLUNTEER } from 'routes';
+import { ROUTE_ABOUT, ROUTE_HOW, ROUTE_SIGN_UP, ROUTE_VOLUNTEER } from 'routes';
+import { sessionProps, withSessionContext } from 'context/session';
+import SIGN_OUT from '@graphql/mutations/signOut.graphql';
+import { ROUTE_LOGIN } from 'routes';
 
 import styles from './menu.module.scss';
 const cx = classnames.bind(styles);
 
 const MENU_ITEMS = [
   {
-    'aria-label': 'About section on home page',
     title: 'about',
     hashId: 'about',
     to: ROUTE_ABOUT,
   },
   {
-    'aria-label': 'How section on home page',
     title: 'how',
     hashId: 'how',
     to: ROUTE_HOW,
   },
   {
-    'aria-label': 'Volunteer page',
     title: 'volunteer',
     to: ROUTE_VOLUNTEER,
   },
-  // {
-  //   'aria-label': 'Profile page',
-  //   title: 'profile',
-  //   to: ROUTE_PROFILE,
-  // },
 ];
 
-const Menu = () => {
+const SIGN_UP_PROPS = {
+  title: 'signUp',
+  to: ROUTE_SIGN_UP,
+};
+
+export const Menu = ({ session }) => {
   const { t } = useTranslation('menu');
+  const router = useRouter();
+  const userId = get('userId', session);
+
+  const signOutSuccessful = useCallback(() => {
+    router.push(ROUTE_LOGIN);
+    session.userLoggedOut();
+  }, [router, session?.userLoggedOut]);
+
+  const [signOut, { loading: signOutLoading }] = useMutation(SIGN_OUT, {
+    onCompleted: signOutSuccessful,
+  });
 
   return (
     <MenuContextConsumer>
       {({ isMenuOpen, setIsMenuOpen }) => {
-        const handleOnClick = () => setIsMenuOpen(!isMenuOpen);
+        const handleToggleClick = () => setIsMenuOpen(!isMenuOpen);
 
         return (
           <div className={cx('menu')}>
@@ -49,7 +63,7 @@ const Menu = () => {
               className={cx('buttonToggle', {
                 isOpen: isMenuOpen,
               })}
-              onClick={handleOnClick}
+              onClick={handleToggleClick}
             >
               <Svg className={cx('icon')} name={isMenuOpen ? CLOSE : MENU} />
             </button>
@@ -60,14 +74,32 @@ const Menu = () => {
             >
               {MENU_ITEMS.map(item => (
                 <Anchor
+                  aria-label={t(`items.${item.title}.label`)}
                   key={item.title}
                   className={cx('navItem')}
                   activeClassName={cx('active')}
                   {...item}
                 >
-                  {t(item.title)}
+                  {t(`items.${item.title}.text`)}
                 </Anchor>
               ))}
+              {userId ? (
+                <button
+                  className={cx('navItem', 'button')}
+                  onClick={signOut}
+                  disabled={signOutLoading}
+                >
+                  {t('signOut')}
+                </button>
+              ) : (
+                <Anchor
+                  className={cx('navItem')}
+                  activeClassName={cx('active')}
+                  {...SIGN_UP_PROPS}
+                >
+                  {t(`items.${SIGN_UP_PROPS.title}.text`)}
+                </Anchor>
+              )}
             </nav>
           </div>
         );
@@ -76,4 +108,8 @@ const Menu = () => {
   );
 };
 
-export default Menu;
+Menu.propTypes = {
+  session: sessionProps,
+};
+
+export default withSessionContext(Menu);
