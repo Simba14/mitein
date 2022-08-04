@@ -1,6 +1,6 @@
 import config from '@api/config';
 import sendChatRequestedEmail from '@api/pubsub/drivers/sendChatEmail';
-import { GERMAN } from '@api/firebase/constants/';
+import { DEFAULT_TIMEZONE, GERMAN } from '@api/firebase/constants/';
 
 import { formatChatDate, formatChatTime } from 'helpers/index';
 import { ROUTE_PROFILE } from 'routes';
@@ -28,7 +28,12 @@ const ChatRequestedMessageHandler = ({
     : template.en.chatRequest;
 
   const date = formatChatDate(start, displayLanguage);
-  const time = formatChatTime({ start, end, language: displayLanguage });
+  const time = formatChatTime({
+    start,
+    end,
+    language: displayLanguage,
+    timeZone: DEFAULT_TIMEZONE,
+  });
 
   return sendRequestedEmail({
     emails: [{ email }],

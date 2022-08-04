@@ -1,6 +1,6 @@
 import config from '@api/config';
 import sendChatConfirmationEmail from '@api/pubsub/drivers/sendChatEmail';
-import { ENGLISH } from '@api/firebase/constants/';
+import { DEFAULT_TIMEZONE, ENGLISH } from '@api/firebase/constants/';
 
 import { formatChatDate, formatChatTime } from 'helpers/index';
 
@@ -24,7 +24,12 @@ const ChatBookedMessageHandler = ({
       : template.de.chatConfirmation;
 
   const date = formatChatDate(start, displayLanguage);
-  const time = formatChatTime({ start, end, language: displayLanguage });
+  const time = formatChatTime({
+    start,
+    end,
+    language: displayLanguage,
+    timeZone: DEFAULT_TIMEZONE,
+  });
 
   return sendConfirmationEmail({
     emails: [{ email }],
