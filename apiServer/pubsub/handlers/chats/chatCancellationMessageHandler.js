@@ -4,6 +4,7 @@ import { GERMAN } from '@api/firebase/constants/';
 
 import { formatChatDate, formatChatTime } from 'helpers/index';
 import { ROUTE_PROFILE } from 'routes';
+import { DEFAULT_TIMEZONE } from '@api/firebase/constants';
 
 const ChatCancellationMessageHandler = ({
   sendCancellationEmail = sendChatCancellationEmail,
@@ -27,7 +28,12 @@ const ChatCancellationMessageHandler = ({
     : template.en.chatCancellation;
 
   const date = formatChatDate(start, displayLanguage);
-  const time = formatChatTime({ start, end, language: displayLanguage });
+  const time = formatChatTime({
+    start,
+    end,
+    language: displayLanguage,
+    timezone: DEFAULT_TIMEZONE,
+  });
 
   return sendCancellationEmail({
     emails: [{ email }],

@@ -19,7 +19,7 @@ export const formatChatDate = (date, locale) =>
     DATE_OPTIONS,
   );
 
-export const formatChatTime = ({ start, end, language }) => {
+export const formatChatTime = ({ start, end, language, ...options }) => {
   const dateStart = new Date(start);
   const dateEnd = new Date(end);
   const locale = language === GERMAN ? DE_LOCALE : EN_LOCALE;
@@ -27,9 +27,11 @@ export const formatChatTime = ({ start, end, language }) => {
   return `${dateStart.toLocaleTimeString(locale, {
     hour: '2-digit',
     minute: '2-digit',
+    ...options,
   })} - ${dateEnd.toLocaleTimeString(locale, {
     hour: '2-digit',
     minute: '2-digit',
     timeZoneName: 'short',
+    ...options,
   })}`;
 };
