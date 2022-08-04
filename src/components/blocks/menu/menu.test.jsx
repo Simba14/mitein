@@ -2,7 +2,7 @@ import React from 'react';
 import { render, screen, userEvent } from 'testUtils';
 import { Menu } from './menu';
 import { MenuContextProvider } from 'context/menu';
-import { ROUTE_ABOUT, ROUTE_HOW, ROUTE_SIGN_UP, ROUTE_VOLUNTEER } from 'routes';
+import { ROUTE_ABOUT, ROUTE_HOW, ROUTE_VOLUNTEER } from 'routes';
 import { MOCK_ID } from 'unitTests/sharedMocks';
 
 const MOCK_SESSION = {
@@ -19,7 +19,7 @@ test('Menu renders correctly when not logged in and is closed by default', () =>
   const toggle = screen.getByRole('button');
   const icon = screen.getByTestId('svg');
   const nav = screen.getByRole('navigation');
-  const [about, how, volunteer, signUp] = screen.getAllByRole('link');
+  const [about, how, volunteer] = screen.getAllByRole('link');
 
   expect(toggle).toBeInTheDocument();
   expect(toggle).toContainElement(icon);
@@ -29,12 +29,10 @@ test('Menu renders correctly when not logged in and is closed by default', () =>
   expect(nav).toContainElement(about);
   expect(nav).toContainElement(how);
   expect(nav).toContainElement(volunteer);
-  expect(nav).toContainElement(signUp);
 
   expect(about).toHaveAttribute('href', ROUTE_ABOUT);
   expect(how).toHaveAttribute('href', ROUTE_HOW);
   expect(volunteer).toHaveAttribute('href', ROUTE_VOLUNTEER.slice(0, -1));
-  expect(signUp).toHaveAttribute('href', ROUTE_SIGN_UP.slice(0, -1));
 });
 
 test('Menu renders correctly when logged in and is closed by default', () => {
@@ -43,7 +41,7 @@ test('Menu renders correctly when logged in and is closed by default', () => {
       <Menu session={MOCK_SESSION} />
     </MenuContextProvider>,
   );
-  const [toggle, signOut] = screen.getAllByRole('button');
+  const [toggle] = screen.getAllByRole('button');
   const icon = screen.getByTestId('svg');
   const nav = screen.getByRole('navigation');
   const [about, how, volunteer] = screen.getAllByRole('link');
@@ -56,7 +54,6 @@ test('Menu renders correctly when logged in and is closed by default', () => {
   expect(nav).toContainElement(about);
   expect(nav).toContainElement(how);
   expect(nav).toContainElement(volunteer);
-  expect(nav).toContainElement(signOut);
 
   expect(about).toHaveAttribute('href', ROUTE_ABOUT);
   expect(how).toHaveAttribute('href', ROUTE_HOW);
