@@ -5,7 +5,6 @@ import User from '@api/firebase/user';
 import {
   FirebaseCreateDocError,
   FirebaseGetDocError,
-  FirebaseChatUnavailableError,
 } from '@api/firebase/errors';
 import {
   COLLECTION_CHATS,
@@ -150,10 +149,6 @@ Chat.onConfirmation = async chat => {
 };
 
 Chat.book = async ({ id, fields }) => {
-  const existingChat = await Chat.byId(id);
-  const isRequested = existingChat?.status === CHAT_STATUS_REQUESTED;
-  if (!isRequested) throw new FirebaseChatUnavailableError();
-
   const link = await generateZoomLink(fields.start);
   const chat = await Chat.updateById({
     id,

@@ -36,6 +36,7 @@ const Mitein = ({ Component, pageProps }) => (
       <ErrorBoundary>
         <Component {...pageProps} />
         <ToastContainer
+          autoClose={false}
           position={toast.POSITION.TOP_LEFT}
           hideProgressBar
           transition={Slide}

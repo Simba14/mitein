@@ -13,7 +13,10 @@ import Text, { HEADING_4 } from 'components/atoms/text';
 import REQUEST_CHAT from '@graphql/mutations/updateChat.graphql';
 import GET_SLOTS from '@graphql/queries/getAvailableSlots.graphql';
 import { formatChatDate, formatChatTime } from 'helpers/index';
-import { LEARNER, REQUESTED } from '@constants/user';
+import {
+  USER_TYPE_LEARNER,
+  CHAT_STATUS_REQUESTED,
+} from '@api/firebase/constants';
 
 import styles from './slots.module.scss';
 const cx = classnames.bind(styles);
@@ -49,7 +52,7 @@ const Slots = ({ userId, onSelect }) => {
       variables: {
         ...selectedChat,
         participant2Id: userId,
-        status: REQUESTED,
+        status: CHAT_STATUS_REQUESTED,
       },
     })
       .then(() => {
@@ -161,7 +164,7 @@ const Slots = ({ userId, onSelect }) => {
           error={requestChatError}
           handleConfirmClick={handleConfirmClick}
           modalOpen={modalOpen}
-          namespace={LEARNER}
+          namespace={USER_TYPE_LEARNER}
           setModalOpen={setModalOpen}
         />
       </div>

@@ -14,14 +14,14 @@ import GET_AVAILABILITY from '@graphql/queries/getChats.graphql';
 import GET_PROFILE from '@graphql/queries/getProfile.graphql';
 import { formatChatDate, formatChatTime } from 'helpers/index';
 import {
-  AVAILABLE,
-  BOOKED,
-  CANCELLED,
-  REQUESTED,
-  REJECTED,
-  LEARNER,
-  NATIVE,
-} from '@constants/user';
+  CHAT_STATUS_AVAILABLE,
+  CHAT_STATUS_BOOKED,
+  CHAT_STATUS_CANCELLED,
+  CHAT_STATUS_REQUESTED,
+  CHAT_STATUS_REJECTED,
+  USER_TYPE_LEARNER,
+  USER_TYPE_NATIVE,
+} from '@api/firebase/constants';
 
 import styles from './chatCard.module.scss';
 
@@ -31,12 +31,13 @@ const ChatCard = ({ chat, status, userType, userId }) => {
   const {
     i18n: { language },
     t,
-  } = useTranslation('chat');
+  } = useTranslation('chat', 'errors');
   const [modalOpen, setModalOpen] = useState(false);
-  const isLearner = userType === LEARNER;
-  const isBooked = status === BOOKED;
-  const isRejected = status === REJECTED;
-  const isRequested = status === REQUESTED;
+  const isLearner = userType === USER_TYPE_LEARNER;
+  const isBooked = status === CHAT_STATUS_BOOKED;
+  const isDenied =
+    status === CHAT_STATUS_REJECTED || status === CHAT_STATUS_CANCELLED;
+  const isRequested = status === CHAT_STATUS_REQUESTED;
   const { id, ...chatFields } = chat;
 
   const refetchQueries = [
@@ -45,7 +46,10 @@ const ChatCard = ({ chat, status, userType, userId }) => {
       : [
           {
             query: GET_AVAILABILITY,
-            variables: { participant1Id: userId, notOneOf: [REJECTED] },
+            variables: {
+              participant1Id: userId,
+              notOneOf: [CHAT_STATUS_REJECTED],
+            },
           },
         ]),
     {
@@ -57,7 +61,7 @@ const ChatCard = ({ chat, status, userType, userId }) => {
   const [amendChat, mutationStatus] = useMutation(UPDATE_CHAT, {
     onError: error => {
       setModalOpen(false);
-      toast.error(error?.message);
+      toast.error(t(error?.message, { ns: 'errors' }));
       mutationStatus.client.refetchQueries({ include: refetchQueries });
     },
   });
@@ -67,7 +71,7 @@ const ChatCard = ({ chat, status, userType, userId }) => {
       variables: {
         id,
         ...chatFields,
-        status: BOOKED,
+        status: CHAT_STATUS_BOOKED,
       },
       refetchQueries,
     }).then(() => setModalOpen(false));
@@ -79,7 +83,7 @@ const ChatCard = ({ chat, status, userType, userId }) => {
         variables: {
           id,
           ...chatFields,
-          status: CANCELLED,
+          status: CHAT_STATUS_CANCELLED,
           cancellationReason: userType,
           cancelledBy: userId,
         },
@@ -92,10 +96,10 @@ const ChatCard = ({ chat, status, userType, userId }) => {
           ...chatFields,
           ...(isLearner
             ? {
-                status: AVAILABLE,
+                status: CHAT_STATUS_AVAILABLE,
                 participant2Id: null,
               }
-            : { status: REJECTED }),
+            : { status: CHAT_STATUS_REJECTED }),
         },
         refetchQueries,
       });
@@ -103,7 +107,7 @@ const ChatCard = ({ chat, status, userType, userId }) => {
   };
 
   return (
-    <div className={cx('chat', { unavailable: isRejected })}>
+    <div className={cx('chat', { unavailable: isDenied })}>
       <Text className={cx('title')} type={BODY_3}>
         {t(`${userType}.${status}.title`)}
       </Text>
@@ -142,7 +146,7 @@ const ChatCard = ({ chat, status, userType, userId }) => {
           {t('chatLink')}
         </Anchor>
       )}
-      {!isRejected && (
+      {!isDenied && (
         <Cta
           className={cx('cancelCta')}
           fullWidth
@@ -173,8 +177,13 @@ ChatCard.propTypes = {
     start: string,
     end: string,
   }).isRequired,
-  status: oneOf([BOOKED, CANCELLED, REJECTED, REQUESTED]).isRequired,
-  userType: oneOf([LEARNER, NATIVE]).isRequired,
+  status: oneOf([
+    CHAT_STATUS_BOOKED,
+    CHAT_STATUS_CANCELLED,
+    CHAT_STATUS_REJECTED,
+    CHAT_STATUS_REQUESTED,
+  ]).isRequired,
+  userType: oneOf([USER_TYPE_LEARNER, USER_TYPE_NATIVE]).isRequired,
   userId: string,
 };
 

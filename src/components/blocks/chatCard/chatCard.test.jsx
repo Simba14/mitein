@@ -12,13 +12,13 @@ import {
   MOCK_TIME_EN,
 } from 'unitTests/sharedMocks';
 import {
-  BOOKED,
-  CANCELLED,
-  REQUESTED,
-  REJECTED,
-  LEARNER,
-  NATIVE,
-} from '@constants/user';
+  CHAT_STATUS_BOOKED,
+  CHAT_STATUS_CANCELLED,
+  CHAT_STATUS_REQUESTED,
+  CHAT_STATUS_REJECTED,
+  USER_TYPE_LEARNER,
+  USER_TYPE_NATIVE,
+} from '@api/firebase/constants';
 import UPDATE_CHAT from '@graphql/mutations/updateChat.graphql';
 
 const mockChat = {
@@ -33,8 +33,8 @@ const CANCEL_CHAT = {
     query: UPDATE_CHAT,
     variables: {
       ...mockChat,
-      status: CANCELLED,
-      cancellationReason: LEARNER,
+      status: CHAT_STATUS_CANCELLED,
+      cancellationReason: USER_TYPE_LEARNER,
       cancelledBy: MOCK_ID,
     },
   },
@@ -50,13 +50,13 @@ describe('User is a LEARNER', () => {
     const { container } = render(
       <ChatCard
         chat={mockChat}
-        status={BOOKED}
-        userType={LEARNER}
+        status={CHAT_STATUS_BOOKED}
+        userType={USER_TYPE_LEARNER}
         userId={MOCK_ID}
       />,
     );
 
-    const textKey = `${LEARNER}.${BOOKED}`;
+    const textKey = `${USER_TYPE_LEARNER}.${CHAT_STATUS_BOOKED}`;
     const cancelBtn = screen.getByRole('button');
     const link = screen.getByRole('link');
     expect(container).toHaveTextContent(`${textKey}.title`);
@@ -71,13 +71,13 @@ describe('User is a LEARNER', () => {
     const { container } = render(
       <ChatCard
         chat={mockChat}
-        status={REQUESTED}
-        userType={LEARNER}
+        status={CHAT_STATUS_REQUESTED}
+        userType={USER_TYPE_LEARNER}
         userId={MOCK_ID}
       />,
     );
 
-    const textKey = `${LEARNER}.${REQUESTED}`;
+    const textKey = `${USER_TYPE_LEARNER}.${CHAT_STATUS_REQUESTED}`;
     const cancelBtn = screen.getByRole('button');
     const link = screen.queryByRole('link');
     expect(container).toHaveTextContent(`${textKey}.title`);
@@ -92,13 +92,13 @@ describe('User is a LEARNER', () => {
     const { container } = render(
       <ChatCard
         chat={mockChat}
-        status={REJECTED}
-        userType={LEARNER}
+        status={CHAT_STATUS_REJECTED}
+        userType={USER_TYPE_LEARNER}
         userId={MOCK_ID}
       />,
     );
 
-    const textKey = `${LEARNER}.${REJECTED}`;
+    const textKey = `${USER_TYPE_LEARNER}.${CHAT_STATUS_REJECTED}`;
     const cancelBtn = screen.queryByRole('button');
     const link = screen.queryByRole('link');
     expect(container).toHaveTextContent(`${textKey}.title`);
@@ -114,8 +114,8 @@ describe('User is a LEARNER', () => {
     render(
       <ChatCard
         chat={mockChat}
-        status={REQUESTED}
-        userType={LEARNER}
+        status={CHAT_STATUS_REQUESTED}
+        userType={USER_TYPE_LEARNER}
         userId={MOCK_ID}
       />,
       {
@@ -135,8 +135,8 @@ describe('User is a NATIVE', () => {
     const { container } = render(
       <ChatCard
         chat={mockChat}
-        status={REQUESTED}
-        userType={NATIVE}
+        status={CHAT_STATUS_REQUESTED}
+        userType={USER_TYPE_NATIVE}
         userId={MOCK_ID}
       />,
       {
@@ -144,7 +144,7 @@ describe('User is a NATIVE', () => {
       },
     );
 
-    const textKey = `${NATIVE}.${REQUESTED}`;
+    const textKey = `${USER_TYPE_NATIVE}.${CHAT_STATUS_REQUESTED}`;
     const [confirmBtn, cancelBtn] = screen.getAllByRole('button');
     const link = screen.queryByRole('link');
     expect(container).toHaveTextContent(`${textKey}.title`);

@@ -15,7 +15,7 @@ import { withLayout } from 'components/blocks/layout';
 import { sessionProps, withSessionContext } from 'context/session';
 import GET_PROFILE from '@graphql/queries/getProfile.graphql';
 import { ROUTE_LOGIN, ROUTE_PROFILE } from 'routes';
-import { LEARNER } from '@constants/user';
+import { USER_TYPE_LEARNER } from '@api/firebase/constants';
 
 import styles from './bookChat.module.scss';
 const cx = classnames.bind(styles);
@@ -44,7 +44,7 @@ const BookChat = ({ session }) => {
   useEffect(() => {
     const userType = get('user.type', data);
 
-    if (userType && userType !== LEARNER) {
+    if (userType && userType !== USER_TYPE_LEARNER) {
       router.push(ROUTE_PROFILE);
     }
   }, [data]);
@@ -60,7 +60,7 @@ const BookChat = ({ session }) => {
     },
   } = data;
 
-  const isLearner = type === LEARNER;
+  const isLearner = type === USER_TYPE_LEARNER;
   const isSuspended = suspendedUntil > new Date().toISOString();
 
   const getContent = () => {

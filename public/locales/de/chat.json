@@ -19,6 +19,10 @@
       "title": "Sitzung gebucht für:",
       "cancelCta": "Sitzung stornieren"
     },
+    "CANCELLED": {
+      "title": "Sitzung abgesagt:",
+      "moreInfo": "Diese Sitzung ist nicht mehr geplant. Bitte stellen Sie eine neue Anfrage."
+    },
     "REQUESTED": {
       "title": "Sitzung angefragt für:",
       "cancelCta": "Sitzung stornieren",
@@ -38,6 +42,10 @@
     "BOOKED": {
       "title": "Sitzung gebucht für:",
       "cancelCta": "Sitzung stornieren"
+    },
+    "CANCELLED": {
+      "title": "Sitzung abgesagt:",
+      "moreInfo": "Sie ist nicht mehr geplant oder verfügbar."
     },
     "REQUESTED": {
       "title": "Sitzung angefragt für:",

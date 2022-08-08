@@ -62,7 +62,9 @@ const PersonalInfo = ({ displayName, email, interests, userId }) => {
             </button>
           ))
         ) : (
-          <Text type={BODY_6}>{t('interests.none')}</Text>
+          <Text className={cx('noInterests')} type={BODY_6}>
+            {t('interests.none')}
+          </Text>
         )}
         <Cta
           aria-label={t('interests.editLabel')}

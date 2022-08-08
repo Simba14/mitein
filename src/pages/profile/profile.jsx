@@ -18,7 +18,7 @@ import { withLayout } from 'components/blocks/layout';
 import { sessionProps, withSessionContext } from 'context/session';
 import GET_PROFILE from '@graphql/queries/getProfile.graphql';
 import { ROUTE_LOGIN, ROUTE_CHATS_BOOK } from 'routes';
-import { LEARNER, NATIVE, BOOKED, REJECTED, REQUESTED } from '@constants/user';
+import { USER_TYPE_LEARNER, USER_TYPE_NATIVE } from '@api/firebase/constants';
 
 import styles from './profile.module.scss';
 import PersonalInfo from 'components/blocks/personalInfo';
@@ -50,16 +50,17 @@ const Profile = ({ session }) => {
       displayName,
       email,
       interests,
-      chats: { booked, rejected, requested },
+      chats: { booked, cancelled, rejected, requested },
       suspendedUntil,
       type,
     },
   } = data;
 
   const requestedAccordionData = requested || rejected;
+  const upcomingChats = booked || cancelled;
 
-  const isLearner = type === LEARNER;
-  const isNative = type === NATIVE;
+  const isLearner = type === USER_TYPE_LEARNER;
+  const isNative = type === USER_TYPE_NATIVE;
   const isSuspended = suspendedUntil > new Date().toISOString();
 
   return (
@@ -71,7 +72,7 @@ const Profile = ({ session }) => {
         userId={userId}
       />
       {isSuspended && <Suspended suspendedUntil={suspendedUntil} />}
-      {booked && (
+      {upcomingChats && (
         <Accordion
           className={cx('accordion')}
           headerClassName={cx('accordionHeader')}
@@ -86,11 +87,11 @@ const Profile = ({ session }) => {
                 </Anchor>
               </Text>
               <div className={cx('chatsContainer')}>
-                {booked.map(chat => (
+                {upcomingChats.map(chat => (
                   <ChatCard
                     key={chat.id}
                     chat={chat}
-                    status={BOOKED}
+                    status={chat.status}
                     userType={type}
                     userId={userId}
                   />
@@ -112,7 +113,7 @@ const Profile = ({ session }) => {
             <ChatCard
               key={chat.id}
               chat={chat}
-              status={requested ? REQUESTED : REJECTED}
+              status={chat.status}
               userType={type}
               userId={userId}
             />

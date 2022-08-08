@@ -31,6 +31,7 @@ export const getServerSideProps = async ({ locale, params }) => {
     props: {
       ...(await serverSideTranslations(locale, [
         'common',
+        'errors',
         'menu',
         'verifyEmail',
       ])),

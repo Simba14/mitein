@@ -20,6 +20,10 @@
       "cancelCta": "Cancel chat",
       "moreInfo": "Will take place online via the zoom link below:"
     },
+    "CANCELLED": {
+      "title": "Chat cancelled:",
+      "moreInfo": "This chat is no longer taking place. Please request a new one."
+    },
     "REQUESTED": {
       "title": "Chat Requested for:",
       "cancelCta": "Cancel chat",
@@ -40,6 +44,10 @@
       "title": "Chat booked for:",
       "cancelCta": "Cancel chat",
       "moreInfo": "Chat will be held online via Zoom."
+    },
+    "CANCELLED": {
+      "title": "Chat cancelled:",
+      "moreInfo": "This chat will no longer take place."
     },
     "REQUESTED": {
       "title": "Chat Requested for:",

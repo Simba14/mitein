@@ -12,6 +12,7 @@ import {
   MAX_NUMBER_OF_CANCELLATIONS,
   SUSPENSION_DURATION,
   CHAT_STATUS_BOOKED,
+  CHAT_STATUS_CANCELLED,
   CHAT_STATUS_REQUESTED,
   CHAT_STATUS_REJECTED,
 } from '@api/firebase/constants';
@@ -63,19 +64,21 @@ User.byIdWithAvailability = async id => {
   const dateConstraint = new Date();
   dateConstraint.setTime(dateConstraint.getTime() - 60 * 60 * 1000); // set 1 hour into past
 
-  const [booked, requested, rejected] = allChats.reduce(
-    ([bookings, requests, rejections], chat) => {
+  const [booked, cancelled, requested, rejected] = allChats.reduce(
+    ([bookings, cancellations, requests, rejections], chat) => {
       // only include upcoming chats
       if (chat.start < dateConstraint.toISOString())
-        return [bookings, requests, rejections];
+        return [bookings, cancellations, requests, rejections];
       if (chat.status === CHAT_STATUS_BOOKED)
-        return [[...bookings, chat], requests, rejections];
+        return [[...bookings, chat], cancellations, requests, rejections];
+      if (chat.status === CHAT_STATUS_CANCELLED)
+        return [bookings, [...cancellations, chat], requests, rejections];
       if (chat.status === CHAT_STATUS_REQUESTED)
-        return [bookings, [...requests, chat], rejections];
+        return [bookings, cancellations, [...requests, chat], rejections];
       if (chat.status === CHAT_STATUS_REJECTED)
-        return [bookings, requests, [...rejections, chat]];
+        return [bookings, cancellations, requests, [...rejections, chat]];
 
-      return [bookings, requests, rejections];
+      return [bookings, cancellations, requests, rejections];
     },
     [[], [], []],
   );
@@ -84,6 +87,7 @@ User.byIdWithAvailability = async id => {
     ...user,
     chats: {
       booked: isEmpty(booked) ? null : booked,
+      cancelled: isEmpty(cancelled) ? null : cancelled,
       requested: isEmpty(requested) ? null : requested,
       rejected: isEmpty(rejected) ? null : rejected,
     },

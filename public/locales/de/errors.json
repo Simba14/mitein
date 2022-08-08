@@ -1,0 +1,10 @@
+{
+    "accountNotFound": "Fehler beim Abrufen des Kontos",
+    "chatCancelled": "Der Chat wurde vom anderen Teilnehmer abgebrochen und ist nicht mehr verfügbar",
+    "chatUnavailable": "Dieser Chat ist nicht mehr verfügbar",
+    "genericError": "Es ist ein Fehler aufgetreten. Wir empfehlen, die Seite zu aktualisieren.",
+    "emailAlreadyExists": "Es existiert bereits ein Konto mit dieser E-Mail-Adresse.",
+    "emailNotVerified": "Diese E-Mail ist nicht verifiziert",
+    "tooManyAttempts": "Zu viele erfolglose Versuche",
+    "wrongCredentials": "Falsche Anmeldedaten angegeben"
+}
