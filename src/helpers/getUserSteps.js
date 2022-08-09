@@ -3,10 +3,10 @@ import SelectCalendarSvg from 'assets/selectCalendar.svg';
 import OnlineChatSvg from 'assets/onlineChat.svg';
 import RequestSvg from 'assets/emailRequest.svg';
 import YesNoSvg from 'assets/yesNo.svg';
-import { LEARNER } from '@constants/user';
+import { USER_TYPE_LEARNER } from '@api/firebase/constants';
 
 const getUserSteps = userType =>
-  userType === LEARNER
+  userType === USER_TYPE_LEARNER
     ? [
         {
           name: 'step1',

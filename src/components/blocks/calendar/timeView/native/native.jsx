@@ -12,7 +12,7 @@ import Loading from 'components/atoms/loading';
 import GET_AVAILABILITY from '@graphql/queries/getAvailability.graphql';
 import CREATE_CHATS from '@graphql/mutations/createChat.graphql';
 import DELETE_CHATS from '@graphql/mutations/deleteChats.graphql';
-import { AVAILABLE } from '@constants/user';
+import { CHAT_STATUS_AVAILABLE } from '@api/firebase/constants';
 import useWindowDimensions from 'hooks/useWindowDimensions';
 import { isSpecifiedBreakpoint } from 'helpers/index';
 import { TABLET_WIDE } from '@constants/breakpoints';
@@ -43,7 +43,7 @@ const NativeCalendar = ({ userId, userType }) => {
     updateAvailability({
       variables: {
         participant1Id: userId,
-        status: AVAILABLE,
+        status: CHAT_STATUS_AVAILABLE,
         start: startStr,
         end: endStr,
         userType,

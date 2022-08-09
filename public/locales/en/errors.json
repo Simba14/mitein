@@ -1,0 +1,10 @@
+{
+    "accountNotFound": "Error retrieving account",
+    "chatCancelled": "Chat was canceled by the other participant and is no longer available",
+    "chatUnavailable": "This chat is no longer available",
+    "genericError": "Something went wrong. We recommend refreshing the page.",
+    "emailAlreadyExists": "An account with this email already exists",
+    "emailNotVerified": "This Email is not verified",
+    "tooManyAttempts": "Too many unsuccessful attempts",
+    "wrongCredentials": "Incorrect credentials provided"
+}

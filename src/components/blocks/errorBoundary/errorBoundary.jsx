@@ -24,7 +24,6 @@ export class ErrorBoundary extends React.Component {
 
   componentDidCatch() {
     // TODO: add Sentry logging
-    // console.log({ error, errorInfo });
   }
 
   render() {

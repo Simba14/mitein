@@ -9,6 +9,7 @@ import { throttle } from 'lodash';
 import Anchor from 'components/atoms/anchor';
 import Cta from 'components/atoms/cta';
 import { ROUTE_FORGOT_PASSWORD, ROUTE_LOGIN, ROUTE_SIGN_UP } from 'routes';
+import { USER_TYPE_LEARNER, USER_TYPE_NATIVE } from '@api/firebase/constants';
 
 import styles from './form.module.scss';
 const cx = classnames.bind(styles);
@@ -17,16 +18,6 @@ export const SIGN_UP_TYPE = 'signUp';
 export const LOGIN_TYPE = 'login';
 export const FORGOT_PASSWORD = 'forgotPassword';
 export const RESET_PASSWORD = 'resetPassword';
-
-const LEARNER_TYPE = 'LEARNER';
-const NATIVE_TYPE = 'NATIVE';
-const REPRESENTATIVE_TYPE = 'REPRESENTATIVE';
-
-const userType = {
-  learner: LEARNER_TYPE,
-  native: NATIVE_TYPE,
-  representative: REPRESENTATIVE_TYPE,
-};
 
 const EmailInput = ({ errors, registerInput, t }) => (
   <div className={cx('fieldContainer', { hasError: errors?.email })}>
@@ -61,7 +52,7 @@ const Form = ({
   onSubmit,
   type,
 }) => {
-  const { t } = useTranslation('form');
+  const { t } = useTranslation(['form', 'errors']);
   const {
     clearErrors,
     register,
@@ -184,12 +175,11 @@ const Form = ({
               className={cx('dropdown')}
               id="accountType"
             >
-              <option value={userType.learner}>
+              <option value={USER_TYPE_LEARNER}>
                 {t('accountType.learner')}
               </option>
-              <option value={userType.native}>{t('accountType.native')}</option>
-              <option value={userType.representative}>
-                {t('accountType.representative')}
+              <option value={USER_TYPE_NATIVE}>
+                {t('accountType.native')}
               </option>
             </select>
           </div>
@@ -218,7 +208,7 @@ const Form = ({
         </div>
       ) : (
         <div className={cx('error', { visible: errors?.submit })}>
-          {get('submit.message', errors)}
+          {t(get('submit.message', errors), { ns: 'errors' })}
         </div>
       )}
     </form>

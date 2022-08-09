@@ -9,7 +9,11 @@ import { get } from 'lodash/fp';
 
 import { deLocale } from 'components/blocks/calendar/locales';
 import { BLUE, GREEN, GREY, RED } from '@constants/colors';
-import { AVAILABLE, BOOKED, REQUESTED } from '@constants/user';
+import {
+  CHAT_STATUS_AVAILABLE,
+  CHAT_STATUS_BOOKED,
+  CHAT_STATUS_REQUESTED,
+} from '@api/firebase/constants';
 
 import styles from './calendar.module.scss';
 const cx = classnames.bind(styles);
@@ -22,13 +26,13 @@ const MAX_TIME = '21:00:00';
 
 const getEventColor = status => {
   switch (status) {
-    case AVAILABLE:
+    case CHAT_STATUS_AVAILABLE:
       return GREEN;
-    case BOOKED:
+    case CHAT_STATUS_BOOKED:
       return BLUE;
     case SELECTED:
       return RED;
-    case REQUESTED:
+    case CHAT_STATUS_REQUESTED:
       return GREY;
     default:
       return GREEN;
