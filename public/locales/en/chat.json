@@ -34,9 +34,16 @@
       "moreInfo": "This chat is no longer available. Please request another one."
     },
     "modal": {
-      "title": "Are you sure?",
-      "disclaimer": "Request the chat only if you defininitely can attend.\nMitein is a charity and free service. Cancellations make our life tough.\nTherefore, we only allow one cancellation per user once a chat is booked.",
-      "cta": "Request chat"
+      "request": {
+        "title": "Are you sure?",
+        "disclaimer": "Request the chat only if you definitely can attend.\nMitein is a charity and free service. Cancellations make our life tough.\nTherefore, we only allow one cancellation per user once a chat is booked.",
+        "cta": "Request chat"
+      },
+      "cancel": {
+        "title": "Are you sure?",
+        "disclaimer": "Cancel the chat only if you definitely cannot attend.\nMitein is a charity and free service. Cancellations make our life tough.\nTherefore, we only allow one cancellation per user once a chat is booked.",
+        "cta": "Cancel chat"
+      }
     }
   },
   "NATIVE": {
@@ -59,9 +66,16 @@
       "moreInfo": "You declined this chat. It is now no longer scheduled or available"
     },
     "modal": {
-      "title": "Are you sure?",
-      "disclaimer": "Click confirm only if you defininitely can attend.\nMitein is a charity and free service. Cancellations make our life tough.\nTherefore, we only allow one cancellation per user.",
-      "cta": "Confirm chat"
+      "confirm": {
+        "title": "Are you sure?",
+        "disclaimer": "Click confirm only if you definitely can attend.\nMitein is a charity and free service. Cancellations make our life tough.\nTherefore, we only allow one cancellation per user.",
+        "cta": "Confirm chat"
+      },
+      "cancel": {
+        "title": "Are you sure?",
+        "disclaimer": "Cancel the chat only if you definitely cannot attend.\nMitein is a charity and free service. Cancellations make our life tough.\nTherefore, we only allow one cancellation per user once a chat is booked.",
+        "cta": "Cancel chat"
+      }
     }
   }
 }

@@ -164,7 +164,7 @@ const Slots = ({ userId, onSelect }) => {
           error={requestChatError}
           handleConfirmClick={handleConfirmClick}
           modalOpen={modalOpen}
-          namespace={USER_TYPE_LEARNER}
+          namespace={`${USER_TYPE_LEARNER}.modal.request`}
           setModalOpen={setModalOpen}
         />
       </div>

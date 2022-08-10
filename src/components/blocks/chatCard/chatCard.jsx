@@ -32,7 +32,8 @@ const ChatCard = ({ chat, status, userType, userId }) => {
     i18n: { language },
     t,
   } = useTranslation('chat', 'errors');
-  const [modalOpen, setModalOpen] = useState(false);
+  const [confirmModalOpen, setConfirmModalOpen] = useState(false);
+  const [cancelModalOpen, setCancelModalOpen] = useState(false);
   const isLearner = userType === USER_TYPE_LEARNER;
   const isBooked = status === CHAT_STATUS_BOOKED;
   const isDenied =
@@ -60,7 +61,8 @@ const ChatCard = ({ chat, status, userType, userId }) => {
 
   const [amendChat, mutationStatus] = useMutation(UPDATE_CHAT, {
     onError: error => {
-      setModalOpen(false);
+      setConfirmModalOpen(false);
+      setCancelModalOpen(false);
       toast.error(t(error?.message, { ns: 'errors' }));
       mutationStatus.client.refetchQueries({ include: refetchQueries });
     },
@@ -74,7 +76,7 @@ const ChatCard = ({ chat, status, userType, userId }) => {
         status: CHAT_STATUS_BOOKED,
       },
       refetchQueries,
-    }).then(() => setModalOpen(false));
+    }).then(() => setConfirmModalOpen(false));
   };
 
   const handleCancelClick = () => {
@@ -88,7 +90,7 @@ const ChatCard = ({ chat, status, userType, userId }) => {
           cancelledBy: userId,
         },
         refetchQueries,
-      });
+      }).then(() => setCancelModalOpen(false));
     } else {
       amendChat({
         variables: {
@@ -102,7 +104,15 @@ const ChatCard = ({ chat, status, userType, userId }) => {
             : { status: CHAT_STATUS_REJECTED }),
         },
         refetchQueries,
-      });
+      }).then(() => setCancelModalOpen(false));
+    }
+  };
+
+  const onCancelClick = () => {
+    if (isRequested) {
+      handleCancelClick();
+    } else {
+      setCancelModalOpen(true);
     }
   };
 
@@ -126,7 +136,7 @@ const ChatCard = ({ chat, status, userType, userId }) => {
         <Cta
           className={cx('confirmCta')}
           fullWidth
-          onClick={() => setModalOpen(true)}
+          onClick={() => setConfirmModalOpen(true)}
           disabled={false}
           text={t(`${userType}.${status}.confirmCta`)}
         />
@@ -150,16 +160,22 @@ const ChatCard = ({ chat, status, userType, userId }) => {
         <Cta
           className={cx('cancelCta')}
           fullWidth
-          onClick={handleCancelClick}
+          onClick={onCancelClick}
           disabled={false}
           text={t(`${userType}.${status}.cancelCta`)}
         />
       )}
       <ConfirmPopUp
         handleConfirmClick={handleConfirmClick}
-        modalOpen={modalOpen}
-        namespace={userType}
-        setModalOpen={setModalOpen}
+        modalOpen={confirmModalOpen}
+        namespace={`${userType}.modal.confirm`}
+        setModalOpen={setConfirmModalOpen}
+      />
+      <ConfirmPopUp
+        handleConfirmClick={handleCancelClick}
+        modalOpen={cancelModalOpen}
+        namespace={`${userType}.modal.cancel`}
+        setModalOpen={setCancelModalOpen}
       />
     </div>
   );

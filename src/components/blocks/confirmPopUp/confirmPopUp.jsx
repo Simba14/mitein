@@ -32,16 +32,16 @@ const ConfirmPopUp = ({
         aria-describedby={DESC_ID}
       >
         <Text id={TITLE_ID} className={cx('heading')} tag="h3" type={HEADING_4}>
-          {t(`${namespace}.modal.title`)}
+          {t(`${namespace}.title`)}
         </Text>
         <Text id={DESC_ID} className={cx('disclaimer')}>
-          {t(`${namespace}.modal.disclaimer`)}
+          {t(`${namespace}.disclaimer`)}
         </Text>
         <Cta
           className={cx('cta')}
           fullWidth
           onClick={handleConfirmClick}
-          text={t(`${namespace}.modal.cta`)}
+          text={t(`${namespace}.cta`)}
           disabled={Boolean(error)}
         />
         {error && (

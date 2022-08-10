@@ -33,9 +33,16 @@
       "moreInfo": "Diese Sitzung ist nicht mehr verfügbar. Bitte stellen Sie eine neue Anfrage."
     },
     "modal": {
-      "title": "Sind Sie sicher?",
-      "disclaimer": "Stellen Sie die Anfrage für die Sitzung nur, wenn Sie ganz sicher daran teilnehmen können.\nMitein ist eine gemeinnützige und kostenlose Plattform. Stornierungen machen uns das Leben schwer.\nDeshalb erlauben wir nur eine Stornierung pro Nutzer:in, sobald eine Sitzung gebucht wurde.",
-      "cta": "Sitzung anfragen"
+      "request": {
+        "title": "Sind Sie sicher?",
+        "disclaimer": "Stellen Sie die Anfrage für die Sitzung nur, wenn Sie ganz sicher daran teilnehmen können.\nMitein ist eine gemeinnützige und kostenlose Plattform. Stornierungen machen uns das Leben schwer.\nDeshalb erlauben wir nur eine Stornierung pro Nutzer:in, sobald eine Sitzung gebucht wurde.",
+        "cta": "Sitzung anfragen"
+      },
+      "cancel": {
+        "title": "Sind Sie sicher?",
+        "disclaimer": "Sagen Sie den Chat nur ab, wenn Sie definitiv nicht teilnehmen können.\nMitein ist eine gemeinnützige und kostenlose Plattform. Stornierungen machen uns das Leben schwer.\nDeshalb erlauben wir nur eine Stornierung pro Nutzer:in.",
+        "cta": "Chat stornieren"
+      }
     }
   },
   "NATIVE": {
@@ -57,9 +64,16 @@
       "moreInfo": "Sie haben diese Sitzung abgesagt. Sie ist nicht mehr geplant oder verfügbar."
     },
     "modal": {
-      "title": "Sind Sie sicher?",
-      "disclaimer": "Bitte bestätigen Sie nur, wenn Sie ganz sicher teilnehmen können.\nMitein ist eine gemeinnützige und kostenlose Plattform. Stornierungen machen uns das Leben schwer.\nDeshalb erlauben wir nur eine Stornierung pro Nutzer:in.",
-      "cta": "Sitzung bestätigen"
+      "confirm": {
+        "title": "Sind Sie sicher?",
+        "disclaimer": "Bitte bestätigen Sie nur, wenn Sie ganz sicher teilnehmen können.\nMitein ist eine gemeinnützige und kostenlose Plattform. Stornierungen machen uns das Leben schwer.\nDeshalb erlauben wir nur eine Stornierung pro Nutzer:in.",
+        "cta": "Sitzung bestätigen"
+      },
+      "cancel": {
+        "title": "Sind Sie sicher?",
+        "disclaimer": "Sagen Sie den Chat nur ab, wenn Sie definitiv nicht teilnehmen können.\nMitein ist eine gemeinnützige und kostenlose Plattform. Stornierungen machen uns das Leben schwer.\nDeshalb erlauben wir nur eine Stornierung pro Nutzer:in.",
+        "cta": "Chat stornieren"
+      }
     }
   }
 }
