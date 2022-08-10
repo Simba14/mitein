@@ -16,12 +16,12 @@
   },
   "LEARNER": {
     "BOOKED": {
-      "title": "Chat booked for:",
+      "title": "Chat Booked for:",
       "cancelCta": "Cancel chat",
       "moreInfo": "Will take place online via the zoom link below:"
     },
     "CANCELLED": {
-      "title": "Chat cancelled:",
+      "title": "Chat Cancelled:",
       "moreInfo": "This chat is no longer taking place. Please request a new one."
     },
     "REQUESTED": {
@@ -48,12 +48,12 @@
   },
   "NATIVE": {
     "BOOKED": {
-      "title": "Chat booked for:",
+      "title": "Chat Booked for:",
       "cancelCta": "Cancel chat",
       "moreInfo": "Chat will be held online via Zoom."
     },
     "CANCELLED": {
-      "title": "Chat cancelled:",
+      "title": "Chat Cancelled:",
       "moreInfo": "This chat will no longer take place."
     },
     "REQUESTED": {
