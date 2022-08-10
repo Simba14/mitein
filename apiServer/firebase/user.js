@@ -80,7 +80,7 @@ User.byIdWithAvailability = async id => {
 
       return [bookings, cancellations, requests, rejections];
     },
-    [[], [], []],
+    [[], [], [], []],
   );
 
   return {

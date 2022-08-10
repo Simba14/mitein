@@ -160,12 +160,12 @@ const ChatsMutation = {
       }
 
       if (status === CHAT_STATUS_REQUESTED) {
-        const requestedchat = await Chat.request({
+        const requestedChat = await Chat.request({
           id,
           fields,
         });
 
-        return requestedchat;
+        return requestedChat;
       }
 
       const chat = await Chat.updateById({
