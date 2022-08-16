@@ -3,9 +3,9 @@
   "chatInfo": "Die Chats finden online über Zoom statt. Um Zoom kostenlos herunterzuladen oder mehr über die Nutzung zu erfahren, klicken Sie ",
   "chatInfoClick": "hier.",
   "zoomHelp": "https://support.zoom.us/hc/de/articles/201362193-An-einem-Zoom-Meeting-teilnehmen",
-  "upcoming": "Kommende Chats",
-  "requested": "Angefragt Chats",
-  "past": "Vergangene Chats",
+  "upcoming": "Kommende",
+  "requested": "Angefragt",
+  "past": "Vergangene",
   "slots": {
     "title": "Eine Sitzung anfragen",
     "cta": "Sitzung anfragen",

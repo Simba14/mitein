@@ -17,6 +17,7 @@
 
   &.unavailable {
     background: $red-background;
+    border-color: $red-background;
 
     .title {
       color: $red;
