@@ -1,5 +1,11 @@
 {
   "chatLink": "Open Zoom chat",
+  "chatInfo": "Chats will be online via Zoom. To download Zoom for free or learn more about how to use it, click ",
+  "chatInfoClick": "here.",
+  "zoomHelp": "https://support.zoom.us/hc/en-us/articles/201362193-Joining-a-Zoom-meeting",
+  "upcoming": "Upcoming Chats",
+  "requested": "Requested Chats",
+  "past": "Past Chats",
   "slots": {
     "title": "Request a chat",
     "cta": "Request Chat",

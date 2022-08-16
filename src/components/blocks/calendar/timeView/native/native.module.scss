@@ -2,6 +2,10 @@
 @import 'scss/spacings.scss';
 
 .calendar {
+  .title {
+    margin-bottom: size(2);
+  }
+
   .instructions {
     margin-bottom: size(4);
   }

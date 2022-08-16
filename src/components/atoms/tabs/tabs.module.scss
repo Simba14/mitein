@@ -1,0 +1,95 @@
+@import 'scss/breakpoints.scss';
+@import 'scss/colors.scss';
+@import 'scss/spacings.scss';
+
+$header-width: size(26);
+$count-width-desktop: size(3);
+$count-width-mobile: 20px;
+
+.container {
+  margin-bottom: size(7);
+
+  .header {
+    display: flex;
+    border-bottom: 1px solid $blue;
+
+    .headerItem {
+      position: relative;
+      cursor: pointer;
+      font-weight: bold;
+      width: $header-width;
+      flex: 1 1 0;
+      border: 1px solid $sky;
+      border-bottom: none;
+      border-top-left-radius: 15px;
+      border-top-right-radius: 15px;
+      padding: size(1);
+      background-color: $sky;
+      color: $dark-grey;
+      text-transform: capitalize;
+      transition: 0.6s ease;
+
+      &:not(:last-child) {
+        margin-right: size(1);
+      }
+
+      @include mq($from: tablet) {
+        width: $header-width;
+        flex: initial;
+      }
+
+      &:after {
+        content: '';
+        position: absolute;
+        height: 1px;
+        width: 100%;
+        left: 0px;
+        bottom: -1px;
+        background: $blue;
+        transition: 0.6s ease;
+      }
+
+      &.active {
+        border-color: $blue;
+        background-color: white;
+        color: $blue;
+        transition: 0.6s ease;
+
+        &:after {
+          background: white;
+        }
+
+        .count {
+          background-color: $blue;
+          color: white;
+        }
+      }
+
+      > p {
+        cursor: pointer;
+      }
+
+      .count {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        background-color: $dark-grey;
+        color: $grey;
+        border-radius: 50%;
+        margin-left: size(1);
+        width: $count-width-mobile;
+        height: $count-width-mobile;
+
+        @include mq($from: tablet) {
+          width: $count-width-desktop;
+          height: $count-width-desktop;
+        }
+      }
+    }
+  }
+
+  .content {
+    border-bottom: 1px solid $blue;
+    padding: size(4) 0;
+  }
+}

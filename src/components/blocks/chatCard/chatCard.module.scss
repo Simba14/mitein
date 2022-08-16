@@ -2,9 +2,9 @@
 @import 'scss/colors.scss';
 @import 'scss/constants.scss';
 @import 'scss/spacings.scss';
-@import 'scss/loading.scss';
 
 .chat {
+  display: block;
   color: black;
   border-radius: $card-border-radius;
   border: 1px solid $blue;
@@ -13,22 +13,7 @@
   padding: size(3);
   justify-content: space-between;
   margin-bottom: size(3);
-
-  @include mq($from: tablet, $until: tabletWide) {
-    width: calc(50% - (1 / 2 * #{size(4)}));
-
-    &:not(:nth-child(2n)) {
-      margin-right: size(3);
-    }
-  }
-
-  @include mq($from: tabletWide) {
-    width: calc(33.33333% - (1 / 3 * #{size(6)}));
-
-    &:not(:nth-child(3n)) {
-      margin-right: size(3);
-    }
-  }
+  flex-basis: 100%;
 
   &.unavailable {
     background: $red-background;
@@ -66,27 +51,5 @@
     color: $blue;
     display: inline-block;
     margin: size(1) 0;
-  }
-}
-
-.modal {
-  border-radius: $card-border-radius;
-  background: white;
-  width: 400px;
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-  padding: size(4);
-
-  .heading {
-    font-family: 'LilGrotesk', sans-serif;
-    color: $orange;
-    margin-bottom: size(3);
-  }
-
-  .disclaimer {
-    line-height: 1.5;
-    margin-bottom: size(3);
-    white-space: break-spaces;
   }
 }

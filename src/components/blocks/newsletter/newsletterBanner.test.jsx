@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, screen, userEvent, waitFor } from 'testUtils';
+import { render, renderWithUser, screen, waitFor } from 'testUtils';
 import { GraphQLError } from 'graphql';
 import NewsletterBanner from './newsletterBanner';
 import {
@@ -65,70 +65,82 @@ test('NewsletterBanner renders correctly', () => {
 });
 
 test('NewsletterBanner when subscribing successfully', async () => {
-  render(<NewsletterBanner heading={MOCK_TITLE} description={MOCK_TEXT} />, {
-    mocks: [VALID_EMAIL_MOCK],
-  });
+  const { user } = renderWithUser(
+    <NewsletterBanner heading={MOCK_TITLE} description={MOCK_TEXT} />,
+    {
+      mocks: [VALID_EMAIL_MOCK],
+    },
+  );
   const submit = screen.getByRole('button');
   const textInput = screen.getByRole('textbox');
   const formMessage = screen.getByRole('alert');
 
   expect(textInput).not.toHaveValue();
   // input email address
-  userEvent.type(textInput, MOCK_EMAIL);
+  await user.type(textInput, MOCK_EMAIL);
   expect(textInput).toHaveValue(MOCK_EMAIL);
   // submit
-  userEvent.click(submit);
+  await user.click(submit);
   await waitFor(() => new Promise(resolve => setTimeout(resolve, 0)));
   expect(formMessage).toHaveTextContent('newsletter:successMessage');
 });
 
 test('NewsletterBanner submitting with invalid email should prevent submit', async () => {
-  render(<NewsletterBanner heading={MOCK_TITLE} description={MOCK_TEXT} />, {
-    mocks: [VALID_EMAIL_MOCK],
-  });
+  const { user } = renderWithUser(
+    <NewsletterBanner heading={MOCK_TITLE} description={MOCK_TEXT} />,
+    {
+      mocks: [VALID_EMAIL_MOCK],
+    },
+  );
   const submit = screen.getByRole('button');
   const textInput = screen.getByRole('textbox');
   const formMessage = screen.getByRole('alert');
 
   expect(textInput).not.toHaveValue();
   expect(textInput).not.toHaveFocus();
-  userEvent.click(submit);
+  await user.click(submit);
   await waitFor(() => new Promise(resolve => setTimeout(resolve, 0)));
   expect(textInput).toHaveFocus();
   expect(formMessage).toBeEmptyDOMElement();
   // TODO add email validation (currently relying on browser)
   // type invalid email
-  //   userEvent.type(textInput, 'notAnEmail');
-  //   userEvent.click(submit);
+  //   user.type(textInput, 'notAnEmail');
+  //   user.click(submit);
   //   await waitFor(() => new Promise(resolve => setTimeout(resolve, 0)));
   //   expect(textInput).toHaveFocus();
   //   expect(formMessage).toBeEmptyDOMElement();
 });
 
 test('NewsletterBanner unsuccessful subscription should display the error', async () => {
-  render(<NewsletterBanner heading={MOCK_TITLE} description={MOCK_TEXT} />, {
-    mocks: [INVALID_EMAIL_MOCK],
-  });
+  const { user } = renderWithUser(
+    <NewsletterBanner heading={MOCK_TITLE} description={MOCK_TEXT} />,
+    {
+      mocks: [INVALID_EMAIL_MOCK],
+    },
+  );
   const submit = screen.getByRole('button');
   const textInput = screen.getByRole('textbox');
   const formMessage = screen.getByRole('alert');
 
-  userEvent.type(textInput, MOCK_EMAIL);
-  userEvent.click(submit);
+  await user.type(textInput, MOCK_EMAIL);
+  await user.click(submit);
   await waitFor(() => new Promise(resolve => setTimeout(resolve, 100)));
   expect(formMessage).toHaveTextContent(MOCK_ERROR);
 });
 
 test('NewsletterBanner subscription with network error should display the error', async () => {
-  render(<NewsletterBanner heading={MOCK_TITLE} description={MOCK_TEXT} />, {
-    mocks: [NETWORK_ERROR_MOCK],
-  });
+  const { user } = renderWithUser(
+    <NewsletterBanner heading={MOCK_TITLE} description={MOCK_TEXT} />,
+    {
+      mocks: [NETWORK_ERROR_MOCK],
+    },
+  );
   const submit = screen.getByRole('button');
   const textInput = screen.getByRole('textbox');
   const formMessage = screen.getByRole('alert');
 
-  userEvent.type(textInput, MOCK_EMAIL);
-  userEvent.click(submit);
+  await user.type(textInput, MOCK_EMAIL);
+  await user.click(submit);
   await waitFor(() => new Promise(resolve => setTimeout(resolve, 100)));
   expect(formMessage).toHaveTextContent('Network error');
 });

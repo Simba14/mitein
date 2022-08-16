@@ -7,8 +7,11 @@
   .toolbar {
     display: flex;
     justify-content: space-between;
-    margin-bottom: size(4);
     width: 100%;
+
+    @include mq($from: tabletWide) {
+      margin-bottom: size(4);
+    }
 
     .title {
       margin-bottom: size(2);

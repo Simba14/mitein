@@ -1,4 +1,3 @@
-@import 'scss/colors.scss';
 @import 'scss/constants.scss';
 @import 'scss/spacings.scss';
 
@@ -7,22 +6,5 @@
 }
 
 .requestCta {
-  margin-bottom: size(4);
-}
-
-.accordion {
-  margin-bottom: size(4);
-
-  .accordionHeader {
-    color: $blue;
-  }
-
-  .bookedDescription {
-    margin-bottom: size(3);
-  }
-
-  .chatsContainer {
-    display: flex;
-    flex-wrap: wrap;
-  }
+  margin-bottom: size(6);
 }

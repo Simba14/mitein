@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, screen, userEvent } from 'testUtils';
+import { render, renderWithUser, screen } from 'testUtils';
 import ConfirmPopUp from './confirmPopUp';
 import { BACKDROP_LABEL } from 'components/atoms/modal';
 
@@ -68,10 +68,10 @@ test('ConfirmPopUp renders correctly when open', () => {
   expect(error).toHaveTextContent(ERROR_MOCK);
 });
 
-test('ConfirmPopUp user clicks calls the appropriate callbacks', () => {
+test.only('ConfirmPopUp user clicks calls the appropriate callbacks', async () => {
   const onConfirm = jest.fn();
   const setModalOpenMock = jest.fn();
-  render(
+  const { user } = renderWithUser(
     <ConfirmPopUp
       modalOpen
       handleConfirmClick={onConfirm}
@@ -79,13 +79,13 @@ test('ConfirmPopUp user clicks calls the appropriate callbacks', () => {
       setModalOpen={setModalOpenMock}
     />,
   );
-
+  screen.debug();
   // click confirm
   const [, cta] = screen.getAllByRole('button');
-  userEvent.click(cta);
+  await user.click(cta);
   expect(onConfirm).toHaveBeenCalled();
   // close modal
   const backdrop = screen.getByLabelText(BACKDROP_LABEL);
-  userEvent.click(backdrop);
+  await user.click(backdrop);
   expect(setModalOpenMock).toHaveBeenCalled();
 });

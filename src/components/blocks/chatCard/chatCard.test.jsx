@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, screen, userEvent } from 'testUtils';
+import { render, renderWithUser, screen } from 'testUtils';
 import ChatCard from './chatCard';
 // import GET_AVAILABILITY from '@graphql/queries/getChats.graphql';
 // import GET_PROFILE from '@graphql/queries/getProfile.graphql';
@@ -110,8 +110,8 @@ describe('User is a LEARNER', () => {
     expect(link).not.toBeInTheDocument();
   });
 
-  test('can successfully cancel a chat', () => {
-    render(
+  test('can successfully cancel a chat', async () => {
+    const { user } = renderWithUser(
       <ChatCard
         chat={mockChat}
         status={CHAT_STATUS_REQUESTED}
@@ -124,7 +124,7 @@ describe('User is a LEARNER', () => {
     );
 
     const cancelBtn = screen.getByRole('button');
-    userEvent.click(cancelBtn);
+    await user.click(cancelBtn);
     // ensure loading is finished
     // await waitFor(() => new Promise(resolve => setTimeout(resolve, 0)));
   });

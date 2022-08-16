@@ -9,6 +9,7 @@ import Calendar, {
   DELETE_SELECTED,
 } from 'components/blocks/calendar/timeView/shared';
 import Loading from 'components/atoms/loading';
+import Text, { HEADING_4 } from 'components/atoms/text';
 import GET_AVAILABILITY from '@graphql/queries/getAvailability.graphql';
 import CREATE_CHATS from '@graphql/mutations/createChat.graphql';
 import DELETE_CHATS from '@graphql/mutations/deleteChats.graphql';
@@ -16,6 +17,7 @@ import { CHAT_STATUS_AVAILABLE } from '@api/firebase/constants';
 import useWindowDimensions from 'hooks/useWindowDimensions';
 import { isSpecifiedBreakpoint } from 'helpers/index';
 import { TABLET_WIDE } from '@constants/breakpoints';
+import { UserType } from '@constants/types';
 
 import styles from './native.module.scss';
 const cx = classnames.bind(styles);
@@ -58,12 +60,15 @@ const NativeCalendar = ({ userId, userType }) => {
       isSmallerViewport ? '' : 'today '
     }prev,next`,
   };
-
+  console.log('NATIVE', { loading, error });
   if (loading) return <Loading />;
   if (error) return null;
 
   return (
     <section className={cx('calendar')}>
+      <Text className={cx('title')} tag="h3" type={HEADING_4}>
+        {t('availabilityTitle')}
+      </Text>
       <div className={cx('instructions')}>{t('instructions')}</div>
       <Calendar
         events={availability}
@@ -82,7 +87,7 @@ const NativeCalendar = ({ userId, userType }) => {
 
 NativeCalendar.propTypes = {
   userId: string.isRequired,
-  userType: string.isRequired,
+  userType: UserType.isRequired,
 };
 
 export default NativeCalendar;

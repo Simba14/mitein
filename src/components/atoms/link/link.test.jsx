@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, screen, userEvent } from 'testUtils';
+import { render, renderWithUser, screen } from 'testUtils';
 import Link from './link';
 import { MOCK_CLASSNAME, MOCK_TEXT, MOCK_SLUG } from 'unitTests/sharedMocks';
 
@@ -12,15 +12,15 @@ test('Link renders correctly when "to" provided', () => {
   expect(link).toHaveAttribute('href', MOCK_SLUG);
 });
 
-test('Link on click should call function', () => {
+test('Link on click should call function', async () => {
   const onClick = jest.fn();
-  render(
+  const { user } = renderWithUser(
     <Link to={MOCK_SLUG} onClick={onClick}>
       {MOCK_TEXT}
     </Link>,
   );
   const link = screen.getByRole('link');
-  userEvent.click(link);
+  await user.click(link);
   expect(onClick).toHaveBeenCalled();
 });
 

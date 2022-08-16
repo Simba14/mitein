@@ -6,9 +6,7 @@
 @import 'scss/spacings.scss';
 
 .container {
-  border-bottom: $blue solid 1px;
-  padding-bottom: size(4);
-  margin-bottom: size(4);
+  margin-bottom: size(6);
 
   .title {
     margin-bottom: size(1);

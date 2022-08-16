@@ -1,0 +1,20 @@
+@import 'scss/breakpoints.scss';
+@import 'scss/spacings.scss';
+
+.bookedDescription {
+  margin-bottom: size(3);
+}
+
+.chatsContainer {
+  display: grid;
+  grid-template-columns: 1fr;
+  column-gap: size(3);
+
+  @include mq($from: tablet, $until: tabletWide) {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  @include mq($from: tabletWide) {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+}
