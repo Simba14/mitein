@@ -77,7 +77,7 @@ const ChatsSection = ({
           ? {
               header: t('past'),
               content: renderChatCards({ chats: pastChats, userId, userType }),
-              numberOfItems: requestedChats.length,
+              numberOfItems: pastChats.length,
             }
           : {},
       ].filter(tab => !isEmpty(tab)),
