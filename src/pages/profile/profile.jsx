@@ -36,7 +36,7 @@ const Profile = ({ session }) => {
       session.userLoggedOut();
     }
   }, [userId]);
-  console.log({ error, data });
+
   if (loading) return <Loading />;
   if (error || !data) return null;
 
