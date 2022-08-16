@@ -34,14 +34,12 @@ const Modal = ({ children, open, onClose, locked, parent, className }) => {
     };
   }, [el, parent, className]);
 
-  React.useEffect(() => {
+  useEffect(() => {
     const { current } = backdrop;
-
     const transitionEnd = () => setActive(open);
-
     const keyHandler = e => !locked && [27].indexOf(e.which) >= 0 && onClose();
-
     const clickHandler = e => !locked && e.target === current && onClose();
+    let openTimeout;
 
     if (current) {
       current.addEventListener('transitionend', transitionEnd);
@@ -50,10 +48,10 @@ const Modal = ({ children, open, onClose, locked, parent, className }) => {
     }
 
     if (open) {
-      window.setTimeout(() => {
+      openTimeout = window.setTimeout(() => {
         document.activeElement.blur();
         setActive(open);
-        document.querySelector(NEXT_ROOT_ID).setAttribute('inert', 'true');
+        document.querySelector(NEXT_ROOT_ID)?.setAttribute('inert', 'true');
       }, 10);
     }
 
@@ -63,6 +61,7 @@ const Modal = ({ children, open, onClose, locked, parent, className }) => {
         current.removeEventListener('click', clickHandler);
       }
 
+      clearTimeout(openTimeout);
       document.querySelector(NEXT_ROOT_ID)?.removeAttribute('inert');
       window.removeEventListener('keyup', keyHandler);
     };

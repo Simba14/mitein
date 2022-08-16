@@ -72,7 +72,7 @@ test('Modal can be closed by clicking on close button', async () => {
 
 test('Modal can be closed by clicking on backdrop', async () => {
   const onCloseMock = jest.fn();
-  const { user } = render(
+  const { user } = renderWithUser(
     <Modal open onClose={onCloseMock}>
       <div data-testid={CHILDREN_TEST_ID} />
     </Modal>,

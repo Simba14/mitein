@@ -68,7 +68,7 @@ test('ConfirmPopUp renders correctly when open', () => {
   expect(error).toHaveTextContent(ERROR_MOCK);
 });
 
-test.only('ConfirmPopUp user clicks calls the appropriate callbacks', async () => {
+test('ConfirmPopUp user clicks calls the appropriate callbacks', async () => {
   const onConfirm = jest.fn();
   const setModalOpenMock = jest.fn();
   const { user } = renderWithUser(
@@ -79,7 +79,7 @@ test.only('ConfirmPopUp user clicks calls the appropriate callbacks', async () =
       setModalOpen={setModalOpenMock}
     />,
   );
-  screen.debug();
+
   // click confirm
   const [, cta] = screen.getAllByRole('button');
   await user.click(cta);
