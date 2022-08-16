@@ -1,6 +1,6 @@
 import React from 'react';
 import { noop } from 'lodash';
-import { render, screen, userEvent } from 'testUtils';
+import { render, renderWithUser, screen } from 'testUtils';
 import AccordionHeader from './accordionHeader';
 import { MOCK_TEXT } from 'unitTests/sharedMocks';
 
@@ -38,9 +38,9 @@ test('AccordionHeader renders correctly when isOpen is false', () => {
   expect(screen.getByTestId('svg')).toBeTruthy();
 });
 
-test('button click should call onClick', () => {
+test('button click should call onClick', async () => {
   const onClick = jest.fn();
-  render(
+  const { user } = renderWithUser(
     <AccordionHeader
       isOpen={false}
       onClick={onClick}
@@ -49,7 +49,6 @@ test('button click should call onClick', () => {
       text={MOCK_TEXT}
     />,
   );
-
-  userEvent.click(screen.getByRole('button'));
+  await user.click(screen.getByRole('button'));
   expect(onClick).toHaveBeenCalled();
 });

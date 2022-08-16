@@ -72,6 +72,7 @@ const PersonalInfo = ({ displayName, email, interests, userId }) => {
           className={cx('edit')}
           onClick={() => setInterestsOpen(true)}
           text={t('interests.edit')}
+          outline
         />
       </div>
 

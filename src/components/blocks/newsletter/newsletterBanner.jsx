@@ -14,6 +14,7 @@ const cx = classnames.bind(styles);
 
 const NewsletterBanner = ({ className, heading, description }) => {
   const [successMessage, setSuccessMessage] = useState(null);
+  const { t } = useTranslation(['form', 'newsletter']);
   const [newsletterSignUp, { loading }] = useMutation(NEWSLETTER_SIGN_UP, {
     onCompleted: () => {
       setSuccessMessage(t('newsletter:successMessage'));
@@ -25,7 +26,7 @@ const NewsletterBanner = ({ className, heading, description }) => {
       });
     },
   });
-  const { t } = useTranslation(['form', 'newsletter']);
+
   const {
     clearErrors,
     register,
@@ -33,6 +34,7 @@ const NewsletterBanner = ({ className, heading, description }) => {
     formState: { errors },
     setError,
   } = useForm();
+
   const formMessage = get('submit.message', errors) || successMessage;
 
   const onSubmit = ({ email }) => {

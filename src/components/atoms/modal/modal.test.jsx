@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, screen, userEvent } from 'testUtils';
+import { render, renderWithUser, screen } from 'testUtils';
 import Modal from './modal';
 import { BACKDROP_LABEL } from 'components/atoms/modal';
 
@@ -57,41 +57,41 @@ test('Modal is correctly appended to parent element if provided', () => {
   expect(parent.firstChild.firstChild).toEqual(backdrop);
 });
 
-test('Modal can be closed by clicking on close button', () => {
+test('Modal can be closed by clicking on close button', async () => {
   const onCloseMock = jest.fn();
-  render(
+  const { user } = renderWithUser(
     <Modal open onClose={onCloseMock}>
       <div data-testid={CHILDREN_TEST_ID} />
     </Modal>,
   );
 
   const closeBtn = screen.getByRole('button');
-  userEvent.click(closeBtn);
+  await user.click(closeBtn);
   expect(onCloseMock).toHaveBeenCalled();
 });
 
-test('Modal can be closed by clicking on backdrop', () => {
+test('Modal can be closed by clicking on backdrop', async () => {
   const onCloseMock = jest.fn();
-  render(
+  const { user } = renderWithUser(
     <Modal open onClose={onCloseMock}>
       <div data-testid={CHILDREN_TEST_ID} />
     </Modal>,
   );
 
   const backdrop = screen.getByLabelText(BACKDROP_LABEL);
-  userEvent.click(backdrop);
+  await user.click(backdrop);
   expect(onCloseMock).toHaveBeenCalled();
 });
 
-test('Modal cannot be closed by clicking on backdrop when locked', () => {
+test('Modal cannot be closed by clicking on backdrop when locked', async () => {
   const onCloseMock = jest.fn();
-  render(
+  const { user } = renderWithUser(
     <Modal locked open onClose={onCloseMock}>
       <div data-testid={CHILDREN_TEST_ID} />
     </Modal>,
   );
 
   const backdrop = screen.getByLabelText(BACKDROP_LABEL);
-  userEvent.click(backdrop);
+  await user.click(backdrop);
   expect(onCloseMock).not.toHaveBeenCalled();
 });

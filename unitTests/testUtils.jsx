@@ -3,6 +3,7 @@ import { render as defaultRender } from '@testing-library/react';
 import { RouterContext } from 'next/dist/shared/lib/router-context';
 import { MockedProvider } from '@apollo/client/testing';
 import { ENGLISH } from '@constants/defaultOptions';
+import userEvent from '@testing-library/user-event';
 
 export * from '@testing-library/react';
 
@@ -55,7 +56,13 @@ function render(ui, { wrapper, router, mocks = [], ...options } = {}) {
   });
 }
 
+function renderWithUser(jsx, options) {
+  return {
+    user: userEvent.setup(),
+    ...render(jsx, options),
+  };
+}
+
 // re-export everything
 export * from '@testing-library/react';
-export { default as userEvent } from '@testing-library/user-event';
-export { render };
+export { render, renderWithUser };

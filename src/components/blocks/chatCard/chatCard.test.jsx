@@ -1,13 +1,11 @@
 import React from 'react';
-import { render, screen, userEvent } from 'testUtils';
+import { render, renderWithUser, screen } from 'testUtils';
 import ChatCard from './chatCard';
 // import GET_AVAILABILITY from '@graphql/queries/getChats.graphql';
 // import GET_PROFILE from '@graphql/queries/getProfile.graphql';
 import {
   MOCK_ID,
-  MOCK_START_UTC,
-  MOCK_END_UTC,
-  MOCK_URL,
+  MOCK_CHAT,
   MOCK_START_EN,
   MOCK_TIME_EN,
 } from 'unitTests/sharedMocks';
@@ -21,18 +19,11 @@ import {
 } from '@api/firebase/constants';
 import UPDATE_CHAT from '@graphql/mutations/updateChat.graphql';
 
-const mockChat = {
-  id: MOCK_ID,
-  start: MOCK_START_UTC,
-  end: MOCK_END_UTC,
-  link: MOCK_URL,
-};
-
 const CANCEL_CHAT = {
   request: {
     query: UPDATE_CHAT,
     variables: {
-      ...mockChat,
+      ...MOCK_CHAT,
       status: CHAT_STATUS_CANCELLED,
       cancellationReason: USER_TYPE_LEARNER,
       cancelledBy: MOCK_ID,
@@ -40,7 +31,7 @@ const CANCEL_CHAT = {
   },
   result: {
     data: {
-      chat: mockChat,
+      chat: MOCK_CHAT,
     },
   },
 };
@@ -49,7 +40,7 @@ describe('User is a LEARNER', () => {
   test('ChatCard renders correctly when status is BOOKED', () => {
     const { container } = render(
       <ChatCard
-        chat={mockChat}
+        chat={MOCK_CHAT}
         status={CHAT_STATUS_BOOKED}
         userType={USER_TYPE_LEARNER}
         userId={MOCK_ID}
@@ -64,13 +55,13 @@ describe('User is a LEARNER', () => {
     expect(container).toHaveTextContent(MOCK_TIME_EN);
     expect(container).toHaveTextContent(`${textKey}.moreInfo`);
     expect(cancelBtn).toHaveTextContent(`${textKey}.cancelCta`);
-    expect(link).toHaveAttribute('href', mockChat.link);
+    expect(link).toHaveAttribute('href', MOCK_CHAT.link);
   });
 
   test('ChatCard renders correctly when status is REQUESTED', () => {
     const { container } = render(
       <ChatCard
-        chat={mockChat}
+        chat={MOCK_CHAT}
         status={CHAT_STATUS_REQUESTED}
         userType={USER_TYPE_LEARNER}
         userId={MOCK_ID}
@@ -91,7 +82,7 @@ describe('User is a LEARNER', () => {
   test('ChatCard renders correctly when status is REJECTED', () => {
     const { container } = render(
       <ChatCard
-        chat={mockChat}
+        chat={MOCK_CHAT}
         status={CHAT_STATUS_REJECTED}
         userType={USER_TYPE_LEARNER}
         userId={MOCK_ID}
@@ -110,10 +101,10 @@ describe('User is a LEARNER', () => {
     expect(link).not.toBeInTheDocument();
   });
 
-  test('can successfully cancel a chat', () => {
-    render(
+  test('can successfully cancel a chat', async () => {
+    const { user } = renderWithUser(
       <ChatCard
-        chat={mockChat}
+        chat={MOCK_CHAT}
         status={CHAT_STATUS_REQUESTED}
         userType={USER_TYPE_LEARNER}
         userId={MOCK_ID}
@@ -124,7 +115,7 @@ describe('User is a LEARNER', () => {
     );
 
     const cancelBtn = screen.getByRole('button');
-    userEvent.click(cancelBtn);
+    await user.click(cancelBtn);
     // ensure loading is finished
     // await waitFor(() => new Promise(resolve => setTimeout(resolve, 0)));
   });
@@ -134,7 +125,7 @@ describe('User is a NATIVE', () => {
   test('ChatCard renders correctly when status is REQUESTED', () => {
     const { container } = render(
       <ChatCard
-        chat={mockChat}
+        chat={MOCK_CHAT}
         status={CHAT_STATUS_REQUESTED}
         userType={USER_TYPE_NATIVE}
         userId={MOCK_ID}

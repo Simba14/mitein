@@ -1,16 +1,15 @@
-import React, { useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import { useMutation } from '@apollo/client';
 import classnames from 'classnames/bind';
-import { oneOf, shape, string } from 'prop-types';
+import { string } from 'prop-types';
 import { useTranslation } from 'next-i18next';
 import { toast } from 'react-toastify';
 
 import Anchor from 'components/atoms/anchor';
 import Cta from 'components/atoms/cta';
 import ConfirmPopUp from 'components/blocks/confirmPopUp';
-import Text, { BODY_3, BODY_6 } from 'components/atoms/text';
+import Text, { BODY_4, BODY_6 } from 'components/atoms/text';
 import UPDATE_CHAT from '@graphql/mutations/updateChat.graphql';
-import GET_AVAILABILITY from '@graphql/queries/getChats.graphql';
 import GET_PROFILE from '@graphql/queries/getProfile.graphql';
 import { formatChatDate, formatChatTime } from 'helpers/index';
 import {
@@ -20,10 +19,11 @@ import {
   CHAT_STATUS_REQUESTED,
   CHAT_STATUS_REJECTED,
   USER_TYPE_LEARNER,
-  USER_TYPE_NATIVE,
 } from '@api/firebase/constants';
+import { ChatType, StatusType, UserType } from '@constants/types';
 
 import styles from './chatCard.module.scss';
+import { useMemo } from 'react';
 
 const cx = classnames.bind(styles);
 
@@ -36,28 +36,21 @@ const ChatCard = ({ chat, status, userType, userId }) => {
   const [cancelModalOpen, setCancelModalOpen] = useState(false);
   const isLearner = userType === USER_TYPE_LEARNER;
   const isBooked = status === CHAT_STATUS_BOOKED;
+
   const isDenied =
     status === CHAT_STATUS_REJECTED || status === CHAT_STATUS_CANCELLED;
   const isRequested = status === CHAT_STATUS_REQUESTED;
   const { id, ...chatFields } = chat;
 
-  const refetchQueries = [
-    ...(isLearner
-      ? []
-      : [
-          {
-            query: GET_AVAILABILITY,
-            variables: {
-              participant1Id: userId,
-              notOneOf: [CHAT_STATUS_REJECTED],
-            },
-          },
-        ]),
-    {
-      query: GET_PROFILE,
-      variables: { id: userId },
-    },
-  ];
+  const refetchQueries = useMemo(
+    () => [
+      {
+        query: GET_PROFILE,
+        variables: { id: userId },
+      },
+    ],
+    [userId],
+  );
 
   const [amendChat, mutationStatus] = useMutation(UPDATE_CHAT, {
     onError: error => {
@@ -68,7 +61,7 @@ const ChatCard = ({ chat, status, userType, userId }) => {
     },
   });
 
-  const handleConfirmClick = () => {
+  const handleConfirmClick = useCallback(() => {
     amendChat({
       variables: {
         id,
@@ -77,9 +70,9 @@ const ChatCard = ({ chat, status, userType, userId }) => {
       },
       refetchQueries,
     }).then(() => setConfirmModalOpen(false));
-  };
+  }, [setConfirmModalOpen, chatFields, refetchQueries]);
 
-  const handleCancelClick = () => {
+  const handleCancelClick = useCallback(() => {
     if (isBooked) {
       amendChat({
         variables: {
@@ -106,19 +99,27 @@ const ChatCard = ({ chat, status, userType, userId }) => {
         refetchQueries,
       }).then(() => setCancelModalOpen(false));
     }
-  };
+  }, [
+    setCancelModalOpen,
+    chatFields,
+    isLearner,
+    isBooked,
+    refetchQueries,
+    userId,
+    userType,
+  ]);
 
-  const onCancelClick = () => {
+  const onCancelClick = useCallback(() => {
     if (isRequested) {
       handleCancelClick();
     } else {
       setCancelModalOpen(true);
     }
-  };
+  }, [isRequested, handleCancelClick, setCancelModalOpen]);
 
   return (
-    <div className={cx('chat', { unavailable: isDenied })}>
-      <Text className={cx('title')} type={BODY_3}>
+    <li className={cx('chat', { unavailable: isDenied })}>
+      <Text className={cx('title')} type={BODY_4}>
         {t(`${userType}.${status}.title`)}
       </Text>
       <Text className={cx('date')} type={BODY_6}>
@@ -177,7 +178,7 @@ const ChatCard = ({ chat, status, userType, userId }) => {
         namespace={`${userType}.modal.cancel`}
         setModalOpen={setCancelModalOpen}
       />
-    </div>
+    </li>
   );
 };
 
@@ -187,19 +188,9 @@ ChatCard.defaultProps = {
 };
 
 ChatCard.propTypes = {
-  chat: shape({
-    id: string.isRequired,
-    link: string,
-    start: string,
-    end: string,
-  }).isRequired,
-  status: oneOf([
-    CHAT_STATUS_BOOKED,
-    CHAT_STATUS_CANCELLED,
-    CHAT_STATUS_REJECTED,
-    CHAT_STATUS_REQUESTED,
-  ]).isRequired,
-  userType: oneOf([USER_TYPE_LEARNER, USER_TYPE_NATIVE]).isRequired,
+  chat: ChatType.isRequired,
+  status: StatusType.isRequired,
+  userType: UserType.isRequired,
   userId: string,
 };
 

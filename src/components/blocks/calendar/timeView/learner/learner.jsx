@@ -17,6 +17,7 @@ import DELETE_AVAILABILITY from '@graphql/mutations/deleteAvailability.graphql';
 import useWindowDimensions from 'hooks/useWindowDimensions';
 import { isSpecifiedBreakpoint } from 'helpers/index';
 import { TABLET_WIDE } from '@constants/breakpoints';
+import { UserType } from '@constants/types';
 
 import styles from './learner.module.scss';
 
@@ -106,7 +107,7 @@ const LearnerCalendar = ({ userId, userType }) => {
 
 LearnerCalendar.propTypes = {
   userId: string.isRequired,
-  userType: string.isRequired,
+  userType: UserType.isRequired,
 };
 
 export default LearnerCalendar;

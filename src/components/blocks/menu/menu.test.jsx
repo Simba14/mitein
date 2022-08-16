@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, screen, userEvent } from 'testUtils';
+import { render, renderWithUser, screen } from 'testUtils';
 import { Menu } from './menu';
 import { MenuContextProvider } from 'context/menu';
 import { ROUTE_ABOUT, ROUTE_HOW, ROUTE_VOLUNTEER } from 'routes';
@@ -60,8 +60,8 @@ test('Menu renders correctly when logged in and is closed by default', () => {
   expect(volunteer).toHaveAttribute('href', ROUTE_VOLUNTEER.slice(0, -1));
 });
 
-test('Menu can be closed and reopened', () => {
-  render(
+test('Menu can be closed and reopened', async () => {
+  const { user } = renderWithUser(
     <MenuContextProvider>
       <Menu />
     </MenuContextProvider>,
@@ -71,13 +71,13 @@ test('Menu can be closed and reopened', () => {
   const nav = screen.getByRole('navigation');
 
   // open menu
-  userEvent.click(toggle);
+  await user.click(toggle);
   expect(toggle).toContainElement(icon);
   expect(toggle).toHaveClass('isOpen');
   expect(nav).toHaveClass('isOpen');
 
   // close menu
-  userEvent.click(toggle);
+  await user.click(toggle);
   expect(toggle).toContainElement(icon);
   expect(toggle).not.toHaveClass('isOpen');
   expect(nav).not.toHaveClass('isOpen');
