@@ -40,7 +40,8 @@ const ChatCard = ({ chat, status, userType, userDisplayName, userId }) => {
   const isDenied =
     status === CHAT_STATUS_REJECTED || status === CHAT_STATUS_CANCELLED;
   const isRequested = status === CHAT_STATUS_REQUESTED;
-  const { id, ...chatFields } = chat;
+  const { id, participant1Name, participant2Name, ...chatFields } = chat;
+  const otherParticipantName = isLearner ? participant1Name : participant2Name;
 
   const refetchQueries = useMemo(
     () => [
@@ -121,7 +122,7 @@ const ChatCard = ({ chat, status, userType, userDisplayName, userId }) => {
   return (
     <li className={cx('chat', { unavailable: isDenied })}>
       <Text className={cx('title')} type={BODY_4}>
-        {t(`${userType}.${status}.title`)}
+        {t(`${userType}.${status}.title`, { name: otherParticipantName })}
       </Text>
       <Text className={cx('date')} type={BODY_6}>
         {formatChatDate(chat.start, language)}
