@@ -27,7 +27,7 @@ import { useMemo } from 'react';
 
 const cx = classnames.bind(styles);
 
-const ChatCard = ({ chat, status, userType, userId }) => {
+const ChatCard = ({ chat, status, userType, userDisplayName, userId }) => {
   const {
     i18n: { language },
     t,
@@ -66,6 +66,7 @@ const ChatCard = ({ chat, status, userType, userId }) => {
       variables: {
         id,
         ...chatFields,
+        participant1Name: userDisplayName,
         status: CHAT_STATUS_BOOKED,
       },
       refetchQueries,
@@ -185,6 +186,7 @@ const ChatCard = ({ chat, status, userType, userId }) => {
 ChatCard.defaultProps = {
   hideCta: false,
   userId: null,
+  userDisplayName: null,
 };
 
 ChatCard.propTypes = {
@@ -192,6 +194,7 @@ ChatCard.propTypes = {
   status: StatusType.isRequired,
   userType: UserType.isRequired,
   userId: string,
+  userDisplayName: string,
 };
 
 export default ChatCard;

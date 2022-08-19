@@ -4,8 +4,9 @@
   "confirmPassword": "Passwort bestätigen",
   "confirmPasswordError": "Passwörter müssen übereinstimmen",
   "displayName": {
+    "error": "Bitte geben Sie einen Namen oder Spitznamen ein, den Sie gerne mit anderen Benutzern teilen möchten.",
     "label": "Anzeigename",
-    "placeholder": "Ihr Anzeigename"
+    "placeholder": "Ihr Vorname oder Spitzname. Nicht Ihr voller Name"
   },
   "accountType": {
     "label": "Ich...",

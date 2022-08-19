@@ -14,7 +14,9 @@ query GetChats(
   ) {
     id
     participant1Id
+    participant1Name
     participant2Id
+    participant2Name
     status
     start
     end

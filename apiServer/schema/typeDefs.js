@@ -35,10 +35,13 @@ const typeDefs = gql`
     end: String!
     link: String
     participant1Id: ID
+    participant1Name: String
     participant2Id: ID
+    participant2Name: String
     status: EventStatus!
     cancellationReason: ID
     lastUpdated: String
+    with: String
   }
 
   type Chats {
@@ -127,7 +130,9 @@ const typeDefs = gql`
     updateChat(
       id: ID
       participant1Id: ID
+      participant1Name: String
       participant2Id: ID
+      participant2Name: String
       status: EventStatus!
       start: String
       end: String

@@ -7,7 +7,7 @@ import { Firestore } from '@api/firebase';
 const Query = {
   user: async (parent, { id }) => {
     if (id) {
-      return User.byIdWithAvailability(id);
+      return User.byIdWithChats(id);
     }
   },
   chats: async (

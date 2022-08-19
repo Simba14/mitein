@@ -4,7 +4,9 @@ query Profile($id: ID!) {
       booked {
         id
         participant1Id
+        participant1Name
         participant2Id
+        participant2Name
         link
         status
         start
@@ -13,7 +15,9 @@ query Profile($id: ID!) {
       cancelled {
         id
         participant1Id
+        participant1Name
         participant2Id
+        participant2Name
         link
         status
         start
@@ -22,7 +26,9 @@ query Profile($id: ID!) {
       rejected {
         id
         participant1Id
+        participant1Name
         participant2Id
+        participant2Name
         link
         status
         start
@@ -31,7 +37,9 @@ query Profile($id: ID!) {
       requested {
         id
         participant1Id
+        participant1Name
         participant2Id
+        participant2Name
         link
         status
         start

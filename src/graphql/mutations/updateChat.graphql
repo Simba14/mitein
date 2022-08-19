@@ -1,7 +1,9 @@
 mutation UpdateChat(
   $id: ID
   $participant1Id: ID
+  $participant1Name: String
   $participant2Id: ID
+  $participant2Name: String
   $status: EventStatus!
   $start: String
   $end: String
@@ -11,7 +13,9 @@ mutation UpdateChat(
   updateChat(
     id: $id
     participant1Id: $participant1Id
+    participant1Name: $participant1Name
     participant2Id: $participant2Id
+    participant2Name: $participant2Name
     status: $status
     start: $start
     end: $end
@@ -20,7 +24,9 @@ mutation UpdateChat(
   ) {
     id
     participant1Id
+    participant1Name
     participant2Id
+    participant2Name
     link
     status
     start

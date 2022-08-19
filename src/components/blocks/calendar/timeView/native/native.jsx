@@ -60,7 +60,7 @@ const NativeCalendar = ({ userId, userType }) => {
       isSmallerViewport ? '' : 'today '
     }prev,next`,
   };
-  console.log('NATIVE', { loading, error });
+
   if (loading) return <Loading />;
   if (error) return null;
 

@@ -35,7 +35,7 @@ User.create = async ({ id, user }) =>
 User.byId = async id =>
   Firestore.collection(COLLECTION_USERS).doc(id).get().then(getDocData);
 
-User.byIdWithAvailability = async id => {
+User.byIdWithChats = async id => {
   const user = await Firestore.collection(COLLECTION_USERS)
     .doc(id)
     .get()

@@ -4,8 +4,9 @@
   "confirmPassword": "Confirm Password",
   "confirmPasswordError": "Passwords must match",
   "displayName": {
+    "error": "Please enter a name or nickname you are comfortable sharing with other users.",
     "label": "Display Name",
-    "placeholder": "Your display name"
+    "placeholder": "First name or nickname. Not your fullname"
   },
   "accountType": {
     "label": "I Am...",
