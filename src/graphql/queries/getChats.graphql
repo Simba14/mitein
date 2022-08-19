@@ -1,3 +1,4 @@
+#import "../fragments/chatFields.graphql"
 query GetChats(
   $participant1Id: ID
   $participant2Id: ID
@@ -12,14 +13,6 @@ query GetChats(
     notOneOf: $notOneOf
     upcoming: $upcoming
   ) {
-    id
-    participant1Id
-    participant1Name
-    participant2Id
-    participant2Name
-    status
-    start
-    end
-    link
+    ...chatFields
   }
 }
