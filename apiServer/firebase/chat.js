@@ -143,6 +143,7 @@ Chat.onConfirmation = async chat => {
         participant,
         chat,
         topics: participants[index ? 0 : 1]?.interests,
+        otherParticipant: participants[index ? 0 : 1]?.displayName,
       },
     }),
   );

@@ -7,6 +7,11 @@ const typeDefs = gql`
     REPRESENTATIVE
   }
 
+  enum ChatType {
+    VIDEO
+    IN_PERSON
+  }
+
   enum EventStatus {
     AVAILABLE
     BOOKED
@@ -41,7 +46,7 @@ const typeDefs = gql`
     status: EventStatus!
     cancellationReason: ID
     lastUpdated: String
-    with: String
+    type: ChatType
   }
 
   type Chats {

@@ -13,6 +13,9 @@ export const GERMAN = 'de';
 export const FIELD_PARTICIPANT_ONE = 'participant1Id';
 export const FIELD_PARTICIPANT_TWO = 'participant2Id';
 
+export const CHAT_TYPE_VIDEO = 'VIDEO';
+export const CHAT_TYPE_IN_PERSON = 'IN_PERSON';
+
 export const CHAT_STATUS_AVAILABLE = 'AVAILABLE';
 export const CHAT_STATUS_CANCELLED = 'CANCELLED';
 export const CHAT_STATUS_BOOKED = 'BOOKED';
