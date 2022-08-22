@@ -54,6 +54,7 @@ const BookChat = ({ session }) => {
 
   const {
     user: {
+      displayName,
       chats: { requested },
       suspendedUntil,
       type,
@@ -84,7 +85,14 @@ const BookChat = ({ session }) => {
         <Text className={cx('text')}>{t('slots.alreadyRequested')}</Text>,
       );
 
-    if (isLearner) return <Slots userId={userId} onSelect={onSelect} />;
+    if (isLearner)
+      return (
+        <Slots
+          userId={userId}
+          userDisplayName={displayName}
+          onSelect={onSelect}
+        />
+      );
 
     return null;
   };

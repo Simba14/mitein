@@ -14,7 +14,7 @@ import { arrayOf } from 'prop-types';
 
 const cx = classnames.bind(styles);
 
-const renderChatCards = ({ chats, userType, userId }) => (
+const renderChatCards = ({ chats, userType, userId, userDisplayName }) => (
   <div className={cx('chatsContainer')}>
     {chats.map(chat => (
       <ChatCard
@@ -23,6 +23,7 @@ const renderChatCards = ({ chats, userType, userId }) => (
         status={chat.status}
         userType={userType}
         userId={userId}
+        userDisplayName={userDisplayName}
       />
     ))}
   </div>
@@ -34,6 +35,7 @@ const ChatsSection = ({
   upcomingChats,
   userId,
   userType,
+  userDisplayName,
 }) => {
   const { t } = useTranslation('chat');
   const [tabs, setTabs] = useState([]);
@@ -70,6 +72,7 @@ const ChatsSection = ({
                 chats: requestedChats,
                 userId,
                 userType,
+                userDisplayName,
               }),
             }
           : {},
@@ -93,6 +96,7 @@ ChatsSection.propTypes = {
   pastChats: arrayOf(ChatType),
   userType: UserType.isRequired,
   userId: string.isRequired,
+  userDisplayName: string,
 };
 
 export default ChatsSection;

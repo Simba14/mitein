@@ -27,7 +27,7 @@ import { useMemo } from 'react';
 
 const cx = classnames.bind(styles);
 
-const ChatCard = ({ chat, status, userType, userId }) => {
+const ChatCard = ({ chat, status, userType, userDisplayName, userId }) => {
   const {
     i18n: { language },
     t,
@@ -40,7 +40,8 @@ const ChatCard = ({ chat, status, userType, userId }) => {
   const isDenied =
     status === CHAT_STATUS_REJECTED || status === CHAT_STATUS_CANCELLED;
   const isRequested = status === CHAT_STATUS_REQUESTED;
-  const { id, ...chatFields } = chat;
+  const { id, participant1Name, participant2Name, ...chatFields } = chat;
+  const otherParticipantName = isLearner ? participant1Name : participant2Name;
 
   const refetchQueries = useMemo(
     () => [
@@ -66,6 +67,7 @@ const ChatCard = ({ chat, status, userType, userId }) => {
       variables: {
         id,
         ...chatFields,
+        participant1Name: userDisplayName,
         status: CHAT_STATUS_BOOKED,
       },
       refetchQueries,
@@ -120,7 +122,7 @@ const ChatCard = ({ chat, status, userType, userId }) => {
   return (
     <li className={cx('chat', { unavailable: isDenied })}>
       <Text className={cx('title')} type={BODY_4}>
-        {t(`${userType}.${status}.title`)}
+        {t(`${userType}.${status}.title`, { name: otherParticipantName })}
       </Text>
       <Text className={cx('date')} type={BODY_6}>
         {formatChatDate(chat.start, language)}
@@ -185,6 +187,7 @@ const ChatCard = ({ chat, status, userType, userId }) => {
 ChatCard.defaultProps = {
   hideCta: false,
   userId: null,
+  userDisplayName: null,
 };
 
 ChatCard.propTypes = {
@@ -192,6 +195,7 @@ ChatCard.propTypes = {
   status: StatusType.isRequired,
   userType: UserType.isRequired,
   userId: string,
+  userDisplayName: string,
 };
 
 export default ChatCard;

@@ -1,0 +1,11 @@
+fragment chatFields on Chat {
+  id
+  participant1Id
+  participant1Name
+  participant2Id
+  participant2Name
+  link
+  status
+  start
+  end
+}

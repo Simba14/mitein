@@ -158,7 +158,13 @@ const Form = ({
           >
             <label htmlFor="displayName">{t('displayName.label')}</label>
             <input
-              {...registerInput('displayName')}
+              {...registerInput('displayName', {
+                validate: {
+                  oneWord: name =>
+                    name.trim().split(' ').length === 1 ||
+                    t('displayName.error'),
+                },
+              })}
               className={cx('textInput')}
               id="displayName"
               placeholder={t('displayName.placeholder')}

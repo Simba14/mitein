@@ -9,6 +9,7 @@ import {
   CHAT_STATUS_AVAILABLE,
   CHAT_STATUS_REJECTED,
   CHAT_STATUS_CANCELLED,
+  CHAT_TYPE_VIDEO,
 } from '@api/firebase/constants';
 import {
   FirebaseUpdateChatError,
@@ -47,6 +48,7 @@ const createChats = async ({
           startDate.getTime() + (i + 1) * EVENT_DURATION,
         ).toISOString(),
         cancellationReason: null,
+        type: CHAT_TYPE_VIDEO,
       },
     });
 
@@ -200,6 +202,7 @@ const ChatsMutation = {
         id: newId,
         chat: {
           id: newId,
+          type: CHAT_TYPE_VIDEO,
           ...fields,
         },
       });

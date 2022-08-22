@@ -4,8 +4,9 @@
   "confirmPassword": "Passwort bestätigen",
   "confirmPasswordError": "Passwörter müssen übereinstimmen",
   "displayName": {
+    "error": "Es darf nur ein Wort sein",
     "label": "Anzeigename",
-    "placeholder": "Ihr Anzeigename"
+    "placeholder": "Ihr Vorname, Spitzname oder ein Alias"
   },
   "accountType": {
     "label": "Ich...",

@@ -11,7 +11,7 @@ const ChatRequestedMessageHandler = ({
 }) => {
   const {
     participant: { displayLanguage, email },
-    chat: { start, end },
+    chat: { participant2Name, start, end },
   } = message;
 
   const {
@@ -39,6 +39,7 @@ const ChatRequestedMessageHandler = ({
     emails: [{ email }],
     params: {
       date,
+      requestedBy: participant2Name,
       time,
       link,
     },

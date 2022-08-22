@@ -1,5 +1,5 @@
 {
-  "chatLink": "Hier klicken, um den Zoom-Chat zu öffnen",
+  "chatLink": "Zoom-Chat öffnen",
   "chatInfo": "Die Chats finden online über Zoom statt. Um Zoom kostenlos herunterzuladen oder mehr über die Nutzung zu erfahren, klicken Sie ",
   "chatInfoClick": "hier.",
   "zoomHelp": "https://support.zoom.us/hc/de/articles/201362193-An-einem-Zoom-Meeting-teilnehmen",
@@ -22,7 +22,7 @@
   },
   "LEARNER": {
     "BOOKED": {
-      "title": "Sitzung gebucht für:",
+      "title": "Sitzung gebucht mit {{name}} für:",
       "cancelCta": "Sitzung stornieren"
     },
     "CANCELLED": {
@@ -53,7 +53,7 @@
   },
   "NATIVE": {
     "BOOKED": {
-      "title": "Sitzung gebucht für:",
+      "title": "Sitzung gebucht mit {{name}} für:",
       "cancelCta": "Sitzung stornieren"
     },
     "CANCELLED": {
@@ -61,7 +61,7 @@
       "moreInfo": "Sie ist nicht mehr geplant oder verfügbar."
     },
     "REQUESTED": {
-      "title": "Sitzung angefragt für:",
+      "title": "Sitzung angefragt by {{name}} für:",
       "confirmCta": "Sitzung bestätigen",
       "cancelCta": "Sitzung stornieren"
     },

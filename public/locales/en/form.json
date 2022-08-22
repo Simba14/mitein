@@ -4,8 +4,9 @@
   "confirmPassword": "Confirm Password",
   "confirmPasswordError": "Passwords must match",
   "displayName": {
+    "error": "Must only be one word",
     "label": "Display Name",
-    "placeholder": "Your display name"
+    "placeholder": "Your first name, nickname or an alias"
   },
   "accountType": {
     "label": "I Am...",

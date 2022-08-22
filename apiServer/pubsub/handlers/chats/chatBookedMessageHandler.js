@@ -12,6 +12,7 @@ const ChatBookedMessageHandler = ({
     participant: { displayLanguage, email },
     chat: { start, end, link },
     topics,
+    otherParticipant,
   } = message;
 
   const {
@@ -38,6 +39,7 @@ const ChatBookedMessageHandler = ({
       link,
       time,
       topics,
+      otherParticipant,
     },
     templateId,
   });

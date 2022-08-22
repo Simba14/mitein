@@ -79,6 +79,7 @@ const Profile = ({ session }) => {
         upcomingChats={upcomingChats}
         userType={type}
         userId={userId}
+        userDisplayName={displayName}
       />
       {isNative && !isSuspended && (
         <NativeCalendar userId={userId} userType={type} />

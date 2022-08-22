@@ -25,7 +25,7 @@ const DROPDOWN_LABEL = 'timeDropdownLabel';
 
 map.convert({ cap: false });
 
-const Slots = ({ userId, onSelect }) => {
+const Slots = ({ userId, userDisplayName, onSelect }) => {
   const {
     i18n: { language },
     t,
@@ -52,6 +52,7 @@ const Slots = ({ userId, onSelect }) => {
       variables: {
         ...selectedChat,
         participant2Id: userId,
+        participant2Name: userDisplayName,
         status: CHAT_STATUS_REQUESTED,
       },
     })
@@ -175,6 +176,7 @@ const Slots = ({ userId, onSelect }) => {
 Slots.propTypes = {
   onSelect: func.isRequired,
   userId: string.isRequired,
+  userDisplayName: string.isRequired,
 };
 
 export default Slots;

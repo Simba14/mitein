@@ -1,41 +1,18 @@
+#import "../fragments/chatFields.graphql"
 query Profile($id: ID!) {
   user(id: $id) {
     chats {
       booked {
-        id
-        participant1Id
-        participant2Id
-        link
-        status
-        start
-        end
+        ...chatFields
       }
       cancelled {
-        id
-        participant1Id
-        participant2Id
-        link
-        status
-        start
-        end
+        ...chatFields
       }
       rejected {
-        id
-        participant1Id
-        participant2Id
-        link
-        status
-        start
-        end
+        ...chatFields
       }
       requested {
-        id
-        participant1Id
-        participant2Id
-        link
-        status
-        start
-        end
+        ...chatFields
       }
     }
     id
