@@ -45,12 +45,12 @@ const Profile = ({ session }) => {
       displayName,
       email,
       interests,
-      chats: { booked, cancelled, rejected, requested },
+      chats: { booked, cancelled, past, rejected, requested },
       suspendedUntil,
       type,
     },
   } = data;
-
+  console.log(data.user.chats);
   const requestedChats = requested || rejected;
   const upcomingChats = booked || cancelled;
 
@@ -77,6 +77,7 @@ const Profile = ({ session }) => {
       <ChatsSection
         requestedChats={requestedChats}
         upcomingChats={upcomingChats}
+        pastChats={[...past, ...past]}
         userType={type}
         userId={userId}
         userDisplayName={displayName}

@@ -185,7 +185,6 @@ const ChatCard = ({ chat, status, userType, userDisplayName, userId }) => {
 };
 
 ChatCard.defaultProps = {
-  hideCta: false,
   userId: null,
   userDisplayName: null,
 };

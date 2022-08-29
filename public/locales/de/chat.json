@@ -3,9 +3,14 @@
   "chatInfo": "Die Chats finden online über Zoom statt. Um Zoom kostenlos herunterzuladen oder mehr über die Nutzung zu erfahren, klicken Sie ",
   "chatInfoClick": "hier.",
   "zoomHelp": "https://support.zoom.us/hc/de/articles/201362193-An-einem-Zoom-Meeting-teilnehmen",
-  "upcoming": "Kommende",
-  "requested": "Angefragt",
-  "past": "Vergangene",
+  "upcomingTab": "Kommende",
+  "requestedTab": "Angefragt",
+  "pastTab": "Vergangene",
+  "pastChats": {
+    "description": "All your previous chats on Mitein.",
+    "title": "{{type}} chat with {{name}}",
+    "cta": "Chat again"
+  },
   "slots": {
     "title": "Eine Sitzung anfragen",
     "cta": "Sitzung anfragen",

@@ -19,7 +19,7 @@ const Cta = ({
   if (to)
     return (
       <Link
-        className={cx('cta', className, { fullWidth })}
+        className={cx('cta', className, { fullWidth, outline })}
         to={to}
         onClick={onClick}
       >

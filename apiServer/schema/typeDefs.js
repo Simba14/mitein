@@ -53,6 +53,7 @@ const typeDefs = gql`
     available: [Chat]
     booked: [Chat]
     cancelled: [Chat]
+    past: [Chat]
     rejected: [Chat]
     requested: [Chat]
   }

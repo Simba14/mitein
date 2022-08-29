@@ -8,4 +8,5 @@ fragment chatFields on Chat {
   status
   start
   end
+  type
 }

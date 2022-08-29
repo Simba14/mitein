@@ -26,4 +26,10 @@ export const MOCK_CHAT = {
   link: MOCK_URL,
 };
 
+export const getMockChat = ({ status, ...other }) => ({
+  ...MOCK_CHAT,
+  ...other,
+  status: status,
+});
+
 export const mockT = string => string;
