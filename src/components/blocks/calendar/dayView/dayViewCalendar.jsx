@@ -33,7 +33,7 @@ const Calendar = ({ locale, onClick, selectedDate, slots }) => {
       if (selectedDate)
         document
           .querySelector(`.${cx('daySelected')}`)
-          .classList.remove(cx('daySelected'));
+          ?.classList.remove(cx('daySelected'));
 
       onClick(dateStr);
       dayEl.classList.add(cx('daySelected'));

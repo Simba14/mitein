@@ -70,6 +70,8 @@ const Slots = ({ userId, userDisplayName, onSelect }) => {
       });
   };
 
+  const openModal = () => setModalOpen(true);
+
   if (loading) return null;
 
   if (getSlotsError || isEmpty(availableSlots))
@@ -151,7 +153,7 @@ const Slots = ({ userId, userDisplayName, onSelect }) => {
                 <Cta
                   className={cx('cta')}
                   fullWidth
-                  onClick={() => setModalOpen(true)}
+                  onClick={openModal}
                   disabled={Boolean(chatRequested || !selectedChat)}
                   text={t('cta')}
                 />
