@@ -1,4 +1,5 @@
 import { Firestore } from '@api/firebase';
+import { uniqBy } from 'lodash/fp';
 import { getDocData, getQuerySnapshotData } from '@api/firebase/helpers';
 import { generateZoomLink } from '@api/zoom';
 import User from '@api/firebase/user';
@@ -118,7 +119,8 @@ Chat.getOnlyAvailable = async () => {
     .where('status', '==', CHAT_STATUS_AVAILABLE)
     .where('start', '>', dateConstraint.toISOString())
     .get()
-    .then(getQuerySnapshotData);
+    .then(getQuerySnapshotData)
+    .then(data => uniqBy(chat => chat.start, data));
 };
 
 Chat.updateById = async ({ id, fields }) => {
