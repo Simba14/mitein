@@ -1,5 +1,5 @@
 import { Firestore } from '@api/firebase';
-import { uniqBy } from 'lodash/fp';
+import { isEmpty, uniqWith } from 'lodash/fp';
 import { getDocData, getQuerySnapshotData } from '@api/firebase/helpers';
 import { generateZoomLink } from '@api/zoom';
 import User from '@api/firebase/user';
@@ -13,6 +13,7 @@ import {
   FIELD_PARTICIPANT_TWO,
   CHAT_STATUS_AVAILABLE,
   CHAT_STATUS_REQUESTED,
+  CHAT_STATUS_BOOKED,
 } from '@api/firebase/constants';
 import ChatBookedMessageHandler from '@api/pubsub/handlers/chats/chatBookedMessageHandler';
 import ChatRequestedMessageHandler from '@api/pubsub/handlers/chats/chatRequestedMessageHandler';
@@ -115,12 +116,32 @@ Chat.getOnlyAvailable = async () => {
   dateConstraint.setDate(dateConstraint.getDate() + 1);
   dateConstraint.setHours(0, 0, 0); // set to tomorrow
 
+  // Due to Zoom limits, we can only facilitate one chat per time slot.
+  // Therefore, already requested / booked times cannot be requested
+  const unavailableChats = await Firestore.collection(COLLECTION_CHATS)
+    .where('status', 'in', [CHAT_STATUS_REQUESTED, CHAT_STATUS_BOOKED])
+    .where('start', '>', dateConstraint.toISOString())
+    .get()
+    .then(getQuerySnapshotData)
+    .then(data => data.map(chat => chat.start));
+
   return await Firestore.collection(COLLECTION_CHATS)
     .where('status', '==', CHAT_STATUS_AVAILABLE)
     .where('start', '>', dateConstraint.toISOString())
     .get()
     .then(getQuerySnapshotData)
-    .then(data => uniqBy(chat => chat.start, data));
+    .then(data => {
+      const filteredData = uniqWith((chat1, chat2) => {
+        return (
+          unavailableChats.includes(chat1.start) || chat1.start === chat2.start
+        );
+      }, data);
+
+      // uniqWith does not check first value
+      return unavailableChats.includes(filteredData[0]?.start)
+        ? filteredData.splice(1)
+        : filteredData;
+    });
 };
 
 Chat.updateById = async ({ id, fields }) => {
