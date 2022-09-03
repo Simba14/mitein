@@ -25,6 +25,12 @@
     "alreadyRequested": "You have already requested a chat. Check the status of it on your profile.",
     "returnToProfile": "View profile"
   },
+  "rebook": {
+    "title": "Rebook a previous chat",
+    "description": "Request to chat again by selecting one of the available chats below.",
+    "noneAvailable": "Unfortunately this user has no upcoming chats available. Check back here at a later date.",
+    "returnToProfile": "Return to profile"
+  },
   "LEARNER": {
     "BOOKED": {
       "title": "Chat Booked with {{name}} for:",

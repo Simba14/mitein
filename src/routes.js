@@ -15,3 +15,5 @@ export const ROUTE_SIGN_UP = '/sign-up/';
 export const ROUTE_TERMS = '/terms/';
 export const ROUTE_VOLUNTEER = '/volunteer/';
 export const ROUTE_VERIFY_EMAIL = '/verify-email/';
+
+export const getUniquePath = ({ base, slug }) => `${base}/${slug}/`;

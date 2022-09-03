@@ -9,7 +9,7 @@ import { USER_TYPE_LEARNER } from '@api/firebase/constants';
 import { ChatType, UserType } from '@constants/types';
 
 import styles from './chatRow.module.scss';
-import { ROUTE_CHATS_BOOK } from 'routes';
+import { getUniquePath, ROUTE_CHATS_REBOOK } from 'routes';
 
 const cx = classnames.bind(styles);
 
@@ -19,13 +19,21 @@ const ChatRow = ({ chat, userType }) => {
     t,
   } = useTranslation('chat', { keyPrefix: 'pastChats' });
   const isLearner = userType === USER_TYPE_LEARNER;
-  const { participant1Name, participant2Name, start, end, type } = chat;
+  const {
+    participant1Id,
+    participant1Name,
+    participant2Name,
+    start,
+    end,
+    type,
+  } = chat;
   const otherParticipantName = isLearner ? participant1Name : participant2Name;
+  const chatType = type[0] + type.slice(1).toLowerCase();
 
   return (
     <li className={cx('chat')}>
       <Text className={cx('title')} type={BODY_4}>
-        {t('title', { name: otherParticipantName, type })}
+        {t('title', { name: otherParticipantName, type: chatType })}
       </Text>
       <Text className={cx('time')} type={BODY_6}>
         {formatChatTime({
@@ -37,7 +45,11 @@ const ChatRow = ({ chat, userType }) => {
       <Text className={cx('date')} type={BODY_6}>
         {formatChatDate(start, language, {})}
       </Text>
-      <Anchor className={cx('cta')} to={ROUTE_CHATS_BOOK} underlined>
+      <Anchor
+        className={cx('cta')}
+        to={getUniquePath({ base: ROUTE_CHATS_REBOOK, slug: participant1Id })}
+        underlined
+      >
         {t('cta')}
       </Anchor>
     </li>

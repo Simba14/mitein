@@ -25,8 +25,8 @@ const Query = {
   availability: async (parent, { userId }) => {
     return await Availability.byUserId(userId);
   },
-  availableSlots: async () => {
-    return sortBy('start')(await Chat.getOnlyAvailable());
+  availableSlots: async (parent, { userId }) => {
+    return sortBy('start')(await Chat.getOnlyAvailable({ userId }));
   },
   volunteerWith: async () => {
     const collection = await Firestore.collection('organizations').get();

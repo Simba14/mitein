@@ -1,24 +1,28 @@
 import React, { useCallback, useEffect } from 'react';
+import { string } from 'prop-types';
 import classnames from 'classnames/bind';
 import { useRouter } from 'next/router';
 import { useQuery } from '@apollo/client';
 import { compose, get } from 'lodash/fp';
 import { useTranslation } from 'next-i18next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
+import { isEmpty } from 'lodash/fp';
 
 import Cta from 'components/atoms/cta';
 import Loading from 'components/atoms/loading';
-import Slots from 'components/blocks/slots';
-import Suspended from 'components/blocks/suspended';
 import Text, { HEADING_1 } from 'components/atoms/text';
+import Slots from 'components/blocks/slots';
 import { withLayout } from 'components/blocks/layout';
 
 import { sessionProps, withSessionContext } from 'context/session';
-import GET_PROFILE from '@graphql/queries/getProfile.graphql';
+import GET_CHATS from '@graphql/queries/getChats.graphql';
 import { ROUTE_LOGIN, ROUTE_PROFILE } from 'routes';
-import { USER_TYPE_LEARNER } from '@api/firebase/constants';
+import {
+  CHAT_STATUS_AVAILABLE,
+  USER_TYPE_LEARNER,
+} from '@api/firebase/constants';
 
-import styles from './bookChat.module.scss';
+import styles from './rebook.module.scss';
 const cx = classnames.bind(styles);
 
 export const getServerSideProps = async ({ locale, params }) => {
@@ -44,19 +48,19 @@ export const getServerSideProps = async ({ locale, params }) => {
   };
 };
 
-const RebookChat = ({ session }) => {
-  const { t } = useTranslation('chat');
+const RebookChat = ({ id, session }) => {
+  const { t } = useTranslation('chat', { keyPrefix: 'rebook' });
   const router = useRouter();
   const userId = get('userId', session);
-  const { data, loading, error, refetch } = useQuery(GET_PROFILE, {
-    variables: { id: userId },
-    skip: !userId,
+  const { data, loading, error } = useQuery(GET_CHATS, {
+    variables: { participant1Id: id, status: CHAT_STATUS_AVAILABLE },
+    skip: !id,
   });
 
   const onSelect = useCallback(() => {
     router.push(ROUTE_PROFILE);
-    refetch();
-  }, [refetch]);
+    // refetch();
+  }, []);
 
   useEffect(() => {
     if (!userId || (!loading && (!data || error))) {
@@ -65,68 +69,25 @@ const RebookChat = ({ session }) => {
     }
   }, [userId, loading]);
 
-  useEffect(() => {
-    const userType = get('user.type', data);
-
-    if (userType && userType !== USER_TYPE_LEARNER) {
-      router.push(ROUTE_PROFILE);
-    }
-  }, [data]);
-
   if (loading) return <Loading />;
   if (error || !data) return null;
 
-  const {
-    user: {
-      displayName,
-      chats: { requested },
-      suspendedUntil,
-      type,
-    },
-  } = data;
-
-  const isLearner = type === USER_TYPE_LEARNER;
-  const isSuspended = suspendedUntil > new Date().toISOString();
-
-  const getContent = () => {
-    const baseContent = component => (
-      <div className={cx('content')}>
-        {component}
-        <Cta
-          to={ROUTE_PROFILE}
-          className={cx('cta')}
-          text={t('slots.returnToProfile')}
-          fullWidth
-        />
-      </div>
-    );
-
-    if (isSuspended)
-      return baseContent(<Suspended suspendedUntil={suspendedUntil} />);
-
-    if (requested)
-      return baseContent(
-        <Text className={cx('text')}>{t('slots.alreadyRequested')}</Text>,
-      );
-
-    if (isLearner)
-      return (
-        <Slots
-          userId={userId}
-          userDisplayName={displayName}
-          onSelect={onSelect}
-        />
-      );
-
-    return null;
-  };
+  const { chats } = data;
 
   return (
     <div className={cx('wrapper')}>
       <Text className={cx('title')} tag="h1" type={HEADING_1}>
-        {t('slots.title')}
+        {t('title')}
       </Text>
-      {getContent()}
+      <div className={cx('content')}>
+        {isEmpty(chats) ? <Text>{t('noneAvailable')}</Text> : <Slots />}
+        <Cta
+          to={ROUTE_PROFILE}
+          className={cx('cta')}
+          text={t('returnToProfile')}
+          fullWidth
+        />
+      </div>
     </div>
   );
 };

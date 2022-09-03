@@ -15,19 +15,28 @@ import { arrayOf } from 'prop-types';
 
 const cx = classnames.bind(styles);
 
-const renderChatCards = ({ chats, userType, userId, userDisplayName }) => (
-  <div className={cx('chatsContainer')}>
-    {chats.map(chat => (
-      <ChatCard
-        key={chat.id}
-        chat={chat}
-        status={chat.status}
-        userType={userType}
-        userId={userId}
-        userDisplayName={userDisplayName}
-      />
-    ))}
-  </div>
+const renderChatCards = ({
+  chats,
+  description,
+  userType,
+  userId,
+  userDisplayName,
+}) => (
+  <>
+    {description && <Text className={cx('description')}>{description}</Text>}
+    <div className={cx('chatsContainer')}>
+      {chats.map(chat => (
+        <ChatCard
+          key={chat.id}
+          chat={chat}
+          status={chat.status}
+          userType={userType}
+          userId={userId}
+          userDisplayName={userDisplayName}
+        />
+      ))}
+    </div>
+  </>
 );
 
 const renderChatRows = ({
@@ -71,14 +80,16 @@ const ChatsSection = ({
               numberOfItems: upcomingChats.length,
               content: (
                 <>
-                  <Text className={cx('description')}>
-                    {t('chatInfo')}
-                    <Anchor href={t('zoomHelp')} underlined>
-                      {t('chatInfoClick')}
-                    </Anchor>
-                  </Text>
                   {renderChatCards({
                     chats: upcomingChats,
+                    description: (
+                      <>
+                        {t('chatInfo')}
+                        <Anchor href={t('zoomHelp')} underlined>
+                          {t('chatInfoClick')}
+                        </Anchor>
+                      </>
+                    ),
                     userId,
                     userType,
                   })}

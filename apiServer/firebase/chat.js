@@ -52,6 +52,7 @@ Chat.byParticipantId = async ({ field, id }) =>
 
 Chat.byParticipantIdWithStatusCondition = async ({
   condition,
+  dateConstraint,
   field,
   id,
   status,
@@ -62,8 +63,10 @@ Chat.byParticipantIdWithStatusCondition = async ({
     .where('status', condition, status);
 
   if (upcoming) {
-    baseQuery = baseQuery.where('start', '>', new Date().toISOString());
+    const constraint = dateConstraint || new Date().toISOString();
+    baseQuery = baseQuery.where('start', '>', constraint);
   }
+
   return baseQuery
     .get()
     .then(getQuerySnapshotData)
@@ -78,6 +81,7 @@ Chat.byFilters = async ({
   participant2Id,
   status,
   upcoming,
+  dateConstraint,
 }) => {
   const participantArgs = {
     field: participant1Id ? FIELD_PARTICIPANT_ONE : FIELD_PARTICIPANT_TWO,
@@ -91,6 +95,7 @@ Chat.byFilters = async ({
         condition: '==',
         status,
         upcoming,
+        dateConstraint,
       });
     }
 
@@ -109,10 +114,18 @@ Chat.byFilters = async ({
   return await Chat.byStatus(status);
 };
 
-Chat.getOnlyAvailable = async () => {
+Chat.getOnlyAvailable = async ({ participant1Id }) => {
   let dateConstraint = new Date();
   dateConstraint.setDate(dateConstraint.getDate() + 1);
   dateConstraint.setHours(0, 0, 0); // set to tomorrow
+
+  if (participant1Id)
+    return await Chat.byFilters({
+      dateConstraint,
+      participant1Id,
+      status: CHAT_STATUS_AVAILABLE,
+      upcoming: true,
+    });
 
   return await Firestore.collection(COLLECTION_CHATS)
     .where('status', '==', CHAT_STATUS_AVAILABLE)
