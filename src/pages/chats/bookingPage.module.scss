@@ -1,4 +1,3 @@
-@import 'scss/breakpoints.scss';
 @import 'scss/constants.scss';
 @import 'scss/colors.scss';
 @import 'scss/spacings';
@@ -10,10 +9,6 @@
     margin-bottom: size(4);
     text-transform: capitalize;
     text-align: center;
-
-    @include mq($from: tablet) {
-      margin-bottom: size(6);
-    }
   }
 
   .content {

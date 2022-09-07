@@ -50,7 +50,7 @@ const Profile = ({ session }) => {
       type,
     },
   } = data;
-  console.log(data.user.chats);
+
   const requestedChats = requested || rejected;
   const upcomingChats = booked || cancelled;
 
@@ -77,7 +77,7 @@ const Profile = ({ session }) => {
       <ChatsSection
         requestedChats={requestedChats}
         upcomingChats={upcomingChats}
-        pastChats={[...past, ...past]}
+        pastChats={past}
         userType={type}
         userId={userId}
         userDisplayName={displayName}

@@ -1,9 +1,0 @@
-query GetAvailableSlots($participant1Id: ID) {
-  availableSlots(participant1Id: $participant1Id) {
-    id
-    participant1Id
-    start
-    status
-    end
-  }
-}

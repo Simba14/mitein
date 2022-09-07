@@ -85,6 +85,7 @@ More information on this can be found [here](https://vercel.com/support/articles
 | `npm run stop-emulator`  | Stops the firebase emulator safely                          |
 | `npm run clean`          | clears the cache (.cache folder) and public directories     |
 | `npm run test`           | Runs the tests files                                        |
+| `npm run test-watch`     | Runs the tests under watch mode                             |
 
 ## Data Fetching
 

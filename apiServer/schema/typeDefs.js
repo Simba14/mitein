@@ -104,7 +104,7 @@ const typeDefs = gql`
 
   type Query {
     availability(userId: ID!): [Availability]
-    availableSlots(userId: ID): [Chat]
+    availableChats(userId: ID): [Chat]
     user(id: ID!): User
     chats(
       participant1Id: ID

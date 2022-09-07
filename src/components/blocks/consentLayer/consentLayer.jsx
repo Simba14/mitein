@@ -16,8 +16,10 @@ const ConsentLayer = ({ session }) => {
   const { consentRecorded, onConsentSelection } = session;
 
   const onConfirm = useCallback(() => {
-    window.OneTrust.AllowAll();
-    onConsentSelection(true);
+    if (window?.OneTrust) {
+      window.OneTrust.AllowAll();
+      onConsentSelection(true);
+    }
   });
 
   // const onReject = useCallback(() => {
@@ -26,12 +28,14 @@ const ConsentLayer = ({ session }) => {
   // });
 
   const onClose = useCallback(() => {
-    window.OneTrust.Close();
-    onConsentSelection(true);
+    if (window?.OneTrust) {
+      window.OneTrust.Close();
+      onConsentSelection(true);
+    }
   });
 
   const openSettings = useCallback(() => {
-    window.OneTrust.ToggleInfoDisplay();
+    window?.OneTrust.ToggleInfoDisplay();
   });
 
   useEffect(() => {

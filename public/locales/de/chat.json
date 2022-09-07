@@ -7,22 +7,31 @@
   "requestedTab": "Angefragt",
   "pastTab": "Vergangene",
   "pastChats": {
-    "description": "All your previous chats on Mitein.",
-    "title": "{{type}} chat with {{name}}",
-    "cta": "Chat again"
+    "title": "{{type}} chat mit {{name}}",
+    "description": "Alle Ihre früheren Chats über Mitein",
+    "cta": "Wieder Chatten"
   },
   "slots": {
-    "title": "Eine Sitzung anfragen",
     "cta": "Sitzung anfragen",
+    "description": "Fordern Sie einen weiteren Chat an, indem Sie einen der verfügbaren Chats des Benutzers unten auswählen.",
     "defaultOption": "Bitte wählen Sie eine Zeit",
     "step1": "1. Wählen Sie ein verfügbares Datum",
     "step2": "Fragen Sie die gewünschte Zeit an{{date}}",
     "step2Number": "2.",
-    "noAvailability": "Es sind keine Sitzungen an diesem Datum verfügbar. Bitte wählen Sie ein anderes Datum im Kalender.",
+    "unavailableDate": "Es sind keine Sitzungen an diesem Datum verfügbar. Bitte wählen Sie ein anderes Datum im Kalender.",
     "note": "Hinweis: Es kann jeweils nur eine Sitzung angefragt werden.\nBitte wählen Sie ein Zeitfenster, das Sie mit Sicherheit wahrnehmen können. Sie bekommen rechtzeitig eine Antwort auf Ihre Anfrage.",
     "noneAvailable": "Keine Sitzungen verfügbar",
-    "checkBack": "Schauen Sie in den nächsten Tagen nochmal rein.\nWir arbeiten intensiv daran, mit weiteren Seniorenheimen und Muttersprachler:innen zu kooperieren.",
+    "checkBack": "Schauen Sie in den nächsten Tagen nochmal rein.\nWir arbeiten intensiv daran, mit weiteren Seniorenheimen und Muttersprachler:innen zu kooperieren."
+  },
+   "book": {
+    "title": "Eine Sitzung anfragen",
+    "noneAvailable": "Keine Sitzungen verfügbar",
     "alreadyRequested": "Sie haben bereits eine Anfrage gestellt. Überprüfen Sie den Status in Ihrem Profil.",
+    "returnToProfile": "Profil ansehen"
+  },
+  "rebook": {
+    "title": "Anfrage zur Buchung eines früheren Chats",
+    "noneAvailable": "Leider hat dieser Benutzer keine kommenden Chats verfügbar.",
     "returnToProfile": "Profil ansehen"
   },
   "LEARNER": {

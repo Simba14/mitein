@@ -45,13 +45,15 @@ const ChatRow = ({ chat, userType }) => {
       <Text className={cx('date')} type={BODY_6}>
         {formatChatDate(start, language, {})}
       </Text>
-      <Anchor
-        className={cx('cta')}
-        to={getUniquePath({ base: ROUTE_CHATS_REBOOK, slug: participant1Id })}
-        underlined
-      >
-        {t('cta')}
-      </Anchor>
+      {isLearner && (
+        <Anchor
+          className={cx('cta')}
+          to={getUniquePath({ base: ROUTE_CHATS_REBOOK, slug: participant1Id })}
+          underlined
+        >
+          {t('cta')}
+        </Anchor>
+      )}
     </li>
   );
 };

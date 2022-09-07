@@ -46,6 +46,37 @@ test('Cta button gets correct classNames', () => {
   expect(button).toHaveClass('outline');
 });
 
+test('Cta button does not have related classNames when outline / fullwidth are false', () => {
+  const onClickMock = jest.fn();
+  render(
+    <Cta
+      text={MOCK_TEXT}
+      onClick={onClickMock}
+      fullWidth={false}
+      outline={false}
+    />,
+  );
+  const button = screen.getByRole('button');
+  expect(button).not.toHaveClass('fullWidth');
+  expect(button).not.toHaveClass('outline');
+});
+
+test('Cta link does not have related classNames when outline / fullwidth are false', () => {
+  const onClickMock = jest.fn();
+  render(
+    <Cta
+      text={MOCK_TEXT}
+      to={MOCK_SLUG}
+      onClick={onClickMock}
+      fullWidth={false}
+      outline={false}
+    />,
+  );
+  const link = screen.getByRole('link');
+  expect(link).not.toHaveClass('fullWidth');
+  expect(link).not.toHaveClass('outline');
+});
+
 test('Cta link gets correct classNames', () => {
   const onClickMock = jest.fn();
   render(
@@ -59,5 +90,5 @@ test('Cta link gets correct classNames', () => {
   );
   const link = screen.getByRole('link');
   expect(link).toHaveClass('fullWidth');
-  expect(link).not.toHaveClass('outline');
+  expect(link).toHaveClass('outline');
 });

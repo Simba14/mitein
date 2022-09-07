@@ -7,28 +7,30 @@
   "requestedTab": "Requested",
   "pastTab": "Past",
   "pastChats": {
-    "description": "All your previous chats on Mitein.",
     "title": "{{type}} chat with {{name}}",
+    "description": "All your previous chats on Mitein.",
     "cta": "Chat again"
   },
   "slots": {
-    "title": "Request a chat",
     "cta": "Request Chat",
+    "description": "Request to chat again by selecting one of the user's available chats below.",
     "defaultOption": "Please select a time",
     "step1": "1. Select an available date",
     "step2": "Request a time slot{{date}}",
     "step2Number": "2.",
-    "noAvailability": "No availabile chats for this date. Please select a different date in the calendar.",
+    "unavailableDate": "No availabile chats for this date. Please select a different date in the calendar.",
     "note": "Note: only one chat can be requested at a time.\nPlease choose a time slot that you can definitely commit to. You will receive an answer to your request in good time.",
+    "checkBack": "Check back here in the next few days.\nWe are working hard to partner with more Retirement homes and native speakers."
+  },
+  "book": {
+    "title": "Request a chat",
     "noneAvailable": "No Available Slots",
-    "checkBack": "Check back here in the next few days.\nWe are working hard to partner with more Retirement homes and native speakers.",
     "alreadyRequested": "You have already requested a chat. Check the status of it on your profile.",
-    "returnToProfile": "View profile"
+    "returnToProfile": "Return to profile"
   },
   "rebook": {
     "title": "Rebook a previous chat",
-    "description": "Request to chat again by selecting one of the available chats below.",
-    "noneAvailable": "Unfortunately this user has no upcoming chats available. Check back here at a later date.",
+    "noneAvailable": "Unfortunately this user has no upcoming chats available.",
     "returnToProfile": "Return to profile"
   },
   "LEARNER": {

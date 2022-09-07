@@ -9,9 +9,9 @@ import Cta from 'components/atoms/cta';
 import ConfirmPopUp from 'components/blocks/confirmPopUp';
 import DayViewCalendar from 'components/blocks/calendar/dayView';
 import Notice, { ALERT } from 'components/atoms/notice';
-import Text, { HEADING_4 } from 'components/atoms/text';
+import Text, { BODY_4, HEADING_4 } from 'components/atoms/text';
 import REQUEST_CHAT from '@graphql/mutations/updateChat.graphql';
-import GET_SLOTS from '@graphql/queries/getAvailableSlots.graphql';
+import GET_SLOTS from '@graphql/queries/getAvailableChats.graphql';
 import { formatChatDate, formatChatTime } from 'helpers/index';
 import {
   USER_TYPE_LEARNER,
@@ -25,7 +25,13 @@ const DROPDOWN_LABEL = 'timeDropdownLabel';
 
 map.convert({ cap: false });
 
-const Slots = ({ userId, userDisplayName, onSelect }) => {
+const Slots = ({
+  slotsOfUserId,
+  noAvailabilityText,
+  requesterId,
+  requesterDisplayName,
+  onSelect,
+}) => {
   const {
     i18n: { language },
     t,
@@ -37,9 +43,14 @@ const Slots = ({ userId, userDisplayName, onSelect }) => {
   const [chatRequested, setChatRequested] = useState(false);
   const [requestChatError, setRequestChatError] = useState(null);
 
-  const { data, loading, error: getSlotsError, refetch } = useQuery(GET_SLOTS);
+  const {
+    data,
+    loading,
+    error: getSlotsError,
+    refetch,
+  } = useQuery(GET_SLOTS, { variables: { userId: slotsOfUserId } });
   const [requestChat] = useMutation(REQUEST_CHAT);
-  const availableSlots = get('availableSlots', data);
+  const availableSlots = get('availableChats', data);
 
   const handleSelectChat = ({ target }) => {
     if (!target.selectedIndex) return;
@@ -51,8 +62,8 @@ const Slots = ({ userId, userDisplayName, onSelect }) => {
     requestChat({
       variables: {
         ...selectedChat,
-        participant2Id: userId,
-        participant2Name: userDisplayName,
+        participant2Id: requesterId,
+        participant2Name: requesterDisplayName,
         status: CHAT_STATUS_REQUESTED,
       },
     })
@@ -70,13 +81,15 @@ const Slots = ({ userId, userDisplayName, onSelect }) => {
       });
   };
 
+  const openModal = () => setModalOpen(true);
+
   if (loading) return null;
 
   if (getSlotsError || isEmpty(availableSlots))
     return (
       <div className={cx('noneAvailable')}>
         <Text className={cx('noneAvailableTitle')} tag="h3" type={HEADING_4}>
-          {t('noneAvailable')}
+          {noAvailabilityText}
         </Text>
         <Text>{t('checkBack')}</Text>
       </div>
@@ -91,9 +104,15 @@ const Slots = ({ userId, userDisplayName, onSelect }) => {
 
     return (
       <div className={cx('container')}>
-        <Notice type={ALERT}>
-          <Text>{t('note')}</Text>
-        </Notice>
+        {slotsOfUserId ? (
+          <Text className={cx('description')} type={BODY_4}>
+            {t('description')}
+          </Text>
+        ) : (
+          <Notice type={ALERT}>
+            <Text>{t('note')}</Text>
+          </Notice>
+        )}
         <section className={cx('selectionContainer')}>
           <div className={cx('calendar')}>
             <Text className={cx('step')} tag="h3" type={HEADING_4}>
@@ -151,13 +170,13 @@ const Slots = ({ userId, userDisplayName, onSelect }) => {
                 <Cta
                   className={cx('cta')}
                   fullWidth
-                  onClick={() => setModalOpen(true)}
+                  onClick={openModal}
                   disabled={Boolean(chatRequested || !selectedChat)}
                   text={t('cta')}
                 />
               </div>
             ) : (
-              <div>{t('noAvailability')}</div>
+              <div>{t('unavailableDate')}</div>
             )}
           </div>
         </section>
@@ -175,8 +194,14 @@ const Slots = ({ userId, userDisplayName, onSelect }) => {
 
 Slots.propTypes = {
   onSelect: func.isRequired,
-  userId: string.isRequired,
-  userDisplayName: string.isRequired,
+  noAvailabilityText: string.isRequired,
+  requesterId: string.isRequired,
+  slotsOfUserId: string,
+  requesterDisplayName: string.isRequired,
+};
+
+Slots.defaultProps = {
+  slotsOfUserId: null,
 };
 
 export default Slots;

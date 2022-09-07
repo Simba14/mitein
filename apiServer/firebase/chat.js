@@ -1,5 +1,9 @@
 import { Firestore } from '@api/firebase';
-import { getDocData, getQuerySnapshotData } from '@api/firebase/helpers';
+import {
+  filterAvailableChats,
+  getDocData,
+  getQuerySnapshotData,
+} from '@api/firebase/helpers';
 import { generateZoomLink } from '@api/zoom';
 import User from '@api/firebase/user';
 import {
@@ -12,6 +16,7 @@ import {
   FIELD_PARTICIPANT_TWO,
   CHAT_STATUS_AVAILABLE,
   CHAT_STATUS_REQUESTED,
+  CHAT_STATUS_BOOKED,
 } from '@api/firebase/constants';
 import ChatBookedMessageHandler from '@api/pubsub/handlers/chats/chatBookedMessageHandler';
 import ChatRequestedMessageHandler from '@api/pubsub/handlers/chats/chatRequestedMessageHandler';
@@ -119,19 +124,28 @@ Chat.getOnlyAvailable = async ({ participant1Id }) => {
   dateConstraint.setDate(dateConstraint.getDate() + 1);
   dateConstraint.setHours(0, 0, 0); // set to tomorrow
 
-  if (participant1Id)
-    return await Chat.byFilters({
-      dateConstraint,
-      participant1Id,
-      status: CHAT_STATUS_AVAILABLE,
-      upcoming: true,
-    });
-
-  return await Firestore.collection(COLLECTION_CHATS)
-    .where('status', '==', CHAT_STATUS_AVAILABLE)
+  // Due to Zoom limits, we can only facilitate one chat per time slot.
+  // Therefore, already requested / booked times cannot be requested
+  const unavailableTimes = await Firestore.collection(COLLECTION_CHATS)
+    .where('status', 'in', [CHAT_STATUS_REQUESTED, CHAT_STATUS_BOOKED])
     .where('start', '>', dateConstraint.toISOString())
     .get()
-    .then(getQuerySnapshotData);
+    .then(getQuerySnapshotData)
+    .then(data => data.map(chat => chat.start));
+
+  let baseQuery = Firestore.collection(COLLECTION_CHATS)
+    .where('status', '==', CHAT_STATUS_AVAILABLE)
+    .where('start', '>', dateConstraint.toISOString());
+
+  if (participant1Id) {
+    baseQuery = baseQuery.where(FIELD_PARTICIPANT_ONE, '==', participant1Id);
+  }
+
+  return await baseQuery
+    .orderBy('start')
+    .get()
+    .then(getQuerySnapshotData)
+    .then(chats => filterAvailableChats({ chats, unavailableTimes }));
 };
 
 Chat.updateById = async ({ id, fields }) => {

@@ -1,4 +1,3 @@
-import { sortBy } from 'lodash/fp';
 import Availability from '@api/firebase/availability';
 import Chat from '@api/firebase/chat';
 import User from '@api/firebase/user';
@@ -25,8 +24,8 @@ const Query = {
   availability: async (parent, { userId }) => {
     return await Availability.byUserId(userId);
   },
-  availableSlots: async (parent, { userId }) => {
-    return sortBy('start')(await Chat.getOnlyAvailable({ userId }));
+  availableChats: async (parent, { userId }) => {
+    return await Chat.getOnlyAvailable({ participant1Id: userId });
   },
   volunteerWith: async () => {
     const collection = await Firestore.collection('organizations').get();
