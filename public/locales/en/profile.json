@@ -3,6 +3,9 @@
   "email": "Email: {{email}}",
   "name": "Display Name: {{displayName}}",
   "account": "Account: {{type}}",
+  "requestCta": "Book a chat",
+  "rebookInfo": "Rebook a previous chat by clicking on the \"Past\" tab",
+  "separator": "Or...",
   "interests": {
     "label": "Interests:",
     "cta": "Confirm selection",
