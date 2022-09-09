@@ -3,6 +3,9 @@
   "email": "Email: {{email}}",
   "name": "Anzeigename: {{displayName}}",
   "account": "Konto: {{type}}",
+  "requestCta": "Einen Chat buchen",
+  "rebookInfo": "Buchen Sie einen früheren Chat neu, indem Sie auf die Registerkarte \"Vergangene\" klicken.",
+  "separator": "Oder...",
   "interests": {
     "label": "Interessen:",
     "cta": "Auswahl bestätigen",

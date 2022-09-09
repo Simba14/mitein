@@ -6,6 +6,7 @@ import { string } from 'prop-types';
 
 import Anchor from 'components/atoms/anchor';
 import ChatCard from 'components/blocks/chatCard';
+import ChatRow from 'components/blocks/chatRow';
 import Tabs from 'components/atoms/tabs';
 import Text from 'components/atoms/text';
 import styles from './chatsSection.module.scss';
@@ -14,19 +15,49 @@ import { arrayOf } from 'prop-types';
 
 const cx = classnames.bind(styles);
 
-const renderChatCards = ({ chats, userType, userId, userDisplayName }) => (
-  <div className={cx('chatsContainer')}>
+const renderChatCards = ({
+  chats,
+  description,
+  userType,
+  userId,
+  userDisplayName,
+}) => (
+  <>
+    {description && <Text className={cx('description')}>{description}</Text>}
+    <div className={cx('chatsContainer')}>
+      {chats.map(chat => (
+        <ChatCard
+          key={chat.id}
+          chat={chat}
+          status={chat.status}
+          userType={userType}
+          userId={userId}
+          userDisplayName={userDisplayName}
+        />
+      ))}
+    </div>
+  </>
+);
+
+const renderChatRows = ({
+  chats,
+  description,
+  userType,
+  userId,
+  userDisplayName,
+}) => (
+  <>
+    <Text className={cx('description')}>{description}</Text>
     {chats.map(chat => (
-      <ChatCard
+      <ChatRow
         key={chat.id}
         chat={chat}
-        status={chat.status}
         userType={userType}
         userId={userId}
         userDisplayName={userDisplayName}
       />
     ))}
-  </div>
+  </>
 );
 
 const ChatsSection = ({
@@ -45,18 +76,20 @@ const ChatsSection = ({
       [
         upcomingChats
           ? {
-              header: t('upcoming'),
+              header: t('upcomingTab'),
               numberOfItems: upcomingChats.length,
               content: (
                 <>
-                  <Text className={cx('bookedDescription')}>
-                    {t('chatInfo')}
-                    <Anchor href={t('zoomHelp')} underlined>
-                      {t('chatInfoClick')}
-                    </Anchor>
-                  </Text>
                   {renderChatCards({
                     chats: upcomingChats,
+                    description: (
+                      <>
+                        {t('chatInfo')}
+                        <Anchor href={t('zoomHelp')} underlined>
+                          {t('chatInfoClick')}
+                        </Anchor>
+                      </>
+                    ),
                     userId,
                     userType,
                   })}
@@ -66,7 +99,7 @@ const ChatsSection = ({
           : {},
         requestedChats
           ? {
-              header: t('requested'),
+              header: t('requestedTab'),
               numberOfItems: requestedChats.length,
               content: renderChatCards({
                 chats: requestedChats,
@@ -78,8 +111,14 @@ const ChatsSection = ({
           : {},
         pastChats
           ? {
-              header: t('past'),
-              content: renderChatCards({ chats: pastChats, userId, userType }),
+              header: t('pastTab'),
+              content: renderChatRows({
+                chats: pastChats,
+                description: t('pastChats.description'),
+                userId,
+                userType,
+                userDisplayName,
+              }),
               numberOfItems: pastChats.length,
             }
           : {},

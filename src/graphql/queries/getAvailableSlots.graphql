@@ -1,9 +1,0 @@
-query GetAvailableSlots {
-  availableSlots {
-    id
-    participant1Id
-    start
-    status
-    end
-  }
-}

@@ -53,6 +53,7 @@ const typeDefs = gql`
     available: [Chat]
     booked: [Chat]
     cancelled: [Chat]
+    past: [Chat]
     rejected: [Chat]
     requested: [Chat]
   }
@@ -103,7 +104,7 @@ const typeDefs = gql`
 
   type Query {
     availability(userId: ID!): [Availability]
-    availableSlots: [Chat]
+    availableChats(userId: ID): [Chat]
     user(id: ID!): User
     chats(
       participant1Id: ID

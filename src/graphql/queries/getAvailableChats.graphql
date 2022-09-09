@@ -1,0 +1,9 @@
+query GetAvailableChats($userId: ID) {
+  availableChats(userId: $userId) {
+    id
+    participant1Id
+    start
+    status
+    end
+  }
+}

@@ -1,0 +1,41 @@
+@import 'scss/breakpoints.scss';
+@import 'scss/colors.scss';
+@import 'scss/constants.scss';
+@import 'scss/spacings.scss';
+
+.chat {
+  display: grid;
+  align-items: center;
+  color: black;
+  border: 1px solid $blue;
+  border-width: 0px 0px 1px;
+  width: 100%;
+  max-width: $content-max-width;
+  padding: size(2) 0;
+  grid-template-columns: auto auto auto 2fr;
+  column-gap: size(2);
+
+  &:first-of-type {
+    border-top-width: 1px;
+  }
+
+  @include mq($from: tablet) {
+    column-gap: size(5);
+  }
+
+  .title {
+    color: $blue;
+  }
+
+  .description {
+    color: black;
+  }
+
+  .cta {
+    text-transform: capitalize;
+    color: $blue;
+    margin-right: size(1);
+    width: max-content;
+    justify-self: end;
+  }
+}

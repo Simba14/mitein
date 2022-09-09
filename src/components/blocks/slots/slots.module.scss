@@ -8,6 +8,16 @@
 $slot-width: 180px;
 
 .container {
+  .description {
+    margin-bottom: size(4);
+    text-transform: capitalize;
+    text-align: center;
+
+    @include mq($from: tablet) {
+      margin-bottom: size(6);
+    }
+  }
+
   .selectionContainer {
     width: 100%;
 

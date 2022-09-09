@@ -31,6 +31,11 @@ module.exports = {
       { vars: 'all', args: 'after-used', ignoreRestSiblings: false },
     ],
   },
+  overrides: [
+    {
+      files: ['*.jsx'],
+    },
+  ],
   settings: {
     react: {
       version: 'detect',

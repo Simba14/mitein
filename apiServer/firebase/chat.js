@@ -1,6 +1,9 @@
 import { Firestore } from '@api/firebase';
-import { isEmpty, uniqWith } from 'lodash/fp';
-import { getDocData, getQuerySnapshotData } from '@api/firebase/helpers';
+import {
+  filterAvailableChats,
+  getDocData,
+  getQuerySnapshotData,
+} from '@api/firebase/helpers';
 import { generateZoomLink } from '@api/zoom';
 import User from '@api/firebase/user';
 import {
@@ -66,6 +69,7 @@ Chat.byParticipantIdWithStatusCondition = async ({
   if (upcoming) {
     baseQuery = baseQuery.where('start', '>', new Date().toISOString());
   }
+
   return baseQuery
     .get()
     .then(getQuerySnapshotData)
@@ -111,37 +115,33 @@ Chat.byFilters = async ({
   return await Chat.byStatus(status);
 };
 
-Chat.getOnlyAvailable = async () => {
+Chat.getOnlyAvailable = async ({ participant1Id }) => {
   let dateConstraint = new Date();
   dateConstraint.setDate(dateConstraint.getDate() + 1);
   dateConstraint.setHours(0, 0, 0); // set to tomorrow
 
   // Due to Zoom limits, we can only facilitate one chat per time slot.
   // Therefore, already requested / booked times cannot be requested
-  const unavailableChats = await Firestore.collection(COLLECTION_CHATS)
+  const unavailableTimes = await Firestore.collection(COLLECTION_CHATS)
     .where('status', 'in', [CHAT_STATUS_REQUESTED, CHAT_STATUS_BOOKED])
     .where('start', '>', dateConstraint.toISOString())
     .get()
     .then(getQuerySnapshotData)
     .then(data => data.map(chat => chat.start));
 
-  return await Firestore.collection(COLLECTION_CHATS)
+  let baseQuery = Firestore.collection(COLLECTION_CHATS)
     .where('status', '==', CHAT_STATUS_AVAILABLE)
-    .where('start', '>', dateConstraint.toISOString())
+    .where('start', '>', dateConstraint.toISOString());
+
+  if (participant1Id) {
+    baseQuery = baseQuery.where(FIELD_PARTICIPANT_ONE, '==', participant1Id);
+  }
+
+  return await baseQuery
+    .orderBy('start')
     .get()
     .then(getQuerySnapshotData)
-    .then(data => {
-      const filteredData = uniqWith((chat1, chat2) => {
-        return (
-          unavailableChats.includes(chat1.start) || chat1.start === chat2.start
-        );
-      }, data);
-
-      // uniqWith does not check first value
-      return unavailableChats.includes(filteredData[0]?.start)
-        ? filteredData.splice(1)
-        : filteredData;
-    });
+    .then(chats => filterAvailableChats({ chats, unavailableTimes }));
 };
 
 Chat.updateById = async ({ id, fields }) => {

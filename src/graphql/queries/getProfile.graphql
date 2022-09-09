@@ -8,6 +8,9 @@ query Profile($id: ID!) {
       cancelled {
         ...chatFields
       }
+      past {
+        ...chatFields
+      }
       rejected {
         ...chatFields
       }

@@ -5,25 +5,28 @@ import { useQuery } from '@apollo/client';
 import { compose, get } from 'lodash/fp';
 
 import Cta from 'components/atoms/cta';
+import PersonalInfo from 'components/blocks/personalInfo';
+import ChatsSection from 'components/blocks/chatsSection';
 import LearnerCalendar from 'components/blocks/calendar/timeView/learner';
 import NativeCalendar from 'components/blocks/calendar/timeView/native';
 import Loading from 'components/atoms/loading';
 import Suspended from 'components/blocks/suspended';
+import Text from 'components/atoms/text';
 import { withLayout } from 'components/blocks/layout';
+import { useTranslation } from 'next-i18next';
 
 import { sessionProps, withSessionContext } from 'context/session';
 import GET_PROFILE from '@graphql/queries/getProfile.graphql';
 import { ROUTE_LOGIN, ROUTE_CHATS_BOOK } from 'routes';
 import { USER_TYPE_LEARNER, USER_TYPE_NATIVE } from '@api/firebase/constants';
 
-import PersonalInfo from 'components/blocks/personalInfo';
-import ChatsSection from 'components/blocks/chatsSection';
 import styles from './profile.module.scss';
 
 const cx = classnames.bind(styles);
 
 const Profile = ({ session }) => {
   const router = useRouter();
+  const { t } = useTranslation('profile');
   const userId = get('userId', session);
   const { data, loading, error } = useQuery(GET_PROFILE, {
     variables: { id: userId },
@@ -45,7 +48,7 @@ const Profile = ({ session }) => {
       displayName,
       email,
       interests,
-      chats: { booked, cancelled, rejected, requested },
+      chats: { booked, cancelled, past, rejected, requested },
       suspendedUntil,
       type,
     },
@@ -67,16 +70,25 @@ const Profile = ({ session }) => {
         userId={userId}
       />
       {isLearner && !requested && Boolean(!suspendedUntil) && (
-        <Cta
-          to={ROUTE_CHATS_BOOK}
-          className={cx('requestCta')}
-          text={'Request a Session'}
-        />
+        <div className={cx('requestSection')}>
+          <Cta
+            to={ROUTE_CHATS_BOOK}
+            className={cx('requestCta', { hasPast: past })}
+            text={t('requestCta')}
+          />
+          {past && (
+            <>
+              <Text className={cx('separator')}>{t('separator')}</Text>
+              <Text className={cx('rebookInfo')}>{t('rebookInfo')}</Text>
+            </>
+          )}
+        </div>
       )}
       {isSuspended && <Suspended suspendedUntil={suspendedUntil} />}
       <ChatsSection
         requestedChats={requestedChats}
         upcomingChats={upcomingChats}
+        pastChats={past}
         userType={type}
         userId={userId}
         userDisplayName={displayName}
