@@ -57,7 +57,6 @@ Chat.byParticipantId = async ({ field, id }) =>
 
 Chat.byParticipantIdWithStatusCondition = async ({
   condition,
-  dateConstraint,
   field,
   id,
   status,
@@ -68,8 +67,7 @@ Chat.byParticipantIdWithStatusCondition = async ({
     .where('status', condition, status);
 
   if (upcoming) {
-    const constraint = dateConstraint || new Date().toISOString();
-    baseQuery = baseQuery.where('start', '>', constraint);
+    baseQuery = baseQuery.where('start', '>', new Date().toISOString());
   }
 
   return baseQuery
@@ -86,7 +84,6 @@ Chat.byFilters = async ({
   participant2Id,
   status,
   upcoming,
-  dateConstraint,
 }) => {
   const participantArgs = {
     field: participant1Id ? FIELD_PARTICIPANT_ONE : FIELD_PARTICIPANT_TWO,
@@ -100,7 +97,6 @@ Chat.byFilters = async ({
         condition: '==',
         status,
         upcoming,
-        dateConstraint,
       });
     }
 
