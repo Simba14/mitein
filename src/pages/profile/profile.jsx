@@ -79,7 +79,7 @@ const Profile = ({ session }) => {
           {past && (
             <>
               <Text className={cx('separator')}>{t('separator')}</Text>
-              <Text className={cx('rebookInfo')}>{t('rebookInfo')}</Text>}
+              <Text className={cx('rebookInfo')}>{t('rebookInfo')}</Text>
             </>
           )}
         </div>
