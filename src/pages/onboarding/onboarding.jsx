@@ -7,8 +7,8 @@ import { get } from 'lodash/fp';
 import Cta from 'components/atoms/cta';
 import ContentSection from 'components/blocks/contentSection';
 import Layout from 'components/blocks/layout';
-import Loading from 'components/atoms/loading';
-import Text, { HEADING_1 } from 'components/atoms/text';
+import { LoadingLogo } from 'components/atoms/loading';
+import Text, { BODY_4, HEADING_1 } from 'components/atoms/text';
 import { ROUTE_PROFILE } from 'routes';
 import { sessionProps, withSessionContext } from 'context/session';
 import GET_USER_TYPE from '@graphql/queries/getUserType.graphql';
@@ -32,14 +32,14 @@ const Onboarding = ({ session }) => {
   return (
     <Layout>
       {loading || !data ? (
-        <Loading />
+        <LoadingLogo />
       ) : (
         <div className={cx('wrapper')}>
           <div id={'intro'} className={cx('intro')}>
             <Text className={cx('title')} tag="h1" type={HEADING_1}>
               {t(`${userType}.intro.title`)}
             </Text>
-            <Text>{t(`${userType}.intro.description`)}</Text>
+            <Text type={BODY_4}>{t(`${userType}.intro.description`)}</Text>
           </div>
           {userSteps.map(({ name, content, className, svg, title }) => {
             const Icon = svg;
