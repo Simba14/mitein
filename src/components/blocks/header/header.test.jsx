@@ -1,6 +1,8 @@
 import React from 'react';
-import { ROUTE_BASE } from 'routes';
+import { ROUTE_BASE, ROUTE_LOGIN, ROUTE_SIGN_UP } from 'routes';
+import { SessionContextProvider } from 'context/session';
 import { render, screen } from 'testUtils';
+import { MOCK_SESSION_VARS } from 'unitTests/sharedMocks';
 import Header from './header';
 
 const MENU_TEST_ID = 'menu';
@@ -19,10 +21,14 @@ jest.mock('components/blocks/header/components/languageSelector', () => {
 });
 
 test('Header renders correctly', () => {
-  render(<Header />);
+  render(
+    <SessionContextProvider {...MOCK_SESSION_VARS}>
+      <Header />
+    </SessionContextProvider>,
+  );
   const header = screen.getByRole('banner');
-  const homeLink = screen.getByRole('link');
-  const logo = screen.getByTestId('svg');
+  const [homeLink, signUpLink, loginLink] = screen.getAllByRole('link');
+  const [logo, profileIcon] = screen.getAllByTestId('svg');
 
   expect(header).toBeInTheDocument();
   expect(header).toContainElement(screen.getByTestId(MENU_TEST_ID));
@@ -33,4 +39,8 @@ test('Header renders correctly', () => {
 
   expect(homeLink).toContainElement(logo);
   expect(homeLink).toHaveAttribute('href', ROUTE_BASE);
+
+  expect(signUpLink).toContainElement(profileIcon);
+  expect(signUpLink).toHaveAttribute('href', ROUTE_SIGN_UP.slice(0, -1));
+  expect(loginLink).toHaveAttribute('href', ROUTE_LOGIN.slice(0, -1));
 });

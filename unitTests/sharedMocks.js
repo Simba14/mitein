@@ -17,7 +17,7 @@ export const MOCK_CHAT_TYPE = 'VIDEO';
 
 export const MOCK_SESSION_VARS = {
   cookieConsentRecordedIdentifier: 'cookieConsentRecordedIdentifier',
-  cookieUserIdExpireDays: 'cookieUserIdExpireDays',
+  cookieUserIdExpireDays: 365,
   cookieUserIdIdentifier: 'cookieUserIdIdentifier',
 };
 

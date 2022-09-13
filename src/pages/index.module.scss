@@ -31,7 +31,7 @@
       .volunteerBtn {
         background: white;
         color: $blue;
-        margin-top: size(4);
+        margin-top: size(6);
 
         @include mq($until: tablet) {
           align-self: center;
