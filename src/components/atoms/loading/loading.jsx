@@ -5,7 +5,9 @@ import Logo from 'assets/loading.svg';
 import styles from './loading.module.scss';
 const cx = classnames.bind(styles);
 
-const Loading = () => {
+export const LOADING_RING_ID = 'loadingRing';
+
+export const LoadingLogo = () => {
   return (
     <div className={cx('wrapper')}>
       <Logo className={cx('logo')} />
@@ -13,4 +15,11 @@ const Loading = () => {
   );
 };
 
-export default Loading;
+export const LoadingRing = () => (
+  <div className={cx('loadingRing')} data-testid={LOADING_RING_ID}>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+  </div>
+);

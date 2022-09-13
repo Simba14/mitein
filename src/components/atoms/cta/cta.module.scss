@@ -14,8 +14,7 @@
   background: $blue;
   padding: size(2);
   border: none;
-  height: 100%;
-  max-height: size(6);
+  height: size(6);
   text-transform: capitalize;
 
   &.fullWidth {
@@ -44,6 +43,10 @@
     opacity: 0.6;
     cursor: not-allowed;
   }
+}
+
+button.cta {
+  width: $cta-width;
 }
 
 a.cta {

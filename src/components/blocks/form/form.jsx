@@ -196,6 +196,8 @@ const Form = ({
         type="submit"
         disabled={loadingSubmit || displaySuccessMsg}
         text={t(`${type}.submitBtn`)}
+        loading={loadingSubmit}
+        fullWidth
       />
       <div className={cx('changeLocation')}>
         {t(`${type}.changeLocation.text`)}{' '}

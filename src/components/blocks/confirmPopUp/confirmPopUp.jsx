@@ -14,6 +14,7 @@ const TITLE_ID = 'confirmPopUpTitle';
 const DESC_ID = 'confirmPopUpTitle';
 
 const ConfirmPopUp = ({
+  ctaLoading,
   error,
   handleConfirmClick,
   modalOpen,
@@ -43,6 +44,7 @@ const ConfirmPopUp = ({
           onClick={handleConfirmClick}
           text={t(`${namespace}.cta`)}
           disabled={Boolean(error)}
+          loading={ctaLoading}
         />
         {error && (
           <Text role="alert" className={cx('error')} type={BODY_6}>
@@ -55,6 +57,7 @@ const ConfirmPopUp = ({
 };
 
 ConfirmPopUp.propTypes = {
+  ctaLoading: bool,
   error: string,
   handleConfirmClick: func.isRequired,
   modalOpen: oneOfType([bool, string]).isRequired,

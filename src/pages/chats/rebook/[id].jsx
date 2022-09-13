@@ -4,7 +4,7 @@ import { get } from 'lodash/fp';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 
 import { ROUTE_PROFILE } from 'routes';
-import BookingPage from '../bookingPage';
+import BookingPage from 'pages/chats/bookingPage';
 
 export const getServerSideProps = async ({ locale, params }) => {
   const id = get('id', params);

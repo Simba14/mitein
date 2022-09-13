@@ -65,7 +65,7 @@ const ChatsMutation = {
     } = fields;
 
     const existingChat = await Chat.byId(id);
-    isInvalidChatUpdate({
+    await isInvalidChatUpdate({
       chat: existingChat,
       newStatus: status,
     });

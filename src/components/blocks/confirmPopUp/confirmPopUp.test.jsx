@@ -42,7 +42,7 @@ test('ConfirmPopUp renders correctly when open with no error', () => {
   expect(error).not.toBeInTheDocument();
 });
 
-test('ConfirmPopUp renders correctly when open', () => {
+test('ConfirmPopUp renders correctly when open with error', () => {
   const ERROR_MOCK = 'error';
   const onConfirm = jest.fn();
   const setModalOpenMock = jest.fn();
@@ -88,4 +88,22 @@ test('ConfirmPopUp user clicks calls the appropriate callbacks', async () => {
   const backdrop = screen.getByLabelText(BACKDROP_LABEL);
   await user.click(backdrop);
   expect(setModalOpenMock).toHaveBeenCalled();
+});
+
+test('ConfirmPopUp renders correctly when ctaLoading is true', () => {
+  const onConfirm = jest.fn();
+  const setModalOpenMock = jest.fn();
+  render(
+    <ConfirmPopUp
+      ctaLoading
+      modalOpen
+      handleConfirmClick={onConfirm}
+      namespace={'default'}
+      setModalOpen={setModalOpenMock}
+    />,
+  );
+
+  const [, cta] = screen.getAllByRole('button');
+  expect(cta).toBeInTheDocument();
+  expect(cta).toBeDisabled();
 });

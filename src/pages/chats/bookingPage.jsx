@@ -6,7 +6,7 @@ import { compose, get } from 'lodash/fp';
 import { useTranslation } from 'next-i18next';
 
 import Cta from 'components/atoms/cta';
-import Loading from 'components/atoms/loading';
+import { LoadingLogo } from 'components/atoms/loading';
 import Slots from 'components/blocks/slots';
 import Suspended from 'components/blocks/suspended';
 import Text, { HEADING_1 } from 'components/atoms/text';
@@ -30,10 +30,13 @@ const BookingPage = ({ id, keyPrefix, requestLimit, session }) => {
     skip: !userId,
   });
 
-  const onSelect = useCallback(() => {
-    router.push(ROUTE_PROFILE);
-    refetch();
-  }, [refetch]);
+  const onSelect = useCallback(
+    redirect => {
+      if (redirect) router.push(ROUTE_PROFILE);
+      refetch();
+    },
+    [refetch],
+  );
 
   useEffect(() => {
     if (!userId || (!loading && (!data || error))) {
@@ -50,7 +53,7 @@ const BookingPage = ({ id, keyPrefix, requestLimit, session }) => {
     }
   }, [data]);
 
-  if (loading) return <Loading />;
+  if (loading) return <LoadingLogo />;
   if (error || !data) return null;
 
   const {

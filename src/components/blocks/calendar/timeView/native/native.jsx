@@ -8,7 +8,7 @@ import { get } from 'lodash/fp';
 import Calendar, {
   DELETE_SELECTED,
 } from 'components/blocks/calendar/timeView/shared';
-import Loading from 'components/atoms/loading';
+import { LoadingLogo } from 'components/atoms/loading';
 import Text, { HEADING_4 } from 'components/atoms/text';
 import GET_AVAILABILITY from '@graphql/queries/getAvailability.graphql';
 import CREATE_CHATS from '@graphql/mutations/createChat.graphql';
@@ -61,7 +61,7 @@ const NativeCalendar = ({ userId, userType }) => {
     }prev,next`,
   };
 
-  if (loading) return <Loading />;
+  if (loading) return <LoadingLogo />;
   if (error) return null;
 
   return (

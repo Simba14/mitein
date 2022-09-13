@@ -77,8 +77,8 @@ const NewsletterBanner = ({ className, heading, description }) => {
         <Cta
           className={cx('submitBtn')}
           text={t('newsletter:cta')}
-          disabled={loading}
           type="submit"
+          loading={loading}
         />
         <div
           role="alert"

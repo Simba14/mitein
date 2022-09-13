@@ -1,5 +1,5 @@
 import React from 'react';
-import BookingPage from '../bookingPage';
+import BookingPage from 'pages/chats/bookingPage';
 
 const BookChat = () => {
   return <BookingPage requestLimit keyPrefix="book" />;
