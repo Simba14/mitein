@@ -9,7 +9,7 @@ import PersonalInfo from 'components/blocks/personalInfo';
 import ChatsSection from 'components/blocks/chatsSection';
 import LearnerCalendar from 'components/blocks/calendar/timeView/learner';
 import NativeCalendar from 'components/blocks/calendar/timeView/native';
-import Loading from 'components/atoms/loading';
+import { LoadingLogo } from 'components/atoms/loading';
 import Suspended from 'components/blocks/suspended';
 import Text from 'components/atoms/text';
 import { withLayout } from 'components/blocks/layout';
@@ -40,7 +40,7 @@ const Profile = ({ session }) => {
     }
   }, [userId]);
 
-  if (loading) return <Loading />;
+  if (loading) return <LoadingLogo />;
   if (error || !data) return null;
 
   const {

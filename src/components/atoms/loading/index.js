@@ -1,1 +1,1 @@
-export { default } from './loading.jsx';
+export { LoadingLogo, LoadingRing, LOADING_RING_ID } from './loading.jsx';

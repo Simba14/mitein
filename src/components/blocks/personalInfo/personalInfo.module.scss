@@ -63,7 +63,7 @@
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  gap: size(1);
+  gap: size(2) size(1);
 
   .label {
     margin-right: size(2);
@@ -71,12 +71,13 @@
 
   .noInterests {
     @include mq($until: tablet) {
-      flex: 1;
+      flex: 1 1 60%;
     }
   }
 
   .edit {
     height: size(4);
+    width: auto;
 
     @include mq($from: tablet) {
       margin-left: size(2);

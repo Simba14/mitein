@@ -4,6 +4,7 @@ import { func, string } from 'prop-types';
 import { useMutation, useQuery } from '@apollo/client';
 import { useTranslation } from 'next-i18next';
 import classnames from 'classnames/bind';
+import { toast } from 'react-toastify';
 
 import Cta from 'components/atoms/cta';
 import ConfirmPopUp from 'components/blocks/confirmPopUp';
@@ -35,13 +36,12 @@ const Slots = ({
   const {
     i18n: { language },
     t,
-  } = useTranslation('chat', { keyPrefix: 'slots' });
+  } = useTranslation(['chat', 'errors']);
 
   const [modalOpen, setModalOpen] = useState(false);
   const [selectedDate, setSelectedDate] = useState(null);
   const [selectedChat, selectChat] = useState(null);
   const [chatRequested, setChatRequested] = useState(false);
-  const [requestChatError, setRequestChatError] = useState(null);
 
   const {
     data,
@@ -49,7 +49,8 @@ const Slots = ({
     error: getSlotsError,
     refetch,
   } = useQuery(GET_SLOTS, { variables: { userId: slotsOfUserId } });
-  const [requestChat] = useMutation(REQUEST_CHAT);
+  const [requestChat, { loading: loadingRequestChat }] =
+    useMutation(REQUEST_CHAT);
   const availableSlots = get('availableChats', data);
 
   const handleSelectChat = ({ target }) => {
@@ -71,12 +72,13 @@ const Slots = ({
         selectChat(null);
         setChatRequested(true);
         setSelectedDate(null);
-        onSelect();
+        onSelect(true);
       })
-      .catch(e => {
-        setRequestChatError(get('graphQLErrors[0].message', e) || e.message);
+      .catch(error => {
         selectChat(null);
-        onSelect();
+        setModalOpen(false);
+        toast.error(t(error?.message, { ns: 'errors' }));
+        onSelect(false);
         refetch();
       });
   };
@@ -91,7 +93,7 @@ const Slots = ({
         <Text className={cx('noneAvailableTitle')} tag="h3" type={HEADING_4}>
           {noAvailabilityText}
         </Text>
-        <Text>{t('checkBack')}</Text>
+        <Text>{t('slots.checkBack')}</Text>
       </div>
     );
   else {
@@ -106,17 +108,17 @@ const Slots = ({
       <div className={cx('container')}>
         {slotsOfUserId ? (
           <Text className={cx('description')} type={BODY_4}>
-            {t('description')}
+            {t('slots.description')}
           </Text>
         ) : (
           <Notice type={ALERT}>
-            <Text>{t('note')}</Text>
+            <Text>{t('slots.note')}</Text>
           </Notice>
         )}
         <section className={cx('selectionContainer')}>
           <div className={cx('calendar')}>
             <Text className={cx('step')} tag="h3" type={HEADING_4}>
-              {t('step1')}
+              {t('slots.step1')}
             </Text>
             <DayViewCalendar
               locale={language}
@@ -128,7 +130,7 @@ const Slots = ({
           <div className={cx('requestSlot')}>
             <div className={cx('step2Container')}>
               <Text className={cx('step')} tag="h3" type={HEADING_4}>
-                {t('step2Number')}
+                {t('slots.step2Number')}
               </Text>
               <Text
                 className={cx('step')}
@@ -136,7 +138,7 @@ const Slots = ({
                 type={HEADING_4}
                 id={DROPDOWN_LABEL}
               >
-                {t('step2', {
+                {t('slots.step2', {
                   date:
                     selectedDate &&
                     ` for ${formatChatDate(selectedDate, language)}`,
@@ -152,7 +154,7 @@ const Slots = ({
                   disabled={Boolean(chatRequested)}
                   onChange={handleSelectChat}
                 >
-                  <option value={null}>{t('defaultOption')}</option>
+                  <option value={null}>{t('slots.defaultOption')}</option>
                   {slots[selectedDate].map(slot => (
                     <option
                       key={slot.id}
@@ -172,16 +174,16 @@ const Slots = ({
                   fullWidth
                   onClick={openModal}
                   disabled={Boolean(chatRequested || !selectedChat)}
-                  text={t('cta')}
+                  text={t('slots.cta')}
                 />
               </div>
             ) : (
-              <div>{t('unavailableDate')}</div>
+              <div>{t('slots.unavailableDate')}</div>
             )}
           </div>
         </section>
         <ConfirmPopUp
-          error={requestChatError}
+          ctaLoading={loadingRequestChat}
           handleConfirmClick={handleConfirmClick}
           modalOpen={modalOpen}
           namespace={`${USER_TYPE_LEARNER}.modal.request`}

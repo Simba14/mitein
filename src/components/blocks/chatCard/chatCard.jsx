@@ -31,7 +31,7 @@ const ChatCard = ({ chat, status, userType, userDisplayName, userId }) => {
   const {
     i18n: { language },
     t,
-  } = useTranslation('chat', 'errors');
+  } = useTranslation(['chat', 'errors']);
   const [confirmModalOpen, setConfirmModalOpen] = useState(false);
   const [cancelModalOpen, setCancelModalOpen] = useState(false);
   const isLearner = userType === USER_TYPE_LEARNER;
@@ -53,12 +53,12 @@ const ChatCard = ({ chat, status, userType, userDisplayName, userId }) => {
     [userId],
   );
 
-  const [amendChat, mutationStatus] = useMutation(UPDATE_CHAT, {
+  const [amendChat, { client, loading }] = useMutation(UPDATE_CHAT, {
     onError: error => {
       setConfirmModalOpen(false);
       setCancelModalOpen(false);
       toast.error(t(error?.message, { ns: 'errors' }));
-      mutationStatus.client.refetchQueries({ include: refetchQueries });
+      client.refetchQueries({ include: refetchQueries });
     },
   });
 
@@ -169,12 +169,14 @@ const ChatCard = ({ chat, status, userType, userDisplayName, userId }) => {
         />
       )}
       <ConfirmPopUp
+        ctaLoading={loading}
         handleConfirmClick={handleConfirmClick}
         modalOpen={confirmModalOpen}
         namespace={`${userType}.modal.confirm`}
         setModalOpen={setConfirmModalOpen}
       />
       <ConfirmPopUp
+        ctaLoading={loading}
         handleConfirmClick={handleCancelClick}
         modalOpen={cancelModalOpen}
         namespace={`${userType}.modal.cancel`}

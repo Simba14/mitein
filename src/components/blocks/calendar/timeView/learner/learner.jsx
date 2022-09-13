@@ -9,7 +9,7 @@ import Calendar, {
   DELETE_SELECTED,
 } from 'components/blocks/calendar/timeView/shared';
 import Cta from 'components/atoms/cta';
-import Loading from 'components/atoms/loading';
+import { LoadingLogo } from 'components/atoms/loading';
 import Text, { HEADING_4 } from 'components/atoms/text';
 import GET_AVAILABILITY from '@graphql/queries/getAvailability.graphql';
 import CREATE_AVAILABILITY from '@graphql/mutations/addAvailability.graphql';
@@ -29,7 +29,8 @@ const LearnerCalendar = ({ userId, userType }) => {
   const { t } = useTranslation('calendar');
 
   const [selectedEvents, setSelectedEvents] = useState([]);
-  const [deleteAvailabilities] = useMutation(DELETE_AVAILABILITY);
+  const [deleteAvailabilities, { loading: loadingDelete }] =
+    useMutation(DELETE_AVAILABILITY);
   const [updateAvailability] = useMutation(CREATE_AVAILABILITY);
   const { data, loading, error } = useQuery(GET_AVAILABILITY, {
     variables: { userId },
@@ -63,7 +64,7 @@ const LearnerCalendar = ({ userId, userType }) => {
     }).then(() => setSelectedEvents([]));
   };
 
-  if (loading) return <Loading />;
+  if (loading) return <LoadingLogo />;
   if (error) return null;
 
   const headerToolbar = isSmallerViewport
@@ -87,6 +88,7 @@ const LearnerCalendar = ({ userId, userType }) => {
           onClick={onDeleteSelected}
           disabled={!selectedEvents.length}
           text={t('deleteSelected')}
+          loading={loadingDelete}
         />
       </div>
       <Calendar

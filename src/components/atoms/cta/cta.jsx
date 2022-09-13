@@ -4,12 +4,14 @@ import classnames from 'classnames/bind';
 
 import Link from 'components/atoms/link';
 import styles from './cta.module.scss';
+import { LoadingRing } from '../loading';
 const cx = classnames.bind(styles);
 
 const Cta = ({
   disabled,
   fullWidth,
   text,
+  loading,
   onClick,
   outline,
   className,
@@ -31,10 +33,10 @@ const Cta = ({
     <button
       className={cx('cta', className, { fullWidth, outline })}
       type={type}
-      disabled={disabled}
+      disabled={disabled || loading}
       onClick={onClick}
     >
-      {text}
+      {loading ? <LoadingRing /> : text}
     </button>
   );
 };
@@ -43,6 +45,7 @@ Cta.propTypes = {
   className: string,
   disabled: bool,
   fullWidth: bool,
+  loading: bool,
   onClick: func,
   outline: bool,
   text: string.isRequired,
@@ -54,6 +57,7 @@ Cta.defaultProps = {
   className: null,
   disabled: false,
   fullWidth: false,
+  loading: false,
   onClick: null,
   outline: false,
   to: null,

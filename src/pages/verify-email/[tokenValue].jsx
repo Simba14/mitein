@@ -7,7 +7,7 @@ import { compose, get } from 'lodash/fp';
 import { useTranslation } from 'next-i18next';
 
 import Cta from 'components/atoms/cta';
-import Loading from 'components/atoms/loading';
+import { LoadingLogo } from 'components/atoms/loading';
 import Text, { HEADING_4 } from 'components/atoms/text';
 import { withLayout } from 'components/blocks/layout';
 import VERIFY_EMAIL from '@graphql/mutations/verifyEmail.graphql';
@@ -63,7 +63,7 @@ const VerifyEmail = ({ tokenValue }) => {
       });
   }, []);
 
-  if (loading) return <Loading />;
+  if (loading) return <LoadingLogo />;
 
   return tokenValid ? (
     <div className={cx('wrapper')}>
