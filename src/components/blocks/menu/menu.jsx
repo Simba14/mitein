@@ -1,11 +1,17 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import { useTranslation } from 'next-i18next';
 import classnames from 'classnames/bind';
+import { useMutation } from '@apollo/client';
+import { useRouter } from 'next/router';
+import { get } from 'lodash/fp';
 
 import { MenuContextConsumer } from 'context/menu/';
 import Anchor from 'components/atoms/anchor';
 import Svg, { CLOSE, MENU } from 'components/atoms/svg';
-import { ROUTE_ABOUT, ROUTE_HOW, ROUTE_VOLUNTEER } from 'routes';
+import { ROUTE_ABOUT, ROUTE_HOW, ROUTE_SIGN_UP, ROUTE_VOLUNTEER } from 'routes';
+import { sessionProps, withSessionContext } from 'context/session';
+import SIGN_OUT from '@graphql/mutations/signOut.graphql';
+import { ROUTE_LOGIN } from 'routes';
 
 import styles from './menu.module.scss';
 const cx = classnames.bind(styles);
@@ -27,8 +33,24 @@ const MENU_ITEMS = [
   },
 ];
 
-export const Menu = () => {
+const SIGN_UP_PROPS = {
+  title: 'signUp',
+  to: ROUTE_SIGN_UP,
+};
+
+export const Menu = ({ session }) => {
   const { t } = useTranslation('menu');
+  const router = useRouter();
+  const userId = get('userId', session);
+
+  const signOutSuccessful = useCallback(() => {
+    router.push(ROUTE_LOGIN);
+    session.userLoggedOut();
+  }, [router, session?.userLoggedOut]);
+
+  const [signOut, { loading: signOutLoading }] = useMutation(SIGN_OUT, {
+    onCompleted: signOutSuccessful,
+  });
 
   return (
     <MenuContextConsumer>
@@ -61,6 +83,23 @@ export const Menu = () => {
                   {t(`items.${item.title}.text`)}
                 </Anchor>
               ))}
+              {userId ? (
+                <button
+                  className={cx('navItem', 'button')}
+                  onClick={signOut}
+                  disabled={signOutLoading}
+                >
+                  {t('signOut')}
+                </button>
+              ) : (
+                <Anchor
+                  className={cx('navItem')}
+                  activeClassName={cx('active')}
+                  {...SIGN_UP_PROPS}
+                >
+                  {t(`items.${SIGN_UP_PROPS.title}.text`)}
+                </Anchor>
+              )}
             </nav>
           </div>
         );
@@ -69,4 +108,8 @@ export const Menu = () => {
   );
 };
 
-export default Menu;
+Menu.propTypes = {
+  session: sessionProps,
+};
+
+export default withSessionContext(Menu);
