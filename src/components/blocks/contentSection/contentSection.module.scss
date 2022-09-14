@@ -7,19 +7,28 @@
 .wrapper {
   background-color: white;
   padding: 1px;
+  width: 100%;
 
   .container {
-    @include wrapper;
-
     display: flex;
     flex-direction: column;
     margin: auto;
     max-width: $content-max-width;
-    padding-bottom: size(14);
+    padding-bottom: size(6);
 
     @include mq($from: tabletWide) {
-      padding-top: size(8);
-      padding-bottom: size(12);
+      padding-top: size(6);
+    }
+
+    &.withWrapper {
+      @include wrapper;
+
+      padding-bottom: size(14);
+
+      @include mq($from: tabletWide) {
+        padding-top: size(8);
+        padding-bottom: size(12);
+      }
     }
   }
 

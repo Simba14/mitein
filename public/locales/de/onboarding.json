@@ -3,7 +3,7 @@
         "cta": "Los geht’s",
         "intro": {
             "title": "Sie sind dabei! So funktioniert’s",
-            "description": "Nur noch ein paar Schritte bis Sie sich mit anderen unterhalten können"
+            "description": "Nur noch ein paar Schritte bis Sie sich mit anderen unterhalten können."
         },
         "step1": {
             "title": "Schritt 1.",
@@ -15,11 +15,11 @@
         },
         "step3": {
             "title": "Schritt 3.",
-            "content": "Einem Gespräch zur vereinbarten Zeit steht nichts mehr im Wege!\nKlicken Sie einfach auf den angezeigten Link, um zum Video-Chat zu gelangen."
+            "content": "Einem Gespräch zur vereinbarten Zeit steht nichts mehr im Wege!\n\nKlicken Sie einfach auf den angezeigten Link, um zum Video-Chat zu gelangen."
         },
         "step4": {
             "title": "Schritt 4.",
-            "content": "Falls keine Zeitfenster angeboten werden, können Sie Ihre eigene Verfügbarkeit in Ihrem Profil angeben.\n Sie bekommen eine Mitteilung, sobald ein Gespräch zu einer passenden Zeit angeboten wird."
+            "content": "Falls keine Zeitfenster angeboten werden, können Sie Ihre eigene Verfügbarkeit in Ihrem Profil angeben.\n\nSie bekommen eine Mitteilung, sobald ein Gespräch zu einer passenden Zeit angeboten wird."
         }
     },
     "NATIVE": {
@@ -34,7 +34,7 @@
         },
         "step2": {
             "title": "Schritt 2.",
-            "content": "Andere Nutzer:innen können so Ihre Verfügbarkeit anonym einsehen und eine Anfrage für ein Gespräch schicken.\n Sie bekommen eine Mitteilung per E-Mail wenn eine Anfrage gestellt wird."
+            "content": "Andere Nutzer:innen können so Ihre Verfügbarkeit anonym einsehen und eine Anfrage für ein Gespräch schicken.\n\nSie bekommen eine Mitteilung per E-Mail wenn eine Anfrage gestellt wird."
         },
         "step3": {
             "title": "Schritt 3.",
@@ -42,7 +42,7 @@
         },
         "step4": {
             "title": "Schritt 4.",
-            "content": "Einem Gespräch zur vereinbarten Zeit steht nichts mehr im Wege!\nKlicken Sie einfach auf den angezeigten Link, um zum Video-Chat zu gelangen."
+            "content": "Einem Gespräch zur vereinbarten Zeit steht nichts mehr im Wege!\n\nKlicken Sie einfach auf den angezeigten Link, um zum Video-Chat zu gelangen."
         }
     }
 }

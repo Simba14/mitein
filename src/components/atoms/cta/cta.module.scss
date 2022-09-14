@@ -17,6 +17,11 @@
   height: size(6);
   text-transform: capitalize;
 
+  &.jumbo {
+    font-size: 1.25rem;
+    height: size(7);
+  }
+
   &.fullWidth {
     width: 100%;
   }

@@ -2,7 +2,7 @@ import React from 'react';
 import { render, renderWithUser, screen } from 'testUtils';
 import { MOCK_TEXT, MOCK_SLUG } from 'unitTests/sharedMocks';
 import { LOADING_RING_ID } from 'components/atoms/loading';
-import Cta from './cta';
+import Cta, { CTA_SIZES } from './cta';
 
 test('Cta renders link if "to" provided and handles onClick', async () => {
   const onClickMock = jest.fn();
@@ -45,6 +45,12 @@ test('Cta button gets correct classNames', () => {
   const button = screen.getByRole('button');
   expect(button).toHaveClass('fullWidth');
   expect(button).toHaveClass('outline');
+});
+
+test('Cta button renders correctly when jumbo size', () => {
+  render(<Cta text={MOCK_TEXT} size={CTA_SIZES.jumbo} />);
+  const button = screen.getByRole('button');
+  expect(button).toHaveClass('jumbo');
 });
 
 test('Cta button does not have related classNames when outline / fullwidth are false', () => {

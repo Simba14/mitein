@@ -11,9 +11,10 @@
     "content": "Mitein looks to connect you to people you’d otherwise never have the fortune of chatting with.\n\n    The goal is to improve people’s German whilst providing human connection to those who currently find themselves socially isolated or just want a chat.\n\n   At present, chats are held online via a video call, but Mitein’s main aim is to increase in-person interactions.\n\n   By partnering with retirement homes and similar organizations, Mitein will help these services easily arrange and manage visits and events safely.\n\n   The first step towards facilitating intergenerational spaces in local communities, whilst integrating a large community of older adults that feel neglected and sidelined.\n\n   We want to create conversations that otherwise wouldn’t take place. Conversations that are purposeful, enjoyable and build confidence.\n\n    Mitein is a foundation. It is free to use."
   },
   "volunteerBtn": "Volunteer now",
-  "newsletter": {
-    "heading": "Launch date...",
-    "description": "Find out as soon as we launch by subscribing to our newsletter."
+  "startNow": {
+    "heading": "Get chatting now!",
+    "description": "Find someone to chat with in just a few quick steps.",
+    "cta": "Sign up"
   },
   "contactUs": {
     "descriptor": "Have questions or want to get in touch?",

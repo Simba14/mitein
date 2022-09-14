@@ -4,7 +4,7 @@ import classnames from 'classnames/bind';
 import { useQuery } from '@apollo/client';
 import { get } from 'lodash/fp';
 
-import Cta from 'components/atoms/cta';
+import Cta, { CTA_SIZES } from 'components/atoms/cta';
 import ContentSection from 'components/blocks/contentSection';
 import Layout from 'components/blocks/layout';
 import { LoadingLogo } from 'components/atoms/loading';
@@ -42,7 +42,7 @@ const Onboarding = ({ session }) => {
             </TextBanner>
             <Text type={BODY_4}>{t(`${userType}.intro.description`)}</Text>
           </div>
-          {userSteps.map(({ name, content, className, svg, title }, index) => {
+          {userSteps.map(({ name, content, className, svg, title }) => {
             const Icon = svg;
             return (
               <ContentSection
@@ -53,21 +53,17 @@ const Onboarding = ({ session }) => {
                 content={t(content)}
                 title={t(title)}
               >
-                <Icon className={cx('sectionImage', `step${index}Image`)} />
+                <Icon className={cx('sectionImage')} />
               </ContentSection>
             );
           })}
-          <ContentSection
-            className={cx('section')}
-            containerClassName={cx('step')}
-          >
-            <Cta
-              className={cx('continue')}
-              text={t(`${userType}.cta`)}
-              to={ROUTE_PROFILE}
-              fullWidth
-            />
-          </ContentSection>
+          <Cta
+            className={cx('continue')}
+            size={CTA_SIZES.jumbo}
+            text={t(`${userType}.cta`)}
+            to={ROUTE_PROFILE}
+            fullWidth
+          />
         </div>
       )}
     </Layout>
