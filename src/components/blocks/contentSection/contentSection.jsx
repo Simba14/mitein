@@ -20,7 +20,7 @@ const ContentSection = ({
         {(title || content) && (
           <div className={cx('fixedContent')}>
             {title && (
-              <Text className={cx('title')} tag="h3" type={HEADING_3}>
+              <Text className={cx('title')} tag="h3" type={HEADING_3} bold>
                 {title}
               </Text>
             )}

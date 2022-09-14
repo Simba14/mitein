@@ -90,7 +90,12 @@ const Slots = ({
   if (getSlotsError || isEmpty(availableSlots))
     return (
       <div className={cx('noneAvailable')}>
-        <Text className={cx('noneAvailableTitle')} tag="h3" type={HEADING_4}>
+        <Text
+          className={cx('noneAvailableTitle')}
+          tag="h3"
+          type={HEADING_4}
+          bold
+        >
           {noAvailabilityText}
         </Text>
         <Text>{t('slots.checkBack')}</Text>
@@ -117,7 +122,7 @@ const Slots = ({
         )}
         <section className={cx('selectionContainer')}>
           <div className={cx('calendar')}>
-            <Text className={cx('step')} tag="h3" type={HEADING_4}>
+            <Text className={cx('step')} tag="h3" type={HEADING_4} bold>
               {t('slots.step1')}
             </Text>
             <DayViewCalendar
@@ -129,7 +134,7 @@ const Slots = ({
           </div>
           <div className={cx('requestSlot')}>
             <div className={cx('step2Container')}>
-              <Text className={cx('step')} tag="h3" type={HEADING_4}>
+              <Text className={cx('step')} tag="h3" type={HEADING_4} bold>
                 {t('slots.step2Number')}
               </Text>
               <Text
@@ -137,6 +142,7 @@ const Slots = ({
                 tag="h3"
                 type={HEADING_4}
                 id={DROPDOWN_LABEL}
+                bold
               >
                 {t('slots.step2', {
                   date:

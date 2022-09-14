@@ -66,7 +66,7 @@ const NativeCalendar = ({ userId, userType }) => {
 
   return (
     <section className={cx('calendar')}>
-      <Text className={cx('title')} tag="h3" type={HEADING_4}>
+      <Text className={cx('title')} tag="h3" type={HEADING_4} bold>
         {t('availabilityTitle')}
       </Text>
       <div className={cx('instructions')}>{t('instructions')}</div>

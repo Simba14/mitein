@@ -28,7 +28,6 @@ $text-max-width: 400px;
   }
 
   .separator {
-    font-weight: bold;
     margin: size(2) 0 size(1);
 
     @include mq($from: tablet) {

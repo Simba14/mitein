@@ -52,10 +52,10 @@ const Volunteer = ({ organizations }) => {
 
   return (
     <div className={cx('container')}>
-      <Text className={cx('headline')} tag="h1" type={HEADING_2}>
+      <Text className={cx('headline')} tag="h1" type={HEADING_2} bold>
         {t('headline')}
       </Text>
-      <Text className={cx('subheadline')} tag="h2" type={HEADING_5}>
+      <Text className={cx('subheadline')} tag="h2" type={HEADING_5} bold>
         {t('subheadline')}
       </Text>
       <div className={cx('filters')}>

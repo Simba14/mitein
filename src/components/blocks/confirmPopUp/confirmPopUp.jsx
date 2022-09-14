@@ -32,7 +32,13 @@ const ConfirmPopUp = ({
         aria-labelledby={TITLE_ID}
         aria-describedby={DESC_ID}
       >
-        <Text id={TITLE_ID} className={cx('heading')} tag="h3" type={HEADING_4}>
+        <Text
+          id={TITLE_ID}
+          className={cx('heading')}
+          tag="h3"
+          type={HEADING_4}
+          bold
+        >
           {t(`${namespace}.title`)}
         </Text>
         <Text id={DESC_ID} className={cx('disclaimer')}>

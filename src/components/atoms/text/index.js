@@ -12,4 +12,5 @@ export {
   BODY_4,
   BODY_5,
   BODY_6,
+  TEXT_TYPES,
 } from './text';

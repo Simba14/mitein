@@ -6,7 +6,8 @@
   display: flex;
   font-size: 1rem;
   flex-direction: column;
-  width: $form-width;
+  width: 100%;
+  max-width: $form-width;
   background: white;
 
   .fieldContainer {

@@ -78,7 +78,7 @@ const LearnerCalendar = ({ userId, userType }) => {
     <section className={cx('calendar')}>
       <div className={cx('toolbar')}>
         <div>
-          <Text className={cx('title')} tag="h3" type={HEADING_4}>
+          <Text className={cx('title')} tag="h3" type={HEADING_4} bold>
             {t('availabilityTitle')}
           </Text>
           <Text className={cx('instructions')}>{t('availabilityNote')}</Text>

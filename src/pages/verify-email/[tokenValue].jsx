@@ -8,7 +8,7 @@ import { useTranslation } from 'next-i18next';
 
 import Cta from 'components/atoms/cta';
 import { LoadingLogo } from 'components/atoms/loading';
-import Text, { HEADING_4 } from 'components/atoms/text';
+import Text, { HEADING_3 } from 'components/atoms/text';
 import { withLayout } from 'components/blocks/layout';
 import VERIFY_EMAIL from '@graphql/mutations/verifyEmail.graphql';
 // import { sessionProps, withSessionContext } from 'context/session';
@@ -67,7 +67,7 @@ const VerifyEmail = ({ tokenValue }) => {
 
   return tokenValid ? (
     <div className={cx('wrapper')}>
-      <Text className={cx('heading')} tag="h3" type={HEADING_4}>
+      <Text className={cx('heading')} tag="h2" type={HEADING_3}>
         {t('emailVerified')}
       </Text>
       <Text className={cx('description')}>{t('featuresEnabled')}</Text>
@@ -75,7 +75,7 @@ const VerifyEmail = ({ tokenValue }) => {
     </div>
   ) : (
     <div className={cx('wrapper')}>
-      <Text className={cx('heading')} tag="h3" type={HEADING_4}>
+      <Text className={cx('heading')} tag="h2" type={HEADING_3}>
         {t('invalidToken.title')}
       </Text>
       <Text className={cx('description')}>{t('invalidToken.description')}</Text>

@@ -105,7 +105,7 @@ const BookingPage = ({ id, keyPrefix, requestLimit, session }) => {
 
   return (
     <div className={cx('wrapper')}>
-      <Text className={cx('title')} tag="h1" type={HEADING_1}>
+      <Text className={cx('title')} tag="h1" type={HEADING_1} bold>
         {t('title')}
       </Text>
       {getContent()}

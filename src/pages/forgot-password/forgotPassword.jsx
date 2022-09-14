@@ -43,7 +43,7 @@ const ForgotPassword = ({ session }) => {
 
   return (
     <div className={cx('wrapper')}>
-      <Text className={cx('title')} type={HEADING_3}>
+      <Text className={cx('title')} type={HEADING_3} tag="h2">
         {t('title')}
       </Text>
       <Text className={cx('description')}>{t('description')}</Text>

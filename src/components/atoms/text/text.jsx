@@ -1,6 +1,6 @@
 import React from 'react';
 import classnames from 'classnames/bind';
-import { node, string, oneOf, oneOfType } from 'prop-types';
+import { node, string, oneOf, oneOfType, bool } from 'prop-types';
 import styles from './text.module.scss';
 
 const cx = classnames.bind(styles);
@@ -18,7 +18,7 @@ export const BODY_4 = 'body4';
 export const BODY_5 = 'body5';
 export const BODY_6 = 'body6';
 
-const TYPES = [
+export const TEXT_TYPES = [
   HEADING_1,
   HEADING_2,
   HEADING_3,
@@ -33,22 +33,24 @@ const TYPES = [
   BODY_6,
 ];
 
-const Text = ({ children, className, tag, type, ...props }) => {
+const Text = ({ bold, children, className, tag, type, ...props }) => {
   return React.createElement(
     tag,
-    { className: cx(className, { [type]: true }), ...props },
+    { className: cx(className, { [type]: true, bold }), ...props },
     children,
   );
 };
 
 Text.propTypes = {
+  bold: bool,
   children: oneOfType([node, string]),
   className: string,
   tag: string,
-  type: oneOf(TYPES),
+  type: oneOf(TEXT_TYPES),
 };
 
 Text.defaultProps = {
+  bold: false,
   children: '',
   className: null,
   tag: 'p',
