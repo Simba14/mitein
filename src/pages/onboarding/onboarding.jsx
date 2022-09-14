@@ -57,17 +57,12 @@ const Onboarding = ({ session }) => {
               </ContentSection>
             );
           })}
-          <ContentSection
-            className={cx('section')}
-            containerClassName={cx('step')}
-          >
-            <Cta
-              className={cx('continue')}
-              text={t(`${userType}.cta`)}
-              to={ROUTE_PROFILE}
-              fullWidth
-            />
-          </ContentSection>
+          <Cta
+            className={cx('continue')}
+            text={t(`${userType}.cta`)}
+            to={ROUTE_PROFILE}
+            fullWidth
+          />
         </div>
       )}
     </Layout>

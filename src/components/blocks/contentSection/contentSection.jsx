@@ -1,5 +1,5 @@
 import React from 'react';
-import { node, string } from 'prop-types';
+import { bool, node, string } from 'prop-types';
 import classnames from 'classnames/bind';
 
 import Text, { BODY_4, HEADING_3 } from 'components/atoms/text';
@@ -13,9 +13,10 @@ const ContentSection = ({
   containerClassName,
   content,
   title,
+  withWrapper,
 }) => {
   return (
-    <div id={anchorId} className={cx('wrapper', className)}>
+    <div id={anchorId} className={cx('wrapper', className, { withWrapper })}>
       <div className={cx('container', containerClassName)}>
         {(title || content) && (
           <div className={cx('fixedContent')}>
@@ -44,6 +45,7 @@ ContentSection.propTypes = {
   containerClassName: string,
   content: string,
   title: string,
+  withWrapper: bool,
 };
 
 ContentSection.defaultProps = {
@@ -52,6 +54,7 @@ ContentSection.defaultProps = {
   containerClassName: null,
   content: null,
   title: null,
+  withWrapper: false,
 };
 
 export default ContentSection;

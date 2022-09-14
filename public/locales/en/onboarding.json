@@ -3,7 +3,7 @@
         "cta": "Get started",
         "intro": {
             "title": "You're in! Here's how it works",
-            "description": "Follow the simple steps below to start chatting with others"
+            "description": "Follow the simple steps below to start chatting with others."
         },
         "step1": {
             "title": "Step 1.",
@@ -15,11 +15,11 @@
         },
         "step3": {
             "title": "Step 3.",
-            "content": "Have a great conversation at the specified time and date!\nTo access the chat you just need to click on the special link provided. Easy!"
+            "content": "Have a great conversation at the specified time and date!\n\nTo access the chat you just need to click on the special link provided. Easy!"
         },
         "step4": {
             "title": "Step 4.",
-            "content": "If there are no available chats, you can set your own availability in your profile.\nYou will then be notified when a suitable chat becomes available."
+            "content": "If there are no available chats, you can set your own availability in your profile.\n\nYou will then be notified when a suitable chat becomes available."
         }
     },
     "NATIVE": {
@@ -34,7 +34,7 @@
         },
         "step2": {
             "title": "Step 2.",
-            "content": "Others will then be able to see your available times and request a chat with you.\nYou will be notified via email when a request is made."
+            "content": "Others will then be able to see your available times and request a chat with you.\n\nYou will be notified via email when a request is made."
         },
         "step3": {
             "title": "Step 3.",
@@ -42,7 +42,7 @@
         },
         "step4": {
             "title": "Step 4.",
-            "content": "Have a great conversation at the specified time and date!\nTo access the chat you just need to click on the special link provided. Easy!"
+            "content": "Have a great conversation at the specified time and date!\n\nTo access the chat you just need to click on the special link provided. Easy!"
         }
     }
 }

@@ -8,7 +8,7 @@
   flex-direction: column;
   width: 100%;
   -webkit-overflow-scrolling: touch;
-  padding: 0 $wrapper-padding-x-mobile $wrapper-padding-y-mobile;
+  padding: 0 $wrapper-padding-x-mobile size(8);
 
   @include mq($from: tablet) {
     padding: $wrapper-padding-y-desktop-small $wrapper-padding-x-desktop
@@ -18,35 +18,51 @@
   .intro {
     width: 100%;
     max-width: $content-max-width;
-    margin-bottom: size(3);
+    margin-bottom: size(5);
     text-align: center;
 
-    .title {
-      margin-bottom: size(3);
+    @include mq($from: tablet) {
+      margin-bottom: size(8);
+    }
 
-      @include mq($from: tablet) {
-        margin-bottom: size(5);
-      }
+    .title {
+      margin-bottom: size(5);
     }
   }
 
   .section {
-    margin-bottom: size(5);
-
     .step {
       display: flex;
       flex-direction: row;
-      justify-content: center;
-      padding-bottom: size(1);
+      justify-content: flex-start;
+
+      > div {
+        max-width: 60%;
+      }
 
       .sectionImage {
-        margin-left: size(8);
+        margin-left: size(4);
       }
 
       &.row-reverse {
         flex-direction: row-reverse;
 
         .sectionImage {
+          margin-right: size(4);
+          margin-left: 0px;
+        }
+      }
+
+      @include mq($from: tablet) {
+        > div {
+          max-width: 50%;
+        }
+
+        .sectionImage {
+          margin-left: size(8);
+        }
+
+        &.row-reverse .sectionImage {
           margin-right: size(8);
           margin-left: 0px;
         }
@@ -57,9 +73,9 @@
       height: size(25);
       width: size(25);
     }
+  }
 
-    .continue {
-      width: calc(#{$content-max-width} / 2);
-    }
+  .continue {
+    width: calc(#{$content-max-width} / 2);
   }
 }

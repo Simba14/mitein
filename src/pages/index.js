@@ -40,6 +40,7 @@ const Home = () => {
           className={cx('how')}
           title={t('how.title')}
           content={t('how.content')}
+          withWrapper
         />
         <NewsletterBanner
           className={cx('newsletter')}
@@ -51,6 +52,7 @@ const Home = () => {
           className={cx('about')}
           title={t('about.title')}
           content={t('about.content')}
+          withWrapper
         >
           <div className={cx('btnWrapper')}>
             <Cta
