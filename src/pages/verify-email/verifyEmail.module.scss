@@ -1,18 +1,24 @@
 @import 'scss/colors.scss';
+@import 'scss/breakpoints.scss';
 @import 'scss/spacings.scss';
 
 .wrapper {
   display: flex;
-  align-items: center;
+  height: 100%;
   flex-direction: column;
-  padding-top: size(2);
+  padding-bottom: size(4);
+
+  @include mq($from: tablet) {
+    align-items: center;
+    padding-top: size(7);
+  }
 
   .heading {
     text-transform: capitalize;
-    margin-bottom: size(4);
+    margin-bottom: size(3);
   }
 
   .description {
-    margin-bottom: size(2);
+    margin-bottom: size(3);
   }
 }

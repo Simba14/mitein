@@ -4,10 +4,11 @@
 
 .wrapper {
   display: flex;
+  align-items: center;
   flex-direction: column;
   width: 100%;
   -webkit-overflow-scrolling: touch;
-  padding: $wrapper-padding-y-mobile $wrapper-padding-x-mobile;
+  padding: 0 $wrapper-padding-x-mobile $wrapper-padding-y-mobile;
 
   @include mq($from: tablet) {
     padding: $wrapper-padding-y-desktop-small $wrapper-padding-x-desktop
@@ -15,14 +16,17 @@
   }
 
   .intro {
-    padding: size(4);
-    margin: auto;
+    width: 100%;
     max-width: $content-max-width;
-    margin-bottom: size(5);
+    margin-bottom: size(3);
     text-align: center;
 
     .title {
-      margin-bottom: size(2);
+      margin-bottom: size(3);
+
+      @include mq($from: tablet) {
+        margin-bottom: size(5);
+      }
     }
   }
 
@@ -33,16 +37,17 @@
       display: flex;
       flex-direction: row;
       justify-content: center;
+      padding-bottom: size(1);
 
       .sectionImage {
-        margin-left: 64px;
+        margin-left: size(8);
       }
 
       &.row-reverse {
         flex-direction: row-reverse;
 
         .sectionImage {
-          margin-right: 64px;
+          margin-right: size(8);
           margin-left: 0px;
         }
       }

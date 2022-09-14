@@ -8,13 +8,14 @@ import Cta from 'components/atoms/cta';
 import ContentSection from 'components/blocks/contentSection';
 import Layout from 'components/blocks/layout';
 import { LoadingLogo } from 'components/atoms/loading';
-import Text, { BODY_4, HEADING_1 } from 'components/atoms/text';
+import Text, { BODY_4 } from 'components/atoms/text';
 import { ROUTE_PROFILE } from 'routes';
 import { sessionProps, withSessionContext } from 'context/session';
 import GET_USER_TYPE from '@graphql/queries/getUserType.graphql';
 import getUserSteps from 'helpers/getUserSteps';
 
 import styles from './onboarding.module.scss';
+import TextBanner from 'components/atoms/textBanner';
 const cx = classnames.bind(styles);
 
 const Onboarding = ({ session }) => {
@@ -36,12 +37,12 @@ const Onboarding = ({ session }) => {
       ) : (
         <div className={cx('wrapper')}>
           <div id={'intro'} className={cx('intro')}>
-            <Text className={cx('title')} tag="h1" type={HEADING_1}>
+            <TextBanner className={cx('title')}>
               {t(`${userType}.intro.title`)}
-            </Text>
+            </TextBanner>
             <Text type={BODY_4}>{t(`${userType}.intro.description`)}</Text>
           </div>
-          {userSteps.map(({ name, content, className, svg, title }) => {
+          {userSteps.map(({ name, content, className, svg, title }, index) => {
             const Icon = svg;
             return (
               <ContentSection
@@ -52,7 +53,7 @@ const Onboarding = ({ session }) => {
                 content={t(content)}
                 title={t(title)}
               >
-                <Icon className={cx('sectionImage')} />
+                <Icon className={cx('sectionImage', `step${index}Image`)} />
               </ContentSection>
             );
           })}

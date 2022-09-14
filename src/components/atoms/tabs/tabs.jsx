@@ -27,7 +27,7 @@ const Tabs = ({ tabs }) => {
             key={tab.header}
             onClick={() => setIndexVisible(index)}
           >
-            <Text>
+            <Text bold>
               {tab.header}
               {tab.numberOfItems && (
                 <span className={cx('count')}>{tab.numberOfItems}</span>

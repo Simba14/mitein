@@ -23,7 +23,7 @@ const AccordionHeader = ({
     id={ariaId}
     aria-controls={ariaControls}
   >
-    <Text tag="h3" type={HEADING_4}>
+    <Text tag="h3" type={HEADING_4} bold>
       {text}
     </Text>
     <ArrowIcon className={cx('arrow')} />

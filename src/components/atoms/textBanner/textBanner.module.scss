@@ -1,0 +1,9 @@
+@import 'scss/spacings.scss';
+
+.banner {
+  text-align: center;
+  margin-bottom: size(5);
+  line-height: 1.5;
+  padding: size(3) size(1);
+  width: 100%;
+}

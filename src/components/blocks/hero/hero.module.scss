@@ -8,7 +8,11 @@ $logo-width-desktop: 190px;
 .wrapper {
   position: relative;
   width: 100%;
-  padding: size(3) size(4);
+  padding: size(3) size(2);
+
+  @include mq($from: tablet) {
+    padding: size(3) size(4);
+  }
 
   .hero {
     display: flex;
@@ -45,8 +49,7 @@ $logo-width-desktop: 190px;
 
       @include mq($until: tablet) {
         &.german {
-          font-size: 25px;
-          line-height: 1.5;
+          font-size: 28px;
         }
       }
 
@@ -56,16 +59,12 @@ $logo-width-desktop: 190px;
       }
     }
 
-    .comingSoon {
+    .subContent {
       color: $egg-shell;
       z-index: 1;
 
       .logo {
         width: $logo-width-mobile;
-      }
-
-      .text {
-        font-family: 'Poppins', sans-serif;
       }
 
       @include mq($from: tablet) {

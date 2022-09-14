@@ -60,7 +60,7 @@ const NewsletterBanner = ({ className, heading, description }) => {
 
   return (
     <div className={cx('container', className)}>
-      <Text className={cx('heading')} tag="h3" type={HEADING_3}>
+      <Text className={cx('heading')} tag="h3" type={HEADING_3} bold>
         {heading || t('newsletter:heading')}
       </Text>
       <Text className={cx('description')}>

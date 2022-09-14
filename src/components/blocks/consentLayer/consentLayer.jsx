@@ -52,7 +52,7 @@ const ConsentLayer = ({ session }) => {
     >
       <div className={cx('container')}>
         <div className={cx('text')}>
-          <Text className={cx('heading')} tag="h3" type={HEADING_4}>
+          <Text className={cx('heading')} tag="h3" type={HEADING_4} bold>
             {t('heading')}
           </Text>
           <Text className={cx('description')}>{t('description')}</Text>

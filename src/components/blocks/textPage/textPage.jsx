@@ -1,14 +1,10 @@
 import React from 'react';
 import classnames from 'classnames/bind';
 import { arrayOf, shape, string } from 'prop-types';
-import Text, {
-  BODY_4,
-  HEADING_1,
-  HEADING_4,
-  HEADING_5,
-} from 'components/atoms/text';
+import Text, { BODY_4, HEADING_4, HEADING_5 } from 'components/atoms/text';
 
 import styles from './textPage.module.scss';
+import TextBanner from 'components/atoms/textBanner';
 const cx = classnames.bind(styles);
 
 export const PARAGRAPH = 'paragraph';
@@ -23,23 +19,18 @@ const TextPage = ({ content }) => {
   return (
     <div className={cx('container')}>
       {content.map(({ text, type }) => {
-        if (type === HEADING)
-          return (
-            <Text className={cx('heading')} tag="h1" type={HEADING_1}>
-              {text}
-            </Text>
-          );
+        if (type === HEADING) return <TextBanner>{text}</TextBanner>;
 
         if (type === TITLE)
           return (
-            <Text className={cx('title')} tag="h3" type={HEADING_4}>
+            <Text className={cx('title')} tag="h3" type={HEADING_4} bold>
               {text}
             </Text>
           );
 
         if (type === SUBTITLE)
           return (
-            <Text className={cx('subtitle')} tag="h4" type={HEADING_5}>
+            <Text className={cx('subtitle')} tag="h4" type={HEADING_5} bold>
               {text}
             </Text>
           );
@@ -63,7 +54,7 @@ const TextPage = ({ content }) => {
 
         if (type === EMPHASIZE)
           return (
-            <Text className={cx('emphasize')} type={BODY_4}>
+            <Text type={BODY_4} bold>
               {text}
             </Text>
           );

@@ -13,7 +13,7 @@ const NotFound = () => {
   const { t } = useTranslation('notFound');
   return (
     <div className={cx('notFound')}>
-      <Text className={cx('title')} tag="h1" type={HEADING_1}>
+      <Text className={cx('title')} tag="h1" type={HEADING_1} bold>
         {t('title')}
       </Text>
       <Text className={cx('returnHome')}>

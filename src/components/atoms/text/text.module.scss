@@ -1,5 +1,9 @@
 @import 'scss/breakpoints.scss';
 
+.bold {
+  font-weight: bold;
+}
+
 .heading1,
 .heading2,
 .heading3,
@@ -17,7 +21,7 @@
 }
 
 .heading2 {
-  font-size: 2rem;
+  font-size: 2.5rem;
 
   @include mq($from: tablet) {
     font-size: 3rem;

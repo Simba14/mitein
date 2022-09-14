@@ -39,7 +39,7 @@ const PersonalInfo = ({ displayName, email, interests, userId }) => {
 
   return (
     <div className={cx('container')}>
-      <Text className={cx('title')} tag="h1" type={HEADING_2}>
+      <Text className={cx('title')} tag="h1" type={HEADING_2} bold>
         {t('title')}
       </Text>
       <Text>{t('email', { email })}</Text>
@@ -78,7 +78,7 @@ const PersonalInfo = ({ displayName, email, interests, userId }) => {
 
       <Modal open={interestsOpen} onClose={() => setInterestsOpen(false)}>
         <div className={cx('addInterests')}>
-          <Text className={cx('interestsHeading')} type={HEADING_4}>
+          <Text className={cx('interestsHeading')} type={HEADING_4} bold>
             {t('interests.heading')}
           </Text>
           <Text className={cx('description')} type={BODY_6}>

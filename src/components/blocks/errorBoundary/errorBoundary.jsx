@@ -32,7 +32,7 @@ export class ErrorBoundary extends React.Component {
       return (
         <Layout>
           <div className={cx('container')}>
-            <Text className={cx('title')} type={HEADING_2}>
+            <Text className={cx('title')} type={HEADING_2} bold>
               {t('error.title')}
             </Text>
             <Cta

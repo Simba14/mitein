@@ -20,7 +20,7 @@ const OrganizationCard = ({ loading, organization, t }) => {
           role="img"
           aria-label={`logo - ${organization.name || 'loading'}`}
         />
-        <Text className={cx('name')} tag="h4" type={HEADING_5}>
+        <Text className={cx('name')} tag="h4" type={HEADING_5} bold>
           {organization.name}
         </Text>
         <Text className={cx('description')} type={BODY_6}>
