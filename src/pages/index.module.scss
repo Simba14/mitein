@@ -27,23 +27,39 @@
       color: white;
     }
 
-    .btnWrapper {
-      .volunteerBtn {
-        background: white;
-        color: $blue;
-        margin-top: size(6);
+    .volunteerCta {
+      background: white;
+      color: $blue;
+      margin-top: size(6);
 
-        @include mq($until: tablet) {
-          align-self: center;
-          width: 100%;
-          max-width: 100%;
-        }
+      @include mq($until: tablet) {
+        align-self: center;
+        width: 100%;
+        max-width: 100%;
       }
     }
   }
 
-  .newsletter {
+  .startNow {
+    text-align: center;
     background: $egg-shell;
+
+    .startNowContainer {
+      padding: size(4) size(2) size(8);
+
+      p {
+        text-align: center;
+      }
+    }
+
+    .startNowCta {
+      margin-top: size(4);
+
+      @include mq($from: tablet) {
+        max-width: $cta-max-width;
+        margin: size(4) auto 0;
+      }
+    }
   }
 
   .how {
@@ -56,7 +72,7 @@
   .contact {
     @include gutter;
 
-    margin: size(5) 0 size(10);
+    margin-bottom: size(10);
 
     @include mq($from: tablet) {
       max-width: $content-max-width;

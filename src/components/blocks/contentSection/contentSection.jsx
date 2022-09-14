@@ -16,8 +16,8 @@ const ContentSection = ({
   withWrapper,
 }) => {
   return (
-    <div id={anchorId} className={cx('wrapper', className, { withWrapper })}>
-      <div className={cx('container', containerClassName)}>
+    <div id={anchorId} className={cx('wrapper', className)}>
+      <div className={cx('container', containerClassName, { withWrapper })}>
         {(title || content) && (
           <div className={cx('fixedContent')}>
             {title && (

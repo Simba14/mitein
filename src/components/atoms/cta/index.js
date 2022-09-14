@@ -1,1 +1,1 @@
-export { default } from './cta.jsx';
+export { default, CTA_SIZES } from './cta.jsx';

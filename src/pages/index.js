@@ -3,14 +3,13 @@ import { useTranslation } from 'next-i18next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import classnames from 'classnames/bind';
 
-import Cta from 'components/atoms/cta';
+import Cta, { CTA_SIZES } from 'components/atoms/cta';
 import ContactUs from 'components/blocks/contactUs';
 import ContentSection from 'components/blocks/contentSection';
 import Footer from 'components/blocks/footer';
 import Hero from 'components/blocks/hero';
 import Layout from 'components/blocks/layout';
-import NewsletterBanner from 'components/blocks/newsletter';
-import { ROUTE_VOLUNTEER } from 'routes';
+import { ROUTE_SIGN_UP, ROUTE_VOLUNTEER } from 'routes';
 
 import styles from './index.module.scss';
 const cx = classnames.bind(styles);
@@ -42,11 +41,21 @@ const Home = () => {
           content={t('how.content')}
           withWrapper
         />
-        <NewsletterBanner
-          className={cx('newsletter')}
-          heading={t('newsletter.heading')}
-          description={t('newsletter.description')}
-        />
+        <ContentSection
+          className={cx('startNow')}
+          containerClassName={cx('step', 'startNowContainer')}
+          title={t('startNow.heading')}
+          content={t('startNow.description')}
+          withWrapper
+        >
+          <Cta
+            className={cx('startNowCta')}
+            size={CTA_SIZES.jumbo}
+            text={t('startNow.cta')}
+            to={ROUTE_SIGN_UP}
+            fullWidth
+          />
+        </ContentSection>
         <ContentSection
           anchorId="about"
           className={cx('about')}
@@ -54,13 +63,12 @@ const Home = () => {
           content={t('about.content')}
           withWrapper
         >
-          <div className={cx('btnWrapper')}>
-            <Cta
-              className={cx('volunteerBtn')}
-              text={t('volunteerBtn')}
-              to={ROUTE_VOLUNTEER}
-            />
-          </div>
+          <Cta
+            className={cx('volunteerCta')}
+            size={CTA_SIZES.jumbo}
+            text={t('volunteerBtn')}
+            to={ROUTE_VOLUNTEER}
+          />
         </ContentSection>
         <ContactUs className={cx('contact')} translation="home" />
         <Footer className={cx('footer')} />

@@ -23,4 +23,5 @@ test('Text renders a heading correctly', () => {
   expect(heading).toBeInTheDocument();
   expect(heading).toHaveTextContent(MOCK_TEXT);
   expect(heading.classList.contains(HEADING_1)).toBe(true);
+  expect(heading.classList.item(1)).not.toContain('bold');
 });
