@@ -1,1 +1,1 @@
-export { default, renderChatCards } from './chatsSection';
+export { default } from './chatsSection';
