@@ -1,7 +1,6 @@
 import React from 'react';
 import { appWithTranslation } from 'next-i18next';
 import { ApolloProvider } from '@apollo/client';
-import { AppProps } from 'next/app';
 import { ToastContainer, toast, Slide } from 'react-toastify';
 
 import { client } from 'apollo/client';
@@ -13,6 +12,7 @@ import '@fullcalendar/timegrid/main.css';
 import 'react-toastify/dist/ReactToastify.css';
 import 'scss/main.scss';
 import 'scss/toast.scss';
+import { any, elementType } from 'prop-types';
 
 const cookieConsentRecordedIdentifier =
   process.env.NEXT_PUBLIC_COOKIE_CONSENT_RECORDED_IDENTIFIER;
@@ -46,6 +46,9 @@ const Mitein = ({ Component, pageProps }) => (
   </ApolloProvider>
 );
 
-Mitein.propTypes = AppProps;
+Mitein.propTypes = {
+  Component: elementType,
+  pageProps: any,
+};
 
 export default appWithTranslation(Mitein);
