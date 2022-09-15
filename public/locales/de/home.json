@@ -1,19 +1,18 @@
 {
   "title": "Menschen zusammenbringen",
   "description": "Eine gemeinnützige Einrichtung, um Menschen zusammenzubringen und die Deutschkenntnisse von Nicht-Muttersprachler:innen zu verbessern",
-  "comingSoon": "Startet bald",
   "about": {
     "title": "Über uns",
     "content": "Das Kernziel von Mitein, kurz für Miteinander, ist es, Menschen zusammenzubringen – auf vielerlei Weise und immer in geschützten Räumen.\n\n      Wir als Gesellschaft sind vom unaufhaltsamen Fortschritt der Technologie geprägt und die Ausbreitung des Internets hat uns alle in ungeahnter Weise miteinander verbunden. Wir sind konstant vernetzt.\n\n      Doch trotz dieser permanenten und unmittelbaren Verbundenheit fühlen sich große Teile der Gesellschaft abgekapselter und ausgegrenzter als je zuvor.\n\n      Das Gefühl der Isoliertheit, der Einsamkeit und des Fehlens von sinnstiftenden Interaktionen ist weit verbreitet und verschärft sich zunehmend. Probleme, die durch die Pandemie noch verstärkt wurden und die wir alle in irgendeiner Form durch die daraus resultierenden Schließungen und soziale Distanzierung erfahren.\n\n      Mitein möchte dazu beitragen, diesen negativen Trends entgegenzuwirken, indem es Wege aufzeigt und Kontakte herstellt, die das Gemeinschaftsgefühl stärken und die Menschen auf sinnvolle Weise zusammenbringen.\n\n      Selbst in einer Zeit, in der Aktion und Interaktion nicht möglich sind oder zu fehlen scheinen, gibt es so viele Organisationen, die unglaubliche Arbeit in und für lokale Gemeinschaften leisten. Sich für die Gemeinschaft zu engagieren, sollte nicht schwierig sein. Wir wollen es einfacher machen.\n\n      Deshalb möchten wir bei Mitein, neben unseren eigenen Projekten, auch andere Organisationen hervorheben und fördern. Jede dieser Organisationen kümmert sich um wichtige Themen und bietet Ihnen die Möglichkeit, sich zu engagieren.\n\n      Erfahren Sie, wie Sie sich dabei einbringen können, indem Sie auf den Button unten klicken."
   },
   "how": {
     "title": "Wie es funktioniert",
-    "content": "Mitein möchte Sie mit Menschen in Kontakt bringen, mit denen Sie sonst nie das Glück und Vergnügen hätten, sich zu unterhalten. Wir sind gerade dabei, eine Plattform aufzubauen, die diejenigen, die ihre Deutschkenntnisse verbessern wollen, mit Muttersprachler:innen zusammenbringt, die jemanden zum Reden suchen.\n\n      Das Konzept basiert darauf, individuelle Begegnungen zu vermitteln, um die Sprachkenntnisse der Teilnehmer:innen zu verbessern und gleichzeitig soziale Bindungen für diejenigen zu schaffen, die sich derzeit gesellschaftlich isoliert fühlen. Wir wollen helfen, die Kluft zwischen den Generationen zu überbrücken und Gespräche zu ermöglichen, die sonst nicht zustande kommen würden. Gespräche, die einen tieferen Sinn haben, die Spaß machen und Vertrauen schaffen. Mitein ist eine gemeinnützige Einrichtung. Die Nutzung ist kostenlos."
+    "content": "Das Ziel ist es, individuelle Begegnungen zu vermitteln, um die Sprachkenntnisse der Teilnehmer:innen zu verbessern und gleichzeitig soziale Bindungen für diejenigen zu schaffen, die sich derzeit gesellschaftlich isoliert fühlen.\n\n Momentan finden die Gespräche per Video-Chat statt, langfristig möchte Mitein gerne echte Begegnungen unterstützen.\n\n In Zusammenarbeit mit Altersheimen und ähnlichen Einrichtungen können Besuche und Veranstaltungen organisiert werden. Wir wollen helfen, die Kluft zwischen den Generationen zu überbrücken und Gespräche zu ermöglichen, die sonst nicht zustande kommen würden. Gespräche, die einen tieferen Sinn haben, die Spaß machen und Vertrauen schaffen. Mitein ist eine gemeinnützige Einrichtung. Die Nutzung ist kostenlos."
   },
   "volunteerBtn": "Jetzt mitmachen",
   "startNow": {
-    "heading": "Chatten Sie jetzt!",
-    "description": "Finden Sie in nur wenigen Schritten jemanden zum Chatten.",
+    "heading": "Kommen Sie jetzt ins Gespräch!",
+    "description": "Finden Sie in nur wenigen Schritten jemanden für eine Unterhaltung.",
     "cta": "Anmelden"
   },
   "contactUs": {
