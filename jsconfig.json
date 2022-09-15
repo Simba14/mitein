@@ -6,6 +6,7 @@
       "apollo/*": ["src/apollo/*"],
       "assets/*": ["src/assets/*"],
       "components/*": ["src/components/*"],
+      "content/*": ["src/content/*"],
       "@constants/*": ["src/constants/*"],
       "context/*": ["src/context/*"],
       "@graphql/*": ["src/graphql/*"],

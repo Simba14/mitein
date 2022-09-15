@@ -11,7 +11,7 @@ const cx = classnames.bind(styles);
 import { withLayout } from 'components/blocks/layout';
 import Accordion from 'components/atoms/accordion';
 import TextBanner from 'components/atoms/textBanner';
-import content from './content';
+import content from 'content/conversationHelpers';
 
 export const getStaticProps = async ({ locale }) => ({
   props: {
