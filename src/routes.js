@@ -11,6 +11,7 @@ export const ROUTE_PROFILE = '/profile/';
 export const ROUTE_RESET_PASSWORD = '/reset-password/';
 export const ROUTE_CHATS_BOOK = '/chats/book';
 export const ROUTE_CHATS_REBOOK = '/chats/rebook';
+export const ROUTE_RESOURCES = '/resources/';
 export const ROUTE_SIGN_UP = '/sign-up/';
 export const ROUTE_TERMS = '/terms/';
 export const ROUTE_VOLUNTEER = '/volunteer/';

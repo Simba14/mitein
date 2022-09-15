@@ -8,7 +8,7 @@
   visibility: hidden;
   text-transform: none;
   opacity: 0;
-  transition: 0.3s linear, opacity 0.2s linear;
+  transition: 0.8s ease, opacity 0.1s ease;
   padding: 0;
 
   &.isOpen {
@@ -16,7 +16,7 @@
     height: auto;
     visibility: visible;
     padding: size(2) 0;
-    transition: 0.3s linear;
+    transition: 1s ease;
 
     @include mq($from: tablet) {
       padding: size(3) 0;

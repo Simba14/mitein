@@ -2,7 +2,13 @@ import React from 'react';
 import { render, renderWithUser, screen } from 'testUtils';
 import { Menu } from './menu';
 import { MenuContextProvider } from 'context/menu';
-import { ROUTE_ABOUT, ROUTE_HOW, ROUTE_VOLUNTEER, ROUTE_SIGN_UP } from 'routes';
+import {
+  ROUTE_ABOUT,
+  ROUTE_HOW,
+  ROUTE_VOLUNTEER,
+  ROUTE_SIGN_UP,
+  ROUTE_RESOURCES,
+} from 'routes';
 import { MOCK_ID } from 'unitTests/sharedMocks';
 
 const MOCK_SESSION = {
@@ -19,7 +25,8 @@ test('Menu renders correctly when not logged in and is closed by default', () =>
   const toggle = screen.getByRole('button');
   const icon = screen.getByTestId('svg');
   const nav = screen.getByRole('navigation');
-  const [about, how, volunteer, signUp] = screen.getAllByRole('link');
+  const [about, how, resources, volunteer, signUp] =
+    screen.getAllByRole('link');
 
   expect(toggle).toBeInTheDocument();
   expect(toggle).toContainElement(icon);
@@ -28,11 +35,13 @@ test('Menu renders correctly when not logged in and is closed by default', () =>
   expect(nav).not.toHaveClass('isOpen');
   expect(nav).toContainElement(about);
   expect(nav).toContainElement(how);
+  expect(nav).toContainElement(resources);
   expect(nav).toContainElement(volunteer);
   expect(nav).toContainElement(signUp);
 
   expect(about).toHaveAttribute('href', ROUTE_ABOUT);
   expect(how).toHaveAttribute('href', ROUTE_HOW);
+  expect(resources).toHaveAttribute('href', ROUTE_RESOURCES.slice(0, -1));
   expect(volunteer).toHaveAttribute('href', ROUTE_VOLUNTEER.slice(0, -1));
   expect(signUp).toHaveAttribute('href', ROUTE_SIGN_UP.slice(0, -1));
 });
@@ -46,7 +55,7 @@ test('Menu renders correctly when logged in and is closed by default', () => {
   const [toggle, signOut] = screen.getAllByRole('button');
   const icon = screen.getByTestId('svg');
   const nav = screen.getByRole('navigation');
-  const [about, how, volunteer] = screen.getAllByRole('link');
+  const [about, how, resources, volunteer] = screen.getAllByRole('link');
 
   expect(toggle).toBeInTheDocument();
   expect(toggle).toContainElement(icon);
@@ -56,10 +65,12 @@ test('Menu renders correctly when logged in and is closed by default', () => {
   expect(nav).toContainElement(about);
   expect(nav).toContainElement(how);
   expect(nav).toContainElement(volunteer);
+  expect(nav).toContainElement(resources);
   expect(nav).toContainElement(signOut);
 
   expect(about).toHaveAttribute('href', ROUTE_ABOUT);
   expect(how).toHaveAttribute('href', ROUTE_HOW);
+  expect(resources).toHaveAttribute('href', ROUTE_RESOURCES.slice(0, -1));
   expect(volunteer).toHaveAttribute('href', ROUTE_VOLUNTEER.slice(0, -1));
 });
 

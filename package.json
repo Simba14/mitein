@@ -107,6 +107,7 @@
       "^apollo(.*)$": "<rootDir>/src/apollo$1",
       "^assets(.*)$": "<rootDir>/src/assets$1",
       "^components(.*)$": "<rootDir>/src/components$1",
+      "^content(.*)$": "<rootDir>/src/content$1",
       "^@constants(.*)$": "<rootDir>/src/constants$1",
       "^context(.*)$": "<rootDir>/src/context$1",
       "^@graphql(.*)$": "<rootDir>/src/graphql$1",
