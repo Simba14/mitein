@@ -4,7 +4,7 @@ import { map } from 'lodash';
 import classnames from 'classnames/bind';
 
 import Svg from 'components/atoms/svg';
-import Text, { BODY_6, HEADING_5 } from 'components/atoms/text';
+import Text, { BODY_3, BODY_6 } from 'components/atoms/text';
 import styles from './organizationCard.module.scss';
 
 const cx = classnames.bind(styles);
@@ -20,7 +20,7 @@ const OrganizationCard = ({ loading, organization, t }) => {
           role="img"
           aria-label={`logo - ${organization.name || 'loading'}`}
         />
-        <Text className={cx('name')} tag="h4" type={HEADING_5} bold>
+        <Text className={cx('name')} tag="h4" type={BODY_3} bold>
           {organization.name}
         </Text>
         <Text className={cx('description')} type={BODY_6}>

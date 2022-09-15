@@ -8,7 +8,13 @@ import { get } from 'lodash/fp';
 import { MenuContextConsumer } from 'context/menu/';
 import Anchor from 'components/atoms/anchor';
 import Svg, { CLOSE, MENU } from 'components/atoms/svg';
-import { ROUTE_ABOUT, ROUTE_HOW, ROUTE_SIGN_UP, ROUTE_VOLUNTEER } from 'routes';
+import {
+  ROUTE_ABOUT,
+  ROUTE_HOW,
+  ROUTE_RESOURCES,
+  ROUTE_SIGN_UP,
+  ROUTE_VOLUNTEER,
+} from 'routes';
 import { sessionProps, withSessionContext } from 'context/session';
 import SIGN_OUT from '@graphql/mutations/signOut.graphql';
 import { ROUTE_LOGIN } from 'routes';
@@ -26,6 +32,10 @@ const MENU_ITEMS = [
     title: 'how',
     hashId: 'how',
     to: ROUTE_HOW,
+  },
+  {
+    title: 'resources',
+    to: ROUTE_RESOURCES,
   },
   {
     title: 'volunteer',

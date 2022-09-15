@@ -1,7 +1,7 @@
 import React from 'react';
 import classnames from 'classnames/bind';
 import { arrayOf, shape, string } from 'prop-types';
-import Text, { BODY_4, HEADING_4, HEADING_5 } from 'components/atoms/text';
+import Text, { BODY_3, BODY_4, HEADING_4 } from 'components/atoms/text';
 
 import styles from './textPage.module.scss';
 import TextBanner from 'components/atoms/textBanner';
@@ -30,7 +30,7 @@ const TextPage = ({ content }) => {
 
         if (type === SUBTITLE)
           return (
-            <Text className={cx('subtitle')} tag="h4" type={HEADING_5} bold>
+            <Text className={cx('subtitle')} tag="h4" type={BODY_3} bold>
               {text}
             </Text>
           );

@@ -10,7 +10,7 @@ import OrganizationCard from 'components/blocks/organizationCard';
 import { withLayout } from 'components/blocks/layout';
 
 import styles from './volunteer.module.scss';
-import Text, { BODY_3, HEADING_2, HEADING_5 } from 'components/atoms/text';
+import Text, { BODY_3, HEADING_2 } from 'components/atoms/text';
 const cx = classnames.bind(styles);
 
 const Volunteer = ({ organizations }) => {
@@ -55,7 +55,7 @@ const Volunteer = ({ organizations }) => {
       <Text className={cx('headline')} tag="h1" type={HEADING_2} bold>
         {t('headline')}
       </Text>
-      <Text className={cx('subheadline')} tag="h2" type={HEADING_5} bold>
+      <Text className={cx('subheadline')} tag="h2" type={BODY_3} bold>
         {t('subheadline')}
       </Text>
       <div className={cx('filters')}>

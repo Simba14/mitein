@@ -1,0 +1,59 @@
+@import 'scss/breakpoints.scss';
+@import 'scss/colors.scss';
+@import 'scss/wrapper.scss';
+
+.wrapper {
+  .description {
+    margin-bottom: size(4);
+  }
+  .section {
+    margin-bottom: size(5);
+    border-bottom: 1px solid $blue;
+
+    .sectionHeader {
+      color: $blue;
+    }
+
+    .itemsContainer {
+      display: grid;
+      grid-template-columns: 1fr;
+      column-gap: size(3);
+
+      @include mq($from: tablet, $until: tabletWide) {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      @include mq($from: tabletWide) {
+        grid-template-columns: 1fr 1fr 1fr;
+      }
+    }
+
+    .item {
+      background: $light-grey;
+      border: 1px solid $sky;
+      border-radius: $card-border-radius;
+      display: flex;
+      flex-direction: column;
+      margin-bottom: size(4);
+      padding: size(2);
+
+      .itemHeading {
+        color: black;
+        margin-bottom: size(1);
+      }
+
+      .options {
+        display: flex;
+        flex-direction: column;
+        color: $dark-blue;
+        padding-left: size(2);
+
+        > li {
+          display: list-item;
+          list-style: circle;
+          margin-bottom: size(1);
+        }
+      }
+    }
+  }
+}
