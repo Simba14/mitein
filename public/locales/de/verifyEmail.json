@@ -1,7 +1,7 @@
 {
   "emailVerified": "Ihre E-Mail-Adresse wurde überprüft.",
   "featuresEnabled": "Sie können nun alle Funktionen von Mitein nutzen",
-  "redirect": "Jetzt eine Sitzung buchen",
+  "redirect": "Jetzt ein Gespräch vereinbaren",
   "invalidToken": {
     "title": "Token ungültig",
     "description": "Ihre E-Mail-Adresse wurde nicht verifiziert.",

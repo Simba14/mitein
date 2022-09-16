@@ -45,7 +45,6 @@
     position: absolute;
     top: 2px;
     right: 0;
-    text-transform: capitalize;
     color: $red;
     visibility: hidden;
     opacity: 0;
@@ -62,7 +61,6 @@
 
     opacity: 0;
     transition: opacity 1s;
-    text-transform: capitalize;
     text-align: center;
 
     &.visible {

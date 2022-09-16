@@ -12,7 +12,6 @@
 
   .heading {
     color: $blue;
-    text-transform: capitalize;
     margin-bottom: size(1);
   }
 
@@ -59,7 +58,6 @@
     background: $green-background;
     opacity: 0;
     transition: opacity 0s;
-    text-transform: capitalize;
     text-align: center;
     height: 38px;
 

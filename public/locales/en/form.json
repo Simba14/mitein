@@ -18,14 +18,14 @@
     "submitBtn": "Sign Up",
     "changeLocation": {
       "text": "Already a member?",
-      "cta": "Login here"
+      "cta": "Login Here"
     }
   },
   "login": {
     "submitBtn": "Login",
     "changeLocation": {
       "text": "New to Mitein?",
-      "cta": "Sign up here"
+      "cta": "Sign Up Here"
     },
     "forgotPassword": "Forgotten Password?"
   },
@@ -33,7 +33,7 @@
     "submitBtn": "Reset Password",
     "changeLocation": {
       "text": "Know your password?",
-      "cta": "Login here"
+      "cta": "Login Here"
     },
     "title": "Forgotten your password?",
     "description": "Enter your email and we'll send you the instructions to create your new password",
@@ -44,7 +44,7 @@
     "title": "Reset your password",
         "changeLocation": {
       "text": "New password set?",
-      "cta": "Login here"
+      "cta": "Login Here"
     },
     "description": "Set a new password for your account",
     "successMsg": "Your new password has been set. You can now login with it."

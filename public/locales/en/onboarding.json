@@ -1,6 +1,6 @@
 {
     "LEARNER": {
-        "cta": "Get started",
+        "cta": "Get Started",
         "intro": {
             "title": "You're in! Here's how it works",
             "description": "Follow the simple steps below to start chatting with others."
@@ -23,7 +23,7 @@
         }
     },
     "NATIVE": {
-        "cta": "Get started",
+        "cta": "Get Started",
        "intro": {
             "title": "You're in! Here's how it works",
             "description": "Follow the simple steps below to start chatting with others"
