@@ -50,7 +50,7 @@
     "husky": "^7.0.0",
     "jest": "^27.4.7",
     "prettier": "^2.7.1",
-    "react-test-renderer": "^16.6.0"
+    "react-test-renderer": "^17.0.1"
   },
   "dependencies": {
     "@apollo/client": "^3.6.9",
@@ -92,6 +92,7 @@
     "winston-transport-sentry-node": "^2.5.0"
   },
   "jest": {
+    "globalSetup": "<rootDir>unitTests/globalSetup.js",
     "setupFilesAfterEnv": [
       "<rootDir>unitTests/setupTests.js"
     ],

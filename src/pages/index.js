@@ -9,7 +9,7 @@ import ContentSection from 'components/blocks/contentSection';
 import Footer from 'components/blocks/footer';
 import Hero from 'components/blocks/hero';
 import Layout from 'components/blocks/layout';
-import { ROUTE_SIGN_UP, ROUTE_VOLUNTEER } from 'routes';
+import { ROUTE_VOLUNTEER } from 'routes';
 
 import styles from './index.module.scss';
 const cx = classnames.bind(styles);
@@ -41,21 +41,6 @@ const Home = () => {
           content={t('how.content')}
           withWrapper
         />
-        <ContentSection
-          className={cx('startNow')}
-          containerClassName={cx('step', 'startNowContainer')}
-          title={t('startNow.heading')}
-          content={t('startNow.description')}
-          withWrapper
-        >
-          <Cta
-            className={cx('startNowCta')}
-            size={CTA_SIZES.jumbo}
-            text={t('startNow.cta')}
-            to={ROUTE_SIGN_UP}
-            fullWidth
-          />
-        </ContentSection>
         <ContentSection
           anchorId="about"
           className={cx('about')}

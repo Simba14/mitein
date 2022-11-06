@@ -8,6 +8,8 @@ import Text, { HEADING_2 } from 'components/atoms/text';
 import styles from './hero.module.scss';
 const cx = classnames.bind(styles);
 
+const ROUTE_LITTLE_WORLD = 'https://home.little-world.com/';
+
 const Hero = () => {
   const {
     t,
@@ -25,6 +27,9 @@ const Hero = () => {
         >
           {t('description')}
         </Text>
+        <a className={cx('cta')} href={ROUTE_LITTLE_WORLD}>
+          {t('heroCta')}
+        </a>
         <div className={cx('subContent')}>
           <Logo className={cx('logo')} />
         </div>
