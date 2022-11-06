@@ -3,13 +3,12 @@ import classnames from 'classnames/bind';
 import { useTranslation } from 'next-i18next';
 import { GERMAN } from '@constants/defaultOptions';
 
-import Cta from 'components/atoms/cta';
 import Logo from 'assets/miteinanderEggshell.svg';
 import Text, { HEADING_2 } from 'components/atoms/text';
 import styles from './hero.module.scss';
 const cx = classnames.bind(styles);
 
-const ROUTE_LITTLE_WORLD = '';
+const ROUTE_LITTLE_WORLD = 'https://home.little-world.com/';
 
 const Hero = () => {
   const {
@@ -28,11 +27,9 @@ const Hero = () => {
         >
           {t('description')}
         </Text>
-        <Cta
-          className={cx('cta')}
-          text={t('heroCta')}
-          to={ROUTE_LITTLE_WORLD}
-        />
+        <a className={cx('cta')} href={ROUTE_LITTLE_WORLD}>
+          {t('heroCta')}
+        </a>
         <div className={cx('subContent')}>
           <Logo className={cx('logo')} />
         </div>
