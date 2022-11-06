@@ -1,4 +1,4 @@
-import { shape, string, oneOf } from 'prop-types';
+import { shape, string, oneOf, arrayOf, bool } from 'prop-types';
 import {
   USER_TYPE_LEARNER,
   USER_TYPE_NATIVE,
@@ -23,3 +23,14 @@ export const StatusType = oneOf([
 ]);
 
 export const UserType = oneOf([USER_TYPE_LEARNER, USER_TYPE_NATIVE]);
+
+export const UserPropTypes = shape({
+  id: string.isRequired,
+  chats: arrayOf(ChatType),
+  displayName: string.isRequired,
+  email: string,
+  isEmailVerified: bool,
+  interests: arrayOf(string),
+  suspendendUntil: string,
+  type: UserType,
+});

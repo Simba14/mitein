@@ -4,6 +4,15 @@
 
 $form-width: 500px;
 
+%formContainer {
+  display: flex;
+  font-size: 1rem;
+  flex-direction: column;
+  width: 100%;
+  max-width: $form-width;
+  background: white;
+}
+
 %formField {
   width: 100%;
   font-family: 'Poppins', sans-serif;

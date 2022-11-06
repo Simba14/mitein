@@ -12,6 +12,15 @@ const typeDefs = gql`
     IN_PERSON
   }
 
+  enum Frequency {
+    ONCE
+    DAILY
+    WEEKLY
+    BIWEEKLY
+    MONTHLY
+    YEARLY
+  }
+
   enum EventStatus {
     AVAILABLE
     BOOKED
@@ -31,6 +40,18 @@ const typeDefs = gql`
     start: String!
     end: String!
     userId: ID!
+  }
+
+  type Event {
+    id: ID!
+    image: String
+    title: String!
+    capacity: String
+    date: String!
+    start: String!
+    end: String!
+    userId: ID!
+    frequency: Frequency
   }
 
   type Chat {
@@ -65,15 +86,13 @@ const typeDefs = gql`
   }
 
   type User {
+    id: ID!
     chats: Chats
     displayName: String
     displayLanguage: Language
     email: String
     isEmailVerified: Boolean
-    id: ID!
     interests: [String]
-    name: String
-    phoneNumber: String
     suspendedUntil: String
     cancellations: [Cancellation]
     type: UserType
@@ -92,14 +111,16 @@ const typeDefs = gql`
 
   type Organization {
     id: ID!
+    address: String!
     city: String!
     description(locale: String!): String!
-    email: String!
+    events: [Event]!
     logo: String!
     name: String!
     socials: Socials
     tags: [String]
     website: String!
+    needsVolunteers: Boolean
   }
 
   type Query {
@@ -113,6 +134,7 @@ const typeDefs = gql`
       status: EventStatus
       upcoming: Boolean
     ): [Chat]
+    organization(id: ID, userId: ID): Organization
     volunteerWith(city: String!): [Organization]
   }
 

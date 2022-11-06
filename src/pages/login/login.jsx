@@ -4,7 +4,7 @@ import { useRouter } from 'next/router';
 import { compose, get } from 'lodash/fp';
 import classnames from 'classnames/bind';
 
-import Form, { LOGIN_TYPE } from 'components/blocks/form';
+import Form, { LOGIN_TYPE } from 'components/blocks/form/account';
 import { ROUTE_PROFILE } from 'routes';
 import { withLayout } from 'components/blocks/layout';
 import { sessionProps, withSessionContext } from 'context/session';

@@ -1,5 +1,5 @@
-query GetVolunteeringOpps($city: String!, $locale: String!) {
-  volunteerWith(city: $city) {
+query GetOrganization($id: ID, $userId: ID!, $locale: String!) {
+  organization(id: $id, userId: $userId) {
     id
     city
     description(locale: $locale)

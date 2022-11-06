@@ -1,7 +1,7 @@
 import Availability from '@api/firebase/availability';
 import Chat from '@api/firebase/chat';
 import User from '@api/firebase/user';
-import { Firestore } from '@api/firebase';
+import Organization from '@api/firebase/organization';
 
 const Query = {
   user: async (parent, { id }) => {
@@ -27,11 +27,12 @@ const Query = {
   availableChats: async (parent, { userId }) => {
     return await Chat.getOnlyAvailable({ participant1Id: userId });
   },
+  organization: async (parent, { id, userId }) => {
+    if (userId) return await Organization.byUserId(userId);
+    return await Organization.byId(id);
+  },
   volunteerWith: async () => {
-    const collection = await Firestore.collection('organizations').get();
-    const coll = collection.docs.map(doc => doc.data());
-
-    return coll;
+    return await Organization.byVolunteerWith();
   },
 };
 

@@ -1,0 +1,18 @@
+@import 'scss/button.scss';
+@import 'scss/breakpoints.scss';
+@import 'scss/colors.scss';
+@import 'scss/constants.scss';
+@import 'scss/form.scss';
+@import 'scss/spacings.scss';
+
+$max-width: 180px;
+
+.wrapper {
+  .heading {
+    margin-bottom: size(4);
+  }
+
+  .form {
+    @extend %formContainer;
+  }
+}

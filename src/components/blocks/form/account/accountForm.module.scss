@@ -1,0 +1,47 @@
+@import 'scss/colors.scss';
+@import 'scss/form.scss';
+@import 'scss/spacings.scss';
+
+.form {
+  @extend %formContainer;
+
+  .submitButton {
+    margin: size(2) 0;
+  }
+
+  .error,
+  .success {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: size(6);
+    padding: size(1);
+
+    opacity: 0;
+    transition: opacity 1s;
+    text-align: center;
+
+    &.visible {
+      opacity: 1;
+    }
+  }
+
+  .error {
+    background: $red-background;
+    color: $red-error-with-background;
+  }
+
+  .success {
+    background: $green-background;
+    color: black;
+  }
+
+  .changeLocation {
+    margin-bottom: size(1);
+  }
+
+  .forgotPassword {
+    margin-bottom: size(3);
+    width: max-content;
+  }
+}

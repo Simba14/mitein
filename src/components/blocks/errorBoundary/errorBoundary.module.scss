@@ -4,8 +4,9 @@
 .container {
   display: flex;
   flex-direction: column;
+  align-items: center;
   height: 100%;
-  padding: size(3) 0;
+  padding: size(3) 0 size(10);
 
   .title {
     margin-bottom: size(4);
@@ -21,7 +22,7 @@
   }
 
   @include mq($from: tablet) {
-    align-items: center;
     justify-content: center;
+    padding: size(3) 0;
   }
 }

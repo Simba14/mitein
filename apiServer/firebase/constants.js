@@ -5,7 +5,7 @@ export const COLLECTION_USERS = 'users';
 
 export const USER_TYPE_LEARNER = 'LEARNER';
 export const USER_TYPE_NATIVE = 'NATIVE';
-export const USER_TYPE_REPRESENTATIVE = 'NATIVE';
+export const USER_TYPE_REPRESENTATIVE = 'REPRESENTATIVE';
 
 export const ENGLISH = 'en';
 export const GERMAN = 'de';

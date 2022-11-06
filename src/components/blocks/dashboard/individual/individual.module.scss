@@ -1,8 +1,6 @@
 @import 'scss/breakpoints.scss';
-@import 'scss/constants.scss';
 @import 'scss/spacings.scss';
-
-$text-max-width: 400px;
+@import 'scss/constants.scss';
 
 .wrapper {
   margin-bottom: $wrapper-padding-y-desktop-large;

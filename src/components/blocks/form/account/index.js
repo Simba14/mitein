@@ -4,4 +4,4 @@ export {
   SIGN_UP_TYPE,
   LOGIN_TYPE,
   RESET_PASSWORD,
-} from './form.jsx';
+} from './accountForm.jsx';
