@@ -92,6 +92,7 @@
     "winston-transport-sentry-node": "^2.5.0"
   },
   "jest": {
+    "globalSetup": "<rootDir>unitTests/globalSetup.js",
     "setupFilesAfterEnv": [
       "<rootDir>unitTests/setupTests.js"
     ],
