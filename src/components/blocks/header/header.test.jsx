@@ -1,5 +1,5 @@
 import React from 'react';
-import { ROUTE_BASE, ROUTE_LOGIN, ROUTE_SIGN_UP } from 'routes';
+import { ROUTE_BASE } from 'routes';
 import { SessionContextProvider } from 'context/session';
 import { render, screen } from 'testUtils';
 import { MOCK_SESSION_VARS } from 'unitTests/sharedMocks';
@@ -27,8 +27,8 @@ test('Header renders correctly', () => {
     </SessionContextProvider>,
   );
   const header = screen.getByRole('banner');
-  const [homeLink, signUpLink, loginLink] = screen.getAllByRole('link');
-  const [logo, profileIcon] = screen.getAllByTestId('svg');
+  const [homeLink] = screen.getAllByRole('link');
+  const [logo] = screen.getAllByTestId('svg');
 
   expect(header).toBeInTheDocument();
   expect(header).toContainElement(screen.getByTestId(MENU_TEST_ID));
@@ -39,8 +39,4 @@ test('Header renders correctly', () => {
 
   expect(homeLink).toContainElement(logo);
   expect(homeLink).toHaveAttribute('href', ROUTE_BASE);
-
-  expect(signUpLink).toContainElement(profileIcon);
-  expect(signUpLink).toHaveAttribute('href', ROUTE_SIGN_UP.slice(0, -1));
-  expect(loginLink).toHaveAttribute('href', ROUTE_LOGIN.slice(0, -1));
 });

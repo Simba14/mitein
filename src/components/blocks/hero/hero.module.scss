@@ -39,6 +39,17 @@ $logo-width-desktop: 190px;
       opacity: 0.3;
     }
 
+    .cta {
+      margin-top: size(2);
+      z-index: 1;
+      width: unset;
+
+      &:hover {
+        opacity: 1;
+        background: $dark-blue;
+      }
+    }
+
     .content {
       position: relative;
       display: flex;
